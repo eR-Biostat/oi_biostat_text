@@ -1,0 +1,119 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {5}Inference for numerical data}{7}{chapter.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Inference for one-sample means with the $t$-distribution}{7}{section.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.1}The $t$-distribution}{8}{subsection.5.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.1.2}Using the $t$-distribution for tests and confidence intervals for a population mean}{11}{subsection.5.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Paired Data}{14}{section.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.3}Difference of two means}{17}{section.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.1}Confidence interval for a difference of means}{18}{subsection.5.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.2}Hypothesis tests for a difference in means}{20}{subsection.5.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.3}The paired $t$-test vs. two independent groups}{23}{subsection.5.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.4}Case study: discrimination in developmental disability support}{24}{subsection.5.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.3.5}Pooled standard deviation estimate (special topic)}{27}{subsection.5.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.4}Power calculations for a difference of means (special topic)}{29}{section.5.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4.1}Reviewing the concepts of a test}{30}{subsection.5.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4.2}Computing the power for a 2-sample test}{31}{subsection.5.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4.3}Determining a proper sample size}{33}{subsection.5.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.4.4}Formulas for power and sample size}{36}{subsection.5.4.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.5}Comparing more than two means with ANOVA (special topic)}{37}{section.5.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5.1}Analysis of variance (ANOVA) and the F test}{38}{subsection.5.5.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5.2}Reading an ANOVA table from software}{43}{subsection.5.5.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.5.3}Multiple comparisons and controlling Type\nobreakspace {}1 Error rate}{43}{subsection.5.5.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.6}Chapter Summary and Notes}{45}{section.5.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.7}Exercises}{48}{section.5.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.7.1}One-sample means with the t-distribution}{48}{subsection.5.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.7.2}Paired data}{50}{subsection.5.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.7.3}Difference of two means}{54}{subsection.5.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.7.4}Power calculations for a difference of means}{59}{subsection.5.7.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {5.7.5}Comparing many means with ANOVA}{59}{subsection.5.7.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Simple linear regression}{65}{chapter.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.1}Examining scatter plots}{65}{section.6.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.2}Estimating a regression line using least squares}{68}{section.6.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.3}Interpreting a least squares regression line}{71}{section.6.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.1}Checking residuals from a linear model}{72}{subsection.6.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Examining patterns in residuals}{73}{subsubsection*.36}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Checking normality of the residuals}{74}{subsubsection*.40}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.2}Using $R^2$ to describe the strength of a fit}{75}{subsection.6.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.3}Categorical predictors with two levels}{77}{subsection.6.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {6.3.4}Outliers in regression}{80}{subsection.6.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.4}Statistical inference with regression}{83}{section.6.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Formulas for calculating standard errors}{85}{subsubsection*.47}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsubsection}{Connection to two-group hypothesis testing}{86}{subsubsection*.49}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {6.5}Chapter Summary and Notes}{88}{section.6.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {7}Multiple Linear Regression}{90}{chapter.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.1}Introduction to multiple linear regression}{90}{section.7.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.2}Simple vs. multiple regression}{92}{section.7.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.3}Evaluating the fit of a multiple regression model}{97}{section.7.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3.1}Using residuals to check model assumptions}{97}{subsection.7.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.3.2}Using $R^2$ and adjusted $R^2$ with multiple regression}{98}{subsection.7.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.4}The general multiple linear regression model}{100}{section.7.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4.1}Model parameters and least squares estimation}{101}{subsection.7.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {7.4.2}Hypothesis tests and confidence intervals with multiple regression}{102}{subsection.7.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.5}Categorical predictors with more than two values}{106}{section.7.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.6}Reanalyzing the statin dataset}{108}{section.7.6}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.7}Predicting change in muscle strength: FAMuSS}{110}{section.7.7}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {7.8}Chapter Summary and Notes}{116}{section.7.8}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {A}End of chapter exercise solutions}{120}{appendix.A}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {B}Distribution tables}{135}{appendix.B}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B.1}Normal Probability Table}{135}{section.B.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B.2}$\mathbf {t}$-Probability Table}{138}{section.B.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {B.3}Chi-Square Probability Table}{140}{section.B.3}
