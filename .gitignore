@@ -1,0 +1,17 @@
+*.toc
+*.xml
+*.out
+*.idx
+*.bib
+*.gz
+*.log
+*.bbl
+*.blg
+*.aux
+main.pdf
+.DS_Store
+*.Rhistory
+data/
+R_code/
+stats_teachr_oi_labs/
+
