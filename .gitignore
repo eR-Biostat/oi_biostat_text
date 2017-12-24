@@ -9,6 +9,7 @@
 *.blg
 *.aux
 main.pdf
+main.tex
 .DS_Store
 *.Rhistory
 data/
