@@ -15,6 +15,5 @@ main.tex
 data/
 R_code/
 stats_teachr_oi_labs/
-
-*.toc
 *.aux
+*.toc

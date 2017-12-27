@@ -33,7 +33,7 @@ This chapter introduces the important ideas in drawing estimates from samples by
 
 % remember to add closing index indicator
 
-The BRFSS was established in 1984 in 15 states to collect data using telephone interviews about health-related risk behaviors, chronic health conditions. and the use of preventive services.  It now collects data in all 50 states and the District of Columbia from more than 400,000 interviews conducted each year.  The data set \data{cdc} contains a small number of variables from a random sample of 20,000 responses from the 264,684 interviews from the BRFSS conducted in the year 2000.  Part of this dataset is shown in Table~\ref{cdcDF}, with the variables described in Table~\ref{cdcVariables}.  The dataset also appears with the same name in one of sample labs for the text \textit{OpenIntro}.\footnote{With small exceptions (character strings re-coded as factors), the data appears in this text as it did in the \textit{OpenIntro} lab. \url{http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-base-R/blob/master/intro\_to\_data/intro\_to\_data.html} }
+The BRFSS was established in 1984 in 15 states to collect data using telephone interviews about health-related risk behaviors, chronic health conditions. and the use of preventive services.  It now collects data in all 50 states and the District of Columbia from more than 400,000 interviews conducted each year.  The data set \data{cdc} contains a small number of variables from a random sample of 20,000 responses from the 264,684 interviews from the BRFSS conducted in the year 2000.  Part of this dataset is shown in Table~\ref{cdcDF}, with the variables described in Table~\ref{cdcVariables}.\footnote{With small modifications (character strings re-coded as factors), the data appears in this text as it does in an \textit{OpenIntro} lab. \url{http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-base-R/blob/master/intro\_to\_data/intro\_to\_data.html} }
 
 
 
@@ -74,7 +74,9 @@ The BRFSS was established in 1984 in 15 states to collect data using telephone i
 \label{cdcVariables}
 \end{table}
 
-Few studies are as large as the original BRFSS dataset (more than 250,000 cases); in fact, few are as large as the 20,000 cases in the dataset \data{cdc}. The dataset \data{cdc} is large enough that estimates calculated from \data{cdc} can be thought of as essentially equivalent to the population characteristics of the entire US adult population. This chapter uses a random sample of 60 cases from \data{cdc}, stored as \data{cdc.samp}, to illustrate the effect of sampling variability and the ideas behind inference. In other words, suppose that \data{cdc} represents the population, and that \data{cdc.samp} is a sample from the population; the goal is to calculate estimates of the population parameters using the data in the sample.
+Few studies are as large as the original BRFSS dataset (more than 250,000 cases); in fact, few are as large as the 20,000 cases in the dataset \data{cdc}. The dataset \data{cdc} is large enough that estimates calculated from \data{cdc} can be thought of as essentially equivalent to the population characteristics of the entire US adult population. This chapter uses a random sample of 60 cases from \data{cdc}, stored as \data{cdc.samp}, to illustrate the effect of sampling variability and the ideas behind inference. In other words, suppose that \data{cdc} represents the population, and that \data{cdc.samp} is a sample from the population; the goal is to estimate characteristics of the population of 20,000 using only the data from the 60 individuals in the sample.
+
+\begin{comment}
 
 Histograms showing the distributions of height, age, weight, and desired weight in \data{cdc.samp} are shown in Figure~\ref{cdcSampHistograms}
 
@@ -86,8 +88,7 @@ Histograms showing the distributions of height, age, weight, and desired weight 
 \label{cdcSampHistograms}
 \end{figure}
 
-
-\newpage
+\end{comment}
 
 %__________________
 \section[Variability in estimates]{Variability in estimates} %\sectionvideohref{youtube-DNIauUrRIEM&list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4}}
@@ -95,9 +96,7 @@ Histograms showing the distributions of height, age, weight, and desired weight 
 
 \index{point estimate|(}
 
-Summary statistics calculated from \data{cdc.samp} can be used to estimate features of the US population, such as average weight, height, and age.  The average weight in this sample of adults is $\overline{x}_{\text{weight}} = 173.3$ lbs, the average height is 67.2 inches, and the average age in this sample of adults is 43.7 years.
-
-The sample mean $\overline{x}_{\text{weight}} = 173.3$ lbs is a \term{point estimate} of the population mean, $\mu_{\text{weight}}$. If a different random sample of 60 individuals were taken from \data{cdc}, the new sample mean would likely be different as a result of \term{sampling variation}. While estimates generally vary from one sample to another, the population mean is a fixed value.  
+A natural way to estimate features of the population, such as the population mean weight, is to use the corresponding summary statistic calculated from the sample.\footnote{Other population parameters, such as population median or population standard deviation, can also estimated using sample versions.} The mean weight in the sample of 60 adults in \data{cdc.samp} is $\overline{x}_{\text{weight}} = 173.3$ lbs; this sample mean is a \term{point estimate} of the population mean, $\mu_{\text{weight}}$. If a different random sample of 60 individuals were taken from \data{cdc}, the new sample mean would likely be different as a result of \term{sampling variation}. While estimates generally vary from one sample to another, the population mean is a fixed value.  
 
 \begin{comment}
 
@@ -114,27 +113,26 @@ Other population parameters, such as population median or population standard de
 \end{comment}
 
 \begin{exercise} \label{peOfDiffWeightBetweenGender}
-	How would one estimate the difference in average weight between men and women? If $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, then what is a good point estimate for the population difference?\footnote{If $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, the difference of the two sample means, $185.1 - 162.3 = 22.8$lbs, would be an estimate of the difference. The data in the random sample suggests that adult males are, on average, about 23~lbs heavier than adult females.}
+	How would one estimate the difference in average weight between men and women? Given that $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, what is a good point estimate for the population difference?\footnote{Given that $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, the difference of the two sample means, $185.1 - 162.3 = 22.8$lbs, is a point estimate of the difference. The data in the random sample suggests that adult males are, on average, about 23~lbs heavier than adult females.}
 \end{exercise}
 
-Point estimates become more accurate with increasing sample size. A \term{running mean} is a sequence of sample means in which sample size increases by 1 for each mean that is calculated. The second mean in the sequence is the average of the first two observations, the third mean in the sequence is the average of the first three observations, etc. The running mean for the variable \var{weight} for a sample of size 500 is shown in Figure~\ref{cdcWeightRunningMean}.  
+Point estimates become more accurate with increasing sample size. Figure~\ref{cdcWeightRunningMean} shows the sample mean weight calculated for random samples drawn from \data{cdc}, where sample size increases by 1 for each draw until sample size equals 500. The red dashed horizontal line in the figure is drawn at the average weight of all adults in \data{cdc}, 169.7 lbs, which represents the population mean weight.\footnote{It is not exactly the mean weight of all US adults, but will be very close since \data{cdc} is so large.}
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.72\textwidth]{ch_inference_foundations_oi_biostat/figures/cdcWeightRunningMean/cdcWeightRunningMeanNew.pdf}
-	\caption{The mean \var{weight} computed for a sample of size 500 from \data{cdc}, adding each individual at a time. The mean approaches the true population mean as sample size increases.}
+	\includegraphics[width=0.95\textwidth]{ch_inference_foundations_oi_biostat/figures/cdcWeightRunningMean/cdcWeightRunningMeanNew.pdf}
+	\caption{The mean \var{weight} computed for a random sample from \data{cdc}, increasing sample size one at a time until $n = 500$. The sample mean approaches the population mean (i.e., mean weight in \data{cdc}) as sample size increases.}
 	\label{cdcWeightRunningMean}
 \end{figure}
 
-%JV: dashed horizontal line represents population mean weight
+Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides more reliable estimate of the population mean.
 
-%JV: Not intuitive to show a running mean calculated from a fixed sample of n, adding in each observation at a time, since this is not how sampling works and can only converge to the sample mean from sample size n. Should show means from repeated draws from cdc, as n increases >> this will have more variability at the beginning and then converge to mu. 
+%JV: with the edits, this figure no longer shows a 'running mean'.
 
-The dotted horizontal line in the figure is drawn at the average weight of all adults in \data{cdc}, 169.7 lbs, which represents the population mean weight.\footnote{It is not exactly the mean weight of all US adults, but will be very close since \data{cdc} is so large.}  Note how for smaller sample sizes (300 or less in this case), the running mean passes above and below 169.7 before it stabilizes. A sample mean becomes less variable as sample size increases.  
 
 \subsection{The sampling distribution for the mean}
 
-The sample mean weight calculated from \data{cdc.samp} was 173.3~lbs. Another random sample of 60 participants might produce a different value of $\overline{x}$, such as 169.5~lbs; repeated random sampling would result in additional different values, perhaps 172.1~lbs, 168.5~lbs, and so on. Each sample mean $\overline{x}$ can be thought of as a single observation from a random variable $\overline{X}$. The distribution of $\overline{X}$ is called the \term{sampling distribution of the sample mean}, and has its own mean and standard deviation like the random variables discussed in Chapter 3. The concept of a sampling distribution can be illustrated by taking repeated random samples from \data{cdc}. Figure~\ref{cdcWeight1000SampDist} shows a histogram of sample means from 1,000 random samples of size 60 from \data{cdc}. The histogram provides an approximation of the theoretical sampling distribution of $\overline{X}$ for samples of size of 60. 
+The sample mean weight calculated from \data{cdc.samp} is 173.3~lbs. Another random sample of 60 participants might produce a different value of $\overline{x}$, such as 169.5~lbs; repeated random sampling could result in additional different values, perhaps 172.1~lbs, 168.5~lbs, and so on. Each sample mean $\overline{x}$ can be thought of as a single observation from a random variable $\overline{X}$. The distribution of $\overline{X}$ is called the \term{sampling distribution of the sample mean}, and has its own mean and standard deviation like the random variables discussed in Chapter 3. The concept of a sampling distribution can be illustrated by taking repeated random samples from \data{cdc}. Figure~\ref{cdcWeight1000SampDist} shows a histogram of sample means from 1,000 random samples of size 60 from \data{cdc}. The histogram provides an approximation of the theoretical sampling distribution of $\overline{X}$ for samples of size 60. 
 
 \begin{figure}[h]
 	\centering
@@ -168,7 +166,6 @@ The sampling distribution for the mean is unimodal and symmetric around the mean
 
 However, in almost any study, conclusions about a population parameter must be drawn from the data collected from a single sample. The sampling distribution of $\overline{X}$ is a theoretical concept, since obtaining repeated samples by conducting a study many times is not possible. In other words, it is not feasible to calculate the population mean $\mu$ by finding the mean of the sampling distribution for $\overline{X}$.
 
-
 \subsection{Standard error of the mean}
 \label{seOfTheMean}
 
@@ -176,12 +173,26 @@ The \term{standard error (SE)}\index{SE}\marginpar[\raggedright\vspace{-4mm}
 
 $SE$\\\footnotesize standard\\error]{\raggedright\vspace{-4mm}
 
-$SE$\\\footnotesize standard\\error} of the sample mean measures the sample-to-sample variability of $\overline{X}$, the extent to which values of the repeated sample means oscillate around the population mean. The theoretical standard error of the sample mean is calculated by dividing the population standard deviation ($\sigma_{x}$) by the square root of the sample size $n$. Since the population standard deviation $\sigma$ is typically unknown, the sample standard deviation $s$ can be used as a reasonably good estimate of $\sigma$, so $s$ is often used in the definition of a standard error. If $\overline{x}$ is the sample mean weight, its standard error (denoted by SE) is
+$SE$\\\footnotesize standard\\error} of the sample mean measures the sample-to-sample variability of $\overline{X}$, the extent to which values of the repeated sample means oscillate around the population mean. The theoretical standard error of the sample mean is calculated by dividing the population standard deviation ($\sigma_{x}$) by the square root of the sample size $n$. Since the population standard deviation $\sigma$ is typically unknown, the sample standard deviation $s$ is often used in the definition of a standard error; $s$ is a reasonably good estimate of $\sigma$. If $\overline{x}$ is the sample mean weight, its standard error (denoted by SE) is
 \[\text{SE}_{\overline{x}} = \dfrac{s_{x}}{\sqrt{n}} = \dfrac{49.04}{\sqrt{60}} = 6.33. \]
 
 This estimate tends to be sufficiently good when the sample size is at least 30 and the population distribution is not strongly skewed. In the case of skewed distributions, a larger sample size is necessary.
 
-The probability tools of Section~\ref{randomVariablesSection} can be used to derive the formula $\sigma_{\overline{X}} = \sigma_x/\sqrt{n}$, but the derivation is not shown here. Conceptually, larger sample sizes result in sampling distributions that have decreasing variability. Increasing the sample size causes $\overline{X}$ to be clustered more tightly around the population mean $\mu$, allowing for more accurate estimates of $\mu$ from a single sample.
+The probability tools of Section~\ref{randomVariablesSection} can be used to derive the formula $\sigma_{\overline{X}} = \sigma_x/\sqrt{n}$, but the derivation is not shown here. Larger sample sizes produce sampling distributions that have lower variability. Increasing the sample size causes $\overline{X}$ to be clustered more tightly around the population mean $\mu$, allowing for more accurate estimates of $\mu$ from a single sample, as shown in Figure~\ref{cdcSamplingVariabilityComparison}. When sample size is large, it is more likely that any particular sample will have a mean close to the population mean. 
+
+\begin{figure}[h!]
+	\centering
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]{ch_inference_foundations_oi_biostat/figures/cdcWeight1000SampDist/cdcWeight1000SampDist}
+		\label{cdcWeight1000SampDistA}
+	}
+	\subfigure[]{
+		\includegraphics[width=0.46\textwidth]{ch_inference_foundations_oi_biostat/figures/cdcWeight1000SampDist/cdcWeight1000SampDistB} 
+		\label{cdcWeight1000SampDistB}		
+	}
+	\caption{\subref{cdcWeight1000SampDistA} Reproduced from Figure~\ref{cdcWeight1000SampDist}, an approximation of the sampling distribution of $\overline{X}$ with $n = 60$. \subref{cdcWeight1000SampDistB} An approximation of the sampling distribution of $\overline{X}$ with $n = 200$.}
+	\label{cdcSamplingVariabilityComparison}
+\end{figure}
 
 
 \begin{termBox}{\tBoxTitle{The standard error (SE) of the sample mean}
@@ -194,20 +205,20 @@ The probability tools of Section~\ref{randomVariablesSection} can be used to der
         This is an accurate estimate of the theoretical standard deviation of $\overline{X}$ when the sample size is at least 30 and the population distribution is not strongly skewed.}
 \end{termBox}
 
-\begin{termBox}{\tBoxTitle{Point estimate terminology: summary}
+\begin{termBox}{\tBoxTitle{Summary: Point estimate terminology}
 \begin{itemize}
 	\setlength{\itemsep}{0mm}	
 	\item The population mean and standard deviation are denoted by $\mu$ and $\sigma$. 
 	
 	\item The sample mean and standard deviation are denoted by $\overline{x}$ and $s$. 
 	
-	\item The distribution of the random variable $\overline{X}$ is the collection of sample means if multiple samples were repeatedly drawn from a population. The distribution of $\overline{X}$ has its own mean ($\mu_{\overline{X}}$) and standard deviation ($\sigma_{\overline{X}}$). 
+	\item The distribution of the random variable $\overline{X}$ refers to the collection of sample means if multiple samples of the same size were repeatedly drawn from a population. 
 	
-	\item The mean of the random variable $\overline{X}$ is always equal to the population mean $\mu$.  In the notation of Chapter 3, $\mu_{\overline{X}} = E(\overline{X}) = \mu$.
+	\item The mean of the random variable $\overline{X}$ equals the population mean $\mu$.  In the notation of Chapter~\ref{modeling}, $\mu_{\overline{X}} = E(\overline{X}) = \mu$.
 	
-	\item  The standard deviation of $\overline{X}$ ($\sigma_{\overline{X}})$, is called the standard error (SE) of $\overline{x}$. 
+	\item  The standard deviation of $\overline{X}$ ($\sigma_{\overline{X}})$ is called the standard error (SE) of the sample mean $\overline{x}$. 
 	
-	\item The theoretical standard error of the sample mean, as calculated from a single sample of size $n$, is equal to $\frac{\sigma}{\sqrt{n}}$. The standard error is abbreviated by SE and is usually estimated by using $s$, the sample standard deviation, so that $SE = \frac{s}{\sqrt{n}}$.
+	\item The theoretical standard error of the sample mean, as calculated from a single sample of size $n$, is equal to $\frac{\sigma}{\sqrt{n}}$. The standard error is abbreviated by SE and is usually estimated by using $s$, the sample standard deviation, such that $SE = \frac{s}{\sqrt{n}}$.
 	
 \end{itemize}
 	}
@@ -223,40 +234,47 @@ While a point estimate consists of a single value, an interval estimate provides
 \[(\overline{x} -m, \ \overline{x} + m) = \overline{x} \pm m, \]
 where $m$ is the \term{margin of error}. Intervals that have this form are called \term{two-sided confidence intervals} because they provide both lower and upper bounds, $\overline{x} - m$ and $\overline{x} + m$, respectively. One-sided sided intervals are discussed in Section~\ref{onesidedCIs}.
 
-The standard error of the sample mean is the standard deviation of its distribution; additionally, the distribution of sample means is nearly normal and centered at $\mu$. Thus, under the normal model, the sample mean $\overline{x}$ will be within 1.96 standard errors (i.e., standard deviations) of the population mean $\mu$ approximately 95\% of the time.\footnote{In other words, the $Z$-score of 1.96 is associated with 2.5\% area to the right (and $Z$ = -1.96 has 2.5\% area to the left); this can be found on normal probability tables or from using statistical software.} Thus, if an interval is constructed that spans 1.96 standard errors from the point estimate in either direction, a data analyst can be 95\% \term{confident} that the population mean is in the interval
+The standard error of the sample mean is the standard deviation of its distribution; additionally, the distribution of sample means is nearly normal and centered at $\mu$. Thus, under the normal model, the sample mean $\overline{x}$ will be within 1.96 standard errors (i.e., standard deviations) of the population mean $\mu$ approximately 95\% of the time.\footnote{In other words, the $Z$-score of 1.96 is associated with 2.5\% area to the right (and $Z$ = -1.96 has 2.5\% area to the left); this can be found on normal probability tables or from using statistical software.} Thus, if an interval is constructed that spans 1.96 standard errors from the point estimate in either direction, a data analyst can be 95\% \term{confident} that the interval
 
 \begin{align}
-  \overline{x}\ \pm\ 1.96\times \text{SE}, 
+  \overline{x}\ \pm\ 1.96\times \text{SE} 
 \label{95PercentCIWhenUsingNormalModel}
 \end{align}
 
-The value 95\% is an approximation, accurate when the sampling distribution for the sample mean is close to that of a normal distribution. This assumption holds when the sample size is sufficiently large (guidelines for `sufficiently large' are given in Section~\ref{ch4Summary}).
+contains the population mean. The value 95\% is an approximation, accurate when the sampling distribution for the sample mean is close to that of a normal distribution. This assumption holds when the sample size is sufficiently large (guidelines for `sufficiently large' are given in Section~\ref{ch4Summary}).
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.70\textwidth]
+	{ch_inference_foundations_oi_biostat/figures/95PercentConfidenceInterval/95PercentConfidenceInterval.pdf}
+	\caption{Twenty-five samples of size $n=60$ were taken from \data{cdc}. For~each sample, a 95\% confidence interval was calculated for the population average adult weight. Only~1 of these~25 intervals did not contain the population mean, $\mu = 169.7$~lbs.}
+	\label{95PercentConfidenceInterval}
+\end{figure}
 
 The phrase "95\% confident" has a subtle interpretation: if many samples were drawn from a population, and a confidence interval is calculated from each one using Equation~\ref{95PercentCIWhenUsingNormalModel}, about 95\% of those intervals would contain the population mean $\mu$. Figure~\ref{95PercentConfidenceInterval} illustrates this process with 25 samples taken from \data{cdc}. Of the 25 samples, 24 contain the mean weight in \data{cdc} of 169.7 lbs, while one does not. 
 
-Just as with the sampling distribution of the sample mean, the interpretation of a confidence interval relies on the abstract construct of repeated sampling. A data analyst, who can only observe one sample, does not know whether the population mean lies within the single interval calculated. The uncertainty is due to random sampling -- by chance, it is possible to select a sample from the population that has unusually high (or low) values, resulting in a sample mean $\overline{x}$ that is relatively far from $\mu$, and by extension, a confidence interval that does not contain $\mu$. 
-
-\begin{figure}[hht]
-   \centering
-   \includegraphics[width=0.78\textwidth]
-{ch_inference_foundations_oi_biostat/figures/95PercentConfidenceInterval/95PercentConfidenceInterval.pdf}
-   \caption{Twenty-five samples of size $n=60$ were taken from \data{cdc}. For~each sample, a 95\% confidence interval was calculated for the population average adult weight. Only~1 of these~25 intervals did not contain the population mean, $\mu = 169.7$~lbs.}
-   \label{95PercentConfidenceInterval}
-\end{figure}
+Just as with the sampling distribution of the sample mean, the interpretation of a confidence interval relies on the abstract construct of repeated sampling. A data analyst, who can only observe one sample, does not know whether the population mean lies within the single interval calculated. The uncertainty is due to random sampling\textemdash by chance, it is possible to select a sample from the population that has unusually high (or low) values, resulting in a sample mean $\overline{x}$ that is relatively far from $\mu$, and by extension, a confidence interval that does not contain $\mu$. 
 
 \begin{example}{The sample mean adult weight from the 60 observations in \data{cdc.samp} is $\overline{x}_{\text{weight}} = 173.3$~lbs, and the standard deviation is $s_{\text{weight}} = 49.04$~lbs.  Use Equation~\ref{95PercentCIWhenUsingNormalModel} to calculate an approximate 95\% confidence interval for the average adult weight in the US population.}
-  The standard error for the sample mean will be  $\text{SE}_{\overline{x}}=\frac{49.04}{\sqrt{60}} = 6.33$~lbs. The interval will be
-  \begin{align*}
-     \overline{x}_{\text{weight}} \pm 1.96 \text{SE}_{\overline{x}} &= 173.3 \pm (1.96)(6.33) \\
-          &= (160.89, 185.71)~\text{lbs.}
-        \end{align*}
-        The data support the conclusion that, with 95\% confidence, the average weight of US adults is between approximately 161 and 186~lbs.  Although the histogram of \var{weight} in Figure~\ref{cdcSampHistograms} shows some right skewing, the confidence interval should be reasonably accurate since the sample size is sufficiently large.
+  The standard error for the sample mean is  $\text{SE}_{\overline{x}}=\frac{49.04}{\sqrt{60}} = 6.33$~lbs. The 95\% confidence interval is
+ \[\overline{x}_{\text{weight}} \pm 1.96 \text{SE}_{\overline{x}} = 173.3 \pm (1.96)(6.33) = (160.89, 185.71)~\text{lbs.} \]
+  
+  The data support the conclusion that, with 95\% confidence, the average weight of US adults is between approximately 161 and 186~lbs.
+  
+  Figure~\ref{cdcWeightBigSampDist} visually shows that the sampling distribution is nearly normal. To assess normality of the sampling distribution without repeated sampling, it is necessary to check whether the data are skewed. Although Figure~\ref{cdcWeightHist} shows some skewing, the sample size is large enough that the confidence interval should be reasonably accurate.
+  
+  \begin{figure}[h!]
+  	\centering
+  	\includegraphics[width=0.55\textwidth]
+  	{ch_inference_foundations_oi_biostat/figures/cdcWeightHist/cdcWeightHist.pdf}
+  	\caption{Histogram of \var{weight} in \data{cdc.samp} }
+  	\label{cdcWeightHist}
+  \end{figure}
+  
   \end{example}
 
-
   \begin{exercise} \label{95CIExerciseForWeightUSFemales}
-    The are 31 females in the sample of 60 US adults, and the average and standard deviation of weight for these individuals are 162.3~lbs and 57.74~lbs, respectively.  A histogram of \var{weight} for the 31 females is shown in Figure~\ref{cdcFemaleWeightHistogram}.  Calculate an approximate 95\% confidence interval for the average weight of US females.  Is the interval likely to be accurate?
-    \footnote{Applying Equation~\ref{95PercentCIWhenUsingNormalModel}: $162.3  \pm (1.96)(57.73/\sqrt{31}) \rightarrow (149.85, 174.67)$.  The usual interpretation would be that a data analyst can be about 95\% confident the average weight of US females is between approximately 150 and 175~lbs.  However, the histogram of female weights shows substantial right skewing, and several females with recorded weights larger than 200~lbs. The confidence interval is probably not accurate; a larger sample should be collected.  Chapter~\ref{inferenceForNumericalData} will introduce the $t$-distribution, which is more reliable with small sample sizes than the $z$-distribution.}
+    The are 31 females in the sample of 60 US adults, and the average and standard deviation of weight for these individuals are 162.3~lbs and 57.74~lbs, respectively.  A histogram of \var{weight} for the 31 females is shown in Figure~\ref{cdcFemaleWeightHist}.  Calculate an approximate 95\% confidence interval for the average weight of US females.  Is the interval likely to be accurate?\footnote{Applying Equation~\ref{95PercentCIWhenUsingNormalModel}: $162.3  \pm (1.96)(57.73/\sqrt{31}) \rightarrow (149.85, 174.67)$.  The usual interpretation would be that a data analyst can be about 95\% confident the average weight of US females is between approximately 150 and 175~lbs.  However, the histogram of female weights shows substantial right skewing, and several females with recorded weights larger than 200~lbs. The confidence interval is probably not accurate; a larger sample should be collected in order for the sampling distribution of the mean to be approximately normal.  Chapter~\ref{inferenceForNumericalData} will introduce the $t$-distribution, which is more reliable with small sample sizes than the $z$-distribution.}
 \end{exercise}
 
 \begin{figure}[hht]
@@ -264,6 +282,7 @@ Just as with the sampling distribution of the sample mean, the interpretation of
    \includegraphics[width=0.5\textwidth]
 {ch_inference_foundations_oi_biostat/figures/cdcFemaleWeightHistogram/cdcFemaleWeightHistogram.pdf}
 \caption{Histogram of \var{weight} for the 31 females in \data{cdc.samp}.}
+\label{cdcFemaleWeightHist}
 \end{figure}
 
 
@@ -317,8 +336,7 @@ Apply the 99\% confidence interval formula: $\overline{x}_{active}\ \pm\ 2.58 \t
 Apply the 99\% confidence interval formula: $\overline{x}_{weight}\ \pm\ 2.58 \times  SE_{\overline{x}} \rightarrow (156.97, 189.63)$. A data analyst can be 99\% confident that the average adult weight is between 156.97 and 189.63~lbs.
 \end{example}
 
-%
-The 95\% confidence interval for the average adult weight was  (160.89, 185.71)~lbs. Increasing the confidence level to 99\% results in (156.97, 189.63) lbs, a wider interval that is more likely to contain the population mean $\mu$. However, increasing confidence level comes at a cost: a wider interval is less informative in providing a precise estimate of the population mean. Consider the extreme: to be "100\% confident" that an interval contains $\mu$, the interval must span all possible values of $\mu$. For example, with 100\% confidence the average weight is between 0 and 1000 lbs, for instance; while this interval necessarily contains $\mu$, it has no interpretive value and is completely uninformative. 
+The 95\% confidence interval for the average adult weight is (160.89, 185.71)~lbs. Increasing the confidence level to 99\% results in the interval (156.97, 189.63) lbs; this wider interval is more likely to contain the population mean $\mu$. However, increasing the confidence level comes at a cost: a wider interval is less informative in providing a precise estimate of the population mean. Consider the extreme: to be "100\% confident" that an interval contains $\mu$, the interval must span all possible values of $\mu$. For example, with 100\% confidence the average weight is between 0 and 1000 lbs; while this interval necessarily contains $\mu$, it has no interpretive value and is completely uninformative.\footnote{Strictly speaking, to be 100\% confident requires an interval spanning all positive numbers; 1000 lbs has been arbitrarily chosen as an upper limit for human weight.} 
 
 Decreasing the confidence level results in a narrower interval and a more precise estimate, but the interval has less chance of containing $\mu$. For example, consider a 50\% confidence interval for average adult weight using \data{cdc.samp}: the $z^{\star}$ value is 0.67, and the confidence interval is (169.06, 177.54)~lbs. This interval provides more precise estimate of the population average weight $\mu$ than the 99\% or 95\% confidence intervals, but there is only a 50\% chance that it contains $\mu$.
 
@@ -343,6 +361,10 @@ While the margin of error $m$ for a one-sided interval is still calculated from 
 The lower bound is $173.3 - (1.645 \times 6.33) = 163.89$. The lower 95\% interval $(163.89, \infty)$ suggests that one can be 95\% confident that the population average adult weight is at least 163.9~lbs. 
 \end{example}
 
+\begin{exercise} Calculate an upper 99\% confidence interval for the population average adult weight in the United States. The mean and standard error for weight in \data{cdc.samp} are $\overline{x} = 173.3$ and $SE = 6.33$ days.\footnote{For a one-sided 99\% confidence interval, the $z^\star$ value corresponds to the point with 0.01 area in the right tail, $z^\star = 2.326$. Thus, the upper bound for the interval is $173.3 + (2.326 \times 6.33) = 188.024.$ The upper 99\% interval ($-\infty, 188.024$) suggests that one can be 99\% confident that the population average adult weight is at most 188.0 lbs.}
+	
+\end{exercise}
+
 %JV: Needs explanation about when to use one-sided interval versus two-sided.
 
 \subsection{Interpreting confidence intervals}
@@ -354,7 +376,7 @@ The correct interpretation of an XX\% confidence interval is, "We are XX\% confi
 
 The conditions regarding the validity of the normal approximation can be checked using the numerical and graphical summaries discussed in Chapter 1. However, the condition that data should be from a random sample is sometimes overlooked. If the data are not from a random sample, then the confidence interval no longer has interpretive value, since there is no population mean to which the confidence interval applies. For example, while only simple arithmetic is needed to calculate a confidence interval for BMI from the \data{famuss} dataset in Chapter 1, the participants in the study are almost certainly not a random sample from some population; thus, a confidence interval should not be calculated in this setting.
 
-\begin{example}{Do Americans tend to be overweight? Body mass index (BMI) is one measure of body weight that adjusts for height. The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The dataset \data{nhanes.samp} contains 76 variables and is a random sample of 200 individuals from the measurements collected in the years 2009-2010 and 2012-2013.\footnote{The sample was drawn from a larger sample of 20,293 participants in the \textbf{NHANES} package, available from The Comprehensive R Archive Network (CRAN). The CDC uses a complex sampling design that samples some demographic subgroups with larger probabilities, but \data{nhanes.samp} has been adjusted so that it can be viewed as a random sample of the US population.} Use \data{nhanes.samp} to calculate a 95\% confidence interval for adult BMI in the US population. \label{exNhanesBmi}}
+\begin{example}{Body mass index (BMI) is one measure of body weight that adjusts for height. The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The dataset \data{nhanes.samp} contains 76 variables and is a random sample of 200 individuals from the measurements collected in the years 2009-2010 and 2012-2013.\footnote{The sample was drawn from a larger sample of 20,293 participants in the \textbf{NHANES} package, available from The Comprehensive R Archive Network (CRAN). The CDC uses a complex sampling design that samples some demographic subgroups with larger probabilities, but \data{nhanes.samp} has been adjusted so that it can be viewed as a random sample of the US population.} Use \data{nhanes.samp} to calculate a 95\% confidence interval for adult BMI in the US population, and assess whether the data suggest Americans tend to be overweight. \label{exNhanesBmi}}
 	
 \begin{figure}[h]
 		\centering
@@ -413,7 +435,7 @@ The confidence interval (27.7, 29.9) $\text{kg}/\text{m}{^2}$ certainly suggests
 
 \index{hypothesis testing|(}
 
-Important decisions in science, such as whether a new treatment for a disease should be approved for the market, are primarily data-driven. For example, does a clinical study of a new cholesterol-lowering drug in patients at risk for heart disease provide robust evidence of a beneficial effect? A confidence interval can be calculated from the study data to provide a plausible range of values for a population parameter, such as the population average decrease in cholesterol levels. A drug is considered to have a beneficial effect on a population of patients if the population average effect is large enough to be clinically important. It is also necessary to evaluate the strength of the evidence that a drug is effective; in other words, is the observed effect larger than would be expected from chance variation alone?
+Important decisions in science, such as whether a new treatment for a disease should be approved for the market, are primarily data-driven. For example, does a clinical study of a new cholesterol-lowering drug provide robust evidence of a beneficial effect in patients at risk for heart disease? A confidence interval can be calculated from the study data to provide a plausible range of values for a population parameter, such as the population average decrease in cholesterol levels. A drug is considered to have a beneficial effect on a population of patients if the population average effect is large enough to be clinically important. It is also necessary to evaluate the strength of the evidence that a drug is effective; in other words, is the observed effect larger than would be expected from chance variation alone?
 
 Hypothesis testing is a method for calculating the probability of making a specific observation under a working hypothesis, called the null hypothesis. By assuming that the data come from a distribution specified by the null hypothesis, it is possible to calculate the likelihood of observing a value as extreme as the one represented by the sample. If the chances of such an extreme observation are small, there is enough evidence to reject the null hypothesis in favor of an alternative hypothesis. 
 
@@ -425,13 +447,11 @@ In medical research, that decision might be faced by staff at the US FDA on whet
 
 \end{comment}
 
-Generally, an investigator suspects that the null hypothesis is not true and performs a hypothesis test in order to evaluate the strength of the evidence against the null hypothesis. The logic behind rejecting or failing to reject the null hypothesis is similar to the principle of presumption of innocence in many legal systems. In the United States, a defendant is assumed innocent until proven guilty; a verdict of guilty is only returned if it has been established beyond a reasonable doubt that the defendant is not innocent.
-
 \begin{termBox}{\tBoxTitle{Null and alternative hypotheses}
   {The \term{null hypothesis ($H_0$)} often represents either a skeptical perspective or a claim to be tested. The \term{alternative hypothesis ($H_A$)} is an alternative claim and is often represented by a range of possible parameter values.}}
 \end{termBox}
 
-In the formal approach to hypothesis testing, the null hypothesis ($H_0$) is not rejected unless the evidence contradicting it is so strong that the only reasonable conclusion is to reject $H_0$ in favor of $H_A$. The logic is similar to the principle of presumption of innocence in many legal systems. In the United States, a defendant is assumed innocent until proven guilty; a verdict of guilty is only returned if it has been established beyond a reasonable doubt that the defendant is not innocent (i.e., guilty). 
+Generally, an investigator suspects that the null hypothesis is not true and performs a hypothesis test in order to evaluate the strength of the evidence against the null hypothesis. The logic behind rejecting or failing to reject the null hypothesis is similar to the principle of presumption of innocence in many legal systems. In the United States, a defendant is assumed innocent until proven guilty; a verdict of guilty is only returned if it has been established beyond a reasonable doubt that the defendant is not innocent. In the formal approach to hypothesis testing, the null hypothesis ($H_0$) is not rejected unless the evidence contradicting it is so strong that the only reasonable conclusion is to reject $H_0$ in favor of $H_A$. 
 
 The next section presents the steps in formal hypothesis testing, which is applied when data are analyzed to support a decision or make a scientific claim.
 
@@ -451,7 +471,7 @@ The next section presents the steps in formal hypothesis testing, which is appli
 
 In this section, hypothesis testing will be used to address the question of whether Americans generally wish to be heavier or lighter than their current weight. In the \data{cdc} data, the two variables \var{weight} and \var{wtdesire} are, respectively, the recorded actual and desired weights for each respondent, measured in pounds. 
 
-Suppose that $\mu$ is the population average of the difference $\text{weight} - \text{wtdesire}$. Using the observations from \data{cdc.samp}, assess the strength of the claim that, on average, there is no systematic preference to be heavier or lighter. 
+Suppose that $\mu$ is the population average of the difference \texttt{weight} $-$ \texttt{wtdesire}. Using the observations from \data{cdc.samp}, assess the strength of the claim that, on average, there is no systematic preference to be heavier or lighter. 
 
 \subsubsection{Step 1: Formulating null and alternative hypotheses}
 
@@ -461,7 +481,7 @@ The claim to be tested is that the population average of the difference between 
 In the absence of prior evidence that people typically wish to be lighter (or heavier), it is reasonable to begin with an alternative hypothesis that allows for differences in either direction.
 \[H_A: \mu \neq 0.\]
 
-The alternative hypothesis $H_A: \mu \neq 0$ is called a \term{two-sided alternative}. A one-sided alternative could be used if, for example, an investigator felt there was prior evidence that people typically wish to be weigh less than they currently do: $H_A: \mu > 0$. 
+The alternative hypothesis $H_A: \mu \neq 0$ is called a \term{two-sided alternative}. A one-sided alternative could be used if, for example, an investigator felt there was prior evidence that people typically wish to weigh less than they currently do: $H_A: \mu > 0$. 
 
 More generally, when testing a hypothesis about a population mean $\mu$, the null and alternative hypotheses are written as follows
 
@@ -477,10 +497,9 @@ The symbol $\mu$ denotes a population mean, while $\mu_0$ refers to the numeric 
 
 \subsubsection{Step 2: Specifying a significance level, $\alpha$}
 
-
 It is important to specify how rare or unlikely an event must be in order to represent sufficient evidence against the null hypothesis. This should be done during the design phase of a study, to prevent any bias that could result from defining 'rare' only after analyzing the results. 
 
-When testing a statistical hypothesis, an investigator specifies a \term{significance level}, $\alpha$, that defines a 'rare' event. Typically, $\alpha = 0.05$, though it may be larger or smaller, depending on context; this is discussed in more detail in Section~\ref{significanceLevel}. An $\alpha$ level of $0.05$ means that an event occurring with probability lower than 5\% will be considered sufficient evidence against $H_0$.
+When testing a statistical hypothesis, an investigator specifies a \term{significance level}, $\alpha$, that defines a 'rare' event. Typically, $\alpha$ is chosen to be $0.05$, though it may be larger or smaller, depending on context; this is discussed in more detail in Section~\ref{significanceLevel}. An $\alpha$ level of $0.05$ implies that an event occurring with probability lower than 5\% will be considered sufficient evidence against $H_0$.
 
 
 \subsubsection{Step 3: Calculating the test statistic}
@@ -491,7 +510,7 @@ Calculating the test statistic $t$ is analogous to standardizing observations wi
 t=\frac{\overline{x}-\mu_0}{s/\sqrt{n}},
 \end{align*}
 
-where $s$ is the sample standard deviation and $n$ is the number of observations in the sample.  If $x = \text{weight} - \text{wtdesire}$, then for the 60 recorded differences in \data{cdc.samp}, $\overline{x} = 18.2$ and $s = 33.46$.  In this sample, respondents weigh on average about 18 lbs more than they wish. The test statistic is 
+where $s$ is the sample standard deviation and $n$ is the number of observations in the sample.  If $x =$ \texttt{weight} $-$ \texttt{wtdesire}, then for the 60 recorded differences in \data{cdc.samp}, $\overline{x} = 18.2$ and $s = 33.46$.  In this sample, respondents weigh on average about 18 lbs more than they wish. The test statistic is 
 
 \[t = \frac{18.2 - 0}{33.46/\sqrt{60}} = 4.22.\]
 The observed sample mean is 4.22 standard deviations to the right of $\mu_0 = 0$.
@@ -560,7 +579,7 @@ For this two-sided alternative $H_A: \mu \neq 0.50$, the $p$-value is
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.9\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueTuna/pValueTuna}
+	\includegraphics[width=0.8\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueTuna/pValueTuna}
 	\caption{The blue shaded region represents the $p$-value, the area to the right of $t = 0.859$ and to the left of $-t = -0.859$. The grey shaded region represents the \term{rejection region} as defined by $\alpha$; in this case, an area of 0.025 in each tail. The $t$-statistic calculated from $\overline{x}$ would have to lie within either of the grey regions in order to constitute sufficient evidence against the null hypothesis.}
 	\label{pValueTuna}
 \end{figure}
@@ -589,7 +608,7 @@ Let $\mu$ be the population average of hours of sleep per night for US adults. C
 
 \textit{Calculate the $p$-value}.
 
-For this one-sided alternative $H_A: \mu < 7$, the $p$-value will be 
+For this one-sided alternative $H_A: \mu < 7$, the $p$-value is 
 
 \[P(Z \leq t) = P(Z < -0.864) = 0.19.\]
 
@@ -598,7 +617,7 @@ Since the alternative states that $\mu_0$ is less than 7, the $p$-value is repre
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.9\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueSleep/pValueSleep}
+	\includegraphics[width=0.8\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueSleep/pValueSleep}
 	\caption{The blue shaded region represents the $p$-value, the area to the left of $t = -0.864$. The grey shaded region represents the rejection region of area 0.05 in the left tail.}
 	\label{pValueSleep}
 \end{figure}
@@ -608,13 +627,13 @@ Since the alternative states that $\mu_0$ is less than 7, the $p$-value is repre
 \end{example}
 
 \begin{exercise}
-	From these data, is there sufficient evidence at the $\alpha = 0.10$ significance level to support the claim that American adults sleep more than 7 hours per night?\footnote{The $t$-statistic does not change from 1.65. Re-calculate the $p$-value since the alternative hypothesis is now $H_A: \mu > 7$: $P(Z \geq -0.864) = 0.81$. Since $p$ > $\alpha$, there is insufficient evidence to reject $H_0$ at $\alpha = 0.10$. A common error when conducting one-sided tests is to assume that the $p$-value will always be the area in the smaller of the two tails to the right or left of the observed value. It is important to remember that the area corresponding to the $p$-value must correspond to the direction specified by the alternative hypothesis.\\
+	From these data, is there sufficient evidence at the $\alpha = 0.10$ significance level to support the claim that American adults sleep more than 7 hours per night?\footnote{The $t$-statistic does not change from 1.65. Re-calculate the $p$-value since the alternative hypothesis is now $H_A: \mu > 7$: $P(Z \geq -0.864) = 0.81$. Since $p$ > $\alpha$, there is insufficient evidence to reject $H_0$ at $\alpha = 0.10$. A common error when conducting one-sided tests is to assume that the $p$-value will always be the area in the smaller of the two tails to the right or left of the observed value. It is important to remember that the area corresponding to the $p$-value is in the direction specified by the alternative hypothesis.\\
 	\includegraphics[width=0.3\textwidth]{ch_inference_foundations_oi_biostat/figures/pValueSleep/pValueSleepEx}}
 \end{exercise}
 
 \subsection{Hypothesis testing and confidence intervals}
 
-The relationship between a hypothesis test and the corresponding confidence interval is defined by the significance level $\alpha$; the two approaches are based on the same inferential logic, and differ only in perspective. The hypothesis testing approach asks whether $\overline{x}$ is far enough away from $\mu_0$ to be considered extreme, while the confidence interval approach asks whether $\mu_0$ is close enough to $\overline{x}$ to be plausible. In both cases, "far enough" and "close enough" are defined by the significance level $\alpha$, which determines the $t^{\star}$ used to calculate the margin of error $m = t^{\star} (s/\sqrt{n}) $.\footnote{If the normal distribution is used, then $m = z^{\star} (s/\sqrt{n})$.}
+The relationship between a hypothesis test and the corresponding confidence interval is defined by the significance level $\alpha$; the two approaches are based on the same inferential logic, and differ only in perspective. The hypothesis testing approach asks whether $\overline{x}$ is far enough away from $\mu_0$ to be considered extreme, while the confidence interval approach asks whether $\mu_0$ is close enough to $\overline{x}$ to be plausible. In both cases, "far enough" and "close enough" are defined by $\alpha$, which determines the $t^{\star}$ used to calculate the margin of error $m = t^{\star} (s/\sqrt{n}) $.\footnote{If the normal distribution is used, then $m = z^{\star} (s/\sqrt{n})$.}
 
 \begin{list}{}{}
 	\item \textit{Hypothesis Test}. For a two-sided test,  $\overline{x}$ needs to be at least $m$ units away from $\mu_0$ in either direction to be considered extreme. The $t$-points marking off the rejection region are equal to the $t^\star$ value used in the confidence interval, with the positive and negative $t$-points accounting for the $\pm$ structure in the confidence interval.
@@ -622,7 +641,7 @@ The relationship between a hypothesis test and the corresponding confidence inte
 	\item \textit{Confidence Interval}. The plausible range of values for $\mu_0$ around $\overline{x}$ is defined as $(\overline{x} - m, \ \overline{x} + m)$. If $\mu_0$ is plausible, it can at most be $m$ units away in either direction from $\overline{x}$. If the interval does not contain $\mu_0$, then $\mu_0$ is implausible according to $\alpha$ and there is sufficient evidence to reject $H_0$.
 \end{list}
 
-Suppose that a two-sided test is conducted at significance level $\alpha$; the confidence level of the matching interval is (1 - $\alpha$)\%. For example, a two-sided hypothesis test with $\alpha = 0.05$ can be compared to a 95\% confidence interval. A hypothesis test will reject at $\alpha = 0.05$ if the 95\% confidence interval does not contain the null hypothesis value of the population mean ($\mu_0$).
+Suppose that a two-sided test is conducted at significance level $\alpha$; the confidence level of the matching interval is ($1 - \alpha$)\%. For example, a two-sided hypothesis test with $\alpha = 0.05$ can be compared to a 95\% confidence interval. A hypothesis test will reject at $\alpha = 0.05$ if the 95\% confidence interval does not contain the null hypothesis value of the population mean ($\mu_0$).
 
 \begin{termBox}{\tBoxTitle{The relationship between two-sided hypothesis tests and confidence intervals}
 {When testing the null hypothesis $H_0:\mu = \mu_0$ against the two-sided alternative $H_A: \mu \neq \mu_0$, $H_0$ will be rejected at significance level $\alpha$ when the $100(1-\alpha)\%$ confidence interval for $\mu$ does not contain $\mu_0$. }}
@@ -724,7 +743,7 @@ By convention, most scientific studies use a significance level of $\alpha = 0.0
 
 For example, in the early stages of assessing a drug therapy, it may be important to continue further testing even if there is not very strong initial evidence for a beneficial effect. If the scientists conducting the research know that any initial positive results will eventually be more rigorously tested in a larger study, they might choose to use $\alpha = 0.10$ to reduce the chances of making a Type II error: prematurely ending research on what might turn out to be a promising drug.
 
-A government agency responsible for approving drugs to be marketed to the general population, however, would likely be biased towards minimizing the chances of making a Type I error -- approving a drug that turns out to be unsafe or ineffective. As a result, they might conduct tests at significance level 0.01 in order to reduce the chances of concluding that a drug works when it is in fact ineffective. The US FDA and the European Medical Agency (EMA) customarily require that two independent studies show the efficacy of a new drug or regimen using $\alpha = 0.05$, though other values are sometimes used.
+A government agency responsible for approving drugs to be marketed to the general population, however, would likely be biased towards minimizing the chances of making a Type I error\textemdash approving a drug that turns out to be unsafe or ineffective. As a result, they might conduct tests at significance level 0.01 in order to reduce the chances of concluding that a drug works when it is in fact ineffective. The US FDA and the European Medical Agency (EMA) customarily require that two independent studies show the efficacy of a new drug or regimen using $\alpha = 0.05$, though other values are sometimes used.
 
 \index{significance level|)}
 \index{hypothesis testing!significance level|)}
@@ -732,11 +751,11 @@ A government agency responsible for approving drugs to be marketed to the genera
 
 \subsection{Choosing between one-sided and two-sided tests}
 
-In some cases, the choice of a one-sided or two-sided test can influence whether the null hypothesis is rejected. For example, consider a sample for which the $t$-statistic is 1.80. If a two-sided test is conducted at $\alpha = 0.05$, the $p$-value is given by
+In some cases, the choice of a one-sided or two-sided test can influence whether the null hypothesis is rejected. For example, consider a sample for which the $t$-statistic is 1.80. If a two-sided test is conducted at $\alpha = 0.05$, the $p$-value is
 
 \[P(Z \leq -t) + P(Z \geq t)= 2P(Z \geq 1.80) = 0.072.\]
 
-There is insufficient evidence to reject $H_0$, since $p > \alpha$. However, what if a one-sided test is conducted at $\alpha = 0.05$, with $H_A: \mu > \mu_0$? In this case, the $p$-value is given by
+There is insufficient evidence to reject $H_0$, since $p > \alpha$. However, what if a one-sided test is conducted at $\alpha = 0.05$, with $H_A: \mu > \mu_0$? In this case, the $p$-value is
 
 \[P(Z \geq t)= P(Z \geq 1.80) = 0.036.\]
 
@@ -798,7 +817,7 @@ These nuanced issues cannot be adequately covered in any introduction to statist
 	
 	\item Unless it is clear from the context of a problem that change in only one direction from the null hypothesis is of interest, the alternative hypothesis should be two-sided.
 	
-	\item The use of a standard normal distribution to calculate $p$-values is reasonable for sample sizes of 30 or more if the distribution of data are not strongly skewed and there are no large outliers. If there is skew or a few large outliers, sample sizes of 50 or more are usually sufficient.
+	\item The use of a standard normal distribution to calculate $p$-values is reasonable for sample sizes of 30 or more if the distribution of data are not strongly skewed and there are no large outliers. If there is skew or a few large outliers, sample sizes of 50 or more are usually sufficient.\footnote{With the use of statistical computing software, it is often simpler to always use the $t$-distribution, which is valid for any sample size.}
 	
 	\item Pay attention to the context of a problem, particularly when formulating hypotheses and drawing conclusions.
 \end{itemize}

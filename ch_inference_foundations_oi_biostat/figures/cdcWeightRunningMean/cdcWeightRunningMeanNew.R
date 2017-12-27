@@ -24,13 +24,13 @@ plot(sample.means,
      type = "l",
      axes = FALSE,
      xlab = "",
-     ylab = "Running mean, weight",
+     ylab = "Mean weight",
      col = COL[1],
-     lwd = 1,
+     lwd = 1.5,
      ylim = range(sample.means))
 axis(1, at = seq(0, 500, 100))
 axis(2, at = seq(0,200,10))
-abline(h = m.pop, lty = 2, col = COL[4,3])
+abline(h = m.pop, lty = 2, lwd = 1.5, col = COL[4,1])
 mtext("Sample size", 1, 2)
 dev.off()
 
