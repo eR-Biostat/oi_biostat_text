@@ -16,17 +16,21 @@ The relationship between two numerical variables can be visualized using a scatt
 
 This chapter explores simple linear regression, a technique for estimating a straight line that best fits data on a scatterplot. A line of best fit functions as a linear model that can not only be used for prediction, but also for inference. Linear regression should only be used with data that exhibit linear or approximately linear relationships. 
 
-For example, scatter plots in Chapter~\ref{introductionToData} displayed height and weight data from the FAMuSS study, with height as a predictor of weight. Adding a best-fitting line to these data using regression techniques would allow for prediction of an individual's weight for a known height; furthermore, the linear model could also be used to investigate questions about the population-level relationship between height and weight. 
+%JV: need to adjust these scatterplots to use NHANES
 
-The next chapter covers multiple regression, a statistical model used to estimate the relationship between a single variable and more than one possible predictors.
+For example, scatterplots in Chapter~\ref{introductionToData} displayed height and weight data from the FAMuSS study, with height as a predictor of weight. Adding a best-fitting line to these data using regression techniques would allow for prediction of an individual's weight for a known height; furthermore, the linear model could also be used to investigate questions about the population-level relationship between height and weight. 
 
-\section{Examining scatter plots}
+The next chapter covers multiple regression, a statistical model used to estimate the relationship between a single response variable and several predictor variables.
+
+\section{Examining scatterplots}
 \label{examiningScatterPlots}
 
-\index{scatter plots|(}
-Various demographic and cardiovascular risk factors, including assessments of cognitive function, were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place between 2003 and 2006 in the Netherlands. As adults age, cognitive function changes over time, largely due to various cerebrovascular and neurodegenerative changes. It is thought that cognitive decline is a long-term process that may start as early as 45 years of age.\footnote{Stroke. 2013;44:1543-1549,https://doi.org/10.1161/STROKEAHA.111.000496 } The Ruff Figural Fluency Test (RFFT) is one measure of cognitive function that provides information about various cognitive abilities such as planning and the ability to switch between different tasks. The test consists of drawing as many unique designs as possible from a pattern of dots, under timed conditions; scores range from 0 to 175 points (worst and best score, respectively).
+\index{scatterplots|(}
+Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{statins} dataset, available in the \textsf{R} \texttt{oibiostat} package. 
 
-A total of 4,095 individuals participated in the study; RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{statinsAgeRFFT}, plotted against age at enrollment, measured in years. The variables \var{Age} and \var{RFFT} are negatively associated; older participants tend to have lower cognitive function. There is an approximately linear trend observable in the data, which suggests that adding a line could be useful for summarizing the relationship between the two variables.
+As adults age, cognitive function changes over time, largely due to various cerebrovascular and neurodegenerative changes. It is thought that cognitive decline is a long-term process that may start as early as 45 years of age.\footnote{Joosten H, et al. Cardiovascular risk profile and cognitive function in young, middle-aged, and elderly subjects. Stroke. 2013;44:1543-1549, \url{https://doi.org/10.1161/STROKEAHA.111.000496} } The Ruff Figural Fluency Test (RFFT) is one measure of cognitive function that provides information about various cognitive abilities such as planning and the ability to switch between different tasks. The test consists of drawing as many unique designs as possible from a pattern of dots, under timed conditions; scores range from 0 to 175 points (worst and best score, respectively).
+
+RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{statinsAgeRFFT}, plotted against age at enrollment, which is measured in years. The variables \var{Age} and \var{RFFT} are negatively associated; older participants tend to have lower cognitive function. There is an approximately linear trend observable in the data, which suggests that adding a line could be useful for summarizing the relationship between the two variables.
 
 \begin{figure}[h!]
 	\centering
