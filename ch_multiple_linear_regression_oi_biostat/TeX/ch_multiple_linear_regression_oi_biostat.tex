@@ -563,194 +563,20 @@ possible or ethical.  In those instances, observational studies may be
 the best available approach. They should be analyzed carefully and
 thoughtfully.
 
+\section{Interaction in regression}
 
-\section{Predicting change in muscle strength: FAMuSS}
+Use NHANES
 
-One of the main aims of the FAMuSS study was to examine the association of muscle response to resistance training with genotype at the residue actn3.577x, and several publications have appeared describing the background of the study, the methods used to measure changes in strength, and an analysis of this question for women.  References for some of the study publications are given in Section~\ref{variableTypes}  Other factors may also be associated with change in strength, including the age, sex and body mass index of the participant.  This section examines the use of multiple regression to estimate the association of genotype with observed response, then to look at a more complex model that might be used to predict changes in strength based on genotype, BMI and the demographic characteristics age and sex.  The analysis also examines the association of \var{race} with the response,  since the allele frequencies actn3.577x are known to differ by race.  Individuals of African ancestry are less likely to be homozygous that Asians, for instance\footnote{Clarkson, et. al, J Appl Physiol 99: 154 - 163, 2005.}  The analyses in the published papers contain much more detail both about the biology and the results.  The analysis presented here does not appear in the published papers; it briefly illustrates the use of multiple linear regression and should not be used to draw definitive conclusions about the data.
+\section{Model selection and prediction}
 
-The histogram of \var{ndrm.ch} in Figure~\ref{famussNdrmChHist} shows that the variable is right-skewed.  A log transform of the data may induce a more symmetric distribution of the response, but inspection of the data reveals that there are 11 participants for whom $\texttt{ndrm.ch} = 0$; apparently there was no change in muscle strength in the non-dominant arm.   Since the natural log of zero is undefined, a common strategy is to add a small positive value to all observed responses before the transformation.  Figure~\ref{famussLogNdrmChHist} shows a histogram of $\log(\text{ndrm.ch} + 5)$. The transformed distribution is more nearly symmetric.  The transformation is used to fit a more robust model for the response and predictors, and it can be accounted for when making predictions for change in strength on the original scale of the measurement. Since $\log(\text{ndrm.ch} + 5)$ increases when \var{ndrm.ch} increases, the interpretation of the signs of regression coefficients will not change -- positive coefficients will imply that \var{ndrm.ch} increases with increasing values of the predictor.  The size of the increase, however, can only be calculated after accounting for the transformation, as will be seen below.
+Forest birds
 
+\section{The connection between ANOVA and regression}
 
-
-\begin{figure}[ht]
-	\centering
-	\subfigure[]{
-		\includegraphics[width=0.46\textwidth]
-		{ch_multiple_linear_regression_oi_biostat/figures/famussNdrmChHist/famussNdrmChHist}
-		\label{famussNdrmChHist}
-	}
-	\subfigure[]{
-		\includegraphics[width=0.46\textwidth]
-		{ch_multiple_linear_regression_oi_biostat/figures/famussNdrmChHist/famussLogNdrmChHist}
-		\label{famussLogNdrmChHist}
-	}
-	\caption{\subref{famussNdrmChHist} Histogram of ndrm.ch. \subref{famussLogNdrmChHist} Histogram of log(ndrm.ch + 5.0).}
-	\label{famussNdrmChHistograms}
-\end{figure}
+Statins and education, refer to ch 5
 
 
-Since the association of change in strength with the genotypes at actn3.577x was of primary interest in the FAMuSS study, this example begins by examining the association between the transformed response $\log(\text{ndrm.ch} + 5)$ and genotype.  The example is extended by constructing a model for predicting change in strength based on genotype and other characteristics of the participants.
-
-There are three genotypes for this residue, \texttt{CC, CT} and \texttt{TT}. Figure~\ref{logNdrmChActn3R577xBoxPlot} shows side-by-side boxplots for $\log(\text{ndrm.ch} + 5)$ across the three genotypes.  The figure shows a slight a slight trend of increasing values of the transformed response moving from CC to CT, and Table~\ref{famussActn3R577xLogNdrmChRegression} presents the results of the regression of the transformed response variable on just the categorical variable \var{actn3.577x}.   The genotype \texttt{CC} has been set as the reference category and serves as the intercept in the model.  The table shows that \texttt{TT} is associated with a statistically significant increase of  0.17 in the transformed response variable (using $\alpha = 0.05$), while there is not strong evidence for an association with \texttt{CT}.  
-
- \begin{figure}[h!]
- 	\centering
- 	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/logNdrmChActn3R577xBoxPlot/logNdrmChActn3R577xBoxPlot.pdf}
- 	\caption{Boxplot of log(ndrm.ch + 5.0) by genotype at actn3.r577x, in the  \data{famuss} data.}
-	\label{logNdrmChActn3R577xBoxPlot}
- \end{figure}
- 
-
-% xtable(summary(lm(log(ndrm.ch + 5.0) ~ actn3.r577x,data=famuss)))
-% latex table generated in R 3.0.1 by xtable 1.7-4 package
-% Fri Nov 11 15:20:17 2016
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 3.8133 & 0.0472 & 80.76 & 0.0000 \\ 
-  actn3.r577xCT & 0.0842 & 0.0609 & 1.38 & 0.1672 \\ 
-  actn3.r577xTT & 0.1730 & 0.0680 & 2.54 & 0.0112 \\ 
-   \hline
-\end{tabular}
-\caption{Parameter estimates in the regression model showing the association of genotype at \data{actn3.r577x} with \data{log(ndrm.ch + 5.0)}}
-\label{famussActn3R577xLogNdrmChRegression}
-\end{table}
-
-
-The change of 0.17 is easier to understand when transformed back to the original scale.   In this model
-\[
-  \widehat{\log(\text{ndrm.ch} + 5.0)} = 3.8133 + 0.0842\text{actn3.r577xCT} + 0.1730\text{actn3.r577xTT}.
-\]
-Exponentiating both sides of the equation then subtracting 5.0,
-\begin{align*}
-   \widehat{\text{ndrm.ch}} &= \exp(3.8133 + 0.0842\text{actn3.r577xCT} + 0.1730\text{actn3.r577xTT}) - 5.0.
-\end{align*}
-
-The predicted response for someone with genotype TT is 
-
-\begin{align*}
-   \widehat{\text{ndrm.ch}} &= \exp(3.8133 + (0.0842)(0) + 0.1730(1)) - 5.0 \\
-      &=48.86\%.
-\end{align*}
-The predicted response for the reference category CC is 
-
-\begin{align*}
-   \widehat{\text{ndrm.ch}} &= \exp(3.8133 + (0.0842)(0) + 0.1730(0)) - 5.0 \\
-      &=40.3\%.
-\end{align*}
-The genotype TT is associated with an approximately 8.5\% difference in response compared to CC. 
-
-Candidate variables in the larger model for prediction include age, sex, BMI and race of the participant. It is always prudent to examine the association of the individual variables with the response before fitting a multiple regression, either graphically or numerically.  This part of the example uses numerical summaries, and the exercises ask for graphical summaries of each of the individual associations.
-
-Figure~\ref{logNdrmChAgePlot} shows a scatterplot of age vs. the transformed response variable, and Table~\ref{logNdrmChAgeRegression} shows a statistically significant association between age and the transformed response variable.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/logNdrmChAgePlot/logNdrmChAgePlot.pdf}
-	\caption{Age vs the transformed variable log(ndrm.ch + 5.0) in the \data{famuss} data, with least squares line added.}
-	\label{logNdrmChAgePlot}
-\end{figure}
-
-
-
-
-% xtable(summary(lm(log(ndrm.ch + 5.0) ~ age, data=famuss)))
-% latex table generated in R 3.3.1 by xtable 1.8-2 package
-% Tue Dec  6 10:39:06 2016
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.5597 & 0.1068 & 42.68 & 0.0000 \\ 
-  age & -0.0272 & 0.0043 & -6.37 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\caption{Parameter estimate in the least squares regression for \var{log(ndrm.ch + 5.0)} vs age, \data{famuss} data.}
-\label{logNdrmChAgeRegression}
-\end{table}
-
-Similar analyses (explored in the exercises) show that both BMI and sex are significantly associated with the transformed response, but that race is not.  Race is not considered further in this analysis.
-
-A multiple regression model accounting for genotype, age, sex, and BMI is shown in Table~\ref{LogNdrmChACTN3AgeSexBmiRegression}.
-
-% xtable(final.model.log.ndrm.ch)
-% latex table generated in R 3.3.1 by xtable 1.8-2 package
-% Tue Dec  6 08:57:05 2016
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 4.7638 & 0.1562 & 30.51 & 0.0000 \\ 
-  actn3.r577xCT & 0.0679 & 0.0567 & 1.20 & 0.2322 \\ 
-  actn3.r577xTT & 0.1396 & 0.0633 & 2.21 & 0.0278 \\ 
-  age & -0.0230 & 0.0042 & -5.53 & 0.0000 \\ 
-  sexMale & -0.3487 & 0.0484 & -7.20 & 0.0000 \\ 
-  bmi & -0.0094 & 0.0053 & -1.78 & 0.0753 \\ 
-   \hline
-\end{tabular}
-\caption{Parameter estimates in the model for \var{log(ndrm.ch = 5.0)} vs genotype, age, sex, and BMI in the \data{famuss} data.}
-\label{LogNdrmChACTN3AgeSexBmiRegression}
-\end{table}
-
-
-
-In this model, genotype, age and sex of the respondent are all significantly associated with the transformed variable $\log(\text{ndrm.ch} + 5.0)$ (using $\alpha = 0.05$), there is some evidence that BMI is associated, and it is left in the model.  The adjusted $R^2$ for this model is 0.1474; it explains approximately 15\% of the variation in the transformed response.  The $F$-statistic is 21.54 with numerator and denominator degrees of freedom 5 and 589, respectively, and is highly significant.
-
-
-Examining the residuals shows that the model in Table~\ref{LogNdrmChACTN3AgeSexBmiRegression} is far from perfect.  Figure~\ref{logNdrmChResidNormPlot} shows a scatterplot of residuals from the model vs. predicted values and a normal probability plot of the residuals. The scatterplot looks reasonably good, but with a notable exception -- there are 11 points that are clearly below the point cloud in the residual plot, all with residuals approximately -2 or smaller.   Large negative residuals occur when the predicted value is much larger than the observed response.  All 11 points correspond to the data points in the original dataset with a recorded value of 0 for the percent change.  The residual plot suggests that the recorded value of 0 was an anomaly and perhaps an error, not that the model is wrong.  It would be wrong to delete these cases from the entire analysis without additional information. If there has not been an error, the original points may represent a small subset of participants who do not benefit from strength training.  Eliminating the points makes the regression models difficult to interpret  -- the models estimate the association between genotype and change in strength only for participants who experience change.
-
-The normal probability plot of the residuals shows a similar anomaly for these points.  They are more negative than would be expected for normally distributed residuals.
-
-
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/logNdrmChResidNormPlot/logNdrmChResidNormPlot.pdf}
-	\caption{A histogram and normal probability plot of the residuals from the linear model for log(ndrm.ch + 5) vs. genotype, age, sex and BMI in the \data{famuss} data}
-	\label{logNdrmChResidNormPlot}
-\end{figure}
-
-
-Scatterplots of individual predictors vs the residuals from the model can sometimes reveal a nonlinear trend that has not bee properly accounted for in the regression model.  Figure~\ref{logNdrmChAgeVSResidPlot} shows a plot of the residuals from the model vs. age.  Apart from the anomalous negative residuals, the plot shows no trend of age vs the residuals.  The exercises explore plots of the residuals vs the other predictors.
-
-\begin{figure}[h!]
-	\centering
-	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/logNdrmChAgeVSResidPlot/logNdrmChAgeVSResidPlot.pdf}
-	\caption{Age vs residuals in the model for log(ndrm.ch + 5.0) vs genotype, age, sex and BMI in the \data{famuss} data.   The horizontal line is the least squares line for age vs the residuals.}
-	\label{logNdrmChAgeVSResidPlot}
-\end{figure}
-
-
-The model in Table~\ref{LogNdrmChACTN3AgeSexBmiRegression} can be used to predict changes in strength for values of the predictors in the model, as is shown in the next set of guided exercises.
-
-\begin{exercise}
-What is the predicted value of $\log(\text{ndrm.ch} + 5.0)$ for a 24 year old male with body mass index 24 and genotype TT?
-\label{predictFinalNdrmchtransf}
-\end{exercise}
-
-\begin{exercise}
-Use the answer Exercise~\ref{predictFinalNdrmchtransf} to calculate the predicted value of \var{ndrm.ch} for the same 24 year old male, with BMI 24 and genotype TT.
-\end{exercise}
-
-\begin{exercise}
-What is the difference in response (\var{ndrm.ch})  between the participant in Exercise~\ref{predictFinalNdrmchtransf} and a 24 year old male, BMI 24 but genotype CC?
-\end{exercise}
-
-
-
-
-\section{Chapter Summary and Notes}
+\section{Notes}
 
 This and the previous chapters have provided only an introduction to regression, with many advance topics not covered. But even this introduction provides useful tools for getting started on many analyses by following some commonly recommended steps.
 
