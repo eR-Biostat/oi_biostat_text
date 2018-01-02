@@ -20,7 +20,7 @@ The study team enrolled children in the United Kingdom between 2006 and 2009, se
 
 At 5 years of age, each child was tested for peanut allergy using an oral food challenge (OFC): 5 grams of peanut protein in a single dose. A child was recorded as passing the oral food challenge if no allergic reaction was detected, and failing the oral food challenge if an allergic reaction occurred. These children had previously been tested for peanut allergy through a skin test, conducted at the time of study entry; the main analysis presented in the paper was based on data from 530 children with an earlier negative skin test.\footnote{Although a total of 542 children had an earlier negative skin test, data collection did not occur for 12 children.} 
 
-Individual-level data from the study are shown in Table \ref{leapStudyResultsDF}, for 5 of the 530 children -- each row represents a participant, and shows the participant's study ID number, treatment group assignment, and OFC outcome. 
+Individual-level data from the study are shown in Table \ref{leapStudyResultsDF}, for 5 of the 530 children\textemdash each row represents a participant, and shows the participant's study ID number, treatment group assignment, and OFC outcome.\footnote{The data are available as \data{LEAP} in the \textsf{R} package \texttt{oibiostat}.}
  
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
 % Mon Sep 28 09:14:28 2015
@@ -128,7 +128,7 @@ In evolutionary biology, parental investment refers to the amount of time, energ
 \end{table}
 %library(xtable); xtable(frog.altitude[c(1,2,3,529, 530),c( "altitude", "latitude", "egg.size", "clutch.size", "clutch.volume", "body.size")], digits = 2, caption = "Frog Study Data Matrix", label = "frogDF" )
 
-Table~\ref{frogDF} displays rows 1, 2, 3, and 150 of the data from the 431 clutches observed as part of the study. Each row in the table corresponds to a single clutch, indicating where the clutch was collected (\var{altitude} and \var{latitude}), \var{egg.size}, \var{clutch.size}, \var{clutch.volume}, and \var{body.size} of the mother when available. "NA" corresponds to a missing value, indicating that information on an individual female was not collected for that particular clutch. The recorded characteristics are referred to as \term{variables}; in this table, each column represents a variable.
+Table~\ref{frogDF} displays rows 1, 2, 3, and 150 of the data from the 431 clutches observed as part of the study.\footnote{The \data{frog} dataset is available in the \textsf{R} package \texttt{oibiostat}.} Each row in the table corresponds to a single clutch, indicating where the clutch was collected (\var{altitude} and \var{latitude}), \var{egg.size}, \var{clutch.size}, \var{clutch.volume}, and \var{body.size} of the mother when available. "NA" corresponds to a missing value, indicating that information on an individual female was not collected for that particular clutch. The recorded characteristics are referred to as \term{variables}; in this table, each column represents a variable.
 
 \begin{table}[t]
 	\centering\small
@@ -675,27 +675,27 @@ When working with strongly skewed data, it can be useful to apply a \term{transf
 	\centering
 	\subfigure[]{
 		\includegraphics[width=0.46\textwidth]
-		{ch_intro_to_data_oi_biostat/figures/incomeHistTransformed/incomeHistReg}
+		{ch_intro_to_data_oi_biostat/figures/wdiIncomeHistRegTransformed/wdiIncomeHistReg}
 		\label{incomeHistReg}
 	}
 	\subfigure[]{
 		\includegraphics[width=0.46\textwidth]
-		{ch_intro_to_data_oi_biostat/figures/incomeHistTransformed/incomeHistLog}
+		{ch_intro_to_data_oi_biostat/figures/wdiIncomeHistRegTransformed/wdiIncomeHistLog}
 		\label{incomeHistLog}
 	}
 	\caption{\subref{incomeHistReg} Histogram of per capita income. \subref{incomeHistLog} Histogram of the log-transformed per capita income.}
 	\label{incomeHistTransform}
 \end{figure}
 
-For example, income data are often skewed right; there are typically large clusters of low to moderate income, with a few large incomes that are outliers. Figure~\ref{incomeHistReg} shows a histogram of average yearly per capita income measured in US dollars for 248 countries in 2012. The data are heavily right skewed, with the majority of countries having average yearly per capita income lower than \$10,000. Once the data are log-transformed, the distribution becomes roughly symmetric (Figure~\ref{incomeHistLog}).\footnote{In statistics, the natural logarithm is usually written $\log$. In other settings it is sometimes written as  $\ln$.} 
+For example, income data are often skewed right; there are typically large clusters of low to moderate income, with a few large incomes that are outliers. Figure~\ref{incomeHistReg} shows a histogram of average yearly per capita income measured in US dollars for 165 countries in 2011.\footnote{The data are available as \data{wdi.2011} in the \textsf{R} package \texttt{oibiostat}.} The data are heavily right skewed, with the majority of countries having average yearly per capita income lower than \$10,000. Once the data are log-transformed, the distribution becomes roughly symmetric (Figure~\ref{incomeHistLog}).\footnote{In statistics, the natural logarithm is usually written $\log$. In other settings it is sometimes written as  $\ln$.} 
 
 For symmetric distributions, the mean and standard deviation are particularly informative summaries. If a distribution is symmetric, approximately 70\% of the data are within one standard deviation of the mean and 95\% of the data are within two standard deviations of the mean; this guideline is known as the \term{empirical rule}.
 
-\begin{example}{On the log-transformed scale, mean $\log$ income is 8.86, with standard deviation 1.33. Apply the empirical rule to describe the distribution of average yearly per capita income among the 248 countries.}
+\begin{example}{On the log-transformed scale, mean $\log$ income is 8.50, with standard deviation 1.54. Apply the empirical rule to describe the distribution of average yearly per capita income among the 165 countries.}
 
-According to the empirical rule, the middle 70\% of the data are within one standard deviation of the mean, in the range (8.86 - 1.33, 8.66 + 1.33) = (7.53, 10.19) log(USD). 95\% of the data are within two standard deviations of the mean, in the range (8.86 - 2(1.33), 8.66 + 2(1.33)) = (6.20, 11.52) log(USD). 	
+According to the empirical rule, the middle 70\% of the data are within one standard deviation of the mean, in the range (8.50 - 1.54, 8.50 + 1.54) = (6.96, 10.04) log(USD). 95\% of the data are within two standard deviations of the mean, in the range (8.50 - 2(1.54), 8.50 + 2(1.54)) = (5.42, 11.58) log(USD). 	
 
-Undo the log transformation. The middle 70\% of the data are within the range ($e^{7.53}$, $e^{10.19}$) = (\$1,863, \$26,635). The middle 95\% of the data are within the range ($e^{6.20}$, $e^{11.52}$) = (\$493, \$100,710).	
+Undo the log transformation. The middle 70\% of the data are within the range ($e^{6.96}$, $e^{10.04}$) = (\$1,054, \$22,925). The middle 95\% of the data are within the range ($e^{5.42}$, $e^{11.58}$) = (\$226, \$106,937).	
 \end{example}
 
 Functions other than the natural log can also be used to transform data, such as the square root and inverse.  
@@ -785,29 +785,31 @@ The plot shows a discernible pattern, which suggests an \term{association}, or r
 As expected, clutch volume and body size are positively associated; larger frogs tend to produce egg clutches with larger volumes. These observations suggest that larger females are capable of investing more energy into offspring production relative to smaller females.
 
 \index{data!frog|)}
-\index{data!famuss|(}
+\index{data!nhanes|(}
 
-\begin{example}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnote{$BMI = \dfrac{weight_{kg}}{height^{2}_m} = \dfrac{weight_{lb}}{height^{2}_{in}} \times 703$} Describe the relationships shown in Figure~\ref{famussHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?
+The National Health and Nutrition Examination Survey (NHANES) consists of a set of surveys and measurements conducted by the US CDC to assess the health and nutritional status of adults and children in the United States. The following example uses data from a sample of 500 adults (individuals ages 21 and older) from the \data{NHANES} dataset.\footnote{The sample are available as \data{nhanes.samp.adult.500} in the \textsf{R} \texttt{oibiostat} package.}
+
+\begin{example}{Body mass index (BMI) is a measure of weight commonly used by health agencies to assess whether someone is overweight, and is calculated from height and weight.\footnote{$BMI = \dfrac{weight_{kg}}{height^{2}_m} = \dfrac{weight_{lb}}{height^{2}_{in}} \times 703$} Describe the relationships shown in Figure~\ref{nhanesHeightWeightBmi}. Why is it helpful to use BMI as a measure of obesity, rather than weight?
 
 	\begin{figure}[h!]
 		\centering
 		\subfigure[]{
 			\includegraphics[width=0.7\textwidth]
-			{ch_intro_to_data_oi_biostat/figures/famussHeightWeight/famussHeightWeight}
-			\label{famussHeightWeight}
+			{ch_intro_to_data_oi_biostat/figures/nhanesHeightWeight/nhanesHeightWeight}
+			\label{nhanesHeightWeight}
 		}
 		\subfigure[]{
 			\includegraphics[width=0.7\textwidth]
-			{ch_intro_to_data_oi_biostat/figures/famussHeightBmi/famussHeightBmi}
-			\label{famussHeightBmi}
+			{ch_intro_to_data_oi_biostat/figures/nhanesHeightBmi/nhanesHeightBmi}
+			\label{nhanesHeightBmi}
 		}
-		\caption{\subref{famussHeightWeight} A scatterplot showing height versus weight from the \data{famuss} data. One participant 70.5 inches tall and weighing 308 pounds is highlighted. \subref{famussHeightBmi} A scatterplot showing height versus BMI from the \data{famuss} data. The same individual highlighted in \subref{famussHeightWeight} is marked here, with BMI 43.56.}
-		\label{famussHeightWeightBmi}
+		\caption{\subref{nhanesHeightWeight} A scatterplot showing height versus weight from the 500 individuals in the sample from \data{NHANES}. One participant 163.9 cm tall (about 5 ft, 4 in) and weighing 144.6 kg (about 319 lb) is highlighted. \subref{nhanesHeightBmi} A scatterplot showing height versus BMI from the 500 individuals in the sample from \data{NHANES}. The same individual highlighted in \subref{nhanesHeightWeight} is marked here, with BMI 53.83.}
+		\label{nhanesHeightWeightBmi}
 	\end{figure}	
 	
 }
 
-Figure~\ref{famussHeightWeight}	shows a positive association between height and weight; taller individuals tend to be heavier. Figure~\ref{famussHeightBmi} shows that height and BMI do not seem to be associated; the range of BMI values observed is roughly consistent across height. 
+Figure~\ref{nhanesHeightWeight}	shows a positive association between height and weight; taller individuals tend to be heavier. Figure~\ref{nhanesHeightBmi} shows that height and BMI do not seem to be associated; the range of BMI values observed is roughly consistent across height. 
 
 Weight itself is not a good measure of whether someone is overweight; instead, it is more reasonable to consider whether someone's weight is unusual relative to other individuals of a comparable height. An individual weighing 200 pounds who is 6 ft tall is not necessarily an unhealthy weight; however, someone who weighs 200 pounds and is 5 ft tall is likely overweight. It is not reasonable to classify individuals as overweight or obese based only on weight.
 
@@ -815,17 +817,17 @@ BMI acts as a relative measure of weight that accounts for height. Specifically,
 	
 \end{example}
 
-\index{data!famuss|)}
+\index{data!nhanes|)}
 
 \index{data!life.expectancy|(}
 
-\begin{example}{Figure~\ref{incomeLifeExpectancy} is a scatterplot of life expectancy versus annual per capita income for 248 countries in 2012. Life expectancy is measured as the expected lifespan for children born in 2012 and income is adjusted for purchasing power in a country. Describe the relationship between life expectancy and annual per capita income; do they seem to be linearly associated?
+\begin{example}{Figure~\ref{incomeLifeExpectancy} is a scatterplot of life expectancy versus annual per capita income for 165 countries in 2011. Life expectancy is measured as the expected lifespan for children born in 2011 and income is adjusted for purchasing power in a country. Describe the relationship between life expectancy and annual per capita income; do they seem to be linearly associated?
 		
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=0.8\textwidth]
-			{ch_intro_to_data_oi_biostat/figures/incomeLifeExpectancy/incomeLifeExpectancy.pdf}
-			\caption{A scatterplot of life expectancy (years) versus annual per capita income (US dollars).}
+			{ch_intro_to_data_oi_biostat/figures/wdiIncomeLifeExpectancy/wdiIncomeLifeExpectancy.pdf}
+			\caption{A scatterplot of life expectancy (years) versus annual per capita income (US dollars) in the \data{wdi.2011} dataset.}
 			\label{incomeLifeExpectancy}
 		\end{figure}
 		
@@ -921,14 +923,14 @@ The correlation is -0.94, which reflects the negative association visible from t
 		\begin{figure}[h]
 			\centering
 			\includegraphics[width=0.8\textwidth]
-			{ch_intro_to_data_oi_biostat/figures/incomeLifeExpectancyLog/incomeLifeExpectancyLog.pdf}
+			{ch_intro_to_data_oi_biostat/figures/wdiIncomeLifeExpectancyLog/wdiIncomeLifeExpectancyLog.pdf}
 			\caption{A scatterplot showing \var{log(income)} (horizontal axis) vs.  \var{log(life.expectancy)} (vertical axis).} 
 			\label{incomeLifeExpectancyLog}
 		\end{figure}
 		
 		}
 	
-Figure~\ref{incomeLifeExpectancyLog} shows an approximately linear relationship; a correlation coefficient is a reasonable numerical summary of the relationship. As calculated from statistical software, $r = 0.77$, which is indicative of a strong linear relationship.
+Figure~\ref{incomeLifeExpectancyLog} shows an approximately linear relationship; a correlation coefficient is a reasonable numerical summary of the relationship. As calculated from statistical software, $r = 0.79$, which is indicative of a strong linear relationship.
 
 \end{example}	
 
