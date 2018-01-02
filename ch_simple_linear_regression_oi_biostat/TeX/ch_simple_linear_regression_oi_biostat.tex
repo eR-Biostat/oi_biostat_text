@@ -26,18 +26,18 @@ The next chapter covers multiple regression, a statistical model used to estimat
 \label{examiningScatterPlots}
 
 \index{scatterplots|(}
-Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{statins} dataset, available in the \textsf{R} \texttt{oibiostat} package. 
+Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{prevend} dataset, available in the \textsf{R} \texttt{oibiostat} package. 
 
 As adults age, cognitive function changes over time, largely due to various cerebrovascular and neurodegenerative changes. It is thought that cognitive decline is a long-term process that may start as early as 45 years of age.\footnote{Joosten H, et al. Cardiovascular risk profile and cognitive function in young, middle-aged, and elderly subjects. Stroke. 2013;44:1543-1549, \url{https://doi.org/10.1161/STROKEAHA.111.000496} } The Ruff Figural Fluency Test (RFFT) is one measure of cognitive function that provides information about various cognitive abilities such as planning and the ability to switch between different tasks. The test consists of drawing as many unique designs as possible from a pattern of dots, under timed conditions; scores range from 0 to 175 points (worst and best score, respectively).
 
-RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{statinsAgeRFFT}, plotted against age at enrollment, which is measured in years. The variables \var{Age} and \var{RFFT} are negatively associated; older participants tend to have lower cognitive function. There is an approximately linear trend observable in the data, which suggests that adding a line could be useful for summarizing the relationship between the two variables.
+RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{prevendAgeRFFT}, plotted against age at enrollment, which is measured in years. The variables \var{Age} and \var{RFFT} are negatively associated; older participants tend to have lower cognitive function. There is an approximately linear trend observable in the data, which suggests that adding a line could be useful for summarizing the relationship between the two variables.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_simple_linear_regression_oi_biostat/figures/statinsAgeRFFTPlot/statinsAgeRFFTPlot}
+	{ch_simple_linear_regression_oi_biostat/figures/prevendAgeRFFTPlot/prevendAgeRFFTPlot}
 	\caption{A scatterplot showing \var{age} vs. \var{RFFT}. Age is the predictor variable, while RFFT score is the response variable.}
-	\label{statinsAgeRFFT}
+	\label{prevendAgeRFFT}
 \end{figure}
 
 It is important to avoid adding straight lines to non-linear data. For example, the scatterplot in Figure~\ref{incomeLifeExpectancy} of Chapter~\ref{introductionToData} shows a highly non-linear relationship between between annual per capita income and life expectancy for 248 countries in 2012.
@@ -76,7 +76,7 @@ Figure~\ref{frogClutchVolBodySizeRegress} shows the relationship between \var{cl
 
 \index{least squares regression |(}
 
-Figure~\ref{statinsResid} shows the scatterplot of age versus RFFT score, with the \term{least squares regression line} added to the plot; this line can also be referred to as a \term{linear model} for the data. An RFFT score can be predicted for a given age from the equation of the regression line:
+Figure~\ref{prevendResid} shows the scatterplot of age versus RFFT score, with the \term{least squares regression line} added to the plot; this line can also be referred to as a \term{linear model} for the data. An RFFT score can be predicted for a given age from the equation of the regression line:
 
 \[\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age}). \]
 
@@ -88,9 +88,9 @@ For example, consider the predicted RFFT score for an individual of age 56. Acco
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_simple_linear_regression_oi_biostat/figures/statinsResid/statinsResid.pdf}
+	{ch_simple_linear_regression_oi_biostat/figures/prevendResid/prevendResid.pdf}
 	\caption{A scatterplot showing \var{age} (horizontal axis) vs. \var{RFFT} (vertical axis) with the regression line added to the plot. Three observations are marked in the figure; the one marked by a ``$+$'' has a large residual of about +38, the one marked by a ``$\times$'' has a small residual of about +5, and the one marked by a ``$\triangle$'' has a moderate residual of about -13.}
-	\label{statinsResid}
+	\label{prevendResid}
 \end{figure}
 
 \begin{termBox}{\tBoxTitle{Residual: difference between observed and expected}
@@ -240,18 +240,18 @@ Figure~\ref{sampleLinesAndResPlots} shows three residual plots from simulated da
 \label{sampleLinesAndResPlots}
 \end{figure}
 
-Figure~\ref{statinsResidualPlot} shows a residual plot from the estimated linear model $\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age})$. While the residuals show scatter around the line, there is less variability for lower predicted RFFT scores. A data analyst might still decide to use the linear model, with the knowledge that predictions of high RFFT scores may not be as accurate as for lower scores. Reading a residual plot critically can reveal weaknesses about a linear model that should be taken into account when interpreting model results. More advanced regression methods may be more suitable for these data but are beyond the scope of this text.
+Figure~\ref{prevendResidualPlot} shows a residual plot from the estimated linear model $\widehat{\text{RFFT}} = 137.55 - 1.26(\text{age})$. While the residuals show scatter around the line, there is less variability for lower predicted RFFT scores. A data analyst might still decide to use the linear model, with the knowledge that predictions of high RFFT scores may not be as accurate as for lower scores. Reading a residual plot critically can reveal weaknesses about a linear model that should be taken into account when interpreting model results. More advanced regression methods may be more suitable for these data but are beyond the scope of this text.
 
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=0.8\textwidth]{ch_simple_linear_regression_oi_biostat/figures/statinsResidPlot/statinsResidPlot}
-	\caption{Residual plot for the model in Figure~\ref{statinsResid}.}
-	\label{statinsResidualPlot}
+	\includegraphics[width=0.8\textwidth]{ch_simple_linear_regression_oi_biostat/figures/prevendResidPlot/prevendResidPlot}
+	\caption{Residual plot for the model in Figure~\ref{prevendResid}.}
+	\label{prevendResidualPlot}
 \end{figure}
 
 \begin{example}{
-Figure~\ref{statinsResidualPlot} shows a residual plot for the model predicting weight from height using the FAMuSS data. Assess whether the constant variability assumption holds for the linear model.
+Figure~\ref{prevendResidualPlot} shows a residual plot for the model predicting weight from height using the FAMuSS data. Assess whether the constant variability assumption holds for the linear model.
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.6\textwidth]
@@ -274,14 +274,14 @@ The residuals above the line are more variable, taking on more extreme values th
 
 % check that this is indexed in chap 1 after pulling from repo
 
-The normal probability plot, introduced in Section~\ref{assessingNormal}, is best suited for checking normality of residuals, since normality can be difficult to assess using histograms alone. Figure~\ref{statinsResidNormPlot} shows both the histogram and normal probability plot of the residuals after fitting a least squares regression to the age versus RFFT data.  
+The normal probability plot, introduced in Section~\ref{assessingNormal}, is best suited for checking normality of residuals, since normality can be difficult to assess using histograms alone. Figure~\ref{prevendResidNormPlot} shows both the histogram and normal probability plot of the residuals after fitting a least squares regression to the age versus RFFT data.  
  
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_simple_linear_regression_oi_biostat/figures/statinsResidNormPlot/statinsResidNormPlot.pdf}
+	{ch_simple_linear_regression_oi_biostat/figures/prevendResidNormPlot/prevendResidNormPlot.pdf}
 	\caption{A histogram and normal probability plot of the residuals from the linear model for RFFT vs. Age in the PREVEND data}
-	\label{statinsResidNormPlot}
+	\label{prevendResidNormPlot}
 \end{figure}
 
 The normal probability plot shows that the distribution of the residuals is very close to a normal distribution, with only a slight deviation from normality in the left and right tails.
