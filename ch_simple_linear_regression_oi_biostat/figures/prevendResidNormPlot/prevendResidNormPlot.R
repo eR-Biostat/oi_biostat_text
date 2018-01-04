@@ -1,5 +1,7 @@
 library(openintro)
+library(oibiostat)
 data(COL)
+data(prevend)
 
 NormalHist <- function(obs, hold, M, SD, col) {
   plot(0, 0,
@@ -23,10 +25,10 @@ NormalHist <- function(obs, hold, M, SD, col) {
 
 # source("famussHeightWeightHelpers.R")
 
-obs = residuals(lm(RFFT ~ Age, data=statins.samp))
+obs = residuals(lm(RFFT ~ Age, data=prevend.samp))
 hold <- hist(obs, plot = FALSE)
 
-myPDF("statinsResidNormPlot.pdf", 6, 3,
+myPDF("prevendResidNormPlot.pdf", 6, 3,
       mfrow = c(1, 2),
       mgp = c(1.9, 0.5, 0),
       mar = c(3, 0.2, 0.5, 0.8))

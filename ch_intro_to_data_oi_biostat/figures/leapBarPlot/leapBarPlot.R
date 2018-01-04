@@ -1,5 +1,6 @@
 library(openintro)
-#data(LEAP)
+library(oibiostat)
+data(LEAP)
 data(COL)
 
 leap.summary = table(LEAP$overall.V60.outcome, LEAP$treatment.group)
