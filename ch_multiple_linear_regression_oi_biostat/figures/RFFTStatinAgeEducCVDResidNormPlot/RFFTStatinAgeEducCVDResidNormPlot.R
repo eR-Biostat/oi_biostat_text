@@ -1,17 +1,17 @@
 library(openintro)
-#library(oibiostat)
+library(oibiostat)
 
 data(COL)
-#data(prevend.samp)
+data(prevend.samp)
 
 
 residuals = resid(lm(RFFT ~ as.factor(Statin) + Age  + 
                     as.factor(Education) + as.factor(CVD), 
-                  data=statins.samp))
+                  data=prevend.samp))
 
 predicted = predict(lm(RFFT ~ as.factor(Statin) + Age  + 
                     as.factor(Education) + as.factor(CVD), 
-                  data=statins.samp))
+                  data=prevend.samp))
 
 myPDF("RFFTstatinAgeEducCVDResidNormPlot.pdf", 6, 3,
       mfrow = c(1, 2),
