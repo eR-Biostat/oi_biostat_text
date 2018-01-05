@@ -1,12 +1,14 @@
 library(openintro)
+library(oibiostat)
+data(prevend.samp)
 data(COL)
 
 
-myPDF("RFFTHist.pdf", 4.5, 4.0,
+myPDF("prevendRFFTHist.pdf", 4.5, 4.0,
       mgp = c(2.4, 0.7, 0),
       mar = c(3.5, 3.5, 0.5, 1.0))
 
-histPlot(statins.samp$RFFT,
+histPlot(prevend.samp$RFFT,
          breaks = 14,
          xlab = 'RFFT Scores',
          ylab = "Frequency",

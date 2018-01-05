@@ -4,16 +4,10 @@ library(oibiostat)
 data(COL)
 data(prevend.samp)
 
+residuals = resid(lm(RFFT ~ Statin + Age, data=prevend.samp))
+predicted = predict(lm(RFFT ~ Statin + Age, data=prevend.samp))
 
-residuals = resid(lm(RFFT ~ as.factor(Statin) + Age  + 
-                    as.factor(Education) + as.factor(CVD), 
-                  data=prevend.samp))
-
-predicted = predict(lm(RFFT ~ as.factor(Statin) + Age  + 
-                    as.factor(Education) + as.factor(CVD), 
-                  data=prevend.samp))
-
-myPDF("RFFTstatinAgeEducCVDResidNormPlot.pdf", 6, 3,
+myPDF("prevendStatinAgeResidNormPlot.pdf", 6, 3,
       mfrow = c(1, 2),
       mgp = c(1.9, 0.5, 0),
       mar = c(3, 3, .5, .5) + 0.1)
@@ -47,5 +41,3 @@ axis(2)
 qqline(residuals)
 
 dev.off()
-
-

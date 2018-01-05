@@ -1,14 +1,15 @@
 library(openintro)
+library(oibiostat)
 data(COL)
-# data(statins.samp)
+data(prevend.samp)
 
 
-myPDF('statinRFFTDotPlot.pdf', 4.5, 4.0,
+myPDF('prevendStatinRFFTDotPlot.pdf', 4.5, 4.0,
       mar = c(3, 3.0, 2.0, 0.5) + 0.1,
       mgp = c(1.9, 1.5 ,0))
 
 
-dotPlot(statins.samp$RFFT, statins.samp$Statin,
+dotPlot(prevend.samp$RFFT, prevend.samp$Statin,
         vertical = TRUE,
         at = 0:1,
         key = 0:1,
@@ -26,7 +27,7 @@ par(mgp = c(1.9, 0.6, 0.0))
 axis(2)
 par(las = 0)
 mtext("RFFT Score", 2, line = 2)
-g <- lm(statins.samp$RFFT ~ statins.samp$Statin)
+g <- lm(prevend.samp$RFFT ~ prevend.samp$Statin)
 abline(g, lwd = 1.5, col = COL[5])
 rect(-10, -1000, -0.125, 1000,
      border  =  rgb(1, 1, 1),

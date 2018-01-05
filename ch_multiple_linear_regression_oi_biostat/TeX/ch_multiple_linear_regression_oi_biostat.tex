@@ -8,32 +8,19 @@
 
 Simple linear regression is useful when the main interest of a study is the association of a response variable with a single predictor or explanatory variable.  Scientific investigations are rarely that simple, however; in most settings more than one explanatory variable is likely to be associated with a response, and multiple linear regression can be important model in those situations.  The study of risk factors for cognitive decline in adults outlined in the next section is one of those situations.
 
-Section~\ref{introductionMultipleLinearRegression} discusses the concept
-of confounding, when the apparent association between a response and a
-primary predictor might be distorted when a third variable associated
-with both the response and the predictor is ignored.  In the example
-used, the response variable is a measure of cognitive decline
-(\var{RFFT} in the PREVEND data), the primary predictor of interest is
-the use of a drug to lower cholesterol and the possible confounder is
-age. 
+Section~\ref{introductionMultipleLinearRegression} discusses the concept of confounding, when the apparent association between a response and a primary predictor might be distorted when a third variable associated with both the response and the predictor is ignored.  In the example used, the response variable is a measure of cognitive decline (\var{RFFT} in the PREVEND data), the primary predictor of interest is the use of a drug to lower cholesterol and the possible confounder is age. 
 
-Sections~\ref{simpleVsMultipleRegression} shows how multiple regression
-can be used to estimate the association between RFFT and statin use,
-after adjusting for age.  Adjusting for one or more possible confounders
-is not the only application of multiple regression, but it is one of the
-more important.   The model used is a simple model with two predictors
-but it illustrates many of the important ideas in multiple regression;
-it is a good way to start the study of more complicated models and other
-applications.
+Sections~\ref{simpleVsMultipleRegression} shows how multiple regression can be used to estimate the association between RFFT and statin use, after adjusting for age.  Adjusting for one or more possible confounders is not the only application of multiple regression, but it is one of the more important.   The model used is a simple model with two predictors but it illustrates many of the important ideas in multiple regression; it is a good way to start the study of more complicated models and other applications.
 
 Section~\ref{Evaluating the fit of a multiple regression model} continues with a model with two predictors, showing methods for evaluating the quality of the fit of the model. Section~\ref{generalMultipleRegression} then outlines the general ideas of multiple regression.  Additional applications of multiple regression are illustrated in the last three sections of the chapter.
 
 \section{Introduction to multiple linear regression}
 \label{introductionMultipleLinearRegression}
 
+
 Statins are a class of drugs that widely used to lower cholesterol. Cholesterol is measured using both low density lipoprotein (LDL) and high density lipoprotein (HDL).  Total cholesterol is the sum of LDL and HDL.  Research has suggested that an adult with elevated LDL may be at risk for adverse cardiovascular events, such as a heart attach or a stroke.  In 2013, an expert panel commissioned by the American College of Cardiology and the American Heart Association recommended that statin therapy be considered in an individual with any form of atherosclerotic cardiovascular disease (arteries that are becoming clogged with plaque), with primary LDL cholesterol levels $\ge$ 190 mg/dL, with type 2 diabetes, with age 40 - 75 and LDL between 70 and 189 mg/dL, or an individual without diabetes but age 40 - 75 and with a predicted probability of future clogged arteries of at least 0.075\footnote{Circulation. 2014;129:S1-S45. DOI: 10.1161/01.cir.0000437738.63853.7a}.
 
-Some health policy analysts have estimated that if the new guidelines were to be followed strictly, almost half of Americans ages 40 to 75 and nearly all men over 60 would be prescribed a statin. In addition to cardiovascular disease, however, older adults are also at risk for cognitive decline and, in severe cases, dementia, and some physicians have raised the question of whether treatment with a statin might be associated with an increased risk of cognitive decline\footnote{Muldoon, Matthew F., et al. Randomized trial of the effects of simvastatin on cognitive functioning in hypercholesterolemic adults. The American journal of medicine 117.11 (2004): 823-829.}\footnote{King, Deborah S., et al. Cognitive impairment associated with atorvastatin and simvastatin. Pharmacotherapy: The Journal of Human Pharmacology and Drug Therapy 23.12 (2003): 1663-1667.}.  The study by Joosten, et al.\footnote{Joosten H, Visser ST, van Eersel ME, Gansevoort RT, Bilo HJG, et al. (2014) Statin Use and Cognitive Function: Population-Based Observational Study with Long-Term Follow- Up. PLoS ONE 9(12): e115755. doi:10.1371/ journal.pone.0115755} examined the association of statin use and other variables with cognitive ability in an observational cohort of 4095 participants from the Netherlands who were part of the larger PREVEND introduced in Section~\ref{examiningScatterPlots}.  This section presents an analysis based on a random sample of 500 participants from the cohort using one measure of cognitive ability and a few important predictors.  The dataset \data{statins.samp} used in this analysis is contained and is documented in the package \textit{oibiostat}.
+Some health policy analysts have estimated that if the new guidelines were to be followed strictly, almost half of Americans ages 40 to 75 and nearly all men over 60 would be prescribed a statin. In addition to cardiovascular disease, however, older adults are also at risk for cognitive decline and, in severe cases, dementia, and some physicians have raised the question of whether treatment with a statin might be associated with an increased risk of cognitive decline\footnote{Muldoon, Matthew F., et al. Randomized trial of the effects of simvastatin on cognitive functioning in hypercholesterolemic adults. The American journal of medicine 117.11 (2004): 823-829.}\footnote{King, Deborah S., et al. Cognitive impairment associated with atorvastatin and simvastatin. Pharmacotherapy: The Journal of Human Pharmacology and Drug Therapy 23.12 (2003): 1663-1667.}.  The study by Joosten, et al.\footnote{Joosten H, Visser ST, van Eersel ME, Gansevoort RT, Bilo HJG, et al. (2014) Statin Use and Cognitive Function: Population-Based Observational Study with Long-Term Follow- Up. PLoS ONE 9(12): e115755. doi:10.1371/ journal.pone.0115755} examined the association of statin use and other variables with cognitive ability in an observational cohort of 4095 participants from the Netherlands who were part of the larger PREVEND introduced in Section~\ref{examiningScatterPlots}.  This section presents an analysis based on a random sample of 500 participants from the cohort using one measure of cognitive ability and a few important predictors.  The dataset \data{prevend.samp} used in this analysis is contained and is documented in the package \textit{oibiostat}.
 
 \begin{comment}
 \textit{The pair of footnotes for muldoon and king appear as 23 instead of 2,3.  usepackage[multiple]{footnotemisc} should solve this but produces an error  -- clash of options. Not sure what it is clashing with.}  Not resolved yet.
@@ -42,37 +29,37 @@ Some health policy analysts have estimated that if the new guidelines were to be
  
 Precise measurements of cognitive ability are difficult, perhaps even impossible.  Cognitive ability fluctuates mildly in elders from day to day and affects speech, reading, the ability to complete tasks and many other aspects of life.  Participants in the Joosten study were asked to complete the Ruff Figural Fluency Test (RFFT)\footnote{Ruff, Ronald M., Rudolph H. Light, and Randall W. Evans. "The Ruff Figural Fluency Test: a normative study with adults." Developmental Neuropsychology 3.1 (1987): 37-51.}, in which scores range from 0 (worst) to 175 (best).  In the test, participants complete as many designs as possible in a time limit, using a pattern of dots on a page.  The test is thought to be a measure of executive function.  Even with a reasonable measurement of cognitive function, the investigators anticipated an issue in the analysis: statins are used more often in older than in younger adults, and older adults suffer a natural cognitive decline.  Age is a potential \term{confounder} in this setting -- if age is ignored in the analysis, the tendency for older people to be treated with statins and to suffer cognitive decline might make it appear that cognitive decline is more common among individuals prescribed statins, simply because those prescribed statins are older than those not prescribed statins.
 
-In the dataset \data{statins.samp}, the scatterplot of \var{Age} vs \var{RFFT} in Figure~\ref{statinAgeRFFTConfounderPlot} shows why \var{Age} is a potential confounder for the association between statin use and RFFT.  The points in the figure are appear in two colors, blue if a participant is not using statins, and red if he or she is.  First, it is clear that statin use increases with age, so age and statin use are associated.  Second, ignoring the colors, it is also clear that age is associated with lower RFFT scores, since the point cloud drifts down and to the right.  But a close inspection of the plot suggests that for ages in relatively small ranges (e.g., age 50 - 60), statin use may not be strongly associated with RFFT score -- there are approximately as many red dots with low RFFT scores as with high RFFT scores.  In subsets of participants with approximately the same age, statin use may not associated with RFFT. Multiple regression provides a way to estimate the association of statin use with RFFT after adjusting for age.  Essentially, it provides an estimate of the association of statin use and RFFT within age groups.
+In the dataset \data{prevend.samp}, the scatterplot of \var{Age} vs \var{RFFT} in Figure~\ref{prevendAgeRFFTConfounderPlot} shows why \var{Age} is a potential confounder for the association between statin use and RFFT.  The points in the figure are appear in two colors, blue if a participant is not using statins, and red if he or she is.  First, it is clear that statin use increases with age, so age and statin use are associated.  Second, ignoring the colors, it is also clear that age is associated with lower RFFT scores, since the point cloud drifts down and to the right.  But a close inspection of the plot suggests that for ages in relatively small ranges (e.g., age 50 - 60), statin use may not be strongly associated with RFFT score -- there are approximately as many red dots with low RFFT scores as with high RFFT scores.  In subsets of participants with approximately the same age, statin use may not associated with RFFT. Multiple regression provides a way to estimate the association of statin use with RFFT after adjusting for age.  Essentially, it provides an estimate of the association of statin use and RFFT within age groups.
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/statinAgeRFFTConfounderPlot/statinAgeRFFTConfounderPlot}
+	{ch_multiple_linear_regression_oi_biostat/figures/prevendAgeRFFTConfounderPlot/prevendAgeRFFTConfounderPlot}
 	\caption{A scatterplot showing \var{age} vs. \var{RFFT}. Points for participants using statins are in red; points for participants not using statins are in black.}
-	\label{statinAgeRFFTConfounderPlot}
+	\label{prevendAgeRFFTConfounderPlot}
 \end{figure}
 
 \section{Simple vs. multiple regression}
 \label{simpleVsMultipleRegression}
 
-The dataset \data{statin.samp} contains observations on a random sample of 500 participants from the PREVEND study, and was introduced in Section~\ref{examiningScatterPlots}.  The variable \var{Statin} is coded 1 if the participant was using a statin at the time of the study, and 0 if not.  
+The dataset \data{prevend.samp} contains observations on a random sample of 500 participants from the PREVEND study, and was introduced in Section~\ref{examiningScatterPlots}.  The variable \var{Statin} is coded 1 if the participant was using a statin at the time of the study, and 0 if not.  
 
-Figure~\ref{statinRFFTPlots} shows on the left a histogram of the RFFT scores, and on the right a scatterplot of categorical predictor \var{Statin} vs the response variable \var{RFFT}.  The RFFT scores are approximately  symmetrically distributed with no extreme outliers, and the negative slope of the least squares regression line in the scatterplot indicates a possible negative association between RFFT cores and statin use.
+Figure~\ref{prevendStatinRFFTPlots} shows on the left a histogram of the RFFT scores, and on the right a scatterplot of categorical predictor \var{Statin} vs the response variable \var{RFFT}.  The RFFT scores are approximately  symmetrically distributed with no extreme outliers, and the negative slope of the least squares regression line in the scatterplot indicates a possible negative association between RFFT cores and statin use.
 
 \begin{figure}[ht]
 	\centering
 	\subfigure[]{
 		\includegraphics[width=0.46\textwidth]
-		{ch_multiple_linear_regression_oi_biostat/figures/statinRFFTPlots/RFFTHist}
-		\label{RFFTHist}
+		{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinRFFTPlots/prevendRFFTHist}
+		\label{prevendRFFTHist}
 	}
 	\subfigure[]{
 		\includegraphics[width=0.46\textwidth]
-		{ch_multiple_linear_regression_oi_biostat/figures/statinRFFTPlots/statinRFFTDotPlot}
-		\label{statinRFFTDotPlot}
+		{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinRFFTPlots/prevendStatinRFFTDotPlot}
+		\label{prevendStatinRFFTDotPlot}
 	}
-	\caption{\subref{RFFTHist} Histogram of RFFT Scores. \subref{statinRFFTDotPlot} scatterplot of statin use vs RFFT score.}
-	\label{statinRFFTPlots}
+	\caption{\subref{prevendRFFTHist} Histogram of RFFT Scores. \subref{prevendStatinRFFTDotPlot} scatterplot of statin use vs RFFT score.}
+	\label{prevendStatinRFFTPlot}
 \end{figure}
 
 
@@ -86,10 +73,12 @@ can be used initially to examine the association between the categorical variabl
    \text{RFFT} = \beta_0 + \beta_{\text{Statin}}\text{Statin} + \varepsilon
 \]
 
-Table~\ref{RFFTStatinRegression} gives the parameters of the least squares line in Figure~\ref{statinRFFTDotPlot}.
+Table~\ref{prevendRFFTStatinRegression} gives the parameters of the least squares line in Figure~\ref{prevendStatinRFFTDotPlot}.
 
 Here is the output from \textsf{R}:
 
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 10:49:51 2018
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -100,43 +89,38 @@ Here is the output from \textsf{R}:
   Statin & -10.0534 & 2.8792 & -3.49 & 0.0005 \\ 
    \hline
 \end{tabular}
-\caption{Parameter estimates for the least squares line of RFFT vs statin use in the PREVEND data.}
-\label{RFFTStatinRegression}
-\end{table} 
-%xtable(summary(lm(RFFT ~ Statin, data=statins.samp)))
-% latex table generated in R 3.2.3 by xtable 1.8-0 package
-% Wed Nov  2 14:30:27 2016
+\caption{Parameter estimates for the least squares 
+       line of RFFT vs statin use in the PREVEND data.} 
+\label{prevendRFFTStatinRegression}
+\end{table}
 The $R^2$ for this model is 0.0239.
  
-Even though the use of a statin drug explains only 2.4\% of the variability in the RFFT scores, the table does show that statin use is significantly associated with RFFT score. Statin users (those with value 1 in \var{statin}) score approximately 10 points lower on average in the RFFT test.  But the result may be confounded by age, as discussed earlier.   The boxplot in Figure~\ref{statinAgeBoxPlot} confirms that statin users tend to be older, and the scatterplot in Figure~\ref{statinAgeRFFTConfounderPlot} showed a clear linear trend in declining RFFT scores for older adults, regardless of statin use.  In fact, the regression output shown in Table~\ref{RFFTAgeRegression} shows that age has a strongly significant association with RFFT score.
+Even though the use of a statin drug explains only 2.4\% of the variability in the RFFT scores, the table does show that statin use is significantly associated with RFFT score. Statin users (those with value 1 in \var{statin}) score approximately 10 points lower on average in the RFFT test.  But the result may be confounded by age, as discussed earlier.   The boxplot in Figure~\ref{prevendStatinAgeBoxPlot} confirms that statin users tend to be older, and the scatterplot in Figure~\ref{prevendStatinAgeRFFTConfounderPlot} showed a clear linear trend in declining RFFT scores for older adults, regardless of statin use.  In fact, the regression output shown in Table~\ref{prevendRFFTAgeRegression} shows that age has a strongly significant association with RFFT score.
  
  \begin{figure}[h!]
  	\centering
  	\includegraphics[width=0.4\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/statinAgeBoxPlot/statinAgeBoxPlot.pdf}
+	{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinAgeBoxPlot/prevendStatinAgeBoxPlot.pdf}
  	\caption{Boxplot of age by statin use; 0 = participant not using statins, 1 = using statins. PREVEND data.}
-	\label{statinAgeBoxPlot}
+	\label{prevendStatinAgeBoxPlot}
  \end{figure}
  
-% latex table generated in R 3.4.2 by xtable 1.8-2 package
-% Fri Dec 29 10:00:07 2017
-% p-value edited
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 10:52:45 2018
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
   \hline
  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
   \hline
-(Intercept) & 137.5497 & 5.0161 & 27.42 & < 0.001 \\ 
-  Age & -1.2614 & 0.0895 & -14.09 & < 0.001 \\ 
+(Intercept) & 137.5497 & 5.0161 & 27.42 & 0.0000 \\ 
+  Age & -1.2614 & 0.0895 & -14.09 & 0.0000 \\ 
    \hline
 \end{tabular}
 \caption{R output from the regression of the 
-       response variab RFFT with predictor Age} 
-\label{RFFTAgeRegression}
+       response variable RFFT with predictor Age} 
+\label{prevendRFFTAgeRegression}
 \end{table}
-
-
 The model for multiple linear regression with two predictors is a straightforward extension of simple regression and can be used to adjust for confounders.  
 
 In the PREVEND data, a model for RFFT that incorporates both statin use and age is
@@ -154,28 +138,28 @@ or, equivalently,
 \[
 E(Y) = \beta_0 + \beta_1 X_1 + \beta_2 X_2,
 \]
-since $\varepsilon$ is assumed to have mean 0.  Section~\ref{generalMultipleRegression} outlines the principles and assumptions behind the multiple regression model with two or more predictors and the method used to estimate the coefficients, but it is not difficult to fit these models in software.  Table~\ref{RFFTStatinAgeRegression} shows the estimated regression model for the association of the response variable \var{RFFT} with both statin use and age, using \textsl{R}.  
- 
- \begin{table}[ht]
- \centering
- \begin{tabular}{rrrrr}
+since $\varepsilon$ is assumed to have mean 0.  Section~\ref{generalMultipleRegression} outlines the principles and assumptions behind the multiple regression model with two or more predictors and the method used to estimate the coefficients, but it is not difficult to fit these models in software.  Table~\ref{prevendRFFTStatinAgeRegression} shows the estimated regression model for the association of the response variable \var{RFFT} with both statin use and age, using \textsl{R}.  
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 11:04:43 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 137.8822 & 5.1221 & 26.92 & 0.0000 \\ 
+  Statin & 0.8509 & 2.5957 & 0.33 & 0.7432 \\ 
+  Age & -1.2710 & 0.0943 & -13.48 & 0.0000 \\ 
    \hline
-  & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-   \hline
- (Intercept) & 137.8822 & 5.1221 & 26.92 & 0.0000 \\ 
-   Statin & 0.8509 & 2.5957 & 0.33 & 0.7432 \\ 
-   Age & -1.2710 & 0.0943 & -13.48 & 0.0000 \\ 
-    \hline
- \end{tabular}
- \caption{Parameter estimates in the multiple regression for RFFT vs statin use and age in the PREVEND data.}
- \label{RFFTStatinAgeRegression}
- \end{table}
- % xtable(summary(lm(RFFT ~ Statin + Age, data=statins.samp)))
- % latex table generated in R 3.3.1 by xtable 1.8-2 package
- % Fri Nov  4 10:01:01 2016
+\end{tabular}
+\caption{Parameter estimates in the 
+       multiple regression for RFFT vs statin use and age in 
+       the PREVEND data.} 
+\label{prevendRFFTStatinAgeRegression}
+\end{table}
  
 
-The information in Table~\ref{RFFTStatinAgeRegression} is used in much the same way that a table showing estimates in simple regression would be used.
+The information in Table~\ref{prevendRFFTStatinAgeRegression} is used in much the same way that a table showing estimates in simple regression would be used.
 
 \begin{itemize}
 	
@@ -205,12 +189,12 @@ A simple calculation shows that this change in RFFT would have been the same for
   
   \item Just as in simple linear regression, the coefficient for the intercept must be interpreted with care.  In this model, the intercept gives the predicted RFFT for someone not using statins and of age 0, and is clearly meaningless.
   
-  \item There is an important aspect of these data that should not be overlooked.  The data do not come from a study in which participants were followed as they aged, allowing for the measurement of changing RFFT in a participant over time. Such a study is called a longitudinal study.  This study was a cross-sectional study -- patient age, statin use and RFFT were recorded for all participants during a short time interval.  The results of the study support the conclusion that older patients tend to have lower RFFT scores, but cannot be used to conclude that scores decline with age in individuals.  Older patients come from an earlier birth cohort, and it is possible, for instance, that younger participants have more post-secondary school education or better health practices generally.  In other words, there may be a cohort effect.  This is an important point to be aware of, and is not at all evident in the Table~\ref{RFFTStatinAgeRegression}
+  \item There is an important aspect of these data that should not be overlooked.  The data do not come from a study in which participants were followed as they aged, allowing for the measurement of changing RFFT in a participant over time. Such a study is called a longitudinal study.  This study was a cross-sectional study -- patient age, statin use and RFFT were recorded for all participants during a short time interval.  The results of the study support the conclusion that older patients tend to have lower RFFT scores, but cannot be used to conclude that scores decline with age in individuals.  Older patients come from an earlier birth cohort, and it is possible, for instance, that younger participants have more post-secondary school education or better health practices generally.  In other words, there may be a cohort effect.  This is an important point to be aware of, and is not at all evident in the Table~\ref{prevendRFFTStatinAgeRegression}
   
  \end{itemize}
  
  
-The results of the analysis shown in Table~\ref{RFFTStatinAgeRegression} provide an initial look at the association between RFFT score, statin use and age. There is, however, no information about either the quality of the fit or its potential value for predictions. The next section describes the residual plots that can be used to check some of the model assumptions and the use of $R^2$ to estimate how much of the variability in the response variable is explained by the model.
+The results of the analysis shown in Table~\ref{prevendRFFTStatinAgeRegression} provide an initial look at the association between RFFT score, statin use and age. There is, however, no information about either the quality of the fit or its potential value for predictions. The next section describes the residual plots that can be used to check some of the model assumptions and the use of $R^2$ to estimate how much of the variability in the response variable is explained by the model.
 
 \section{Evaluating the fit of a multiple regression model}
 
@@ -218,43 +202,27 @@ The results of the analysis shown in Table~\ref{RFFTStatinAgeRegression} provide
 
 The assumptions behind multiple regression are essentially the same as the 4 assumptions listed in Section~\ref{examiningScatterplots}.  The assumption of linearity is extended to multiple regression by assuming that when only one predictor changes, it is linearly related to the change in the response variable.  Assumption 2 becomes the slightly more general assumption that the residuals have approximately constant variance, and Assumption 4 is simply that the residuals are approximately normally distributed. Assumption 3 that the observations on each case are independent does not change. 
 
-Residual plots are useful in checking modeling assumptions in multiple
-regression, perhaps even more so than in simple linear regression since
-it is not possible to make a scatterplot of a response variable against
-several simultaneous predictors.  It is possible to plot predicted
-values vs residuals, since each case has one predicted value and one
-residual. The patterns in these residual plots that might indicate lack
-of fit are the same as in Figure~\ref{sampleLinesAndResPlots} from
-Chapter~\ref{linRegrForTwoVar}. Just as in simple regression, normal
-probability plots can be used to check the normality assumption of the
-residuals.  The scatterplot of predicted values vs residuals from the
-estimated model in Table~\ref{RFFTStatinAgeRegression} is in the left
-panel of Figure~\ref{statinAgeResidNormPlot} and shows that the
-residuals have slightly smaller variance for small predicted values of
-RFFT, but that the variability of the residuals is otherwise
-approximately constant.  The normal probability plot in the left panel
-shows that the residuals from the model are reasonably normally
-distributed, with departures from normality in the tails.
+Residual plots are useful in checking modeling assumptions in multiple regression, perhaps even more so than in simple linear regression since it is not possible to make a scatterplot of a response variable against several simultaneous predictors.  It is possible to plot predicted values vs residuals, since each case has one predicted value and one residual. The patterns in these residual plots that might indicate lack of fit are the same as in Figure~\ref{sampleLinesAndResPlots} from Chapter~\ref{linRegrForTwoVar}. Just as in simple regression, normal probability plots can be used to check the normality assumption of the residuals.  The scatterplot of predicted values vs residuals from the estimated model in Table~\ref{prevendRFFTStatinAgeRegression} is in the left panel of Figure~\ref{prevendStatinAgeResidNormPlot} and shows that the residuals have slightly smaller variance for small predicted values of RFFT, but that the variability of the residuals is otherwise approximately constant.  The normal probability plot in the left panel shows that the residuals from the model are reasonably normally distributed, with departures from normality in the tails.
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/statinAgeResidNormPlot/statinAgeResidNormPlot.pdf}
+	{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinAgeResidNormPlot/prevendStatinAgeResidNormPlot.pdf}
 	\caption{A histogram and normal probability plot of the residuals from the linear model for RFFT vs. statin use and age in the PREVEND data}
-	\label{statinAgeResidNormPlot}
+	\label{prevendStatinAgeResidNormPlot}
 \end{figure}
 
 
-Examining plots of residuals against each of the predictors can be useful with multiple regression, since they might show a nonlinear trend in an association with one of the variables that might be corrected with a transformation.  The scatterplot of residuals from the model in Table~\ref{RFFTStatinAgeRegression} vs Age shows no apparent nonlinear trends.  
+Examining plots of residuals against each of the predictors can be useful with multiple regression, since they might show a nonlinear trend in an association with one of the variables that might be corrected with a transformation.  The scatterplot of residuals from the model in Table~\ref{prevendRFFTStatinAgeRegression} vs Age shows no apparent nonlinear trends.  
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/statinAgeResidPlot/statinAgeResidPlot.pdf}
+	{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinAgeResidPlot/prevendStatinAgeResidPlot.pdf}
 	\caption{Age vs residuals in the model for RFFT vs statins and age in the PREVEND data.  The horizontal line is the least squares line for age vs the residuals.}
-	\label{statinAgeResidPlot}
+	\label{prevendStatinAgeResidPlot}
 \end{figure}
 
 
@@ -324,24 +292,23 @@ In words, multiple regression is the model for the mean of the response $Y$ in a
 
 \begin{exercise}
 The table below shows an estimated regression model for \var{RFFT} with predictors \var{Statin} and \var{Gender}, where \var{Gender} is coded 0 for males and 1 for females.  Based on the model, what are the estimated mean RFFT scores for the four groups defined by statin use and gender? 
-	% xtable(summary(lm(RFFT ~ Statin + Gender, data=statins.samp)))
-	% latex table generated in R 3.3.1 by xtable 1.8-2 package
-	% Mon Dec  5 09:40:50 2016
-	\begin{table}[ht]
-	\centering
-	\begin{tabular}{rrrrr}
-	  \hline
-	 & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-	  \hline
-	(Intercept) & 70.4068 & 1.8477 & 38.11 & 0.0000 \\ 
-	  Statin & -9.9700 & 2.9011 & -3.44 & 0.0006 \\ 
-	  Gender & 0.6133 & 2.4461 & 0.25 & 0.8021 \\ 
-	   \hline
-	\end{tabular}
-	\end{table}
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 11:21:50 2018
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
+  \hline
+(Intercept) & 70.4068 & 1.8477 & 38.11 & 0.0000 \\ 
+  Statin & -9.9700 & 2.9011 & -3.44 & 0.0006 \\ 
+  Gender & 0.6133 & 2.4461 & 0.25 & 0.8021 \\ 
+   \hline
+\end{tabular}
+\end{table}
 \end{exercise}
 
-Datasets for multiple regression have $n$ cases, usually indexed algebraically by $i$, where $i$ takes on values from 1 (first case in the dataset) to $n$ (last case).  The dataset \data{statins.samp} contains $n = 500$ observations.  Algebraic representations of the data must denote both the case number and the predictor in the set of $p$ predictors. The variable $X_{ij}$ denotes predictor $X_j$ for case $i$ in the dataset.  The response for case $i$ is simply $Y_i$. The dataset \data{statins.samp} has many possible predictors, some of which are examined later in this chapter.  The analysis in Section~\ref{simpleVsMultipleRegression} used $p=2$ predictors, \var{Statin} and \var{Age}.
+Datasets for multiple regression have $n$ cases, usually indexed algebraically by $i$, where $i$ takes on values from 1 (first case in the dataset) to $n$ (last case).  The dataset \data{prevend.samp} contains $n = 500$ observations.  Algebraic representations of the data must denote both the case number and the predictor in the set of $p$ predictors. The variable $X_{ij}$ denotes predictor $X_j$ for case $i$ in the dataset.  The response for case $i$ is simply $Y_i$. The dataset \data{prevend.samp} has many possible predictors, some of which are examined later in this chapter.  The analysis in Section~\ref{simpleVsMultipleRegression} used $p=2$ predictors, \var{Statin} and \var{Age}.
 
 Just as in Chapter~\ref{probability}, upper case letters are used when thinking of data as a set of random observations subject to sampling from a population, and lower case letters are used for observed values.  With this notation, row $i$ of dataset with $n$ cases and $p$ predictors can be written as $(y_i, x_{i1}, x_{i2}, \ldots, x_{ip})$.
 
@@ -444,8 +411,8 @@ In practice, it is rare for the $F$-test not to reject the null hypothesis, sinc
 In the model~\ref{RFFTStatinModel}, the variable \var{Statin} is a categorial predictor with two values, coded 0 if the participant was not taking a statin, and 1 if he or she was using the medication.  Without adjusting for age, the estimated coefficient (-10.05) suggests that taking a statin may be associated with a 10 point drop in RFFT score.  In a model such as this, the category \var{Statin = 0} is called the reference category, and the estimated coefficient is the change in the average response between the category \var{Statin = 1} and the reference category.
 
 Software such as \textsf{R} includes the option of declaring categorical variables as factors, with values (called levels) that serve as labels for categories instead of as numerical values.  Here is the output from \textsf{R} of a regression of RFFT score with the predictor \var{Statin} declared as a factor:
-
-
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 11:27:38 2018
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -456,21 +423,19 @@ Software such as \textsf{R} includes the option of declaring categorical variabl
   as.factor(Statin)1 & -10.0534 & 2.8792 & -3.49 & 0.0005 \\ 
    \hline
 \end{tabular}
-\caption{Parameter estimates for the least squares regression of RFFT vs. statin use,  with \var{Statin} converted to a factor variable.  PREVEND Data.}
-\end{table} 
-%xtable(summary(lm(RFFT ~ as.factor(Statin), data=statins.samp))) 
-% latex table generated in R 3.3.1 by xtable 1.8-2 package
-% Tue Nov  8 09:34:46 2016
+\caption{Parameter estimates for 
+       the least squares regression of RFFT vs. 
+       statin use,  with \var{Statin} converted to a 
+       factor variable.  PREVEND Data.} 
+\end{table}
 
 The predictor is now labeled \texttt{as.factor(Statin)1}, denoting that the value 0 is the reference category, since the estimate -10.05 is the change in mean RFFT when the category for \var{Statin} changes from 0 to 1.  The regression estimate is the same as in the model where \var{Statin} was treated as a numerical value, because in that instance a 1 unit change in \var{Statin} was a change in mean RFFT between not taking a statin to taking one.  
 
-The same idea is used when estimating the association of a response with a categorical variable that has more than two categories.  One of the categories is set as the reference category, and coefficients are estimated for each of the other categories, each one providing an estimate of the change in response between the reference category and the category of interest.  In the dataset \data{statin.samp}, the educational level of the participant is coded 0, 1, 2 or 3, where 0 denotes only a primary school education, 1 a lower secondary school education in the Dutch system, 2 a higher secondary education, and 3 a University education.   In statistical terms, the variable \var{Education} is a categorical variable with 4 levels.  It would not be correct to estimate the association between RFFT and educational level using the numerical codes for \var{Education}; such a model would assume that the change in mean RFFT when changing educational level from primary to lower secondary school would be the same as the change when educational level changes from upper secondary school to a university education, since in the codes assigned, the predictor would change by 1 in both cases.  The codes assigned to categorical variables are simply short-hand names for the levels, not meaningful values.  
+The same idea is used when estimating the association of a response with a categorical variable that has more than two categories.  One of the categories is set as the reference category, and coefficients are estimated for each of the other categories, each one providing an estimate of the change in response between the reference category and the category of interest.  In the dataset \data{prevend.samp}, the educational level of the participant is coded 0, 1, 2 or 3, where 0 denotes only a primary school education, 1 a lower secondary school education in the Dutch system, 2 a higher secondary education, and 3 a University education.   In statistical terms, the variable \var{Education} is a categorical variable with 4 levels.  It would not be correct to estimate the association between RFFT and educational level using the numerical codes for \var{Education}; such a model would assume that the change in mean RFFT when changing educational level from primary to lower secondary school would be the same as the change when educational level changes from upper secondary school to a university education, since in the codes assigned, the predictor would change by 1 in both cases.  The codes assigned to categorical variables are simply short-hand names for the levels, not meaningful values.  
 
-Table~\ref{RFFTEducationRegression} provides the output from \textsf{R} from a regression model for RFFT with predictor \var{Education}.  
-
-% xtable(summary(lm(RFFT ~  as.factor(Education), data=statins.samp)))
-% latex table generated in R 3.3.1 by xtable 1.8-2 package
-% Mon Nov  7 12:11:37 2016
+Table~\ref{prevendRFFTEducationRegression} provides the output from \textsf{R} from a regression model for RFFT with predictor \var{Education}.  
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 11:32:59 2018
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -483,10 +448,12 @@ Table~\ref{RFFTEducationRegression} provides the output from \textsf{R} from a r
   as.factor(Education)3 & 44.9639 & 3.6835 & 12.21 & 0.0000 \\ 
    \hline
 \end{tabular}
-\caption{Parameter estimates for the least squares model for RFFT vs education, with \var{Education} converted to a factor variable. PREVEND data.}
-\label{RFFTEducationRegression}
+\caption{{Parameter estimates for the least squares 
+       model for RFFT vs education, with 
+       \var{Education} converted to a factor variable. 
+       PREVEND data.} 
+\label{prevendRFFTEducationRegression}}
 \end{table}
-
 \textsf{R} has set \var{Education = 0} as the baseline category. The coefficients other than the intercept provide the estimated change in mean RFFT score when \var{Education} changes from the baseline category to the level 1, 2 or 3. Since these are estimated changes or differences, the mean RFFT scores in each category are the mean in the reference category (the intercept) plus the coefficient for that category. Mean RFFT scores are approximately 14.8 points higher in participants with a lower secondary school education compared to those with only a primary school education.  The estimated mean for those with a lower secondary education is $40.94 + 14.78 = 55.72$.  Participants with a higher secondary education scored approximately 32.1 points higher than those with only a primary school education, and have estimated mean RFFT score $40.94 + 32.13 = 73.07$.  Unlike many other settings, the intercept in this model does have a meaningful interpretation -- it is the mean response (mean RFFT) in the reference category (primary school education), or 40.94.
 
 The estimated model can be used to calculate changes in mean score between any two levels using simple subtraction.  For instance, the change in mean score between lower and higher secondary education is approximately $(40.28 +32.13) - (40.28 +14.78) = 32.13 - 14.8 = 17.3$ points.
@@ -502,14 +469,11 @@ Categorical variables can be included in multiple regression models with other p
 
 Is adjusting for \var{Age} the best model for understanding the possible association of statins and cognitive level?  The earlier model showed that considering statins alone could be misleading -- older participants tended to score lower RFFT scores but also were more likely to be taking statins.  Age was a confounder in this setting.  Is it the only confounder?
 
-Potential confounders are best identified using scientific information about the response and predictor values.  For the statin dataset, there are two natural potential confounders -- education level and the presence of cardiovascular disease. Model~\ref{RFFTEducationRegression} showed that education was associated with RFFT -- higher levels of education were associated with higher RFFT scores.  The use of medications is also known to vary by education levels, often because individuals with more education tend to have higher incomes and consequently better access to health care.  Individuals with cardiovascular disease are often prescribed statins to lower cholesterol, and cardiovascular disease can lead to vascular dementia and cognitive decline.  
+Potential confounders are best identified using scientific information about the response and predictor values.  For the statin dataset, there are two natural potential confounders -- education level and the presence of cardiovascular disease. Model~\ref{prevendRFFTEducationRegression} showed that education was associated with RFFT -- higher levels of education were associated with higher RFFT scores.  The use of medications is also known to vary by education levels, often because individuals with more education tend to have higher incomes and consequently better access to health care.  Individuals with cardiovascular disease are often prescribed statins to lower cholesterol, and cardiovascular disease can lead to vascular dementia and cognitive decline.  
 
-Table~\ref{RFFTStatinAgeEducationCVD} contains the result of a regression of RFFT with statin use, adding the possible confounders \var{Age}, \var{Education}, and \var{CVD}. The variables \var{Statin}, \var{Education} and \var{CVD} are treated as factors, and \var{Age} is a continuous predictor.  All of the predictors have coefficients significantly different from 0, with the possible exception of \var{Statin}, which is almost significant.  The coefficient for statin use shows the importance of adjusting for confounders.  In the initial model for RFFT that included statins alone, statin use was significantly associated with lower RFFT scores.  After adjusting for age, statins were no longer significantly associated with RFFT scores, but seemed to suggest that statin use could be associated with increased RFFT scores.  This final model suggests that, after adjusting for age, education and the presence of cardiovascular disease, statin use may well be associated with an increase in RFFT scores of approximately 4.7 points.
-
-%RFFT.statin.model = lm(RFFT ~ as.factor(Statin) + Age  + as.factor(Education) + as.factor(CVD), data=statins.samp)
-% xtable(RFFT.statin.model)
-% latex table generated in R 3.3.1 by xtable 1.8-2 package
-% Tue Nov  8 11:20:07 2016
+Table~\ref{prevendRFFTStatinAgeEducationCVD} contains the result of a regression of RFFT with statin use, adding the possible confounders \var{Age}, \var{Education}, and \var{CVD}. The variables \var{Statin}, \var{Education} and \var{CVD} are treated as factors, and \var{Age} is a continuous predictor.  All of the predictors have coefficients significantly different from 0, with the possible exception of \var{Statin}, which is almost significant.  The coefficient for statin use shows the importance of adjusting for confounders.  In the initial model for RFFT that included statins alone, statin use was significantly associated with lower RFFT scores.  After adjusting for age, statins were no longer significantly associated with RFFT scores, but seemed to suggest that statin use could be associated with increased RFFT scores.  This final model suggests that, after adjusting for age, education and the presence of cardiovascular disease, statin use may well be associated with an increase in RFFT scores of approximately 4.7 points.
+% latex table generated in R 3.3.2 by xtable 1.8-2 package
+% Fri Jan  5 11:40:26 2018
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -525,43 +489,24 @@ Table~\ref{RFFTStatinAgeEducationCVD} contains the result of a regression of RFF
   as.factor(CVD)1 & -7.5665 & 3.6516 & -2.07 & 0.0388 \\ 
    \hline
 \end{tabular}
-\caption{Parameter estimates in the multiple regression model for RFFT vs statin use, age, education and presence of cardiovascular disease.}
-\label{RFFTStatinAgeEducationCVD}
+\caption{Parameter estimates in the multiple 
+       regression model for RFFT vs statin use, age, 
+       education and presence of cardiovascular disease.} 
+\label{prevendRFFTStatinAgeEducationCVD}
 \end{table}
 
-% edits to here; figure needs to be fixed
-
-Figure~\ref{RFFTStatinAgeEducCVDResidNormPlot} shows (on the left) a plot of residuals vs predicted RFFT scores from the model in Table~\ref{RFFTStatinAgeEducationCVD} and (on the right) a normal probability plot of the residuals.  These plots show that the model fits the data reasonably well, though not perfectly.  The residuals show a slight increase in variability for larger predicted values, and the normal probability plot shows the residuals depart from normality in the extreme tails.  Model assumptions never hold exactly, and the possible violations shown in this figure are not sufficient reason to discard the model.
+Figure~\ref{prevendRFFTStatinAgeEducCVDResidNormPlot} shows (on the left) a plot of residuals vs predicted RFFT scores from the model in Table~\ref{prevendRFFTStatinAgeEducationCVD} and (on the right) a normal probability plot of the residuals.  These plots show that the model fits the data reasonably well, though not perfectly.  The residuals show a slight increase in variability for larger predicted values, and the normal probability plot shows the residuals depart from normality in the extreme tails.  Model assumptions never hold exactly, and the possible violations shown in this figure are not sufficient reason to discard the model.
 
 
 \begin{figure}[h!]
 	\centering
 	\includegraphics[width=0.8\textwidth]
-	{ch_multiple_linear_regression_oi_biostat/figures/RFFTStatinAgeEducCVDResidNormPlot/RFFTStatinAgeEducCVDResidNormPlot.pdf}
+	{ch_multiple_linear_regression_oi_biostat/figures/prevendRFFTStatinAgeEducCVDResidNormPlot/prevendRFFTStatinAgeEducCVDResidNormPlot.pdf}
 	\caption{A histogram and normal probability plot of the residuals from the linear model for RFFT vs. statin use, age, educational level and presence of cardiovascular disease in the PREVEND data}
-	\label{RFFTStatinAgeEducCVDResidNormPlot}
+	\label{prevendRFFTStatinAgeEducCVDResidNormPlot}
 \end{figure}
 
-It is quite possible that even the model summarized in
-Table~\ref{RFFTStatinAgeEducationCVD} is not the best one to understand
-the association of cognitive ability with statin use.  There may well be
-other confounders not accounted for.  Possible predictors that may be
-confounders but have not been examined are called \term{residual
-confounders}.  Residual confounders can be other variables in a dataset
-that have not been examined, or variables that were not measured in the
-study.  Residual confounders exist in almost all observational studies,
-and is one of the main reasons that observational studies should be
-interpreted with caution.  A randomized experiment is the best way to
-eliminate residual confounders, since randomization insures that, at
-least on average, all predictors are not associated with the randomized
-intervention, eliminating one of the conditions for confounding.  A
-randomized trial may be possible in some settings; there have been many
-randomized trials examining the effect of using statins. But in many
-other settings, such as a study of the association of marijuana use and
-later addiction to controlled substances, randomization may not be
-possible or ethical.  In those instances, observational studies may be
-the best available approach. They should be analyzed carefully and
-thoughtfully.
+It is quite possible that even the model summarized in Table~\ref{prevendRFFTStatinAgeEducationCVD} is not the best one to understand the association of cognitive ability with statin use.  There may well be other confounders not accounted for.  Possible predictors that may be confounders but have not been examined are called \term{residual confounders}.  Residual confounders can be other variables in a dataset that have not been examined, or variables that were not measured in the study.  Residual confounders exist in almost all observational studies, and is one of the main reasons that observational studies should be interpreted with caution.  A randomized experiment is the best way to eliminate residual confounders, since randomization insures that, at least on average, all predictors are not associated with the randomized intervention, eliminating one of the conditions for confounding.  A randomized trial may be possible in some settings; there have been many randomized trials examining the effect of using statins. But in many other settings, such as a study of the association of marijuana use and later addiction to controlled substances, randomization may not be possible or ethical.  In those instances, observational studies may be the best available approach. They should be analyzed carefully and thoughtfully.
 
 \section{Interaction in regression}
 
