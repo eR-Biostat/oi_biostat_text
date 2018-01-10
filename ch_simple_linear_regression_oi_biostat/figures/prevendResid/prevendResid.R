@@ -1,6 +1,6 @@
 require(openintro)
 require(oibiostat)
-data(prevend)
+data(prevend.samp)
 data(COL)
 set.seed(1)
 
@@ -29,7 +29,7 @@ for(i in 1:3){
   lines(rep(prevend.samp$Age[these[i]], 2),
         c(prevend.samp$RFFT[these[i]], y2),
         lty = 3,
-        lwd = 1.5,
+        lwd = 2.5,
         col = COL[4])
 }
 
