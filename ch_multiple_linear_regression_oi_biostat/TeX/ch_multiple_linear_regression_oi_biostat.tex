@@ -510,7 +510,31 @@ It is quite possible that even the model summarized in Table~\ref{prevendRFFTSta
 
 \section{Interaction in regression}
 
-Use NHANES
+An important assumption in the multiple regression model
+\[y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_px_p + \varepsilon \] 
+is that when one of the variables changes (say, $x_j$) by 1 unit and all other variables do not change, the predicted response changes by $\beta_j$, regardless of the values of the other variables.  An statistical \term{interaction} occurs when this assumption is not true and the nature relationship of one explanatory variable $x_j$ with the response depends on the value of one or more other explanatory variables.
+
+This is most easily understood in a model with two predictors,
+Consider a model that might be used to predict total cholesterol level from age and diabetes status (either diabetic or non-diabetic).  
+\[\text{TotChol} = \beta_0 + \beta_1\text{Age} + \beta_2\text{Diabetes} + \varepsilon \]
+Assume that total cholesterol (\var{TotChol}) is measured in mmol/L, \var{Age} is recorded in years, and \var{Diabetes} is coded as 1 for a person with diabetes, and 0 otherwise.  For non-diabetics (\var{Diabetes} = 0), the linear relationship between cholesterol and age would be
+\[TotChol = \beta_0 + \beta_1\text{Age} + \varepsilon. \]
+The population regression line would have slope $\beta_1$ and intercept $\beta_0$.  For diabetics (\var{Diabetes} = 1), the population regression line becomes
+\begin{align*}
+\text{TotChol} &= \beta_0 + \beta_1\text{Age} + \beta_2 + \varepsilon \\
+&= \beta_0 + \beta_2 + \beta_1\text{Age},
+\end{align*}
+a line with the same slope $\beta_1$ but different intercept $\beta_0 + \beta_2$.  The lines predicting cholesterol as a function of age in diabetics and non-diabetics are parallel lines with different intercept.  Cholesterol might be higher overall in diabetics than non-diabetics, but the changes in cholesterol as age changes will be the same in both groups.
+
+Figure~\ref{modelNoInteraction} shows hypothetical  graphs of population regression lines in this setting when there is no statistical interaction between age and diabetes status.
+
+% graphic needed here of parallel lines.  Might be a two panel plot, second panel showing interaction.
+
+A relationship in which changes in cholesterol as a function of age does not depend on diabetes status might, however, be overly simple, and potentially misleading if it is wrong.
+
+% begin example from nhanes here.
+
+
 
 \section{Model selection and prediction}
 
