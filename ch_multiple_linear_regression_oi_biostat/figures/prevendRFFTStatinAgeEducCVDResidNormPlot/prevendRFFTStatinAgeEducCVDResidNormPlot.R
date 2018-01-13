@@ -21,18 +21,18 @@ myPDF("prevendRFFTStatinAgeEducCVDResidNormPlot.pdf", 6, 3,
 plot(predicted,
      residuals,
      pch = 19,
-     cex = 1.3,
+     cex = 1,
      col = COL[1, 3],
      xlab = "Predicted Value",
      ylab = "Residual",
      ylim = c(min(residuals), max(residuals)))
-points(residuals,
-       predicted,
-       cex = 1.3,
+points(predicted,
+       residuals,
+       cex = 1,
        col = COL[1])
 #mtext("Predicted Value", 1, 1.9)
 
-abline(lm(residuals ~ predicted))
+abline(lm(residuals ~ predicted), lty = 2)
 
 par(mar = c(3,4,1,0))
 
