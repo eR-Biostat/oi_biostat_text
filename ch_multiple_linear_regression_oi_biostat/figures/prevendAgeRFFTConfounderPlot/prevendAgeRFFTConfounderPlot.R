@@ -26,4 +26,10 @@ points(prevend.samp$Age[statin.use == TRUE],
      col = COL[4])
 mtext("Age (yrs)", 1, 1.9)
 
+abline(v = 40, lty = 2)
+abline(v = 50, lty = 2)
+abline(v = 60, lty = 2)
+abline(v = 70, lty = 2)
+abline(v = 80, lty = 2)
+
 dev.off()

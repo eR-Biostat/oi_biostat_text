@@ -343,15 +343,7 @@ Figure~\ref{wdiHistReg} shows that infant mortality rates are highly right-skewe
 	\label{wdiHistTransform}
 \end{figure}
 
-Figure~\ref{wdiPlot} shows a scatterplot of log(\texttt{inf.mortality}) against the categorical variable for sanitation access, coded \texttt{1} if at least 50\% of the population has access to adequate sanitation, and \texttt{0} otherwise. Since there are only two values of the predictor, the values of infant mortality are stacked above the two predictor values 0 and 1. 
-
-The least squares regression line has the form
-\begin{align}
-\widehat{\log(\texttt{inf.mortality})} = b_0 + b_1(\texttt{sanit.access}).
-\label{logInfMortalitySanitRegress}
-\end{align}
-
-The estimated least squares regression line has intercept and slope parameters of 4.018 and -1.681, respectively. While the scatterplot appears unlike those for two numerical variables, the interpretation of the parameters remains unchanged. The slope, -1.681, is the estimated change in the logarithm of infant mortality when the categorical predictor changes from low access to sanitation facilities to high access. The intercept term 4.018 is the estimated log infant mortality for the set of countries where less than 50\% of the population has access to adequate sanitation facilities (\var{sanit.access} = 0).
+Figure~\ref{wdiPlot} shows a scatterplot of log(\texttt{inf.mortality}) against the categorical variable for sanitation access, coded \texttt{1} if at least 50\% of the population has access to adequate sanitation, and \texttt{0} otherwise. Since there are only two values of the predictor, the values of infant mortality are stacked above the two predictor values 0 and 1.\footnote{Typically, side-by-side boxplots are used to display the relationship between a numerical variable and a categorical variable. In a regression context, it can be useful to use a scatterplot instead, in order to see the variability around the regression line.} 
 
 \begin{figure}[h!]
 	\centering
@@ -361,6 +353,15 @@ The estimated least squares regression line has intercept and slope parameters o
 \end{figure}
 
 %JV: Change the name of the plot to wdiPlotA to see a version of the plot that is closer to base R. OI code uses dotplot instead of plot to suppress the tick mark labeling on the x-axis and more easily add labels.
+
+
+The least squares regression line has the form
+\begin{align}
+\widehat{\log(\texttt{inf.mortality})} = b_0 + b_1(\texttt{sanit.access}).
+\label{logInfMortalitySanitRegress}
+\end{align}
+
+The estimated least squares regression line has intercept and slope parameters of 4.018 and -1.681, respectively. While the scatterplot appears unlike those for two numerical variables, the interpretation of the parameters remains unchanged. The slope, -1.681, is the estimated change in the logarithm of infant mortality when the categorical predictor changes from low access to sanitation facilities to high access. The intercept term 4.018 is the estimated log infant mortality for the set of countries where less than 50\% of the population has access to adequate sanitation facilities (\var{sanit.access} = 0).
 
 Using the model in Equation~\ref{logInfMortalitySanitRegress}, the prediction equation can be written
 \[

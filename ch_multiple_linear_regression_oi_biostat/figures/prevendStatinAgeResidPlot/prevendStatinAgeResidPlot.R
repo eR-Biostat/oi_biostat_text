@@ -13,17 +13,17 @@ myPDF("prevendStatinAgeResidPlot.pdf",
 plot(prevend.samp$Age,
      obs,
      pch = 19,
-     cex = 1.3,
+     cex = 1,
      col = COL[1, 3],
      xlab = "",
      ylab = "Residual")
 points(prevend.samp$Age,
        obs,
-       cex = 1.3,
+       cex = 1,
        col = COL[1])
 mtext("Age (yrs)", 1, 1.9)
 
-abline(lm(obs ~ prevend.samp$Age))
+abline(lm(obs ~ prevend.samp$Age), lty = 2)
 
 dev.off()
 
