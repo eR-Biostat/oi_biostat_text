@@ -1,28 +1,8 @@
 library(openintro)
-#data(Golub)
 data(COL)
 
-###defining golub.train and golub.test
-leuk.type = (Golub$cancer == "aml")
-aml.rows = which(leuk.type)
-
-complete.rows = c(1:74)
-all.rows = setdiff(complete.rows, aml.rows)
-
-set.seed(5011)
-aml.test.rows = sample(aml.rows, 5, replace = FALSE)
-set.seed(5011)
-all.test.rows = sample(all.rows, 5, replace = FALSE)
-
-test.patients = c(aml.test.rows, all.test.rows)
-
-
-##set aside 10 patients, others as training
-golub.test = Golub[test.patients,]
-golub.train = Golub[-test.patients,]
-
-golub.train = Golub[16:35,]
-
+library(oibiostat)
+data(golub.train)
 
 ## analysis
 

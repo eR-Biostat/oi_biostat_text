@@ -8,7 +8,6 @@ Making observations and recording \term{data} form the backbone of empirical res
 
 This chapter provides a brief discussion on the principles of data collection, and introduces basic methods for summarizing and exploring data. 
 
-
 \section[Case study]{Case study: preventing peanut allergies}
 \label{leapCaseStudy}
 
@@ -1542,7 +1541,7 @@ Table~\ref{sampleGolubData} shows five rows and seven columns from the dataset. 
 	\centering
 	\begin{tabular}{ccccccc}
 		\hline
-		Samples & BM.PB & Gender & Source & tissue.mf & cancer & AFFX.BioB.5.at \\ 
+		Samples & BM.PB & Gender & Source & tissue.mf & cancer & AFFX-BioB-5\_at \\ 
 		\hline
 		  39 & BM & F & DFCI & BM:f & allB & -1363.28 \\ 
 		  40 & BM & F & DFCI & BM:f & allB & -796.29 \\ 
@@ -1703,9 +1702,7 @@ It is possible to identify the outliers from simply looking at the list of diffe
 	\label{golubHistandBox}
 \end{figure}
 
-With the use of computing software, the same process of calculating means, differences of means, and identifying outliers can easily be applied to the complete version of the data. Figure~\ref{golubHistandBox} shows the distribution of differences in mean expression level between AML and ALL patients for all 7,129 genes in the dataset, from 62 patients. The vast majority of genes are expressed at similar levels in AML and ALL patients; most genes have a difference in mean expression within -5,000 to 5,000. However, there are many genes that show extreme differences, as much as higher by 20,000 in AML or lower by 30,000 in ALL. These genes may be useful for differentiating between AML and ALL. The companion volume illustrates the details of using \textsf{R} to identify these genes.
-
-%JV: Edit reference to companion?
+With the use of computing software, the same process of calculating means, differences of means, and identifying outliers can easily be applied to the complete version of the data. Figure~\ref{golubHistandBox} shows the distribution of differences in mean expression level between AML and ALL patients for all 7,129 genes in the dataset, from 62 patients. The vast majority of genes are expressed at similar levels in AML and ALL patients; most genes have a difference in mean expression within -5,000 to 5,000. However, there are many genes that show extreme differences, as much as higher by 20,000 in AML or lower by 30,000 in ALL. These genes may be useful for differentiating between AML and ALL. The corresponding \textsf{R} lab illustrates the details of using \textsf{R} to identify these genes.\footnote{Lab 3, Chapter 1.}
 
 Note how Figure~\ref{golubHistandBox} uses data from only 62 patients out of the 72 in the \data{Golub} dataset; this subset is called \data{golub.train}. The remaining 10 patients have been set aside as a "test" dataset (\data{golub.test}). Based on what has been learned about expression patterns from the 62 patients in \data{golub.train}, how well can the leukemia type of the 10 patients in \data{golub.test} be predicted?\footnote{The original analysis used data from 38 patients to identify informative genes, then tested predictions on an independent collection of data from 34 patients.}
 
@@ -1717,37 +1714,40 @@ Note how Figure~\ref{golubHistandBox} uses data from only 62 patients out of the
 	}
 \end{figure}
 
-Figure~\ref{golubPrediction} illustrates the main ideas behind the strategy developed by the Golub team to predict leukemia type from expression data. The vertical orange bars represent the gene expression levels of a patient for each gene, relative to the mean expression for AML patients and ALL patients from the training dataset (vertical blue bars). A gene will "vote" for either AML or ALL, depending on whether the patient's expression level is closer to $\mu_{AML}$ or $\mu_{ALL}$. In the example shown, three of the genes are considered to have ALL-like expression, versus the other two that are more AML-like. The votes are also weighted to account for how far an observation is from the midpoint between the two means (vertical dotted blue line), i.e. the deviation from the midpoint. For example, the observed expression value for gene 2 is not as strong an indicator of ALL as the expression value for gene 1. The magnitude of the deviations ($v_1$, $v_2$, ...) are summed to obtain $V_{AML}$ and $V_{ALL}$, and a higher value indicates a prediction of either AML or ALL, respectively.
+Figure~\ref{golubPrediction} illustrates the main ideas behind the strategy developed by the Golub team to predict leukemia type from expression data. The vertical orange bars represent the gene expression levels of a patient for each gene, relative to the mean expression for AML patients and ALL patients from the training dataset (vertical blue bars). A gene will "vote" for either AML or ALL, depending on whether the patient's expression level is closer to $\mu_{AML}$ or $\mu_{ALL}$. In the example shown, three of the genes are considered to have ALL-like expression, versus the other two that are more AML-like. The votes are also weighted to account for how far an observation is from the midpoint between the two means (horizontal dotted blue line), i.e. the length of the dotted line shows the deviation from the midpoint. For example, the observed expression value for gene 2 is not as strong an indicator of ALL as the expression value for gene 1. The magnitude of the deviations ($v_1$, $v_2$, ...) are summed to obtain $V_{AML}$ and $V_{ALL}$, and a higher value indicates a prediction of either AML or ALL, respectively.
 
 The published analysis chose to use 50 informative genes; a decision about how many genes to use in a diagnostic panel typically involves considering factors such as the number of genes practical for a clinical setting. For simplicity, a smaller number of genes will be used in the analysis shown here. 
 
-Suppose that 10 genes are selected as predictors -- the 5 largest outliers and 5 smallest outliers for the difference in mean expression between AML and ALL. Table~\ref{golubTestData} shows expression data for these 10 genes from the 10 patients in \data{golub.test}, while Table~\ref{golubTrainMeansMidpoints} contains the mean expression value for each gene among AML and ALL patients in \data{golub.train}.
+Suppose that 10 genes are selected as predictors---the 5 largest outliers and 5 smallest outliers for the difference in mean expression between AML and ALL. Table~\ref{golubTestData} shows expression data for these 10 genes from the 10 patients in \data{golub.test}, while Table~\ref{golubTrainMeansMidpoints} contains the mean expression value for each gene among AML and ALL patients in \data{golub.train}.
 
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Mon Feb 12 21:54:24 2018
 \begin{table}[ht]
 	\tiny
 	\centering
 	\begin{tabular}{r|rrrrr|rrrrr}
 		\hline
-		& M19507.at & M27891.at & M96326.rna1.at & M11147.at & M84526.at & M26602.at & M25079.s.at & X82240.rna1.at & HG1428.HT1428.s.at & D49824.s.at \\ 
+		& M19507\_at & M27891\_at & M11147\_at & M96326\_rna1\_at & Y00787\_s\_at & M14483\_rna1\_s\_at & X82240\_rna1\_at & X58529\_at & M33680\_at & U05259\_rna1\_at \\ 
 		\hline
-		1&4481 & 47532 & 1785 & 56261 & 9756 & -913 & 14310 & -231 & 21343 & 58702 \\ 
-		2&11513 & 2839 & 5018 & 42469 & 2642 & -1498 & -726 & -1116 & 33771 & 60007 \\ 
-		3&21294 & 6439 & 61951 & 30239 & 21585 & -302 & 5081 & -540 & 6323 & 20862 \\ 
-		4&-399 & 26023 & 1271 & 40910 & -548 & -1190 & 35885 & -1247 & 45027 & 45275 \\ 
-		5&-147 & 29609 & 20053 & 37606 & 14559 & -658 & 27903 & -1104 & 36296 & 51608 \\ 
-		6&-1229 & -1206 & 2250 & 16932 & -2119 & -1262 & 8251 & 20951 & 56991 & 88753 \\ 
-		7&-238 & -610 & -991 & 21798 & -835 & -988 & -93 & 6500 & -518 & 74282 \\ 
-		8&-1021 & -792 & 730 & 17732 & -766 & 4306 & 23917 & 158 & 24766 & 64597 \\ 
-		9&432 & -1099 & -576 & 9683 & -932 & -1150 & 10576 & 7097 & 43054 & 71533 \\ 
-		10&-518 & -862 & -2971 & 26386 & -1382 & -1773 & -1267 & 32706 & 17306 & 36460 \\ 
+		1 & 4481 & 47532 & 56261 & 1785 & -77 & 7824 & -231 & 9520 & 7181 & 2757 \\ 
+		2 & 11513 & 2839 & 42469 & 5018 & 20831 & 27407 & -1116 & -221 & 6978 & -187 \\ 
+		3 & 21294 & 6439 & 30239 & 61951 & -187 & 19692 & -540 & 216 & 1741 & -84 \\ 
+		4 & -399 & 26023 & 40910 & 1271 & 26842 & 30092 & -1247 & 19033 & 13117 & -188 \\ 
+		5 & -147 & 29609 & 37606 & 20053 & 12745 & 26985 & -1104 & -273 & 8701 & -168 \\ 
+		6 & -1229 & -1206 & 16932 & 2250 & 360 & 38058 & 20951 & 12406 & 9927 & 8378 \\ 
+		7 & -238 & -610 & 21798 & -991 & -348 & 23986 & 6500 & 20451 & 8500 & 7005 \\ 
+		8 & -1021 & -792 & 17732 & 730 & 5102 & 17893 & 158 & 9287 & 7924 & 9221 \\ 
+		9 & 432 & -1099 & 9683 & -576 & -804 & 14386 & 7097 & 5556 & 9915 & 5594 \\ 
+		10 & -518 & -862 & 26386 & -2971 & -1032 & 30100 & 32706 & 21007 & 23932 & 14841 \\ 
 		\hline
 	\end{tabular}
 	\caption{Expression data from the 10 patients in \data{golub.test}, for the 10 genes selected as predictors. Each row represents a patient; the five right-most columns are the 5 largest outliers and the five left-most columns are the 5 smallest outliers.}
 	\label{golubTestData}
 \end{table}
 
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Thu Jun 29 15:11:32 2017
+
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Mon Feb 12 22:14:04 2018
 \begin{table}[ht]
 	\centering
 	\footnotesize
@@ -1755,80 +1755,81 @@ Suppose that 10 genes are selected as predictors -- the 5 largest outliers and 5
 		\hline
 		Probe & AML Mean & ALL Mean & Midpoint \\ 
 		\hline
-		M19507.at & 23654 & 1399 & 11128 \\ 
-		M27891.at & 21181 & 516 & 10332 \\ 
-		M96326.rna1.at & 18909 & 1755 & 8577 \\ 
-		M11147.at & 33718 & 17792 & 7963 \\ 
-		M84526.at & 12837 & -794 & 6815 \\ 
-		M26602.at & 6100 & 36297 & -15098 \\ 
-		M25079.s.at & 39234 & 66217 & -13492 \\ 
-		X82240.rna1.at & -780 & 21260 & -11020 \\ 
-		HG1428.HT1428.s.at & 37013 & 58021 & -10504 \\ 
-		D49824.s.at & 51767 & 68253 & -8243 \\ 
+		M19507\_at & 20143 & 322 & 9910 \\ 
+		M27891\_at & 17395 & -262 & 8829 \\ 
+		M11147\_at & 32554 & 16318 & 8118 \\ 
+		M96326\_rna1\_at & 16745 & 830 & 7957 \\ 
+		Y00787\_s\_at & 16847 & 1002 & 7923 \\ 
+		M14483\_rna1\_s\_at & 22268 & 33561 & -5647 \\ 
+		X82240\_rna1\_at & -917 & 9499 & -5208 \\ 
+		X58529\_at & 598 & 10227 & -4815 \\ 
+		M33680\_at & 4151 & 13447 & -4648 \\ 
+		U05259\_rna1\_at & 74 & 8458 & -4192 \\ 
 		\hline
 	\end{tabular}
 		\caption{Mean expression value for each gene among AML patients and ALL patients in \data{golub.train}, and the midpoint between the means. \label{golubTrainMeansMidpoints}}
-		
-\end{table}	
+\end{table}
+
 
 \begin{example}{Consider the expression data for the patient in the first row of Table~\ref{golubTestData}. For each gene, identify whether the expression level is more AML-like or more ALL-like.}
 	
-For the gene represented by the M19507.at probe, the patient has a recorded expression level of 4,481, which is closer to the ALL mean of 1,399 than the AML mean of 23,654. Similarly, for the M96326.rna1.at probe, the expression level of 1,785 is closer to the ALL mean of 1,755 than the AML mean of 18,909. 
+For the gene represented by the M19507\_at probe, the patient has a recorded expression level of 4,481, which is closer to the ALL mean of 322 than the AML mean of 20,143. However, for the gene represented by the M27891\_at probe, the expression level of 47,532 is closer to the AML mean of 17,395 than the ALL mean of -262. 
 
-All other expression levels are closer to $\mu_{AML}$.
+Expression at genes represented by M19507\_at, M96326\_rna1\_at, Y00787\_s\_at, and X58529\_at are more ALL-like than AML-like. All other expression levels are closer to $\mu_{AML}$.
 	
 \end{example}
 
 \begin{example}{Use the information in Tables\ref{golubTestData} and \ref{golubTrainMeansMidpoints} to calculate the magnitude of the deviations $v_1$ and $v_{10}$ for the first patient.}
 	
-For the gene represented by the M19507.at probe, the magnitude of the deviation is $v_1 = |4,481 - 11,128| = 6,647$.	
+For the gene represented by the M19507\_at probe, the magnitude of the deviation is $v_1 = |4,481 - 20,143| = 15,662$.	
 
-For the gene represented by the D49824.s.at probe, the magnitude of the deviation is $v_{10} = | 58,702 - (-8243)| = 66,945$.
+For the gene represented by the U05259\_rna1\_at probe, the magnitude of the deviation is $v_{10} = |2,757 - 74| = 2.683$.
 	
 \end{example}	
 
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Thu Jun 29 15:19:57 2017
+% latex table generated in R 3.4.3 by xtable 1.8-2 package
+% Tue Feb 13 01:28:10 2018
 \begin{table}[ht]
 	\tiny
 	\centering
 	\begin{tabular}{r|rrrrr|rrrrr}
 		\hline
-		& M19507.at & M27891.at & M96326.rna1.at & M11147.at & M84526.at & M26602.at & M25079.s.at & X82240.rna1.at & HG1428.HT1428.s.at & D49824.s.at \\ 
+		& M19507\_at & M27891\_at & M11147\_at & M96326\_rna1\_at & Y00787\_s\_at & M14483\_rna1\_s\_at & X82240\_rna1\_at & X58529\_at & M33680\_at & U05259\_rna1\_at \\ 
 		\hline
-		1 & 6646 \cellcolor{lightblue}& 37200 & 6792 \cellcolor{lightblue}& 48298 & 2940 & 14185 & 27801 & 10789 & 31847 & 66946 \\ 
-		2 & 385 \cellcolor{lightblue}& 7493 \cellcolor{lightblue}& 3559 \cellcolor{lightblue}& 34506 & 4174 \cellcolor{lightblue}& 13600 & 12766 & 9903 & 44275 & 68250 \\ 
-		3 & 10166 & 3893 \cellcolor{lightblue}& 53375 & 22276 & 14770 & 14796 & 18573 & 10480 & 16827 & 29106 \\ 
-		4 & 11527 \cellcolor{lightblue}& 15691 & 7305 \cellcolor{lightblue}& 32947 & 7363 \cellcolor{lightblue}& 13908 & 49376 & 9773 & 55531 & 53519 \\ 
-		5 & 11275 \cellcolor{lightblue}& 19276 & 11476 & 29643 & 7744 & 14440 & 41395 & 9915 & 46800 & 59851 \\ 
-		6 & 12356 \cellcolor{lightblue}& 11539 \cellcolor{lightblue}& 6326 \cellcolor{lightblue}& 8969 \cellcolor{lightblue}& 8935 \cellcolor{lightblue}& 13836 & 21743 & 31971 \cellcolor{lightblue}& 67495 \cellcolor{lightblue}& 96997 \cellcolor{lightblue}\\ 
-		7 & 11365 \cellcolor{lightblue}& 10942 \cellcolor{lightblue}& 9567 \cellcolor{lightblue}& 13835 \cellcolor{lightblue}& 7650 \cellcolor{lightblue}& 14110 & 13398 & 17520 & 9986 & 82526 \cellcolor{lightblue}\\ 
-		8 & 12149 \cellcolor{lightblue}& 11124 \cellcolor{lightblue}& 7847 \cellcolor{lightblue}& 9769 \cellcolor{lightblue}& 7582 \cellcolor{lightblue}& 19405 & 37409 & 11178 & 35270 & 72840 \cellcolor{lightblue}\\ 
-		9 & 10695 \cellcolor{lightblue}& 11431 \cellcolor{lightblue}& 9152 \cellcolor{lightblue}& 1719 \cellcolor{lightblue}& 7747 \cellcolor{lightblue}& 13948 & 24068 & 18117 & 53558 & 79777 \cellcolor{lightblue}\\ 
-		10 & 11645 \cellcolor{lightblue}& 11194 \cellcolor{lightblue}& 11548 \cellcolor{lightblue}& 18423 & 8197 \cellcolor{lightblue}& 13325 & 12224 & 43726 \cellcolor{lightblue}& 27810 & 44703 \\ 
+		1 & 4481 \cellcolor{lightblue}& 47532 & 56261 & 1785 \cellcolor{lightblue}& 77 \cellcolor{lightblue}& 7824 & 231 & 9520 \cellcolor{lightblue} & 7181 & 2757 \\ 
+		2 & 11513 & 2839 \cellcolor{lightblue}& 42469 & 5018 \cellcolor{lightblue}& 20831 & 27407 & 1116 & 221 & 6978 & 187 \\ 
+		3 & 21294 & 6439 \cellcolor{lightblue}& 30239 & 61951 & 187 \cellcolor{lightblue} & 19692 & 540 & 216 & 1741 & 84 \\ 
+		4 & 399 \cellcolor{lightblue}& 26023 & 40910 & 1271 \cellcolor{lightblue} & 26842 & 30092 \cellcolor{lightblue} & 1247 & 19033 \cellcolor{lightblue}& 13117 \cellcolor{lightblue} & 188 \\ 
+		5 & 147 \cellcolor{lightblue}& 29609 & 37606 & 20053 & 12745 & 26985 & 1104 & 273 & 8701 & 168 \\ 
+		6 & 1229 \cellcolor{lightblue}& 1206 \cellcolor{lightblue}& 16932 \cellcolor{lightblue}& 2250 \cellcolor{lightblue}& 360 \cellcolor{lightblue}& 38058 \cellcolor{lightblue}& 20951 \cellcolor{lightblue}& 12406 \cellcolor{lightblue}& 9927 \cellcolor{lightblue}& 8378 \cellcolor{lightblue} \\ 
+		7 & 238 \cellcolor{lightblue}& 610 \cellcolor{lightblue}& 21798 \cellcolor{lightblue}& 991 \cellcolor{lightblue}& 348 \cellcolor{lightblue}& 23986 & 6500 \cellcolor{lightblue}& 20451 \cellcolor{lightblue} & 8500 & 7005 \cellcolor{lightblue}\\ 
+		8 & 1021 \cellcolor{lightblue}& 792 \cellcolor{lightblue}& 17732 \cellcolor{lightblue}& 730 \cellcolor{lightblue}& 5102 \cellcolor{lightblue}& 17893 & 158 & 9287 \cellcolor{lightblue}& 7924 & 9221 \cellcolor{lightblue}\\ 
+		9 & 432 \cellcolor{lightblue}& 1099 \cellcolor{lightblue}& 9683 \cellcolor{lightblue}& 576 \cellcolor{lightblue}& 804 \cellcolor{lightblue}& 14386 & 7097 \cellcolor{lightblue}& 5556 \cellcolor{lightblue}& 9915 \cellcolor{lightblue}& 5594 \cellcolor{lightblue}\\ 
+		10 & 518 \cellcolor{lightblue}& 862 \cellcolor{lightblue}& 26386 & 2971 \cellcolor{lightblue}& 1032 \cellcolor{lightblue}& 30100 \cellcolor{lightblue}& 32706 \cellcolor{lightblue} & 21007 \cellcolor{lightblue}& 23932 \cellcolor{lightblue}& 14841 \cellcolor{lightblue}\\ 
 		\hline
 	\end{tabular}
-		\caption{The magnitude of deviations from the midpoints. Cells for which the expression level is more ALL-like (closer to $\mu_{ALL}$ than $\mu_{AML}$) are highlighted in blue.}
-		\label{golubTestDataMagnitudes}
+	\caption{The magnitude of deviations from the midpoints. Cells for which the expression level is more ALL-like (closer to $\mu_{ALL}$ than $\mu_{AML}$) are highlighted in blue.}
+	\label{golubTestDataMagnitudes}
 \end{table}
 
 \begin{example}{Using the information in Table~\ref{golubTestDataMagnitudes}, make a prediction for the leukemia status of Patient 1.}
 	
 Calculate the total weighted votes for each category:
-\[V_{AML} = 37,200 + 14,185 + 27,801 + 10,789 + 31,847 + 66,946 = 240,006 \]
-\[V_{ALL} = 6,646 + 6,972 = 13,438 \]	
+\[V_{AML} = 47,532 + 56,261 + 7,824 + 231 + 7,181 + 2,757 = 121,786 \]
+\[V_{ALL} = 4,481 + 1,785 + 77 + 9,520 = 15,863 \]	
 
 Since $V_{AML} > V_{ALL}$, Patient 1 is predicted to have AML. 	
 	
 \end{example}
 
-\begin{exercise}{Make a prediction for the leukemia status of Patient 10.\footnote{Since $V_{AML} = 116,485$ and $V_{ALL} = 86,309$, Patient 10 is predicted to have AML.}}
+\begin{exercise}{Make a prediction for the leukemia status of Patient 10.\footnote{Since $V_{AML} = 26,386$ and $V_{ALL} = 127,968$, Patient 10 is predicted to have ALL.}}
 \end{exercise}
 
-Table~\ref{golubActualPrediction} shows the comparison between actual leukemia status and predicted leukemia status based on the described prediction strategy. The prediction matches patient leukemia status for all patients except Patient 10. 
+Table~\ref{golubActualPrediction} shows the comparison between actual leukemia status and predicted leukemia status based on the described prediction strategy. The prediction matches patient leukemia status for all patients. 
 
 % latex table generated in R 3.3.2 by xtable 1.8-2 package
 % Thu Jun 29 16:04:36 2017
+% modified Feb 13 2018
 \begin{table}[ht]
 	\centering
 	\small
@@ -1845,7 +1846,7 @@ Table~\ref{golubActualPrediction} shows the comparison between actual leukemia s
 		7 & allB & all \\ 
 		8 & allB & all \\ 
 		9 & allB & all \\ 
-		10 & allB & aml \\ 
+		10 & allB & all \\ 
 		\hline
 	\end{tabular}
 	\caption{Actual leukemia status versus predicted leukemia status for the patients in \data{golub.test} \label{golubActualPrediction}}
