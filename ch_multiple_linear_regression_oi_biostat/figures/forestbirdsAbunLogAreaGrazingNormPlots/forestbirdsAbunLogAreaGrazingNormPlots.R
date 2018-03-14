@@ -6,24 +6,24 @@ data(forest.birds)
 
 library(plyr)
 
-forest.birds$grazing.level = forest.birds$grazing.intensity
-forest.birds$grazing.level = mapvalues(forest.birds$grazing.level,
-                                       from = c("light", "less than average",
-                                                "average", "moderately heavy"),
-                                       to = c("moderate", "moderate", "moderate",
-                                              "moderate"))
+forest.birds$grazing.binary = forest.birds$grazing.intensity
+forest.birds$grazing.binary = mapvalues(forest.birds$grazing.binary,
+                                        from = c("light", "less than average",
+                                                 "average", "moderately heavy"),
+                                        to = c("moderate", "moderate", "moderate",
+                                               "moderate"))
 
 
-residuals = resid(lm(abundance ~ log.area + grazing.level, data=forest.birds))
-predicted = predict(lm(abundance ~ log.area + grazing.level, data=forest.birds))
+residuals = resid(lm(abundance ~ log.area + grazing.binary, data=forest.birds))
+predicted = predict(lm(abundance ~ log.area + grazing.binary, data=forest.birds))
 
 myPDF("forestbirdsAbunLogAreaGrazingNormPlots.pdf", 6, 3,
       mfrow = c(1, 2),
       mgp = c(1.9, 0.5, 0),
-      mar = c(3, 3, .5, .5) + 0.1)
-#mar = c(3, 0.2, 1.5, 0.8) + 0.1)
+      #mar = c(3, 3, .5, 1) + 0.1)
+      mar = c(3, 0.2, 1.5, 0.8) + 0.5)
 
-par(mar = c(3,4,1,0))
+#par(mar = c(3,4,1,0))
 
 NormalHist <- function(obs, hold, M, SD, col) {
   plot(0, 0,

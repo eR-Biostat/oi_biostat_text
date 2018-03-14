@@ -4,9 +4,9 @@ data(COL)
 data("forest.birds")
 
 forest.birds$log.area = log(forest.birds$patch.area)
-forest.birds$log.dist.near.patch = log(forest.birds$distance.nearest.patch)
-forest.birds$log.dist.larger.patch = log(forest.birds$distance.larger.patch)
-forest.birds$log.years.since.isolation = log(forest.birds$years.since.isolation)
+forest.birds$log.dist.nearest = log(forest.birds$dist.nearest)
+forest.birds$log.dist.larger = log(forest.birds$dist.larger)
+forest.birds$log.yrs.isolation = log(forest.birds$yrs.isolation)
 
 myPDF("forestbirdsScatterPlotMatrix.pdf",
 #      6, 3.3,
@@ -15,8 +15,8 @@ myPDF("forestbirdsScatterPlotMatrix.pdf",
      mgp = c(2.0, 0.5, 0),
      mai = c(0.1, 0.1, 0.1, 0.1))
 
-pairs(~ abundance + log.area + log.dist.near.patch
-      + log.dist.larger.patch  + altitude + log.years.since.isolation +
+pairs(~ abundance + log.area + log.dist.nearest
+      + log.dist.larger  + altitude + log.yrs.isolation +
         grazing.intensity, data=forest.birds,
       pch = 21,
       cex = 0.7,

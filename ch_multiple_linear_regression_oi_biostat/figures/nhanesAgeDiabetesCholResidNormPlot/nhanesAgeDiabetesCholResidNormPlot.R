@@ -13,23 +13,6 @@ myPDF("nhanesAgeDiabetesCholResidNormPlot.pdf", 6, 3,
       mgp = c(1.9, 0.5, 0),
       mar = c(3, 3, .5, .5) + 0.1)
 
-#mar = c(3, 0.2, 1.5, 0.8) + 0.1)
-plot(predicted,
-     residuals,
-     pch = 19,
-     cex = 1,
-     col = COL[1, 3],
-     xlab = "Predicted Value",
-     ylab = "Residual",
-     ylim = c(min(residuals), max(residuals)))
-points(residuals,
-       predicted,
-       cex = 1,
-       col = COL[1])
-#mtext("Predicted Value", 1, 1.9)
-
-abline(lm(residuals ~ predicted), lty = 2)
-
 ##histogram
 
 NormalHist <- function(obs, hold, M, SD, col) {
@@ -71,7 +54,7 @@ qqnorm(residuals,
        main = '',
        axes = FALSE,
        ylab = "Sample Quantiles",
-       col = COL[1])
+       col = COL[1,3])
 axis(1)
 axis(2)
 qqline(residuals)

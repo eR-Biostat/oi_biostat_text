@@ -3,12 +3,6 @@ library(oibiostat)
 data(forest.birds)
 data(COL)
 
-forest.birds$log.area = log(forest.birds$patch.area)
-forest.birds$log.dist.near.patch = log(forest.birds$distance.nearest.patch)
-forest.birds$log.dist.larger.patch = log(forest.birds$distance.larger.patch)
-forest.birds$log.years.since.isolation = log(forest.birds$years.since.isolation)
-
-
 myPDF("forestbirdsLogPredictorDist.pdf", 6.6, 4,
       mfrow = c(2,2),
       mgp = c(2, 0.7, 0),
@@ -21,23 +15,23 @@ histPlot(log(forest.birds$patch.area),
          ylim = c(0, 25),
          col = COL[1],
          border = COL[5])
-histPlot(log(forest.birds$distance.nearest.patch),
+histPlot(log(forest.birds$dist.nearest),
          breaks = 10,
-         xlab = "log(distance.nearest.patch)",
+         xlab = "log(dist.nearest)",
          ylab = "Frequency",
          ylim = c(0, 25),
          col = COL[1],
          border = COL[5])
-histPlot(log(forest.birds$distance.larger.patch),
+histPlot(log(forest.birds$dist.larger),
          breaks = 10,
-         xlab = "log(distance.larger.patch)",
+         xlab = "log(dist.larger)",
          ylab = "Frequency",
          ylim = c(0, 25),
          col = COL[1],
          border = COL[5])
-histPlot(log(forest.birds$years.since.isolation),
+histPlot(log(forest.birds$yrs.isolation),
          breaks = 10,
-         xlab = "log(years.since.isolation)",
+         xlab = "log(yrs.isolation)",
          ylab = "Frequency",
          ylim = c(0, 25),
          col = COL[1],
