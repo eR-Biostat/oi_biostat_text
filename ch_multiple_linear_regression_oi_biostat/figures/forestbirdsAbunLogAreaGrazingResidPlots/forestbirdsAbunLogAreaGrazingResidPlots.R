@@ -90,7 +90,7 @@ boxplot(residuals ~ forest.birds$grazing.binary,
         outbg = COL[1,3],
         col = COL[1,4],
         medlwd = 1.25,
-        names = c("heavy", "not heavy"))
+        names = c("not heavy", "heavy"))
 title(xlab = "grazing.binary")
 
 dev.off()
