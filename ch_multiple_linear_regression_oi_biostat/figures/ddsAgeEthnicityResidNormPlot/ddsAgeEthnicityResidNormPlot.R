@@ -45,5 +45,6 @@ qqnorm(residuals,
 axis(1)
 axis(2)
 qqline(residuals)
+mtext("Theoretical Quantiles", 1, 1.9)
 
 dev.off()

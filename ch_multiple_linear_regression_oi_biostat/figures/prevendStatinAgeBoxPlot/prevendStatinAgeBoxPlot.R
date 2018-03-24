@@ -8,7 +8,7 @@ myPDF("prevendStatinAgeBoxPlot.pdf", 4.0, 5.0,
       mgp = c(2.2, 0.7, 0))
 boxPlot(prevend.samp$Age, prevend.samp$Statin,
         ylab = 'Age (years)',
-        xlab = 'Statin use',
+        xlab = 'Statin Use',
         pch = 19,
         cex = 1.0,
         lcol = COL[1],
