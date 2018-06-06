@@ -3,37 +3,47 @@
 \chapter{Inference for categorical data}
 \label{inferenceForCategoricalData}
 
-Previous chapters discussed methods of inference for numerical data; in this chapter, those methods are extended to categorical data, such as binomial proportions or data in two-way tables. While various details of the methods may change, such as the calculations for a test statistic or the distributions used to find a $p$-value, the core ideas and principles behind inference remain the same.
+Previous chapters discussed methods of inference for numerical data; in this chapter, those methods are extended to categorical data, such as binomial proportions or data in two-way tables. While various details of the methods may change, such as the calculations for a test statistic or the distributions used to find a $p$-value, the core ideas and principles behind inference remain the same.  
+
+Categorical data arise frequently in medical research because disease outcomes and patient characteristics are often recorded in natural categories such as types of treatment received, whether or not disease advanced to a later stage, or whether or not a patient responded initially to a treatment. In the simplest settings, a binary outcome (yes/no, success/failure, etc)  is recorded for a single group of participants, in hopes of learning more about the population from which the participants were drawn.  The binomial distribution is often used for the statistical model in this setting, and inference about the binomial probability of success provides information about a population proportion $p$.   In more complex settings, participant characteristics are recorded in a factor variable with two or more levels, and the outcome or response variable itself has two or more levels.  In these instances, data are usually summarized in two-way tables with two or more rows and two or more columns.
+
+As with all methods of inference, it is important to understand how the data were collected and whether the data is a random sample from a well-identified population, at least approximately.  This issue is at least as important as the formulas for test statistics and confidence intervals, and is often overlooked.
+
+The next section illustrates the use of inference with binomial data in a current line of research in cancer therapy.  Be careful about the notation in this chapter - since $p$ is the standard notation for a population proportion or probability, $p$ does double duty in this chapter as a population parameter and significance level.  The notation is unfortunate but commonly used.
 
 %__________________
 \section{Inference for a single proportion}
 \label{singleProportion}
 
-Suppose that out of a cohort of 120 patients with lung cancer at the Dana-Farber Cancer Institute (DFCI), 80 of the patients survive at least 5 years. Using inference, it is possible to construct a confidence interval for the 5-year survival probability and conduct a hypothesis test to assess whether the DFCI population has a different 5-year survival probability than a different group. 
+Advanced melanoma is an aggressive form of skin cancer that until recently was uniformly fatal.  Historically, some cancers, including melanoma, have stopped progressing or disappeared altogether  when a patient's immune system successfully mounted a response to the cancer. During the last several decades, those observations led to research into therapies that might trigger an immune response in cancer.  Some of the most notable successes have been in melanoma, particularly with two therapies nivolumab and ipilimumab\footnote{The mab suffix in these therapies stands for monoclonal antibody, a therapeutic agent made by identical immune cells that are all clones of a unique parent cell from a patient}.
 
-The DFCI data are binomial data, with success defined as survival for at least 5 years. Let the number of patients who survive at least 5 years be represented by the random variable $X$, where $X$ is binomial with parameters $n$ (the number of trials, where each trial is represented by a patient) and $p$, the unknown population parameter of survival for at least 5 years. From formulas discussed in Chapter~\ref{modeling}, the mean of $X$ is $np$ and the standard deviation of $X$ is $\sqrt{np(1-p)}$.
+A 2013 report in the New England Journal of Medicine\footnote{N Engl J Med 2013;369:122-33. DOI: 10.1056/NEJMoa1302369} by Wolchok et al. reported the results of a study in which patients were treated with both of the new regimens.  Fifty-three patients were given the new regimens concurrently, and the response to therapy could be evaluated in 52 of the 53.  Of the 52 evaluable patients, 21 (40\%) experience a response according to commonly accepted criteria.  In previous studies, the proportion of patients responding to one of these agents was 30\% or less.  How might one compare these data with past experience?
 
-Inference about $p$ is made based on the sample proportion $\hat{p}$, where $\hat{p} = x/n$. In this case, $\hat{p} = 80/120 = 0.67$. If the sample proportion is nearly normal, it is appropriate to use the normal approximation to the binomial to conduct inference; this method is commonly used since it allows for the use of normal probability tables. Exact inference is based on the binomial distribution for $X$, rather than the normal approximation for the distribution of $X/n$. Both the normal approximation and exact methods will be covered in this chapter.
+The data are from this study are binomial data, with success defined as a good response to therapy. Suppose the number of patients who respond in a study like this is represented by the random variable $X$, where $X$ is binomial with parameters $n$ (the number of trials, where each trial is represented by a patient) and $p$, the unknown population parameter of response. From formulas discussed in Chapter~\ref{modeling}, the mean of $X$ is $np$ and the standard deviation of $X$ is $\sqrt{np(1-p)}$.
+
+Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normal distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used since normal probability tables are easily available in either paper or electronic form.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
+
 
 
 \subsection{Inference using the normal approximation}
 
-A sample proportion can be described as a sample mean. If each success is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of these numerical outcomes:
+A sample proportion can be described as a sample mean. If each success  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of these 52 numerical outcomes:
 \begin{eqnarray*}
-\hat{p} = \frac{\ 0 + 1 + 1 + \cdots + 0\ }{120} = 0.67
+\hat{p} = \frac{\ 0 + 1 + 1 + \cdots + 0\ }{52} = 0.404.
 \end{eqnarray*}
 The distribution of $\hat{p}$ is nearly normal when the distribution of successes and failures is not too strongly skewed for the sample size.
 
 \begin{termBox}{\tBoxTitle{Conditions for the sampling distribution of $\hat{p}$ being nearly normal}
-The sampling distribution for $\hat{p}$, taken from a sample of size $n$ from a population with a true proportion $p$, is nearly normal when
+The sampling distribution for $\hat{p}$, calculated from a sample of size $n$ from a population with a success proportion $p$, is nearly normal when
 \begin{enumerate}
 \item the sample observations are independent and
 \item at least 10 successes and 10 failures are expected in the sample, i.e. $np\geq10$ and $n(1-p)\geq10$. This is called the \term{success-failure condition}.
 \end{enumerate}
-If these conditions are met, then the sampling distribution of $\hat{p}$ is nearly normal with mean $p$ and standard error
+
+If these conditions are met, then the sampling distribution of $\hat{p}$ is approximately normal with mean $p$ and standard error
 \index{standard error (SE)!single proportion}
 \begin{eqnarray}
-SE_{\hat{p}} = \sqrt{\frac{\ p(1-p)\ }{n}}
+SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
 \label{seOfPHat}
 \end{eqnarray}}
 \end{termBox}\marginpar[\raggedright\vspace{-53mm}
@@ -42,89 +52,114 @@ $\hat{p}$\vspace{0mm}\\\footnotesize sample\\proportion\vspace{3mm}\\\normalsize
 
 $\hat{p}$\vspace{0mm}\\\footnotesize sample\\proportion\vspace{3mm}\\\normalsize$p$\vspace{0mm}\\\footnotesize population\\proportion}
 
-Since the true proportion $p$ is typically unknown, the sample proportion $\hat{p}$ can be substituted for $p$ to check the success-failure condition and compute the standard error.
+When conducting inference, the population proportion $p$ is unknown, and the sample proportion $\hat{p}$ can be substituted for $p$ to check the success-failure condition and compute the standard error.
 
 \subsubsection{Confidence intervals for a proportion}
 \label{confIntForPropSection}
 
 \index{point estimate!single proportion}
 
-A confidence interval for a proportion has the same general structure as a confidence interval for a mean; it is centered at the point estimate, with a margin of error calculated from the standard error and appropriate $z^{\star}$ value.
+When using the normal approximation to the sampling distribution of $\hat{p}$, a confidence interval for a proportion has the same structure as a confidence interval for a mean; it is centered at the point estimate, with a margin of error calculated from the standard error and appropriate $z^{\star}$ value.  The formula for a 95\% confidence interval is
+\[
+     \hat{p} \pm 1.96 \sqrt{\frac{p(1-p)}{n}}.
+\]
 
-\begin{example}{Verify that the sampling distribution of $p$ is approximately normal for the DFCI data.}
-	
-It is reasonable to assume that the data are independent, and the cohort of 120 patients consists of fewer than 10\% of the total number of patients treated at DFCI. The success-failure condition is satisfied since $(120)(0.67) = 80 > 5$ and $(120)(1-0.67) = 40 > 5$.
-	
+
+\begin{example}{Using the normal approximation, construct an approximate 95\% confidence interval for the response probability for patients with advanced melanoma who were administered the combination of nivolumab and ipilimumab.}
+
+The independence and success-failure assumptions should be checked first.  Since the outcome of one patient is unlikely to influence that of other patients, the observations are independent.  The success-failure condition is satisfied since $n\hat{p} = (52)(.404) = 21  > 10$ and $n\hat{p}(1 - \hat{p}) = (52)(.596) = 31  > 10$.
+
+The point estimate for the response probability, based on a sample of size $n = 52$, is $\hat{p} = 0.404$. For a 95\% confidence interval, $z^{\star} = 1.96$. The margin of error is estimated as: $\sqrt{\frac{\ \hat{p}(1-\hat{p})\ }{n}} = \sqrt{\frac{(0.404)(1-0.404)}{52}} = 0.068$.  The confidence interval is
+
+\[0.404 \pm 1.96 (0.068) \rightarrow (0.27, 0.54) \]
+
+The approximate 95\% confidence interval for $p$, the population response probability to CAR-T cells among patients with relapsed or refractory lymphoma is  (0.27, 0.54), or (27\%, 54\%).  
+
 \end{example}
 
-\begin{example}{Using the normal approximation, construct an approximate 95\% confidence interval for the 5-year survival probability in the larger population of lung cancer patients treated at DFCI.}
+Patients with a form of cancer who participate in clinical trials at research samples are unlikely to be a random sample of patients from the disease, since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  Investigators are aware that the hypothetical response probability of the population of patients with advanced melanoma treated with new therapies on a clinical trial may be different than the observed proportion of patients responding in a clinical trial.  Study teams try to minimize these differences by using a research protocol with a detailed specification of the characteristics of the disease used to decide if a patient was eligible for the study and assuming that other potential differences do not have a large effect on outcome.  But there can be no guarantee that systematic differences between a study sample and an overall population do not influence the results.  Small, initial studies in which there is no control group like the one described here early steps in exploring the value of a new therapy and are used to justify further study of a treatment when the results are substantially different than expected.  The largest observed response rate in previous trials of 30\% is not outside the confidence interval from this study and but the results of the study were considered adequate justification for continued research on this treatment.
 
-The point estimate for the proportion of patients treated for lung cancer at DCFI, based on a sample of size $n = 120$, is $\hat{p} = 0.67$. For a 95\% confidence interval, $z^{\star} = 1.96$. The margin of error is estimated as: $\sqrt{\frac{\ p(1-p)\ }{n}} = \sqrt{\frac{(0.67)(1-0.67)}{120}}$.
 
-\[0.67 \pm 1.96 \sqrt{\dfrac{(0.67)(1-0.67)}{120}} \rightarrow (0.59, 0.75) \]
 
-The approximate 95\% confidence interval for $p$, the 5-year survival probability in the larger population of stage I lung cancer patients treated at DFCI is (0.59, 0.75).
-	
-\end{example}
 
 \begin{exercise}
-In New York City on October 23rd, 2014, a doctor who had recently been treating Ebola patients in Guinea went to the hospital with a slight fever and was subsequently diagnosed with Ebola. Soon after, a poll found that 82\% of New Yorkers favored a "mandatory 21-day quarantine for anyone who has come in contact with an Ebola patient."\footnote{\oiRedirect{textbook-maristpoll_ebola_201410}{Poll ID NY141026 on maristpoll.marist.edu}.} a) Verify that the sampling distribution of $\overline{p}$ is nearly normal. b) Construct a 95\% confidence interval for $p$, the proportion of New York adults who supported a quarantine for anyone who has come into contact with an Ebola patient.\footnote{a) The poll is based on a simple random sample and consists of fewer than 10\% of the adult population of New York, which makes independence a reasonable assumption. The success-failure condition is satisfied since, $1042(0.82) > 5$ and $1042(1-0.82) > 5$. b) $0.82 \pm 1.96\sqrt{\frac{0.82(1-0.82)}{1042}} \rightarrow (0.796, 0.844)$. }
+In New York City on October 23rd, 2014, a doctor who had recently been treating Ebola patients in Guinea went to the hospital with a slight fever and was subsequently diagnosed with Ebola. Soon after, a survey conducted by the Marist Poll, an organization with a carefully designed methodology for drawing random samples from identified populations, found that 82\% of New Yorkers favored a "mandatory 21-day quarantine for anyone who has come in contact with an Ebola patient."\footnote{\oiRedirect{textbook-maristpoll_ebola_201410}{Poll ID NY141026 on maristpoll.marist.edu}.} a) Verify that the sampling distribution of $\hat{p}$ is nearly normal. b) Construct a 95\% confidence interval for $p$, the proportion of New York adults who supported a quarantine for anyone who has come into contact with an Ebola patient.\footnote{a) The poll is based on a simple random sample and consists of fewer than 10\% of the adult population of New York, which makes independence a reasonable assumption. The success-failure condition is satisfied since, $1042(0.82) > 5$ and $1042(1-0.82) > 5$. b) $0.82 \pm 1.96\sqrt{\frac{0.82(1-0.82)}{1042}} \rightarrow (0.796, 0.844)$. }
 \end{exercise}
+
 
 \subsubsection{Hypothesis testing for a proportion}
 \label{htForPropSection}
 
-Before conducting a hypothesis test about $p$, verify that $\hat{p}$ is nearly normal under $H_0$ through checking the independence and success-failure conditions. In a hypothesis test, the success-failure condition is not checked using $\hat{p}$, but the null proportion $p_0$. 
+
+Just as with inference for population means, confidence intervals for population proportions can be used when deciding whether to reject a null hypothesis. It is useful in most settings, however, to also calculate the $p$-value for a test as a measure of the strength of the evidence contradicting the null hypothesis.
+
+When using the normal approximation for the distribution of $\hat{p}$ to conduct a hypothesis test, one should always verify that $\hat{p}$ is nearly normal under $H_0$ by checking the independence and success-failure conditions. Since a hypothesis test is based on the distribution of the test statistic under the null hypothesis, the success-failure condition is checked using the null proportion $p_0$, not the estimate $\hat{p}$. 
 
 According to the normal approximation to the binomial distribution, the number of successes in $n$ trials is normally distributed with mean $np_0$ and standard deviation $\sqrt{np(1-p_0)}$. This approximation is valid when $np_0$ and $n(1-p_0)$ are both at least 10.\footnote{The normal approximation to the binomial distribution was discussed in Section~\ref{binomialModel} of Chapter~\ref{modeling}.} 
 
 Under the null hypothesis, the sample proportion $\hat{p} = X/n$ has distribution 
 \[N \left(p_0, \sqrt{\frac{p_0(1-p_0)}{n}} \right).\]
 
-When computing the standard error, use the null value $p_0$.
+The test statistic $z$ for null the hypothesis $H_0: p = p_0$ is based on a sample of size $n$ is 
+\begin{align*}
+  z &= \dfrac{\text{point estimate - null value}}{SE} \\
+    &= \dfrac{\hat{p} - p_0}{\sqrt{\frac{(p_0)(1-p_0)}{n}}}. 
+\end{align*}
 
-\begin{example}{Suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population with this disease has a different 5-year survival probability?}
+\begin{example}{Suppose that out of a cohort of 120 patients with stage 1 lung cancer at the Dana-Farber Cancer Institute (DFCI), 80 of the patients survive at least 5 years, and suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population with this disease has a different 5-year survival probability than the national population?}
 
-The independence condition has been verified earlier. Check the success-failure condition using the null proportion, $p_0 = 0.60$: $np_0 = 120(0.60) > 10$ and $n(1-p_0) = 120(0.40) > 10$. It is valid to apply the normal model to $\hat{p}$.
-	
-Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A: = p \neq 0.60$. Use $\alpha = 0.05$. 
-
-Calculate the test statistic, which is the $z$-score of the point estimate. Note that the standard error is computing using the null value $p_0$.
+Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A: = p \neq 0.60$, using $\alpha = 0.05$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.67) = 40 > 5$ The test statistic is the $z$-score of the point estimate: 
 
 \[z = \dfrac{\text{point estimate - null value}}{SE} = \dfrac{0.67 - 0.60}{\sqrt{\frac{(0.60)(1-0.60)}{120}}} = 1.57 \]
 
 The $p$-value is 0.12; since the $p$-value is greater than 0.05, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national rate.
-		
+
+\end{example}
+
+\begin{example} {Using the data from the study in advanced melanoma, use the normal approximation to the sampling distribution of $\hat{p}$ to test the null hypothesis that the response probability to the novel combined therapy is 30\% against a two sided alternative.}
+
+The test statistic has value 
+\[
+z = (0.404 - 0.30)/\sqrt{(0.30)(0.70)/52} = 1.64. 
+\] 
+
+The two-sided p-value is $P(|Z| \geq 1.64) = 0.10$. The null hypothesis is not rejected.  This is consistent with the fact that 0.30 was not outside the 95\% confidence interval for the response probability.
+
 \end{example}
 
 \begin{exercise} One of the questions on the National Health and Nutrition Examination Survey (introduced in Chapter~\ref{inferenceForNumericalData}) asked participants whether they participated in moderate or vigorous intensity sports, fitness, or recreational activities. In a random sample of 135 adults, 76 answered "Yes" to the question. Based on this evidence, are a majority of American adults physically active?\footnote{The observations are independent. Check success-failure: $np_0 = n(1-p_0) = 135(0.5) > 10$. $H_0: p = 0.5$; $H_A: p > 0.5$. Calculate the $z$-score: $z = \frac{0.56 - 0.50}{\sqrt{\frac{0.5(1-0.5)}{135}}} = 1.39$. The $p$-value is 0.08. Since the $p$-value is larger than 0.05, there is insufficient evidence to reject $H_0$; there is not convincing evidence that a majority of Americans are physically active.}
 \end{exercise}
 
+
 \subsection{Inference using exact methods}
 
-When the normal approximation is not valid, inference requires the use of exact binomial probabilities. With access to a computing package, calculating confidence intervals and $p$-values based on the binomial distribution is relatively easy. Although the logic behind computing a $p$-value is discussed, the formulas for a confidence interval are complicated and not shown here.
+When the normal approximation to the distribution of $\hat{p}$ may not be accurate, inference is based on exact binomial probabilities. With access to a computing package, calculating confidence intervals and $p$-values based on the binomial distribution is relatively easy. Although the logic behind computing a $p$-value is discussed here, the formulas for a confidence interval are complicated and not shown.
 
-The $p$-value for a hypothesis test corresponds to the sum of the probabilities of all events that are as extreme as or more extreme than the sample result obtained. Let $X$ be a binomial random variable with parameters $n$ and $p_0$, where $\hat{p} = x/n$ and $x$ is the observed number of events. If $\hat{p} \leq p_0$, then the one-tail probability equals $P(X \leq x)$; if $\hat{p} > p_0$, then the one-tail probability equals $P(X \geq x)$. These probabilities are calculated using the approaches from Chapter~\ref{modeling}.
+The $p$-value for a hypothesis test corresponds to the sum of the probabilities of all events that are or more extreme than the sample result obtained. Let $X$ be a binomial random variable with parameters $n$ and $p_0$, where $\hat{p} = x/n$ and $x$ is the observed number of events. If $\hat{p} \leq p_0$, then the one-tail probability equals $P(X \leq x)$; if $\hat{p} > p_0$, then the one-tail probability equals $P(X \geq x)$. These probabilities are calculated using the approaches from Chapter~\ref{modeling}.
 
 \begin{example}{In 2009, the FDA Oncology Drug Advisory Committee (ODAC) recommended that the drug Avastin be approved for use in glioblastoma, a form of brain cancer. Tumor shrinkage after taking a drug is called a response; out of 85 patients, 24 exhibited a response. Historically, response probabilities for brain cancer drugs were approximately 0.05. Assess whether there is evidence that the response probability for Avastin is different from previous drugs. 		
 }	
 
-$H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$. 
+$H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$. This is one of those situations where $p$ is doing double duty and (be careful!) the null hypothesis value for the parameter and the significance level $\alpha$ have the same numerical value. 
+
+The independence condition is satisfied, but the success-failure condition is not, since $np_0 = (85)(0.05) = 4.25 < 10$, so this is a setting where exact binomial probabilities should be used to calculate a $p$-value.
 
 The sample proportion $\hat{p}$ equals $x/n = 24/85 = 0.28$. Since $\hat{p} > p_0$, calculate the two-sided $p$-value from $2 \times P(X \geq 24)$, where $X \sim \text{Binom}(85, 0.05)$.
 
-The $p$-value can be directed by solving for the probability, or by directly using a command for conducting hypothesis tests, as shown in the \textsf{R} companion to this text.
+Calculating the $p$-value by hand would be time-consuming and error prone; it is best done in software using, for instance, the R command $pbinom$:
 
-The $p$-value is $5.3 \times 10^{-12}$. There is highly significant evidence to suggest that the response probability for Avastin is higher than for previous brain cancer drugs.
+\texttt{2*(1 - pbinom(q = 23, size = 85, p = 0.05))},
+
+which returns value $(5.3486)10^{-12}$.  The FDA staff felt that this highly significant evidence suggesting that the response probability for Avastin is higher than for previous brain cancer drugs was sufficient to justify approval for the use of the drug in that disease.  The decision was a rare one, since the FDA normally requires evidence from two independently conducted randomized trial. 
 	
 \end{example}
 
-\begin{comment}
-\textit{JV: The p-value returned by binom.test seems to be the one-sided p-value, and it does not change when changing the alternative hypothesis.}
-\end{comment}
 
-\begin{exercise} Medical consultants assist patients with all aspects of an organ donation surgery, with the goal of reducing the possibility of complications during the medical procedure and recovery. To attract customers, one consultant noted that while the average complication rate for liver donation surgeries in the United States is about 10\%, she has only had 3 out of 62 clients experience complications with liver donor surgeries. Is there evidence to suggest that the rate of complications for her patients is lower than the national average?\footnote{The sample proportion $\hat{p} = 3/62 = 0.048$. Under the null hypothesis, the expected number of complications is $62(0.10) = 6.2$, so the normal approximation is not valid. Use the exact method. Since $\hat{p} \leq p_0$, find the $p$-value by calculating $P(X \leq 3)$: $P(X \leq 3) = 0.121$. There is not sufficient evidence to suggest that the rate of complications for her patients is lower than the national average.}
+
+\begin{exercise} Medical consultants assist patients with all aspects of an organ donation surgery, with the goal of reducing the possibility of complications during the medical procedure and recovery. To attract customers, one consultant noted that while the average complication rate for liver donation surgeries in the United States is about 10\%, she has only had 3 out of 62 clients experience complications with liver donor surgeries. Is there evidence to suggest that the rate of complications for her patients is lower than the national average?\footnote{Assume that the 62 patients she is referring to may be viewed as a random sample from her patient population. The sample proportion $\hat{p} = 3/62 = 0.048$. Under the null hypothesis, the expected number of complications is $62(0.10) = 6.2$, so the normal approximation may not be accurate and it is best to use exact binomial probabilities. Since $\hat{p} \leq p_0$, find the $p$-value by calculating $P(X \leq 3)$ when $X$ has a binomial distribution with parameters $n = 62,\, p = 0.10$: $P(X \leq 3) = 0.121$. There is not sufficient evidence to suggest that the rate of complications for her patients is lower than the national average.}
 \end{exercise}
+
+
 
 \begin{comment}
 
