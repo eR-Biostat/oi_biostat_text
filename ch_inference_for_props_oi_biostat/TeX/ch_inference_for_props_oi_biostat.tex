@@ -3,6 +3,9 @@
 \chapter{Inference for categorical data}
 \label{inferenceForCategoricalData}
 
+% testing file sync
+
+
 Previous chapters discussed methods of inference for numerical data; in this chapter, those methods are extended to categorical data, such as binomial proportions or data in two-way tables. While various details of the methods may change, such as the calculations for a test statistic or the distributions used to find a $p$-value, the core ideas and principles behind inference remain the same.  
 
 Categorical data arise frequently in medical research because disease outcomes and patient characteristics are often recorded in natural categories such as types of treatment received, whether or not disease advanced to a later stage, or whether or not a patient responded initially to a treatment. In the simplest settings, a binary outcome (yes/no, success/failure, etc)  is recorded for a single group of participants, in hopes of learning more about the population from which the participants were drawn.  The binomial distribution is often used for the statistical model in this setting, and inference about the binomial probability of success provides information about a population proportion $p$.   In more complex settings, participant characteristics are recorded in a factor variable with two or more levels, and the outcome or response variable itself has two or more levels.  In these instances, data are usually summarized in two-way tables with two or more rows and two or more columns.
@@ -78,8 +81,6 @@ The approximate 95\% confidence interval for $p$, the population response probab
 \end{example}
 
 Patients with a form of cancer who participate in clinical trials at research samples are unlikely to be a random sample of patients from the disease, since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  Investigators are aware that the hypothetical response probability of the population of patients with advanced melanoma treated with new therapies on a clinical trial may be different than the observed proportion of patients responding in a clinical trial.  Study teams try to minimize these differences by using a research protocol with a detailed specification of the characteristics of the disease used to decide if a patient was eligible for the study and assuming that other potential differences do not have a large effect on outcome.  But there can be no guarantee that systematic differences between a study sample and an overall population do not influence the results.  Small, initial studies in which there is no control group like the one described here early steps in exploring the value of a new therapy and are used to justify further study of a treatment when the results are substantially different than expected.  The largest observed response rate in previous trials of 30\% is not outside the confidence interval from this study and but the results of the study were considered adequate justification for continued research on this treatment.
-
-
 
 
 \begin{exercise}
@@ -160,50 +161,48 @@ which returns value $(5.3486)10^{-12}$.  The FDA staff felt that this highly sig
 \end{exercise}
 
 
-
-\begin{comment}
-
-\textit{JV: This guided practice is from the OI section on small sample hypothesis testing, where they show how to generate the null distribution and $p$-value by simulation, as well as using the binomial method. Could be informative to show the simulation method in the companion, although I do not think it needs to be discussed in this text.}
-
-\end{comment}
-
-%JV: Hid section about choosing sample sizes because it seemed to disrupt the flow of the chapter.
-
-\begin{comment}
-
 \subsection{Choosing a sample size when estimating a proportion}
 
 \index{margin of error|(}
 
-When collecting data, we choose a sample size suitable for the purpose of the study. Often times this means choosing a sample size large enough that the \term{margin of error} -- which is the part we add and subtract from the point estimate in a confidence interval -- is sufficiently small that the sample is useful. More explicitly, our task is to find a sample size $n$ so that the sample proportion is within some margin of error $m$ of the actual proportion with a certain level of confidence.
+Whenever possible, a sample size for a study should be estimated before data collection begins.  Section \ref{PowerForDifferenceOfTwoMeans} explored the calculation of sample sizes so that a hypothesis test comparing two groups would have adequate power.  When estimating a proportion, preliminary sample size calculations are often done to estimate a sample size large enough that to make the \term{margin of error} $m$ in a confidence interval  sufficiently small for the interval to be useful. The margin of error $m$ is the term that is added and subtracted from the point estimate.  Statistically, this means estimating a sample size $n$ so that the sample proportion is within some margin of error $m$ of the actual proportion with a certain level of confidence. When the normal approximation is used for a binomial proportion, a sample size sufficiently large to have a margin of error of $m$ will satisfy 
+\begin{align*}
+ m = z^{\star}\text{s.e.}\hat{p} = z^{\star} \sqrt{\frac{(p)(1 - p)}{n}} 
+\end{align*}
 
-% For example, the margin of error for a point estimate using 95\% confidence can be written as $1.96\times SE$. We set up a general equation to represent the problem:
-%\begin{align*}
-%ME = z^{\star}SE \leq m
-%\end{align*}
-%where $ME$ represented the actual margin of error and $z^{\star}$ was chosen to correspond to the confidence level. The standard error formula is specified to correspond to the particular setting. For instance, in the case of means, the standard error was given as $\sigma / \sqrt{n}$. In the case of a single proportion, we use $\sqrt{p(1-p) / n\ }$ for the standard error.
+Algebra can be used to show that the above equation implies
 
-\begin{example}{A university newspaper is conducting a survey to determine what fraction of students support a \$200 per year increase in fees to pay for a new football stadium. How big of a sample is required to ensure the margin of error is smaller than 0.04 using a 95\% confidence level?}
-The margin of error for a sample proportion is
 \begin{align*}
-z^{\star} \sqrt{\frac{p (1 - p)}{n}}
+n = \frac{(z^{\star})^2}{m^2(p)(1 - p)}.
 \end{align*}
-Our goal is to find the smallest sample size $n$ so that this margin of error is smaller than $m=0.04$. For a 95\% confidence level, the value $z^{\star}$ corresponds to 1.96:
+In some settings a preliminary estimate for $p$ can be used to calculate $n$.  Calculus can be used to show that $p(1 - p)$ has its largest value when $p = 1/2$, and that value for $p$ is often used to insure that $n$ is sufficiently large regardless of the value of the unknown population proportion $p$.  In  that case, $n$ satisfies
 \begin{align*}
-1.96\times \sqrt{\frac{p(1-p)}{n}} \ < \ 0.04
+  n \geq \frac{(z^{\star})^2(p)(1-p)}{m^2} = \frac{z^{\star})^2}{4m^2}.
 \end{align*}
-There are two unknowns in the equation: $p$ and $n$. If we have an estimate of $p$, perhaps from a similar survey, we could enter in that value and solve for $n$. If we have no such estimate, we must use some other value for $p$. It turns out that the margin of error is largest when $p$ is 0.5, so we typically use this \emph{worst case value} if no estimate of the proportion is available:
-\begin{align*}
-	1.96\times \sqrt{\frac{0.5(1-0.5)}{n}} &\ < \ 0.04 \\
-	1.96^2\times \frac{0.5(1-0.5)}{n} &\ < \ 0.04^2 \\
-	1.96^2\times \frac{0.5(1-0.5)}{0.04^2} &\ < \ n \\
-	600.25 &\ < \  n
+
+\begin{example}
+ Donor organs for organ transplant are scarce, and studies are sometimes conducted to explore whether the population of eligible organs can be expanded. Suppose a research team is studying the possibility of transplanting lungs from from with hepatitis C positive individuals lungs into patients who can then be treated with one of the new drugs that effectively cures hepatitis C.
+
+ Preliminary studies in organ transplant are often designed to estimate the probability of a successful organ graft 6 months after the transplant.  How large should a study be so that the 95\% confidence interval for the probability of a successful graft at 6 months is no wider than 20\%?
+
+ A confidence interval no wider than 20\% will gave a margin of error of 10\%, or 0.10.  Using the conservative value p = 1/2,
+
+ \begin{align*}
+    n = \frac{(1.96)^2}{(4)(0.10^2)} =  96.04.
 \end{align*}
-We would need over 600.25 participants, which means we need 601 participants or more, to ensure the sample proportion is within 0.04 of the true proportion with 95\% confidence.
+
+Sample sizes are always rounded up, so the study should have 97 patients.  Since the final study will likely yield a value $\hat{p}$ different from 1/4, the final margin of error will be smaller than $\pm 0.10$.
 \end{example}
 
-When an estimate of the proportion is available, we use it in place of the worst case proportion value,~0.5.
+When the confidence coefficient is 95\%, 1.96 can replaced by 2 and the formula for $n$ becomes
+\begin{align*}
+  n = 1/m^2.
+\end{align*}
 
+This remarkably simple formula is often used by practitioners for a quick estimate of sample size.
+
+% I  like this example but it does not match our content.  Perhaps we can make it a bio lab
+\begin{comment}
 \begin{example}{A manager is about to oversee the mass production of a new tire model in her factory, and she would like to estimate what proportion of these tires will be rejected through quality control. The quality control team has monitored the last three tire models produced by the factory, failing 1.7\% of tires in the first model, 6.2\% of the second model, and 1.3\% of the third model. The manager would like to examine enough tires to estimate the failure rate of the new tire model to within about 2\% with a 90\% confidence level.
 \begin{enumerate}
 \setlength{\itemsep}{0mm}
@@ -222,6 +221,8 @@ A similar computation can be accomplished using 0.062 and 0.013 for $p$, and you
 (b) We could examine which of the old models is most like the new model, then choose the corresponding sample size. Or if two of the previous estimates are based on small samples while the other is based on a larger sample, we should consider the value corresponding to the larger sample. There are also other reasonable approaches.
 \end{example}
 
+\end{comment}
+
 \index{data!Congress approval rating|(}
 
 \begin{exercise}
@@ -237,24 +238,25 @@ A sample size of 370 or more would be reasonable. (Reminder: always round up for
 
 \end{exercise}
 
-\end{comment}
+% expand the next section to incorporate case-control?
 
 %__________________
 \section{Inference for the difference of two proportions}
 \label{differenceOfTwoProportions}
 
-Just as inference can be done with the difference of two means, conclusions can also be drawn about the difference of two population proportions: $p_1 - p_2$. 
+Just as inference can be done for the difference of two population means, conclusions can also be drawn about the difference of two population proportions: $p_1 - p_2$. 
 
 \subsection{Sampling distribution of the difference of two proportions}
 
-The normal model can only be applied to $\hat{p}_1 - \hat{p}_2$ if the sampling distribution for each sample proportion is nearly normal, and if the samples are independent. 
+The normal model can only be applied to $\hat{p}_1 - \hat{p}_2$ if the sampling distribution for each sample proportion is nearly normal, and if the samples are independent random samples from the relevant population. 
 
 \begin{termBox}{\tBoxTitle{Conditions for the sampling distribution of $\hat{p}_1 - \hat{p}_2$ to be normal}
 The difference $\hat{p}_1 - \hat{p}_2$ tends to follow a normal model when
 \begin{itemize}
 \setlength{\itemsep}{0mm}
+\item each of the two samples are random samples from a population,
 \item the two samples are independent of each other, and
-\item each proportion separately follows a normal model. This condition is satisfied when $np_1 \geq 10$ and $np_2 \geq 10$.
+\item each sample proportion follows a normal model. This condition is satisfied when $n_1p_1 \geq 10$ and $n_2p_2 \geq 10$.
 \end{itemize}
 The standard error of the difference in sample proportions is
 \index{standard error (SE)!difference in proportions}
@@ -264,11 +266,11 @@ SE_{\hat{p}_1 - \hat{p}_2}
 	= \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}
 \label{seForDiffOfProp}
 \end{eqnarray}
-where $p_1$ and $p_2$ represent the population proportions, and $n_1$ and $n_2$ represent the sample sizes.}
+where $p_1$ and $p_2$ are the population proportions, and $n_1$ and $n_2$ are the two sample sizes.}
 \end{termBox}
 
 
-\subsection{Confidence intervals for $p_1 -p_2$}
+\subsection{Confidence intervals for $p_1 - p_2$}
 
 When calculating confidence intervals for a difference of two proportions using the normal approximation to the binomial, the two sample proportions are used to verify the success-failure condition and to compute the standard error.
 
@@ -276,7 +278,7 @@ When calculating confidence intervals for a difference of two proportions using 
 \begin{quote}
 As you may know, by 2014 nearly all Americans will be required to have health insurance. [People who do not buy insurance will pay a penalty] while [People who cannot afford it will receive financial help from the government]. Do you approve or disapprove of this policy?
 \end{quote}
-\index{data!health care|(}For each randomly sampled respondent, the statements in brackets were randomized: either they were kept in the order given above, or the two statements were reversed. Table~\ref{pewPollResultsForRandomizedStatementOrdering} shows the results of this experiment. Create and interpret a 90\% confidence interval of the difference in approval rate.
+\index{data!health care|(}For each randomly sampled respondent, the statements in brackets were randomized: either they were kept in the order given above, or the order of the two statements was reversed. Table~\ref{pewPollResultsForRandomizedStatementOrdering} shows the results of this experiment. Calculate and interpret a 90\% confidence interval of the difference in the probability of approval of the policy.
 
 \begin{table}[h]
 \centering
@@ -292,36 +294,35 @@ Reversed ordering & 732	& 34	& 63	& 3 \\
 \end{table}
 
 }
-
-First the conditions must be verified. Because each group is a simple random sample from less than 10\% of the population, the observations are independent, both within the samples and between the samples. The success-failure condition also holds for each sample. Because all conditions are met, the normal model can be used for the point estimate of the difference in support, where $p_1$ corresponds to the original ordering and $p_2$ to the reversed ordering:
+First the conditions for the use of a normal model must be verified. The Pew Research Center uses sampling methods produce random samples of the US population (at least approximately) and because each group was a simple random sample from less than 10\% of the population, the observations are independent, both within the samples and between the samples. The success-failure condition also holds for each sample, so the normal model can be used for confidence intervals for the difference in approval proportions.  The point estimate of the difference in support, where $p_1$ corresponds to the original ordering and $p_2$ to the reversed ordering:
 $$\hat{p}_{1} - \hat{p}_{2} = 0.47 - 0.34 = 0.13$$
 The standard error may be computed from Equation~\eqref{seForDiffOfProp} using the sample proportions:
 $$SE \approx \sqrt{\frac{0.47(1-0.47)}{771} + \frac{0.34(1-0.34)}{732}} = 0.025$$
 For a 90\% confidence interval, $z^{\star} = 1.65$:
 $$\text{point estimate} \ \pm\ z^{\star}SE \quad \to \quad 0.13 \ \pm\ 1.65 \times  0.025 \quad \to \quad (0.09, 0.17)$$
-With 90\% confidence, the approval rate for the 2010 healthcare law changes between 9\% and 17\% once the ordering of the two statements changes. The Pew Research Center interpreted this modestly large difference as an indication that for most of the public, opinions are still fluid on the health insurance mandate.
+With 90\% confidence, the proportion approving the 2010 health care law ranged between 9\% and 17\% depending on the phrasing of the question. The Pew Research Center interpreted this modestly large difference as an indication that for most of the public, opinions were still fluid on the health insurance mandate.  The law eventually passed as the Affordable Health Care Act (ACA).
 \index{data!health care|)}
 \end{example}
 
 
 \subsection{Hypothesis testing for $p_1 -p_2$}
 
-Hypothesis tests for $p_1 - p_2$ are generally testing the null hypothesis that there is no difference between $p_1$ and $p_2$; i.e. $p_1 - p_2 = 0$. Under the null hypothesis, $\hat{p}_1 - \hat{p}_2$ is normally distributed with mean 0 and standard deviation $\sqrt{p(1-p)(\frac{1}{n_1} + \frac{1}{n_2})}$.
+Hypothesis tests for $p_1 - p_2$ are usually testing the null hypothesis of no difference between $p_1$ and $p_2$; i.e. $H_0:\,p_1 - p_2 = 0$. Under the null hypothesis, $\hat{p}_1 - \hat{p}_2$ is normally distributed with mean 0 and standard deviation $\sqrt{p(1-p)(\frac{1}{n_1} + \frac{1}{n_2})}$, where under the null hypothesis $p = p_1 = p_2$.
 
-Since $p$ is unknown, an estimate is necessary in order to compute the standard error; $p$ can be estimated by $\hat{p}$, the weighted average of the sample proportions $\hat{p}_1$ and $\hat{p}_2$:
-
+Since $p$ is unknown, an estimate is used to compute the standard error of $\hat{p}_1 - \hat{p}_2$; $p$ can be estimated by $\hat{p}$, the weighted average of the sample proportions $\hat{p}_1$ and $\hat{p}_2$:
 \[\hat{p} = \dfrac{n_{1}\hat{p}_1 + n_{2}\hat{p}_2}{n_{1} + n_{2}} = \dfrac{x_{1} + x_{2}}{n_{1} + n_{2}}, \]
-
 where $x_1$ is the number of observed events in the first sample and $x_2$ is the number of observed events in the second sample. This pooled proportion $\hat{p}$ is also used to check the success-failure condition.
 
-The test statistic $z$ for testing $H_0: p_1 = p_2$ versus $H_A: p_1 \neq p_2$ equals:
+The test statistic $z$ for testing $H_0:\, p_1 = p_2$ versus $H_A: p_1 \neq p_2$ equals:
 
-\[z = \dfrac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_1} + \frac{1}{n_2} \right)}} \]
+\[z = \dfrac{\hat{p}_1 - \hat{p}_2}{\sqrt{\hat{p}(1-\hat{p})\left(\frac{1}{n_1} + \frac{1}{n_2} \right)}}. \]
  
 \index{data!mammography|(}
 \index{data!breast cancer|(}
 
-\begin{example}{A 30-year study to investigate the effectiveness of mammograms versus a standard non-mammogram breast cancer exam was conducted with nearly 90,000 female participants.\footnote{\oiRedirect{textbook-90k_mammogram_study_2014}{Miller AB. 2014. \emph{Twenty five year follow-up for breast cancer incidence and mortality of the Canadian National Breast Screening Study: randomised screening trial}. BMJ 2014;348:g366.}} During a 5-year screening period, each woman was randomized to either receive regular mammograms or standard examinations. No intervention was made during the following 25 years of the study. The results are summarized in Table~\ref{mammogramStudySummaryTable}.
+\begin{example}{The use of screening mammograms for breast cancer has been controversial for decades, because the overall benefit on breast cancer mortality is uncertain.  Several large randomized studies have been conducted in an attempt to estimate the effect of mammographic screening,  A 30-year study to investigate the effectiveness of mammograms versus a standard non-mammogram breast cancer exam was conducted in Canada with 89,835 female participants.\footnote{\oiRedirect{textbook-90k_mammogram_study_2014}{Miller AB. 2014. \emph{Twenty five year follow-up for breast cancer incidence and mortality of the Canadian National Breast Screening Study: randomised screening trial}. BMJ 2014;348:g366 doi: 10.1136/bmj.g366}} During a 5-year screening period, each woman was randomized to either receive annual mammograms or standard physical exams for breast cancer.  During the 25 years following the screening period, women were screened for breast cancer according to the standard of care at their health care center. 
+
+At the end of the 25 year follow-up period, 1005 women died from breast cancer. The results by intervention are summarized in Table~\ref{mammogramStudySummaryTable}.
 		
 \begin{table}[h]
 	\centering
@@ -340,7 +341,8 @@ The test statistic $z$ for testing $H_0: p_1 = p_2$ versus $H_A: p_1 \neq p_2$ e
 
 Assess whether the normal model can be used to analyze the study results.}
 
-Since the patients were randomly assigned to each group, the groups can be treated as independent. Additionally, it is reasonable to assume independence of patients within each group.
+Since the participants were randomly assigned to each group, the groups can be treated as independent, and it is reasonable to assume independence of patients within each group.  Participants in randomized studies are rarely random samples from a population, but the investigators in the Canadian trial recruited  participants using a general publicity campaign, by sending personal invitation letters to women identified from general population lists, and through family doctors.
+
 
 Calculate the pooled proportion $\hat{p}$: 
 
@@ -360,13 +362,11 @@ The normal model can be used to analyze the study results.
 \label{mammogramSuccessFailure}
 \end{example}
 
-\begin{example}{Do the results from the study provide convincing evidence of a difference in breast cancer death rates between women who regularly have mammograms versus women who regularly have non-mammogram screenings?}
+\begin{example}{Do the results from the study provide convincing evidence of a difference in the proportion of breast cancer deaths between women who had annual mammograms during the screening period versus women who received annual screening with physical exams?}
 
 \label{mammogramExProp}
 
-The null hypothesis is that the breast cancer death rate between the groups is equal. Let group 1 represent the mammogram group and group 2 represent the control group. $H_0: p_1 = p_2$. Test this hypothesis against the alternative, that the death rates differ: $H_A: p_1 \neq p_2$.
-
-Let $\alpha = 0.05$.
+The null hypothesis is that the probability of a breast cancer death is the same for the women in the two groups. If group 1 represents the mammogram group and group 2 the control group, $H_0: p_1 = p_2$ and $H_A: p_1 \neq p_2$.  Let $\alpha = 0.05$.
 
 Calculate the test statistic $z$:
 
@@ -378,9 +378,31 @@ The $p$-value is 0.8650, which is greater than 0.05. There is insufficient evide
 	\includegraphics[width=0.6\textwidth]{ch_inference_for_props_oi_biostat/figures/mammograms/mammogramPValue}
 \end{center}	
 	
-Evaluating medical treatments typically requires accounting for evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. Additionally, this study found that mammograms led to overdiagnosis of breast cancer, with some cancers not necessarily causing symptoms during a patient's lifetime; some patients may have been treated unnecessarily. 
-	
+Evaluating medical treatments typically requires accounting for evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. This study also found that a higher proportion of diagnosed breast cancer cases in the mammogram screening arm (3250 in the mammogram group vs 3133 in the physical exam group), despite the nearly equal number of breast cancer deaths.  The investigators inferred that mammogram may cause over-diagnosis of breast cancer, a phenomenon where a breast cancer diagnosed with mammogram and subsequent biopsy may never become symptomatic. The possibility of over-diagnosis is one of the reasons mammogram screening remains controversial.
+
 \end{example}
+
+\begin{example}{Calculate a 95\% confidence interval for the difference in proportions of deaths from breast cancer from the Canadian study.}
+
+\label{mammogramExConfInt}
+
+The independence and random sampling conditions have already been discussed.  Since there is no null hypothesis, the success failure condition should be checked for each sample.  For the mammogram group, $\hat{p}_1 = 0.01113$; $n_1 \hat{p}_1 = (0.1113)(44,925) = 500$ and $n_1 (1 - \hat{p}_1) = 39,925.$ It is easy to show that the success failure condition is holds for the control group as well.
+
+The point estimate for the difference in the probability of death is
+
+$$\hat{p}_{1} - \hat{p}_{2} = 0.01113 - 0.01125 = -0.00012$$, or 0.012\%.
+
+Since there is no null hypothesis, the standard error for the estimated difference is uses the individual estimates of the probability of a death:
+$$SE \approx \sqrt{\frac{0.01113(1-0.01113)}{44,925} + \frac{0.01125(1-0.01125)}{44,910}} = 0.0007 $$
+
+The 95\% confidence interval is given by 
+$$ -0.00012 \pm (1.96) (0.0007) = (-0.0015, 0.0013).$$
+
+With 95\% confidence the difference in the probability of death is between -0.15\% and 0.13\%. 
+
+\end{example}
+
+
 
 \index{data!breast cancer|)}
 \index{data!mammography|)}
@@ -460,7 +482,7 @@ Using the normal model for this test statistic, we identify the right tail area 
 %__________________
 \section{Inference for two or more groups}
 \label{twoWayTablesAndChiSquare}
-The comparison of breast cancer death rates between the two groups can also be approached using a two-way contingency table, which contains counts for combinations of outcomes for two variables. The results for the mammogram study in this format are shown in Table~\ref{mammogramStudySummaryTableWithTotals}.
+The comparison of the proportion of breast cancer deaths between the two groups can also be approached using a two-way contingency table, which contains counts for combinations of outcomes for two variables. The results for the mammogram study in this format are shown in Table~\ref{mammogramStudySummaryTableWithTotals}.
 
 Previously, the main question of interest was stated as, "Is there evidence of a difference in breast cancer death rates between the two screening groups?" If there is no difference in breast cancer death rate by screening method, then screening method and outcome are independent. Thus, the question can be re-phrased: "Is there evidence that screening method is associated with outcome?"
 
