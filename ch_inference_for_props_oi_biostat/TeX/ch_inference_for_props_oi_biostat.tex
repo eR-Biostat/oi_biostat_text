@@ -3,38 +3,34 @@
 \chapter{Inference for categorical data}
 \label{inferenceForCategoricalData}
 
-% testing file sync
-
-
 Previous chapters discussed methods of inference for numerical data; in this chapter, those methods are extended to categorical data, such as binomial proportions or data in two-way tables. While various details of the methods may change, such as the calculations for a test statistic or the distributions used to find a $p$-value, the core ideas and principles behind inference remain the same.  
 
-Categorical data arise frequently in medical research because disease outcomes and patient characteristics are often recorded in natural categories such as types of treatment received, whether or not disease advanced to a later stage, or whether or not a patient responded initially to a treatment. In the simplest settings, a binary outcome (yes/no, success/failure, etc)  is recorded for a single group of participants, in hopes of learning more about the population from which the participants were drawn.  The binomial distribution is often used for the statistical model in this setting, and inference about the binomial probability of success provides information about a population proportion $p$.   In more complex settings, participant characteristics are recorded in a factor variable with two or more levels, and the outcome or response variable itself has two or more levels.  In these instances, data are usually summarized in two-way tables with two or more rows and two or more columns.
+Categorical data arise frequently in medical research because disease outcomes and patient characteristics are often recorded in natural categories such as types of treatment received, whether or not disease advanced to a later stage, or whether or not a patient responded initially to a treatment. In the simplest settings, a binary outcome (yes/no, success/failure, etc)  is recorded for a single group of participants, in hopes of learning more about the population from which the participants were drawn.  The binomial distribution is often used for the statistical model in this setting, and inference about the binomial probability of success provides information about a population proportion $p$.   In more complex settings, participant characteristics are recorded in a categorical variable with two or more levels, and the outcome or response variable itself has two or more levels.  In these instances, data are usually summarized in two-way tables with two or more rows and two or more columns.
 
-As with all methods of inference, it is important to understand how the data were collected and whether the data is a random sample from a well-identified population, at least approximately.  This issue is at least as important as the formulas for test statistics and confidence intervals, and is often overlooked.
+As with all methods of inference, it is important to understand how the data were collected and whether the data may be viewed as a random sample from a well-identified population, at least approximately.  This issue is at least as important as the formulas for test statistics and confidence intervals, and is often overlooked.
 
-The next section illustrates the use of inference with binomial data in a current line of research in cancer therapy.  Be careful about the notation in this chapter - since $p$ is the standard notation for a population proportion or probability, $p$ does double duty in this chapter as a population parameter and significance level.  The notation is unfortunate but commonly used.
+Be careful about the notation in this chapter - since $p$ is the standard notation for a population proportion or probability, $p$ does double duty in this chapter as a population parameter and significance level.  The notation is unfortunate but commonly used.
 
 %__________________
 \section{Inference for a single proportion}
 \label{singleProportion}
 
-Advanced melanoma is an aggressive form of skin cancer that until recently was uniformly fatal.  Historically, some cancers, including melanoma, have stopped progressing or disappeared altogether  when a patient's immune system successfully mounted a response to the cancer. During the last several decades, those observations led to research into therapies that might trigger an immune response in cancer.  Some of the most notable successes have been in melanoma, particularly with two therapies nivolumab and ipilimumab\footnote{The mab suffix in these therapies stands for monoclonal antibody, a therapeutic agent made by identical immune cells that are all clones of a unique parent cell from a patient}.
+Advanced melanoma is an aggressive form of skin cancer that until recently was uniformly fatal.  In rare instances a patient's melanoma stopped progressing or disappeared altogether when the patient's immune system successfully mounted a response to the cancer. Those observations led to research into therapies that might trigger an immune response in cancer.  Some of the most notable successes have been in melanoma, particularly with two new therapies nivolumab and ipilimumab\footnote{The mab suffix in these therapies stands for monoclonal antibody, a therapeutic agent made by identical immune cells that are all clones of a unique parent cell from a patient}.
 
 A 2013 report in the New England Journal of Medicine\footnote{N Engl J Med 2013;369:122-33. DOI: 10.1056/NEJMoa1302369} by Wolchok et al. reported the results of a study in which patients were treated with both of the new regimens.  Fifty-three patients were given the new regimens concurrently, and the response to therapy could be evaluated in 52 of the 53.  Of the 52 evaluable patients, 21 (40\%) experience a response according to commonly accepted criteria.  In previous studies, the proportion of patients responding to one of these agents was 30\% or less.  How might one compare these data with past experience?
 
-The data are from this study are binomial data, with success defined as a good response to therapy. Suppose the number of patients who respond in a study like this is represented by the random variable $X$, where $X$ is binomial with parameters $n$ (the number of trials, where each trial is represented by a patient) and $p$, the unknown population parameter of response. From formulas discussed in Chapter~\ref{modeling}, the mean of $X$ is $np$ and the standard deviation of $X$ is $\sqrt{np(1-p)}$.
+The data are from this study are binomial data, with success defined as a good response to therapy. Suppose the number of patients who respond in a study like this is represented by the random variable $X$, where $X$ is binomial with parameters $n$ (the number of trials, where each trial is represented by a patient) and $p$, the unknown population proportion of response. From formulas discussed in Chapter~\ref{modeling}, the mean of $X$ is $np$ and the standard deviation of $X$ is $\sqrt{np(1-p)}$.
 
-Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normal distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used since normal probability tables are easily available in either paper or electronic form.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
-
+Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normal distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used since normal probability is accurate and tables of the normal distribution are  available in either paper or electronic form.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
 
 
 \subsection{Inference using the normal approximation}
 
-A sample proportion can be described as a sample mean. If each success  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of these 52 numerical outcomes:
+A sample proportion can be described as a sample mean. If each success in the melanoma data  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of the 52 numerical outcomes:
 \begin{eqnarray*}
 \hat{p} = \frac{\ 0 + 1 + 1 + \cdots + 0\ }{52} = 0.404.
 \end{eqnarray*}
-The distribution of $\hat{p}$ is nearly normal when the distribution of successes and failures is not too strongly skewed for the sample size.
+The distribution of $\hat{p}$ is nearly normal when the distribution of successes and failures is not too strongly skewed.
 
 \begin{termBox}{\tBoxTitle{Conditions for the sampling distribution of $\hat{p}$ being nearly normal}
 The sampling distribution for $\hat{p}$, calculated from a sample of size $n$ from a population with a success proportion $p$, is nearly normal when
@@ -46,7 +42,7 @@ The sampling distribution for $\hat{p}$, calculated from a sample of size $n$ fr
 If these conditions are met, then the sampling distribution of $\hat{p}$ is approximately normal with mean $p$ and standard error
 \index{standard error (SE)!single proportion}
 \begin{eqnarray}
-SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}
+SE_{\hat{p}} = \sqrt{\frac{p(1-p)}{n}}.
 \label{seOfPHat}
 \end{eqnarray}}
 \end{termBox}\marginpar[\raggedright\vspace{-53mm}
@@ -64,7 +60,7 @@ When conducting inference, the population proportion $p$ is unknown, and the sam
 
 When using the normal approximation to the sampling distribution of $\hat{p}$, a confidence interval for a proportion has the same structure as a confidence interval for a mean; it is centered at the point estimate, with a margin of error calculated from the standard error and appropriate $z^{\star}$ value.  The formula for a 95\% confidence interval is
 \[
-     \hat{p} \pm 1.96 \sqrt{\frac{p(1-p)}{n}}.
+  \hat{p} \pm 1.96 \sqrt{\frac{\hat{p}(1-\hat{p})}{n}}.
 \]
 
 
@@ -72,15 +68,15 @@ When using the normal approximation to the sampling distribution of $\hat{p}$, a
 
 The independence and success-failure assumptions should be checked first.  Since the outcome of one patient is unlikely to influence that of other patients, the observations are independent.  The success-failure condition is satisfied since $n\hat{p} = (52)(.404) = 21  > 10$ and $n\hat{p}(1 - \hat{p}) = (52)(.596) = 31  > 10$.
 
-The point estimate for the response probability, based on a sample of size $n = 52$, is $\hat{p} = 0.404$. For a 95\% confidence interval, $z^{\star} = 1.96$. The margin of error is estimated as: $\sqrt{\frac{\ \hat{p}(1-\hat{p})\ }{n}} = \sqrt{\frac{(0.404)(1-0.404)}{52}} = 0.068$.  The confidence interval is
+The point estimate for the response probability, based on a sample of size $n = 52$, is $\hat{p} = 0.404$. For a 95\% confidence interval, $z^{\star} = 1.96$. The standard error is estimated as: $\sqrt{\frac{\ \hat{p}(1-\hat{p})\ }{n}} = \sqrt{\frac{(0.404)(1-0.404)}{52}} = 0.068$.  The confidence interval is
 
 \[0.404 \pm 1.96 (0.068) \rightarrow (0.27, 0.54) \]
 
-The approximate 95\% confidence interval for $p$, the population response probability to CAR-T cells among patients with relapsed or refractory lymphoma is  (0.27, 0.54), or (27\%, 54\%).  
+The approximate 95\% confidence interval for $p$, the population response probability of melanoma patients to the combination of these new drugs (0.27, 0.54), or (27\%, 54\%).  
 
 \end{example}
 
-Patients with a form of cancer who participate in clinical trials at research samples are unlikely to be a random sample of patients from the disease, since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  Investigators are aware that the hypothetical response probability of the population of patients with advanced melanoma treated with new therapies on a clinical trial may be different than the observed proportion of patients responding in a clinical trial.  Study teams try to minimize these differences by using a research protocol with a detailed specification of the characteristics of the disease used to decide if a patient was eligible for the study and assuming that other potential differences do not have a large effect on outcome.  But there can be no guarantee that systematic differences between a study sample and an overall population do not influence the results.  Small, initial studies in which there is no control group like the one described here early steps in exploring the value of a new therapy and are used to justify further study of a treatment when the results are substantially different than expected.  The largest observed response rate in previous trials of 30\% is not outside the confidence interval from this study and but the results of the study were considered adequate justification for continued research on this treatment.
+Did the participants in this study constitute a random sample?  Patients who participate in clinical trials are unlikely to be a random sample of patients with the disease being studied since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  Investigators in the melanoma trial were aware that the hypothetical response probability among the population of patients with advanced melanoma treated with a new drug may be different than the observed proportion of patients responding in a clinical trial.  Study teams try to minimize these differences by using a research protocol with a detailed specification of the characteristics of the disease used to decide if a patient is eligible for the study and assume that other potential differences do not have a large effect on outcome.  But there can be no guarantee that systematic differences between a study sample and an overall population do not influence the results.  Small, initial studies in which there is no control group like the one described here are early steps in exploring the value of a new therapy and are used to justify further study of a treatment when the results are substantially different than expected.  The largest observed response rate in previous trials of 30\% was close to the lower bound of the confidence interval so the results of the study were considered adequate justification for continued research on this treatment.
 
 
 \begin{exercise}
@@ -91,17 +87,16 @@ In New York City on October 23rd, 2014, a doctor who had recently been treating 
 \subsubsection{Hypothesis testing for a proportion}
 \label{htForPropSection}
 
-
-Just as with inference for population means, confidence intervals for population proportions can be used when deciding whether to reject a null hypothesis. It is useful in most settings, however, to also calculate the $p$-value for a test as a measure of the strength of the evidence contradicting the null hypothesis.
+Just as with inference for population means, confidence intervals for population proportions can be used when deciding whether to reject a null hypothesis. It is useful in most settings, however, to calculate the $p$-value for a test as a measure of the strength of the evidence contradicting the null hypothesis.
 
 When using the normal approximation for the distribution of $\hat{p}$ to conduct a hypothesis test, one should always verify that $\hat{p}$ is nearly normal under $H_0$ by checking the independence and success-failure conditions. Since a hypothesis test is based on the distribution of the test statistic under the null hypothesis, the success-failure condition is checked using the null proportion $p_0$, not the estimate $\hat{p}$. 
 
 According to the normal approximation to the binomial distribution, the number of successes in $n$ trials is normally distributed with mean $np_0$ and standard deviation $\sqrt{np(1-p_0)}$. This approximation is valid when $np_0$ and $n(1-p_0)$ are both at least 10.\footnote{The normal approximation to the binomial distribution was discussed in Section~\ref{binomialModel} of Chapter~\ref{modeling}.} 
 
-Under the null hypothesis, the sample proportion $\hat{p} = X/n$ has distribution 
+Under the null hypothesis, the sample proportion $\hat{p} = X/n$ is approximately distributed as 
 \[N \left(p_0, \sqrt{\frac{p_0(1-p_0)}{n}} \right).\]
 
-The test statistic $z$ for null the hypothesis $H_0: p = p_0$ is based on a sample of size $n$ is 
+The test statistic $z$ for null the hypothesis $H_0: p = p_0$ based on a sample of size $n$ is 
 \begin{align*}
   z &= \dfrac{\text{point estimate - null value}}{SE} \\
     &= \dfrac{\hat{p} - p_0}{\sqrt{\frac{(p_0)(1-p_0)}{n}}}. 
@@ -109,36 +104,36 @@ The test statistic $z$ for null the hypothesis $H_0: p = p_0$ is based on a samp
 
 \begin{example}{Suppose that out of a cohort of 120 patients with stage 1 lung cancer at the Dana-Farber Cancer Institute (DFCI), 80 of the patients survive at least 5 years, and suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population with this disease has a different 5-year survival probability than the national population?}
 
-Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A: = p \neq 0.60$, using $\alpha = 0.05$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.67) = 40 > 5$ The test statistic is the $z$-score of the point estimate: 
+Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A:  p \neq 0.60$, using $\alpha = 0.05$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.60) = 40 > 5.$ The test statistic is the $z$-score of the point estimate: 
 
-\[z = \dfrac{\text{point estimate - null value}}{SE} = \dfrac{0.67 - 0.60}{\sqrt{\frac{(0.60)(1-0.60)}{120}}} = 1.57 \]
+\[z = \dfrac{\text{point estimate - null value}}{SE} = \dfrac{0.67 - 0.60}{\sqrt{\frac{(0.60)(1-0.60)}{120}}} = 1.57. \]
 
-The $p$-value is 0.12; since the $p$-value is greater than 0.05, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national rate.
+The $p$-value is the probability that a standard normal variable is larger than 1.57 or smaller than -.157, and is 0.12; since the $p$-value is greater than 0.05, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national rate.
 
 \end{example}
 
-\begin{example} {Using the data from the study in advanced melanoma, use the normal approximation to the sampling distribution of $\hat{p}$ to test the null hypothesis that the response probability to the novel combined therapy is 30\% against a two sided alternative.}
+\begin{example} {Using the data from the study in advanced melanoma, use the normal approximation to the sampling distribution of $\hat{p}$ to test the null hypothesis that the response probability to the novel combined therapy is 30\% against a one-sided alternative that the response proportion is greater than 30\%.}
 
 The test statistic has value 
 \[
 z = (0.404 - 0.30)/\sqrt{(0.30)(0.70)/52} = 1.64. 
 \] 
 
-The two-sided p-value is $P(|Z| \geq 1.64) = 0.10$. The null hypothesis is not rejected.  This is consistent with the fact that 0.30 was not outside the 95\% confidence interval for the response probability.
+The one-sided p-value is $P(Z \geq 1.64) = 0.05$ and the null hypothesis is rejected in favor of a one-sided alternative.  This is an example where a one-sided test and a two-sided confidence interval (equivalent to a two-sided test) yield slightly different conclusions. With either approach, the data would support further study of these drugs in melanoma.  
 
 \end{example}
 
-\begin{exercise} One of the questions on the National Health and Nutrition Examination Survey (introduced in Chapter~\ref{inferenceForNumericalData}) asked participants whether they participated in moderate or vigorous intensity sports, fitness, or recreational activities. In a random sample of 135 adults, 76 answered "Yes" to the question. Based on this evidence, are a majority of American adults physically active?\footnote{The observations are independent. Check success-failure: $np_0 = n(1-p_0) = 135(0.5) > 10$. $H_0: p = 0.5$; $H_A: p > 0.5$. Calculate the $z$-score: $z = \frac{0.56 - 0.50}{\sqrt{\frac{0.5(1-0.5)}{135}}} = 1.39$. The $p$-value is 0.08. Since the $p$-value is larger than 0.05, there is insufficient evidence to reject $H_0$; there is not convincing evidence that a majority of Americans are physically active.}
+\begin{exercise} One of the questions on the National Health and Nutrition Examination Survey (introduced in Chapter~\ref{inferenceForNumericalData}) asked participants whether they participated in moderate or vigorous intensity sports, fitness, or recreational activities. In a random sample of 135 adults, 76 answered "Yes" to the question. Based on this evidence, are a majority of American adults physically active?\footnote{The observations are independent. Check success-failure: $np_0 = n(1-p_0) = 135(0.5) > 10$. $H_0: p = 0.5$; $H_A: p > 0.5$. Calculate the $z$-score: $z = \frac{0.56 - 0.50}{\sqrt{\frac{0.5(1-0.5)}{135}}} = 1.39$. The $p$-value is 0.08. Since the $p$-value is larger than 0.05, there is insufficient evidence to reject $H_0$; there is not convincing evidence that a majority of Americans are physically active, although the data suggest that may be the case.}
 \end{exercise}
 
 
 \subsection{Inference using exact methods}
 
-When the normal approximation to the distribution of $\hat{p}$ may not be accurate, inference is based on exact binomial probabilities. With access to a computing package, calculating confidence intervals and $p$-values based on the binomial distribution is relatively easy. Although the logic behind computing a $p$-value is discussed here, the formulas for a confidence interval are complicated and not shown.
+When the normal approximation to the distribution of $\hat{p}$ may not be accurate, inference is based on exact binomial probabilities. Calculating confidence intervals and $p$-values based on the binomial distribution can be done by hand, with tables of the binomial distribution, or (more easily and accurately) with statistical software. The logic behind computing a $p$-value is discussed here, but the formulas for a confidence interval are complicated and are not shown.
 
-The $p$-value for a hypothesis test corresponds to the sum of the probabilities of all events that are or more extreme than the sample result obtained. Let $X$ be a binomial random variable with parameters $n$ and $p_0$, where $\hat{p} = x/n$ and $x$ is the observed number of events. If $\hat{p} \leq p_0$, then the one-tail probability equals $P(X \leq x)$; if $\hat{p} > p_0$, then the one-tail probability equals $P(X \geq x)$. These probabilities are calculated using the approaches from Chapter~\ref{modeling}.
+The $p$-value for a hypothesis test corresponds to the sum of the probabilities of all events that are or more extreme than the sample result. Let $X$ be a binomial random variable with parameters $n$ and $p_0$, where $\hat{p} = x/n$ and $x$ is the observed number of events. If $\hat{p} \leq p_0$, then the one-tail probability equals $P(X \leq x)$; if $\hat{p} > p_0$, then the one-tail probability equals $P(X \geq x)$. These probabilities are calculated using the approaches from Chapter~\ref{modeling}.
 
-\begin{example}{In 2009, the FDA Oncology Drug Advisory Committee (ODAC) recommended that the drug Avastin be approved for use in glioblastoma, a form of brain cancer. Tumor shrinkage after taking a drug is called a response; out of 85 patients, 24 exhibited a response. Historically, response probabilities for brain cancer drugs were approximately 0.05. Assess whether there is evidence that the response probability for Avastin is different from previous drugs. 		
+\begin{example}{In 2009, the FDA Oncology Drug Advisory Committee (ODAC) recommended that the drug Avastin be approved for use in glioblastoma, a form of brain cancer. Tumor shrinkage after taking a drug is called a response; out of 85 patients, 24 exhibited a response. Historically, response probabilities for brain cancer drugs were approximately 0.05, or about 5\%. Assess whether there is evidence that the response probability for Avastin is different from previous drugs. 		
 }	
 
 $H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$. This is one of those situations where $p$ is doing double duty and (be careful!) the null hypothesis value for the parameter and the significance level $\alpha$ have the same numerical value. 
@@ -151,23 +146,20 @@ Calculating the $p$-value by hand would be time-consuming and error prone; it is
 
 \texttt{2*(1 - pbinom(q = 23, size = 85, p = 0.05))},
 
-which returns value $(5.3486)10^{-12}$.  The FDA staff felt that this highly significant evidence suggesting that the response probability for Avastin is higher than for previous brain cancer drugs was sufficient to justify approval for the use of the drug in that disease.  The decision was a rare one, since the FDA normally requires evidence from two independently conducted randomized trial. 
+which returns value $(5.3486)(10^{-12})$.  The FDA staff felt that this highly significant evidence suggesting that the response probability for Avastin is higher than for previous brain cancer drugs was sufficient to justify approval for the use of the drug.  The decision was a rare one, since the FDA normally requires evidence from two independently conducted randomized trials. 
 	
 \end{example}
 
-
-
-\begin{exercise} Medical consultants assist patients with all aspects of an organ donation surgery, with the goal of reducing the possibility of complications during the medical procedure and recovery. To attract customers, one consultant noted that while the average complication rate for liver donation surgeries in the United States is about 10\%, she has only had 3 out of 62 clients experience complications with liver donor surgeries. Is there evidence to suggest that the rate of complications for her patients is lower than the national average?\footnote{Assume that the 62 patients she is referring to may be viewed as a random sample from her patient population. The sample proportion $\hat{p} = 3/62 = 0.048$. Under the null hypothesis, the expected number of complications is $62(0.10) = 6.2$, so the normal approximation may not be accurate and it is best to use exact binomial probabilities. Since $\hat{p} \leq p_0$, find the $p$-value by calculating $P(X \leq 3)$ when $X$ has a binomial distribution with parameters $n = 62,\, p = 0.10$: $P(X \leq 3) = 0.121$. There is not sufficient evidence to suggest that the rate of complications for her patients is lower than the national average.}
+\begin{exercise} Medical consultants assist patients with all aspects of an organ donation surgery, with the goal of reducing the possibility of complications during the medical procedure and recovery. To attract customers, one consultant noted that while the usual proportions of complications in liver donation surgeries in the United States is about 10\%, she has only had 3 out of 62 clients experience complications with liver donor surgeries. Is there evidence to suggest that the proportion of complications in her patients is lower than the national average?\footnote{Assume that the 62 patients in her dataset may be viewed as a random sample from her patient population. The sample proportion $\hat{p} = 3/62 = 0.048$. Under the null hypothesis, the expected number of complications is $62(0.10) = 6.2$, so the normal approximation may not be accurate and it is best to use exact binomial probabilities. Since $\hat{p} \leq p_0$, find the $p$-value by calculating $P(X \leq 3)$ when $X$ has a binomial distribution with parameters $n = 62,\, p = 0.10$: $P(X \leq 3) = 0.121$. There is not sufficient evidence to suggest that the proportion of complications among her patients is lower than the national average.}
 \end{exercise}
-
 
 \subsection{Choosing a sample size when estimating a proportion}
 
 \index{margin of error|(}
 
-Whenever possible, a sample size for a study should be estimated before data collection begins.  Section \ref{PowerForDifferenceOfTwoMeans} explored the calculation of sample sizes so that a hypothesis test comparing two groups would have adequate power.  When estimating a proportion, preliminary sample size calculations are often done to estimate a sample size large enough that to make the \term{margin of error} $m$ in a confidence interval  sufficiently small for the interval to be useful. The margin of error $m$ is the term that is added and subtracted from the point estimate.  Statistically, this means estimating a sample size $n$ so that the sample proportion is within some margin of error $m$ of the actual proportion with a certain level of confidence. When the normal approximation is used for a binomial proportion, a sample size sufficiently large to have a margin of error of $m$ will satisfy 
+Whenever possible, a sample size for a study should be estimated before data collection begins.  Section \ref{PowerForDifferenceOfTwoMeans} explored the calculation of sample sizes so that a hypothesis test comparing two groups would have adequate power.  When estimating a proportion, preliminary sample size calculations are often done to estimate a sample size large enough to make the \term{margin of error} $m$ in a confidence interval  sufficiently small for the interval to be useful. The margin of error $m$ is the term that is added and subtracted from the point estimate.  Statistically, this means estimating a sample size $n$ so that the sample proportion is within some margin of error $m$ of the actual proportion with a certain level of confidence. When the normal approximation is used for a binomial proportion, a sample size sufficiently large to have a margin of error of $m$ will satisfy 
 \begin{align*}
- m = z^{\star}\text{s.e.}\hat{p} = z^{\star} \sqrt{\frac{(p)(1 - p)}{n}} 
+ m = (z^{\star})(\text{s.e.}(\hat{p})) = z^{\star} \sqrt{\frac{(p)(1 - p)}{n}}. 
 \end{align*}
 
 Algebra can be used to show that the above equation implies
@@ -175,17 +167,14 @@ Algebra can be used to show that the above equation implies
 \begin{align*}
 n = \frac{(z^{\star})^2}{m^2(p)(1 - p)}.
 \end{align*}
-In some settings a preliminary estimate for $p$ can be used to calculate $n$.  Calculus can be used to show that $p(1 - p)$ has its largest value when $p = 1/2$, and that value for $p$ is often used to insure that $n$ is sufficiently large regardless of the value of the unknown population proportion $p$.  In  that case, $n$ satisfies
+In some settings a preliminary estimate for $p$ can be used to calculate $n$.  When no estimate is available, calculus can be used to show that $p(1 - p)$ has its largest value when $p = 1/2$, and that conservative value for $p$ is often used to insure that $n$ is sufficiently large regardless of the value of the unknown population proportion $p$.  In  that case, $n$ satisfies
 \begin{align*}
-  n \geq \frac{(z^{\star})^2(p)(1-p)}{m^2} = \frac{z^{\star})^2}{4m^2}.
+  n \geq \frac{(z^{\star})^2(p)(1-p)}{m^2} = \frac{(z^{\star})^2}{4m^2}.
 \end{align*}
 
-\begin{example}
- Donor organs for organ transplant are scarce, and studies are sometimes conducted to explore whether the population of eligible organs can be expanded. Suppose a research team is studying the possibility of transplanting lungs from from with hepatitis C positive individuals lungs into patients who can then be treated with one of the new drugs that effectively cures hepatitis C.
+\begin{example} {Donor organs for organ transplant are scarce, and studies are sometimes conducted to explore whether the population of eligible organs can be expanded. Suppose a research team is studying the possibility of transplanting lungs from hepatitis C positive individuals into patients who can then be treated with one of the new drugs that cures hepatitis C. Preliminary studies in organ transplant are often designed to estimate the probability of a successful organ graft 6 months after the transplant.  How large should a study be so that the 95\% confidence interval for the probability of a successful graft at 6 months is no wider than 20\%?}
 
- Preliminary studies in organ transplant are often designed to estimate the probability of a successful organ graft 6 months after the transplant.  How large should a study be so that the 95\% confidence interval for the probability of a successful graft at 6 months is no wider than 20\%?
-
- A confidence interval no wider than 20\% will gave a margin of error of 10\%, or 0.10.  Using the conservative value p = 1/2,
+A confidence interval no wider than 20\% will have a margin of error of 10\%, or 0.10.  Using the conservative value p = 1/2,
 
  \begin{align*}
     n = \frac{(1.96)^2}{(4)(0.10^2)} =  96.04.
@@ -198,7 +187,6 @@ When the confidence coefficient is 95\%, 1.96 can replaced by 2 and the formula 
 \begin{align*}
   n = 1/m^2.
 \end{align*}
-
 This remarkably simple formula is often used by practitioners for a quick estimate of sample size.
 
 % I  like this example but it does not match our content.  Perhaps we can make it a bio lab
@@ -238,9 +226,10 @@ A sample size of 370 or more would be reasonable. (Reminder: always round up for
 
 \end{exercise}
 
-% expand the next section to incorporate case-control?
+% 25 jun 2018  careful proofing  to here
 
 %__________________
+
 \section{Inference for the difference of two proportions}
 \label{differenceOfTwoProportions}
 
@@ -248,22 +237,22 @@ Just as inference can be done for the difference of two population means, conclu
 
 \subsection{Sampling distribution of the difference of two proportions}
 
-The normal model can only be applied to $\hat{p}_1 - \hat{p}_2$ if the sampling distribution for each sample proportion is nearly normal, and if the samples are independent random samples from the relevant population. 
+The normal model can be applied to $\hat{p}_1 - \hat{p}_2$ if the sampling distribution for each sample proportion is nearly normal, and if the samples are independent random samples from the relevant population. 
 
-\begin{termBox}{\tBoxTitle{Conditions for the sampling distribution of $\hat{p}_1 - \hat{p}_2$ to be normal}
+\begin{termBox}{\tBoxTitle{Conditions for the sampling distribution of $\hat{p}_1 - \hat{p}_2$ to be approximately normal}
 The difference $\hat{p}_1 - \hat{p}_2$ tends to follow a normal model when
 \begin{itemize}
 \setlength{\itemsep}{0mm}
 \item each of the two samples are random samples from a population,
 \item the two samples are independent of each other, and
-\item each sample proportion follows a normal model. This condition is satisfied when $n_1p_1 \geq 10$ and $n_2p_2 \geq 10$.
+\item each sample proportion follows (approximately) a normal model. This condition is satisfied when $n_1p_1, n_1(1 - p_1), n_2 p_2$ and $n_2(1 - p_2)$ are all $\geq 10$.
 \end{itemize}
 The standard error of the difference in sample proportions is
 \index{standard error (SE)!difference in proportions}
 \begin{eqnarray}
 SE_{\hat{p}_1 - \hat{p}_2}
 	= \sqrt{SE_{\hat{p}_1}^2 + SE_{\hat{p}_2}^2}
-	= \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}
+	= \sqrt{\frac{p_1(1-p_1)}{n_1} + \frac{p_2(1-p_2)}{n_2}}i,
 \label{seForDiffOfProp}
 \end{eqnarray}
 where $p_1$ and $p_2$ are the population proportions, and $n_1$ and $n_2$ are the two sample sizes.}
@@ -294,10 +283,10 @@ Reversed ordering & 732	& 34	& 63	& 3 \\
 \end{table}
 
 }
-First the conditions for the use of a normal model must be verified. The Pew Research Center uses sampling methods produce random samples of the US population (at least approximately) and because each group was a simple random sample from less than 10\% of the population, the observations are independent, both within the samples and between the samples. The success-failure condition also holds for each sample, so the normal model can be used for confidence intervals for the difference in approval proportions.  The point estimate of the difference in support, where $p_1$ corresponds to the original ordering and $p_2$ to the reversed ordering:
-$$\hat{p}_{1} - \hat{p}_{2} = 0.47 - 0.34 = 0.13$$
+First the conditions for the use of a normal model must be verified. The Pew Research Center uses sampling methods produce random samples of the US population (at least approximately) and because each group was a simple random sample from less than 10\% of the population, the observations are independent, both within the samples and between the samples. The success-failure condition also holds for each sample, so the normal model can be used for confidence intervals for the difference in approval proportions.  The point estimate of the difference in support, where $\hat{p}_1$ corresponds to the original ordering and $\hat{p}_2$ to the reversed ordering:
+$$\hat{p}_{1} - \hat{p}_{2} = 0.47 - 0.34 = 0.13.$$
 The standard error may be computed from Equation~\eqref{seForDiffOfProp} using the sample proportions:
-$$SE \approx \sqrt{\frac{0.47(1-0.47)}{771} + \frac{0.34(1-0.34)}{732}} = 0.025$$
+$$SE \approx \sqrt{\frac{0.47(1-0.47)}{771} + \frac{0.34(1-0.34)}{732}} = 0.025.$$
 For a 90\% confidence interval, $z^{\star} = 1.65$:
 $$\text{point estimate} \ \pm\ z^{\star}SE \quad \to \quad 0.13 \ \pm\ 1.65 \times  0.025 \quad \to \quad (0.09, 0.17)$$
 With 90\% confidence, the proportion approving the 2010 health care law ranged between 9\% and 17\% depending on the phrasing of the question. The Pew Research Center interpreted this modestly large difference as an indication that for most of the public, opinions were still fluid on the health insurance mandate.  The law eventually passed as the Affordable Health Care Act (ACA).
@@ -320,7 +309,7 @@ The test statistic $z$ for testing $H_0:\, p_1 = p_2$ versus $H_A: p_1 \neq p_2$
 \index{data!mammography|(}
 \index{data!breast cancer|(}
 
-\begin{example}{The use of screening mammograms for breast cancer has been controversial for decades, because the overall benefit on breast cancer mortality is uncertain.  Several large randomized studies have been conducted in an attempt to estimate the effect of mammographic screening,  A 30-year study to investigate the effectiveness of mammograms versus a standard non-mammogram breast cancer exam was conducted in Canada with 89,835 female participants.\footnote{\oiRedirect{textbook-90k_mammogram_study_2014}{Miller AB. 2014. \emph{Twenty five year follow-up for breast cancer incidence and mortality of the Canadian National Breast Screening Study: randomised screening trial}. BMJ 2014;348:g366 doi: 10.1136/bmj.g366}} During a 5-year screening period, each woman was randomized to either receive annual mammograms or standard physical exams for breast cancer.  During the 25 years following the screening period, women were screened for breast cancer according to the standard of care at their health care center. 
+\begin{example}{The use of screening mammograms for breast cancer has been controversial for decades, because the overall benefit on breast cancer mortality is uncertain.  Several large randomized studies have been conducted in an attempt to estimate the effect of mammographic screening,  A 30-year study to investigate the effectiveness of mammograms versus a standard non-mammogram breast cancer exam was conducted in Canada with 89,835 female participants.\footnote{\oiRedirect{textbook-90k_mammogram_study_2014}{Miller AB. 2014. \emph{Twenty five year follow-up for breast cancer incidence and mortality of the Canadian National Breast Screening Study: randomised screening trial}. BMJ 2014;348:g366 doi: 10.1136/bmj.g366}} During a 5-year screening period, each woman was randomized to either receive annual mammograms or standard physical exams for breast cancer.  During the 25 years following the screening period, each woman was screened for breast cancer according to the standard of care at her health care center. 
 
 At the end of the 25 year follow-up period, 1005 women died from breast cancer. The results by intervention are summarized in Table~\ref{mammogramStudySummaryTable}.
 		
@@ -341,14 +330,14 @@ At the end of the 25 year follow-up period, 1005 women died from breast cancer. 
 
 Assess whether the normal model can be used to analyze the study results.}
 
-Since the participants were randomly assigned to each group, the groups can be treated as independent, and it is reasonable to assume independence of patients within each group.  Participants in randomized studies are rarely random samples from a population, but the investigators in the Canadian trial recruited  participants using a general publicity campaign, by sending personal invitation letters to women identified from general population lists, and through family doctors.
+Since the participants were randomly assigned to each group, the groups can be treated as independent, and it is reasonable to assume independence of patients within each group.  Participants in randomized studies are rarely random samples from a population, but the investigators in the Canadian trial recruited  participants using a general publicity campaign, by sending personal invitation letters to women identified from general population lists, and through family doctors.  In this study, the participants could reasonably be thought of as a random sample.
 
 
-Calculate the pooled proportion $\hat{p}$: 
+The pooled proportion $\hat{p}$ is  
 
-\[\hat{p} = \dfrac{x_{1} + x_{2}}{n_{1} + n_{2}} = \dfrac{500 + 505}{500 + 44,425 + 505 + 44,405} = 0.0112 \]
+\[\hat{p} = \dfrac{x_{1} + x_{2}}{n_{1} + n_{2}} = \dfrac{500 + 505}{500 + 44,425 + 505 + 44,405} = 0.0112. \]
 
-Check the success-failure condition for each group: 
+Checking the success-failure condition for each group: 
 \begin{align*}
 \hat{p} \times n_{mgm} &= 0.0112 \times \text{44,925} = 503
 & (1 - \hat{p}) \times n_{mgm} &= 0.9888 \times \text{44,925} = \text{44,422} \\
@@ -356,7 +345,7 @@ Check the success-failure condition for each group:
 & (1 - \hat{p}) \times n_{ctrl} &= 0.9888 \times \text{44,910} = \text{44,407}
 \end{align*}
 
-All values are at least 10, which satisfies the success-failure condition. 
+All values are at least 10. 
 
 The normal model can be used to analyze the study results.
 \label{mammogramSuccessFailure}
@@ -370,15 +359,20 @@ The null hypothesis is that the probability of a breast cancer death is the same
 
 Calculate the test statistic $z$:
 
-\[z = \dfrac{0.01113 - 0.01125}{\sqrt{(0.0112)(1-0.0112)\left(\frac{1}{44,925} + \frac{1}{44,910} \right)}} = -0.17\]	
+\[z = \dfrac{0.01113 - 0.01125}{\sqrt{(0.0112)(1-0.0112)\left(\frac{1}{44,925} + \frac{1}{44,910} \right)}} = -0.17.
+\]	
 	
-The $p$-value is 0.8650, which is greater than 0.05. There is insufficient evidence to reject the null hypothesis; the observed difference in breast cancer death rates is reasonably explained by chance. 	
-	
+The two-sided $p$-value is $P|Z| \ge 0.17 = 0.8650$,  which is greater than 0.05. There is insufficient evidence to reject the null hypothesis; the observed difference in breast cancer death rates is reasonably explained by chance. 	
+
+% removed figure because it does not add much.
+
+\begin{comment}
 \begin{center}
 	\includegraphics[width=0.6\textwidth]{ch_inference_for_props_oi_biostat/figures/mammograms/mammogramPValue}
 \end{center}	
-	
-Evaluating medical treatments typically requires accounting for evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. This study also found that a higher proportion of diagnosed breast cancer cases in the mammogram screening arm (3250 in the mammogram group vs 3133 in the physical exam group), despite the nearly equal number of breast cancer deaths.  The investigators inferred that mammogram may cause over-diagnosis of breast cancer, a phenomenon where a breast cancer diagnosed with mammogram and subsequent biopsy may never become symptomatic. The possibility of over-diagnosis is one of the reasons mammogram screening remains controversial.
+\end{comment}
+
+Evaluating medical treatments typically requires accounting for additional evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. This study also found that a higher proportion of diagnosed breast cancer cases in the mammogram screening arm (3250 in the mammogram group vs 3133 in the physical exam group), despite the nearly equal number of breast cancer deaths.  The investigators inferred that mammogram may cause over-diagnosis of breast cancer, a phenomenon where a breast cancer diagnosed with mammogram and subsequent biopsy may never become symptomatic. The possibility of over-diagnosis is one of the reasons mammogram screening remains controversial.
 
 \end{example}
 
@@ -390,7 +384,7 @@ The independence and random sampling conditions have already been discussed.  Si
 
 The point estimate for the difference in the probability of death is
 
-$$\hat{p}_{1} - \hat{p}_{2} = 0.01113 - 0.01125 = -0.00012$$, or 0.012\%.
+$$\hat{p}_{1} - \hat{p}_{2} = 0.01113 - 0.01125 = -0.00012,$$ or 0.012\%.
 
 Since there is no null hypothesis, the standard error for the estimated difference is uses the individual estimates of the probability of a death:
 $$SE \approx \sqrt{\frac{0.01113(1-0.01113)}{44,925} + \frac{0.01125(1-0.01125)}{44,910}} = 0.0007 $$
@@ -482,11 +476,12 @@ Using the normal model for this test statistic, we identify the right tail area 
 %__________________
 \section{Inference for two or more groups}
 \label{twoWayTablesAndChiSquare}
+
 The comparison of the proportion of breast cancer deaths between the two groups can also be approached using a two-way contingency table, which contains counts for combinations of outcomes for two variables. The results for the mammogram study in this format are shown in Table~\ref{mammogramStudySummaryTableWithTotals}.
 
-Previously, the main question of interest was stated as, "Is there evidence of a difference in breast cancer death rates between the two screening groups?" If there is no difference in breast cancer death rate by screening method, then screening method and outcome are independent. Thus, the question can be re-phrased: "Is there evidence that screening method is associated with outcome?"
+Previously, the main question of interest was stated as, "Is there evidence of a difference in the proportion of breast cancer deaths between the two screening groups?" If the probability of a death from breast cancer does not depend the method of screening, then screening method and outcome are independent. Thus, the question can be re-phrased: "Is there evidence that screening method is associated with outcome?"
 
-Hypothesis testing in a two-way table assesses whether the two variables of interest are associated (i.e., not independent). This approach is applicable to settings with two or more groups and for responses that have two or more categories. The observed number of counts in each table are compared to the \term{expected} counts if the null hypothesis of association is true; a $\chi^2$ test of significance can then be conducted based on the standardized differences between observed and expected values in each table cell.
+Hypothesis testing in a two-way table assesses whether the two variables of interest are associated (i.e., not independent). The approach can be applied to settings with two or more groups and for responses that have two or more categories by comparing the observed number of counts in each cell in a table to the \term{expected} number counts if the null hypothesis of no association is true. A $\chi^2$ test of significance is based on can the differences between observed and expected values in the cells.
 
 \begin{table}[h]
 	\centering
@@ -512,15 +507,15 @@ Hypothesis testing in a two-way table assesses whether the two variables of inte
 
 If type of breast cancer screening had no effect on outcome in the mammogram data, what would the expected results be? 
 
-Recall that if two events $A$ and $B$ are independent, then $P(A \cap B) = P(A) \times P(B)$. Let $A$ represent assignment to the mammogram group and $B$ represent the event of death from breast cancer. Under independence, the number of individuals out of 89,835 that are expected to be in the mammogram screening group and die from breast cancer equals:
+Recall that if two events $A$ and $B$ are independent, then $P(A \cap B) = P(A)P(B)$. Let $A$ represent assignment to the mammogram group and $B$ the event of death from breast cancer. Under independence, the number of individuals out of 89,835 that are expected to be in the mammogram screening group and die from breast cancer equals:
 
-\[89,835 \times P(A)P(B) = 89,835 \times  \frac{44,925}{89,835} \times \frac{1,005}{89,835} = 502.6 \]
+\[(89,835) P(A)P(B) = (89,835) \left(\frac{44,925}{89,835}\right) \left(\frac{1,005}{89,835} \right) = 502.6. \]
 
-Note that the quantities 44,925 and 1,005 are the row and column totals corresponding to the upper left cell of Table~\ref{mammogramStudySummaryTableWithTotals}, where 89,835 is the total number $n$ of observations in the table. A general formula for computing expected counts for any cell can be written from the marginal totals and the total number of observations.
+Note that the quantities 44,925 and 1,005 are the row and column totals corresponding to the upper left cell of Table~\ref{mammogramStudySummaryTableWithTotals}, and 89,835 is the total number $n$ of observations in the table. A general formula for computing expected counts for any cell can be written from the marginal totals and the total number of observations.
 
 \begin{termBox}{\tBoxTitle{Computing expected counts in a two-way table}
-		To identify the expected count for the $i^{th}$ row and $j^{th}$ column, compute
-		$$\text{Expected Count}_{\text{row }i,\text{ col }j} = \frac{(\text{row $i$ total}) \times  (\text{column $j$ total})}{\text{table total}}\vspace{2mm}$$}
+		To calculate the expected count for the $i^{th}$ row and $j^{th}$ column, compute
+		$$\text{Expected Count}_{\text{row }i,\text{ col }j} = \frac{(\text{row $i$ total}) \times  (\text{column $j$ total})}{\text{table total}}.\vspace{2mm}$$}
 \end{termBox}	
 	
 \begin{example}{Calculate expected counts for the data in Table~\ref{mammogramStudySummaryTableWithTotals}.}
@@ -547,7 +542,8 @@ Note that the quantities 44,925 and 1,005 are the row and column totals correspo
 	
 \end{example}
 
-\begin{example} {If a child is HIV$^+$, should they be treated with nevirapine (NVP) or a more expensive drug, lopinarvir (LPV)? In this setting, success means preventing virologic failure; i.e., growth of the virus. A randomized study was conducted to assess whether there is an association between treatment and outcome. Of the 147 children administered NVP, about 41\% experienced virologic failure; of the 140 children administered LPV, about 19\% experienced virologic failure. Construct a table of observed counts and a table of expected counts.}
+\begin{example} {If a newborn is HIV$^+$, should he or she be treated with nevirapine (NVP) or a more expensive drug, lopinarvir (LPV)? In this setting, success means preventing virologic failure; i.e., growth of the virus. A randomized study was conducted to assess whether there is an association between treatment and outcome\footnote{N Engl J Med 2012; 366:2380-2389
+DOI: 10.1056/NEJMoa1113249}. Of the 147 children administered NVP, about 41\% experienced virologic failure; of the 140 children administered LPV, about 19\% experienced virologic failure. Construct a table of observed counts and a table of expected counts.}
 	
 Convert the proportions to count data: 41\% of 147 is approximately 60, and 19\% of 140 is approximately 27. 
 
@@ -590,7 +586,9 @@ Calculate the expected counts for each cell:
 
 \subsection{The $\chi^2$ test statistic}
 
-Previously, test statistics have been constructed by calculating the difference between a point estimate and a null value, then dividing by the standard error of the point estimate to standardize the difference. Similar logic can be applied in this context to construct a single test statistic, the $\chi^2$ statistic, that measures whether all the standardized differences (one for each cell) are significantly far from zero. If $\chi^2$ is large, this represents a large amount of deviation between the observed and expected values, which suggests evidence against independence of the two variables. The $\chi^2$ test statistic\marginpar[\raggedright\vspace{9mm}
+Previously, test statistics have been constructed by calculating the difference between a point estimate and a null value, then dividing by the standard error of the point estimate to standardize the difference. The $\chi^2$ statistic is based on a different idea.  In each cell of a table, the difference \emph{observed} - \emph{expected} is a measure of the discrepancy between what was observed in the data and what should have been observed under the null hypothesis of no association. If the row and column variables are highly associated, that difference will be large.  Two adjustments are needed to the differences before the final statistic can be calculated.  First, both positive and negative differences suggest a lack of independence, the differences are squared to remove the effect of the sign.  Second, cells with larger counts may have larger discrepancies by chance alone, so the squared differences in each cell are scaled by the number expected in the cell under the hypothesis of independence.  The final $\chi^2$ statistic is the sum of these standardize squared differences, where the sum has one term for each cell in the table.
+
+The $\chi^2$ test statistic\marginpar[\raggedright\vspace{9mm}
 
 $\chi^2$\vspace{0.5mm}\\\footnotesize chi-square\\test statistic]{\raggedright\vspace{9mm}
 	
@@ -598,18 +596,15 @@ $\chi^2$\vspace{0.5mm}\\\footnotesize chi-square\\test statistic]{\raggedright\v
 
 \[\chi^2 = \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \]
 
-The standardized difference for each cell is a standard normal random variable $Z$. The $\chi^2$ statistic is the sum of squared standard normals; i.e., $\chi^2 = Z_1^2 + Z_2^2 + Z_3^2 + Z_4^2$ for a table with four cells. Squaring each difference allows the $\chi^2$ value to represent the absolute magnitude of how far an observed count differs from an expected count.
-
-It is valid to apply the $\chi^2$ test when 1) each case in a table is independent of the other cases, and 2) each expected cell count is at least 10. The calculations for checking that expected cell counts are at least 10 are identical to those for checking the success-failure condition when conducting a hypothesis test for $p_1 - p_2$:  $n_1 \hat{p} \geq 10$ and $n_2 \hat{p} \geq 10$. This condition ensures that the normal approximation to the binomial can be used.
-
-For example, refer to the mammogram data; the expected counts found in Example~\ref{mammogramStudyExpectedCounts} are identical to the values obtained from checking the success-failure condition in Example~\ref{mammogramSuccessFailure}. Recall that the pooled proportion $\hat{p}$ is the total number of successes $x$ over the total number of cases $n$: $\hat{p} = \frac{x_1 + x_2}{n_1 + n_2}$. In the mammogram table, if "success" is defined as death from breast cancer, then $\hat{p}$ is equal to the (left) column total divided by the total number of cases. The value $n_1$ is the row total of individuals in the mammogram group. Thus, $n_1 \hat{p}  = \frac{\text{(row 1 total) } \times \text{ (col 1 total)}}{\text{table total}}$. The same structure applies for $n_1 (1 - \hat{p})$, $n_2 \hat{p}$, and $n_2 (1 - \hat{p})$.
+The theory behind the $\chi^2$ test and its sampling distribution relies on the same normal approximation to the binomial distribution that has been used earlier.  The cases in the dataset must be independent, and each expected cell count should be at least 10.  The second condition can be relaxed in tables with more than 4 cells.
 
 \begin{termBox}{\tBoxTitle{Conditions for the $\chi^2$ test}
-There are two conditions that must be checked before performing a $\chi^2$ test:\vspace{-1mm}
+Two conditions that must be checked before performing a $\chi^2$ test:\vspace{-1mm}
 \begin{description}
 \setlength{\itemsep}{0mm}
 	\item[Independence.] Each case that contributes a count to the table must be independent of all the other cases in the table.
-	\item[Sample size.] Each expected cell count must be greater than or equal to 10. For tables larger than $2 \times 2$, it is appropriate to use the test if no more than 1/5 of the expected counts are less than 5, and all expected counts are greater than 1.\footnote{This criterion for large tables is from Rosner's advice on the general $r \times c$ case, pg. 393 of the 7$^{th}$ edition.}
+	\item[Sample size.] Each expected cell count must be greater than or equal to 10. For tables larger than $2 \times 2$, it is appropriate to use the test if no more than 1/5 of the expected counts are less than 5, and all expected counts are greater than 1.
+      
 \vspace{-1mm}
 \end{description}
 }
@@ -633,9 +628,7 @@ Independence is a reasonable assumption, since individuals have been randomized 
 
 \subsection{Calculating $p$-values for a $\chi^2$ distribution}
 
-The \term{chi-square distribution} is used to characterize data and statistics that are always positive and typically right-skewed. Figure~\ref{chiSquareDistributionWithInceasingDF} demonstrates three general properties of chi-square distributions as the degrees of freedom increases: the distribution becomes more symmetric, the center moves to the right, and the variability inflates.
-
-The $\chi^2$ statistic has a sampling distribution that approximately follows a $\chi^2$ distribution with degrees of freedom $df = (r-1)(c-1)$, where $r$ is the number of rows and $c$ is the number of columns.
+The \term{chi-square distribution} is often used with data and statistics that are positive and right-skewed.  The distribution is characterized by a single parameter, the degrees of freedom. Figure~\ref{chiSquareDistributionWithInceasingDF} demonstrates three general properties of chi-square distributions as the degrees of freedom increases: the distribution becomes more symmetric, the center moves to the right, and the variability increases.
 
 \begin{figure}[h]
 	\centering
@@ -644,7 +637,8 @@ The $\chi^2$ statistic has a sampling distribution that approximately follows a 
 	\label{chiSquareDistributionWithInceasingDF}
 \end{figure}
 
-Either statistical software or a table can be used to calculate $p$-values from the $\chi^2$ distribution. The \term{chi-square table} is partially shown in Table~\ref{chiSquareProbabilityTableShort}, and a more complete table is presented in Appendix~\vref{chiSquareProbabilityTable}. This table is very similar to the $t$-table: each row provides values for distributions with different degrees of freedom, and a cut-off value is provided for specified tail areas. One important difference from the $t$-table is that the $\chi^2$ table only provides upper tail values.
+
+The $\chi^2$ statistic from a contingency table has a sampling distribution that approximately follows a $\chi^2$ distribution with degrees of freedom $df = (r-1)(c-1)$, where $r$ is the number of rows and $c$ is the number of columns. Either statistical software or a table can be used to calculate $p$-values from the $\chi^2$ distribution. The \term{chi-square table} is partially shown in Table~\ref{chiSquareProbabilityTableShort}, and a more complete table is presented in Appendix~\vref{chiSquareProbabilityTable}. This table is very similar to the $t$-table: each row provides values for distributions with different degrees of freedom, and a cut-off value is provided for specified tail areas. One important difference from the $t$-table is that the $\chi^2$ table only provides upper tail values.
 
 \begin{table}[h]
 	\centering
@@ -673,11 +667,9 @@ The degrees of freedom in a $2 \times 2$ table is 1, so refer to the values in t
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.55\textwidth]{ch_inference_for_props_oi_biostat/figures/mammogramPValue/mammogramPValue}
-	\caption{The $p$-value for the mammogram data is shaded on the $\chi^2$ distribution with $df=1$.}
+	\caption{The $p$-value for the mammogram data is shaded on the $\chi^2$ distribution with $df=1$.The shaded area is to the right of x = 0.02.}
 	\label{mammogramPValue}
 \end{figure}
-
-%JV: This figure uses a workaround from the code used to generate the chi-square image for the appendix, but perhaps worth asking where the OI custom function ChiSquareTail is...
 
 \end{example}
 
@@ -687,11 +679,10 @@ The degrees of freedom in a $2 \times 2$ table is 1, so refer to the values in t
 
 \subsection{Interpreting the results of a $\chi^2$ test}
 
-If the $p$-value from a $\chi^2$ test is small enough to represent sufficient evidence to reject the null hypothesis, it is important to explore the results further in order to make a complete conclusion about the direction of the observed association. This is done by comparing the observed and expected counts, or by calculating \term{residuals}, which may help in identifying the cells that exhibit the largest discrepancies between observed and expected counts. Calculating residuals can be particularly helpful for understanding the results from large tables.
+If the $p$-value from a $\chi^2$ test is small enough to provide evidence to reject the null hypothesis of no association, it is important to explore the results further to understand direction of the observed association. This is done by examining the residuals for each cell, the standardized differences of the \emph{observed} - \emph{expected}. Instead of using squared differences, the residuals are based on the differences themselves, and the standardizing or scaling factor is $\sqrt{\text{expected}}$.  Calculating residuals can be particularly helpful for understanding the results from large tables.
 
 For each cell in a table, the residual equals:
 \[\dfrac{\text{observed} - \text{expected}}{\sqrt{\text{expected}}} \]
-
 Residuals with a large magnitude contribute the most to the $\chi^2$ statistic. If a residual is positive, the observed value is greater than the expected value, and vice versa for a negative residual.
 
 \begin{example}{In the FAMuSS study introduced in Chapter~\ref{introductionToData}, researchers measured a variety of demographic and genetic characteristics for about 1,300 participants, including data on race and genotype at a specific locus on the ACTN3 gene. Is there evidence of an association between genotype and race?
@@ -754,9 +745,16 @@ Calculate the $\chi^2$ statistic:
 &=19.4
 \end{align*}	
 
-Calculate the $p$-value: for a table with 3 rows and 5 columns, the $\chi^2$ statistic is distributed with $(3-1)(5-1) = 8$ degrees of freedom. From the table, a $\chi^2$ value of 19.4 corresponds to a tail area between 0.01 and 0.02.\footnote{The exact $p$-value can be obtained from software: $p = 0.013$.} Thus, there is sufficient evidence to reject the null hypothesis of independence between race and genotype.
+Calculate the $p$-value: for a table with 3 rows and 5 columns, the $\chi^2$ statistic is distributed with $(3-1)(5-1) = 8$ degrees of freedom. From the table, a $\chi^2$ value of 19.4 corresponds to a tail area between 0.01 and 0.02. Thus, there is sufficient evidence to reject the null hypothesis of independence between race and genotype.
 
-To further explore the differences in genotype distribution between races, calculate residuals for each cell. The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic effect.
+The exact $p$-value can be obtained using the \textsf{R} function \texttt{pchisq}: 
+\begin{verbatim}
+pchisq(19.4, df = 8, lower.tail = FALSE)
+0.012861. 
+\end{verbatim}
+
+To further the differences in genotype distribution between races, calculate residuals for each cell. The largest residuals are in the first row; there are many more African Americans with the CC genotype than expected under independence, and fewer with the CT genotype than expected. The residuals in the second row indicate a similar trend for Asians, but with a less pronounced difference. These results suggest further directions for research; a future study could enroll a larger number of African American and Asian participants to examine whether the observed trend holds with a more representative sample. Geneticists might also be interested in exploring whether this genetic difference between populations has an observable phenotypic effect.
+
 
 % latex table generated in R 3.2.4 by xtable 1.8-2 package
 % Thu Dec 08 10:48:57 2016
@@ -800,7 +798,6 @@ To further explore the differences in genotype distribution between races, calcu
 } 
 	
 In a $2 \times 2$ table, it is relatively easy to directly compare observed and expected counts. 
-
 For nevirapine, more infants than expected experienced virologic failure (60 > 44.6), while fewer than expected reached a stable disease state (87 < 102.4). For lopinarvir, fewer infants than expected experienced virologic failure (27 < 42.4), and more infants than expected reached a stable disease state (113 > 97.6). The outcomes for infants on lopinarvir are better than for those on nevirapine; combined with the results of the significance test, the data suggest that lopinarvir is associated with better treatment outcomes.
 \label{HIVDirectionEx}	
 \end{example}
