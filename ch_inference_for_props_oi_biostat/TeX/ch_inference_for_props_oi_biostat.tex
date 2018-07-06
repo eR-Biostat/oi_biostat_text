@@ -7,7 +7,7 @@ Previous chapters discussed methods of inference for numerical data; in this cha
 
 Categorical data arise frequently in medical research because disease outcomes and patient characteristics are often recorded in natural categories such as types of treatment received, whether or not disease advanced to a later stage, or whether or not a patient responded initially to a treatment. In the simplest settings, a binary outcome (yes/no, success/failure, etc)  is recorded for a single group of participants, in hopes of learning more about the population from which the participants were drawn.  The binomial distribution is often used for the statistical model in this setting, and inference about the binomial probability of success provides information about a population proportion $p$.   In more complex settings, participant characteristics are recorded in a categorical variable with two or more levels, and the outcome or response variable itself has two or more levels.  In these instances, data are usually summarized in two-way tables with two or more rows and two or more columns.
 
-As with all methods of inference, it is important to understand how the data were collected and whether the data may be viewed as a random sample from a well-identified population, at least approximately.  This issue is at least as important as the formulas for test statistics and confidence intervals, and is often overlooked.
+As  with all methods of inference, it is important to understand how the data were collected and whether the data may be viewed as a random sample from a well-identified population, at least approximately.  This issue is at least as important as the formulas for test statistics and confidence intervals, and is often overlooked.
 
 Be careful about the notation in this chapter - since $p$ is the standard notation for a population proportion or probability, $p$ does double duty in this chapter as a population parameter and significance level.  The notation is unfortunate but commonly used.
 
@@ -23,8 +23,8 @@ The data are from this study are binomial data, with success defined as a good r
 
 Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normal distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used since normal probability is accurate and tables of the normal distribution are  available in either paper or electronic form.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
 
-
 \subsection{Inference using the normal approximation}
+
 
 A sample proportion can be described as a sample mean. If each success in the melanoma data  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of the 52 numerical outcomes:
 \begin{eqnarray*}
@@ -830,13 +830,12 @@ For nevirapine, more infants than expected experienced virologic failure (60 > 4
 
 \subsection{Fisher's exact test}
 
-If sample sizes are too small, it is not valid to assess independence with the $\chi^2$ test. When expected counts in a table are less than 5, \term{Fisher's exact test} can be used to calculate exact levels of significance. This test is usually applied to $2 \times 2$ tables. Although it is possible to use the test on larger tables, the calculations involved are computationally intensive, and software packages will typically use simulation methods instead. 
+If sample sizes are too small, the $\chi^2$ distribution does not yield accurate $p$-values for  assessing  independence of the row and column variables in a table.  When expected counts in a table are less than 5, \term{Fisher's exact test} is often  used to calculate exact levels of significance. This test is usually applied to $2 \times 2$ tables. It can be applied to larger tables, but the logic behind the test is complex and the calculations involved are computationally intensive,  so this section covers only $2 \times 2$ tables. 
 
-\textit{Clostridium difficile} is a bacterium that causes inflammation of the colon. Antibiotic treatment is typically not effective, particularly for patients that experience multiple recurrences of infection. Infusion of feces from healthy donors has been reported as an effective treatment for recurrent infection. A randomized trial was conducted to compare the efficacy of donor-feces infusion versus vancomycin, the antibiotic typically prescribed to treat \textit{C. difficile }infection. The results of the trial are shown in Table~\ref{fecalStudyResultsTest}.\footnote{These results correspond to the number of patients cured after the first infusion of donor feces and the number of patients cured in the vancomycin-alone group.} The expected values of this table are too small for the $\chi^2$ method to be valid.
 
-%JV: Expected values are 9.3, 6.6, 7.6, 5.4. Need to adjust depending on value decided for using normal approximation.
+\textit{Clostridium difficile} is a bacterium that causes inflammation of the colon. Antibiotic treatment is typically not effective, particularly for patients who experience multiple recurrences of infection. Infusion of feces from healthy donors has been reported as an effective treatment for recurrent infection. A randomized trial was conducted to compare the efficacy of donor-feces infusion versus vancomycin, the antibiotic typically prescribed to treat \textit{C. difficile }infection. The results of the trial are shown in Table~\ref{fecalStudyResultsTest}.\footnote{These results correspond to the number of patients cured after the first infusion of donor feces and the number of patients cured in the vancomycin-alone group.} A brief calculation shows that all of the expected cell counts are less than 10, so the $\chi^2$ test should not be used as a test for association. 
 
-Under the null hypothesis, the cure rates for the fecal infusion and fecal infusion groups are equal; i.e., individuals in one group are just as likely to be cured as individuals in the other group. Suppose the probability that an individual is cured given they were assigned to the fecal infusion group is $p_1$ and the probability an individual is cured given they were assigned to the vancomycin group is $p_2$. Researchers are interested in testing the null hypothesis $H_0$: $p_1 = p_2$.
+Under the null hypothesis, the probabilities of cure in the fecal infusion and vancomycin groups are equal; i.e., individuals in one group are just as likely to be cured as individuals in the other group. Suppose the probability that an individual is cured, given that he or she was assigned to the fecal infusion group, is $p_1$ and the probability an individual is cured in the vancomycin group is $p_2$. Researchers were interested in testing the null hypothesis $H_0$: $p_1 = p_2$.
 
 %data from \medicine\feces_infusion
 
@@ -855,21 +854,15 @@ Under the null hypothesis, the cure rates for the fecal infusion and fecal infus
 	\label{fecalStudyResultsTest}
 \end{table}
 
-The $p$-value is the probability of observing results as or more extreme than those observed, if the null hypothesis is true. Previously discussed methods for significance testing have relied on calculating a test statistic associated with a defined sampling distribution, then obtaining $p$-values from tail areas on the distribution. 
+The $p$-value is the probability of observing results as or more extreme than those observed in the study under  the assumption that the null hypothesis is true. Previously discussed methods for significance testing have relied on calculating a test statistic associated with a defined sampling distribution, then obtaining $p$-values from tail areas on the distribution.  Fisher's exact test uses a similar  approach, but introduces a new sampling distribution.  The $p$-value for Fisher's exact test is calculated by adding together the individual conditional probabilities of tables that are as or more extreme than observed table under the null hypothesis, given that the row and column totals in the table are held constant, i.e., given that the marginal totals are considered fixed.
 
-Fisher's exact test uses a different approach; the $p$-value is calculated by adding together the individual probabilities of obtaining each result that is as or more extreme than those observed, given fixed marginal totals. 
-
-\begin{itemize}
-	\item A single result is defined as the unique combination of values in the four main cells when the marginal totals are held constant. If the margins are fixed, any single table can be identified from knowing just one of the values in the table. For example, if the marginal sums in Table~\ref{fecalStudyResultsTest} are known, along with the value in one cell (e.g., the upper right equals 3), it is possible to calculate the values in the other three cells. 
-	
-	\item Extreme results are defined in relation to the null hypothesis of $p_1 = p_2$. In the fecal infusion data, about $(0.50)(17) = 8.5$ cured patients are expected in each treatment group under the null hypothesis. It would be considered extreme if all 17 cured patients were in the fecal infusion group and 0 in the vancomycin group; an extreme result in the other direction would be, for instance, 1 cured patient in the fecal infusion group and 16 in the vancomycin group.
-\end{itemize}
+When the row and column totals are held constant, the value of any one cell in the table determines the rest of the entries.  For example, if the marginal sums in Table~\ref{fecalStudyResultsTest} are known, along with the value in one cell (e.g., the upper right equals 3), it is possible to calculate the values in the other three cells. Extreme results are those which contradict the null hypothesis of $p_1 = p_2$. In the fecal infusion data, the proportion cured is $17/29 = 0.586$; since 16 patients were treated with fecal infusion, under the null hypothesis of no difference in the population proportion cured, one would expect $(16)(0.586) = 9.38$ to be cured in that group.  The 13 observed `cures' in the fecal infusion group is extreme in the direction of more being cured than expected if the cure proportions were the same. The most extreme result with 17 total cured patients favoring the fecal infusion treatment would be if all 16 patients in that group were cured and only 1 in the vancomycin group; an extreme result in the other direction would occur if of the 17 cures, all 13 patients in the vancomycin group were cured and 4 in the fecal infusion group were cured. 
 
 \newpage
 
 \begin{example}{Of the 17 patients cured, 13 were in the fecal infusion group and 4 were in the vancomycin group. Assume that the marginal totals are fixed (i.e., 17 patients were cured, 12 were uncured, and 16 patients were in the fecal infusion group, while 13 were in the vancomycin group). Enumerate all possible sets of results that are more extreme in the same direction than what was observed.}
 	
-The observed results show a case of $\hat{p}_1 > \hat{p}_2$; results that are more extreme consist of cases where more than 13 cured patients were in the fecal infusion group. Under the assumption that the total number of cured patients is constant at 17 and that only 16 patients were assigned to the fecal infusion group (out of 29 patients total), more extreme results are represented by cases where 14, 15, or 16 cured patients were in the fecal infusion group. The following tables illustrate the unique combinations of values $a, b, c, d$ corresponding to those extreme results.
+The observed results show a case of $\hat{p}_1 > \hat{p}_2$; results that are more extreme consist of cases where more than 13 cured patients were in the fecal infusion group. Under the assumption that the total number of cured patients is constant at 17 and that only 16 patients were assigned to the fecal infusion group (out of 29 patients total), more extreme results are represented by cases where 14, 15, or 16 cured patients were in the fecal infusion group. The following tables illustrate the unique combinations of values for the 4 table cells corresponding to those extreme results.
 
 \begin{table}[h]
 	\centering
@@ -921,7 +914,7 @@ The observed results show a case of $\hat{p}_1 > \hat{p}_2$; results that are mo
 
 \subsubsection{Calculating a one-sided $p$-value}
 
-Suppose that researchers were interested in testing the null hypothesis against the one-sided alternative, $H_A: p_1 > p_2$. To calculate the one-sided $p$-value, sum the probabilities of each table representing results as or more extreme than those observed, in the same direction; specifically, sum the probabilities of observing the tables in Example~\ref{fecalStudyExtreme} and of observing Table~\ref{fecalStudyResultsTest}.
+Suppose that researchers were interested in testing the null hypothesis against the one-sided alternative, $H_A: p_1 > p_2$. To calculate the one-sided $p$-value, sum the probabilities of each table representing results as or more extreme than those observed; specifically, sum the probabilities of observing the tables in Example~\ref{fecalStudyExtreme} and of 0observing Table~\ref{fecalStudyResultsTest}.
 
 \begin{table}[h]
 	\centering
@@ -939,22 +932,21 @@ Suppose that researchers were interested in testing the null hypothesis against 
 \end{table}
 
 
-The probability of observing a table with cells $a, b, c, d$ given fixed marginal totals $a+b$, $c+d$, $a + c$, and $b +d$ follows the hypergeometric distribution.
+The probability of observing a table with cells $a, b, c, d$ given fixed marginal totals $a+b$, $c+d$, $a + c$, and $b +d$ follows the hypergeometric distribution.  The hypergeometric distribution was introduced in Section~\ref{hypergeometric}.
 
 \[P(a,b,c,d) = \text{HGeom}(a+b, c+d, a+c) = \dfrac{ {a+b \choose a} {c+d \choose c}}{{n \choose a+c}} = \dfrac{(a+b)! \text{ } (c+d)! \text{ } (a+c)! \text{ } (b+d)!}{a! \text{ } b! \text{ } c! \text{ } d! \text{ } n!}\]
 
 \begin{example}{Calculate the probability of observing Table~\ref{fecalStudyResultsTest}, assuming the margin totals are fixed.}
 
-\[P(13, 3, 4, 9) = \dfrac{ {16 \choose 13} {13 \choose 4}}{{29 \choose 17}} = \dfrac{16! \text{ } 13! \text{ } 17! \text{ } 12!}{13! \text{ } 3! \text{ } 4! \text{ } 9! \text{ } 29!} = 7.71 \times 10^{-3}\]
+\[P(13, 3, 4, 9) = \dfrac{ {16 \choose 13} {13 \choose 4}}{{29 \choose 17}} = \dfrac{16! \text{ } 13! \text{ } 17! \text{ } 12!}{13! \text{ } 3! \text{ } 4! \text{ } 9! \text{ } 29!} = 7.71 \times 10^{-3}.\]
 
-The value .0077 represents the probability of observing 13 cured patients out of 16 individuals in the fecal infusion group, given that there are a total of 29 patients and 17 were cured overall.
+The value 0.0077 represents the probability of observing 13 cured patients out of 16 individuals in the fecal infusion group and 1 cured in the vancomycin group, given that there are a total of 29 patients and 17 were cured overall.
 \end{example}
 
 \begin{example}{Evaluate the statistical significance of the observed data in Table~\ref{fecalStudyResultsTest} using the one-sided alternative $H_A: p_1 > p_2$.}
 
 Calculate the probability of the tables from Example~\ref{fecalStudyExtreme}. Generally, the formula for these tables is 
 \[P(a, b, c, d) = \dfrac{ {a+b \choose a} {c+d \choose c}}{{n \choose a+c}} = \dfrac{ {16 \choose a} {13 \choose c}}{{29 \choose 17}},\] 
-
 since the marginal totals from Table~\ref{fecalStudyResultsTest} are fixed. The value $a$ ranges from 14, 15, 16, while $c$ ranges from 3, 2, 1.
 \begin{align*}
 P(14, 2, 3, 10) &= \dfrac{ {16 \choose 14} {13 \choose 3}}{{29 \choose 17}} = 6.61 \times 10^{-4} \\
@@ -971,7 +963,7 @@ The results are significant at the $\alpha = 0.05$ significance level. There is 
 
 \subsubsection{Calculating a two-sided $p$-value}
 
-There are various methods for calculating a two-sided $p$-value in the Fisher's exact test setting. One common method used by various statistical computing packages such as \textsf{R} is to classify "more extreme" tables as all tables with probabilities less than that of the observed table, in both directions. The two-sided $p$-value is the sum of probabilities for the qualifying tables.
+There are various methods for calculating a two-sided $p$-value in the Fisher's exact test setting. When the test is calculated by hand, the most common way to calculate a two-sided $p$-value is to double the one-sided $p$-value. One other common method used by various statistical computing packages such as \textsf{R} is to classify "more extreme" tables as all tables with probabilities less than that of the observed table, in both directions. The two-sided $p$-value is the sum of probabilities for the qualifying tables.  That approach is illustrated in the next example.
 
 \begin{example}{Evaluate the statistical significance of the observed data in Table~\ref{fecalStudyResultsTest} using the two-sided alternative $H_A: p_1 \neq p_2$.}
 	
@@ -1030,23 +1022,20 @@ The table with 6 cured patients in the fecal infusion group has probability 0.01
 
 Thus, the two-sided $p$-value for these data equals $0.0084 + (3.5 \times 10^{-5}) + (1.09 \times 10^{-3}) = 0.0095$. The results are significant at the $\alpha = 0.01$ significance level, and there is evidence to support the efficacy of donor-feces infusion as a treatment for recurrent \textit{C. difficile} infection.
 
-\textit{JV: According to Figure 2 of the paper, though, they report a $p$-value of 0.008, which corresponds to the one-sided $p$-value? Results in R agree with the hand calculations.}
-	
 \end{example}
 
 \textit{JV: Did not look for a good example for a guided practice yet, as the table needs to be relatively small for the hand calculation method to be reasonable.}
 
+
 %__________________
-\section[Testing for goodness of fit using chi-square (special topic)]{Testing for goodness of fit using chi-square \\(special topic)}
+\section[Chi-square tests for the fit of a distribution. (special topic)]{Chi-square tests for the fit of a distribution \\(special topic)}
 \label{oneWayChiSquare}
 
-The $\chi^2$ test can also be used to assess a null model when data for a single variable is sorted across several categories. This technique is commonly used in two circumstances: 1) Given a sample of cases that can be classified into several groups, determine if the sample is representative of the general population, 2) Evaluate whether data resemble a particular distribution. 
+The $\chi^2$ test can also be used to examine the appropriateness of hypothesized distribution for a dataset, most commonly when a set of observations falls naturally into categories as in the examples discussed in this section. As with testing in the two-way table setting, expected counts are calculated based on the assumption that the hypothesized distribution is correct, and the statistic is based on the discrepancies between observed and expected counts. The  $\chi^2$ sampling distribution for the test statistic is reasonably accurate when each expected count is at least 5 and follows a $\chi^2$ distribution with $k-1$ degrees of freedom, where $k$ is the number of categories.  Some guidelines recommend that no more than 1/5 of the cells have expected counts less than 5, but the stricter requirement that all cells have expected counts greater than 5 is safer.
 
-As with testing in the two-way table setting, expected counts are calculated based on the assumption that the null hypothesis is true. It is valid to apply the $\chi^2$ distribution when each expected count is at least 5. In this setting, the $\chi^2$ statistic follows a $\chi^2$ distribution with $k-1$ degrees of freedom, where $k$ is the number of categories. 
+When used in this setting the $\chi^2$ test is often called a `goodness-of-fit' test, a term that is often misunderstood.  Small p-values of the test suggest evidence that a hypothesized distribution is not a good model, but non-significant $p$-values do not imply that the hypothesized distribution is the best model for the data, or even a good one.  In the logic of hypothesis testing, failure to reject a null hypothesis cannot be viewed as evidence that the null hypothesis is true.
 
-\begin{example} {It is not clear that the participants in the FAMuSS study are representative of the general United States population. For example, are the participants racially representative of the general population? Assess whether the proportions from each race in the FAMuSS data are indicative of a random sample from the population.
-		
-The following data are from the U.S. Census Bureau report from 2004, the year that the FAMusSS study was published.\footnote{The US Census Bureau considers Hispanic as a classification separate from race, on the basis that Hispanic individuals can be any race. In order to facilitate the comparison with the FAMuSS data, participants identified as "Hispanic" have been merged with the "Other" category.}
+\begin{example} {The participants in the FAMuSS study were volunteers at a university, so did not come from a random sample of the US population.  The participants may not be representative of the general United States population. The $chi^2$ test can be used to test the null hypothesis that the participants racially representative of the general population.  Table~\ref{famussRacialProportions} shows the number observed by racial category in FAMuSS and the proportions of the US population in each of those categories.
 
 \begin{table}[h]
 	\centering
@@ -1059,11 +1048,11 @@ The following data are from the U.S. Census Bureau report from 2004, the year th
 		\hline
 	\end{tabular}
 	\caption{Representation by race in the FAMuSS study versus the general population.}
+    \label{famussRacialProportions}
 \end{table}
-		
 }
 
-Calculate expected counts under the null hypothesis that the sample proportions should equal the population proportions. For example, since African Americans are 0.128 of the general proportion, $(0.128)(595) = 76.16$ African Americans are expected in the sample.
+Under the null hypothesis the sample proportions should equal the population proportions. For example, since African Americans are 0.128 of the general proportion, $(0.128)(595) = 76.16$ African Americans would be expected in the sample.  The rest of the expected counts are shown in Table~\ref{actualExpectedRacialCountsFamuss}
 
 \begin{table}[h]
 	\centering
@@ -1076,16 +1065,17 @@ Calculate expected counts under the null hypothesis that the sample proportions 
 		\hline
 	\end{tabular}
 	\caption{Actual and expected counts in the FAMuSS data.}
+    \label{actualExpectedRacialCountsFamuss}
 \end{table}	
 
-Each expected count is greater than or equal to 5; proceed with the $\chi^2$ test.
+Since each expected count is greater than or equal to 5 the  $\chi^2$ distribution can be used to calculate a $p$-value for the test.
 \begin{align*}
 \chi^2 &= \sum_{\text{all cells}} \frac{(\text{observed} - \text{expected})^2}{\text{expected}} \\
 &= \dfrac{(27-76.16)^2}{76.16} + \dfrac{(55-5.95)^2}{5.95} + \dfrac{(467-478.38)^2}{478.38} + \dfrac{(46-34.51)^2}{34.51} \\
 &=440.18
 \end{align*}	
 
-There are 3 degrees of freedom, since $k = 4$. The $\chi^2$ statistic is extremely large, and the associated tail area is smaller than 0.001. There is sufficient evidence to reject the null hypothesis that the sample is representative of the general population. A comparison of the observed and expected values (or the residuals) indicates that the largest discrepancy is with the over-representation of Asian participants.
+There are 3 degrees of freedom, since $k = 4$. The $\chi^2$ statistic is extremely large, and the associated tail area is smaller than 0.001. There is more than sufficient evidence to reject the null hypothesis that the sample is representative of the general population. A comparison of the observed and expected values (or the residuals) indicates that the largest discrepancy is with the over-representation of Asian participants.
 \end{example}
 
 %2004 US Census data: https://www.census.gov/population/pop-profile/dynamic/RACEHO.pdf
@@ -1103,7 +1093,7 @@ The Mendelian proportions are 25\%, 50\%, and 25\%. Thus, the expected counts in
 &=11.59
 \end{align*}
 
-There are 2 degrees of freedom, since $k = 2$. The $p$-value is between 0.005 and 0.001, which is greater than $\alpha = 0.0001$. There is insufficient evidence to reject the null hypothesis that the offspring ratios correspond to expected Mendelian frequencies.
+There are 2 degrees of freedom, since $k = 3$. The $p$-value is between 0.005 and 0.001, which is greater than $\alpha = 0.0001$. There is insufficient evidence to reject the null hypothesis that the offspring ratios correspond to expected Mendelian frequencies.
 \end{example}
 
 \begin{comment}
@@ -1234,7 +1224,6 @@ Since the minimum bin count condition was satisfied, the chi-square distribution
 \label{jurorChiSquareSimulated}
 \end{figure}
 
-\end{comment}
 
 %__________________
 \section{Randomization test (special topic)}
@@ -1280,7 +1269,7 @@ Calculate the test statistic, $z$:
 	
 This $z$-score has area 0.0853 in the right tail. The $p$-value is 0.176, twice the single-tail area. There is insufficient evidence to reject the null hypothesis that there is a difference in survival rates between the treatment and control groups.\footnote{It is also valid to use a $\chi^2$ test to assess significance. The $\chi^2$ statistic of 1.87 and degrees of freedom 1 corresponds to a $p$-value between 0.1 and 0.2. From software, the exact $p$-value is 0.17.}
 
-%chi-squarate p-value without continuity correction	
+%chi-square p-value without continuity correction	
 
 \begin{figure}[ht]
 	\centering
@@ -1336,3 +1325,27 @@ In general, small sample methods produce more accurate results since they rely o
 \subsection{Randomization for two-way tables}
 
 Randomization methods may also be used for contingency tables. This involves creating randomized contingency tables and computing $\chi^2$ statistics, then examining the null distribution. This randomization approach is valid for any sized sample, and it will be more accurate for cases where one or more expected bin counts do not meet the minimum threshold of~5. When the minimum threshold is met, the simulated null distribution will very closely resemble the $\chi^2$ distribution. 
+
+\end{comment}
+
+\section{Notes}
+
+\begin{comment}
+
+Discussion of FE and conditioning.
+
+What to do about the simulation methods
+
+
+editing here to see what is  happening.
+
+Can we add material here as if editing and save later
+
+
+do we see diff
+
+
+\end{comment}
+
+
+    
