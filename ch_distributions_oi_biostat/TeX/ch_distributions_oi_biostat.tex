@@ -358,7 +358,7 @@ Substituting $n$ choose $k$ for the number of scenarios and $p^k(1-p)^{n-k}$ for
 
 \begin{termBox}{\tBoxTitle{Binomial distribution} Suppose the probability of a single trial being a success is $p$. The probability of observing exactly $k$ successes in $n$ independent trials is given by\vspace{-1mm}
 		\begin{eqnarray}
-		{n\choose k}p^k(1-p)^{n-k} = \frac{n!}{k!(n-k)!}p^k(1-p)^{n-k}
+		P(X = k) = {n\choose k}p^k(1-p)^{n-k} = \frac{n!}{k!(n-k)!}p^k(1-p)^{n-k}
 		\label{binomialFormula}
 		\end{eqnarray}
 		Additionally, the mean, variance, and standard deviation of the number of observed successes are\vspace{-2mm}
@@ -960,9 +960,9 @@ The geometric distribution from Example~\ref{waitForShocker} is shown in Figure~
 \end{figure}
 
 \begin{termBox}{\tBoxTitle{Geometric Distribution\index{distribution!geometric|textbf}}
-If the probability of a success in one trial is $p$ and the probability of a failure is $1-p$, then the probability of finding the first success in the $n^{th}$ trial is given by\vspace{-1.5mm}
+If the probability of a success in one trial is $p$ and the probability of a failure is $1-p$, then the probability of finding the first success in the $k^{th}$ trial is given by\vspace{-1.5mm}
 \begin{eqnarray*}
-(1-p)^{n-1}p
+P(X = k) = (1-p)^{k-1}p
 \end{eqnarray*}
 The mean (i.e. expected value), variance, and standard deviation of this wait time are given by\vspace{-2.5mm}
 \begin{align*}
@@ -986,7 +986,7 @@ If individuals were examined until one did not administer the most severe shock,
 \end{exercise}
 
 \begin{example}{What is the probability of the first success occurring within the first 4 people?} \label{marglimFirstSuccessIn4}
-This is the probability it is the first ($n=1$), second ($n=2$), third ($n=3$), or fourth ($n=4$) trial that is the first success, which represent four disjoint outcomes. Compute the probability of each case and add the separate results:
+This is the probability it is the first ($k=1$), second ($k=2$), third ($k=3$), or fourth ($k=4$) trial that is the first success, which represent four disjoint outcomes. Compute the probability of each case and add the separate results:
 \begin{eqnarray*}
 &&P(X=1, 2, 3,\text{ or }4) \\
 	&& \quad = P(X=1)+P(X=2)+P(X=3)+P(X=4) \\
@@ -1009,7 +1009,7 @@ Note that there are differing conventions for defining the geometric distributio
 
 \index{distribution!negative binomial|(}
 
-The geometric distribution describes the probability of observing the first success on the $n^{th}$ trial. The \termsub{negative binomial distribution}{distribution!negative binomial} is more general: it describes the probability of observing the $k^{th}$ success on the $n^{th}$ trial.
+The geometric distribution describes the probability of observing the first success on the $k^{th}$ trial. The \termsub{negative binomial distribution}{distribution!negative binomial} is more general: it describes the probability of observing the $r^{th}$ success on the $k^{th}$ trial.
 
 Suppose a research assistant needs to successfully extract RNA from four plant samples before leaving the lab for the day. Yesterday, it took 6 attempts to attain the fourth successful extraction. The last extraction must have been a success; that leaves three successful extractions and two unsuccessful ones that make up the first five attempts. There are ten possible sequences, which are shown in \ref{successFailureOrdersForRNAExtractions}. 
 
@@ -1041,32 +1041,32 @@ Suppose a research assistant needs to successfully extract RNA from four plant s
 
 If the probability of a successful extraction is $p=0.8$, what is the probability that it takes exactly six attempts to reach the fourth successful extraction? As expressed by \ref{probOfEachSeqOfSixTriesToGetFourSuccesses}, there are 10 different ways that this event can occur. The probability of the first sequence was identified in Guided Practice~\ref{probOfEachSeqOfSixTriesToGetFourSuccesses} as 0.0164, and each of the other sequences have the same probability. Thus, the total probability is $(10)(0.0164) = 0.164$.
 
-A general formula for computing a negative binomial probability can be generated using similar logic as for binomial probability. The probability is comprised of two pieces: the probability of a single sequence of events, and then the number of possible sequences. The probability of observing $k$ successes out of $n$ attempts can be expressed as $(1-p)^{n-k} p^{k}$. Next, identify the number of possible sequences. In the above example, 10 sequences were identified by fixing the last observation as a success and looking for ways to arrange the other observations. In other words, the goal is to arrange $k-1$ successes in $n-1$ trials. This can be expressed as: \[{n-1 \choose k-1} = \frac{(n-1)!}{(k-1)! \left((n-1) - (k-1)\right)!} = \frac{(n-1)!}{(k-1)! \left(n - k\right)!}\]
+A general formula for computing a negative binomial probability can be generated using similar logic as for binomial probability. The probability is comprised of two pieces: the probability of a single sequence of events, and then the number of possible sequences. The probability of observing $r$ successes out of $k$ attempts can be expressed as $(1-p)^{k-r} p^{r}$. Next, identify the number of possible sequences. In the above example, 10 sequences were identified by fixing the last observation as a success and looking for ways to arrange the other observations. In other words, the goal is to arrange $r-1$ successes in $k-1$ trials. This can be expressed as: \[{k-1 \choose r-1} = \frac{(k-1)!}{(r-1)! \left((k-1) - (r-1)\right)!} = \frac{(k-1)!}{(r-1)! \left(k - r\right)!}\]
 
 \begin{termBox}{\tBoxTitle{Negative binomial distribution}
-		The negative binomial distribution describes the probability of observing the $k^{th}$ success on the $n^{th}$ trial, for independent trials:
+		The negative binomial distribution describes the probability of observing the $r^{th}$ success on the $k^{th}$ trial, for independent trials:
 		\begin{eqnarray}
-		P(\text{the $k^{th}$ success on the $n^{th}$ trial}) = {n-1 \choose k-1} p^{k}(1-p)^{n-k}
+		P(X = k) = {k-1 \choose r-1} p^{r}(1-p)^{k-r}
 		\label{negativeBinomialEquation}
 		\end{eqnarray}
 		where $p$ is the probability an individual trial is a success.
 		
 		The mean and variance are given by\vspace{-2.5mm}
 		\begin{align*}
-		\mu &= \frac{k}{p}
-		&\sigma^2&=\frac{k(1-p)}{p^2}
+		\mu &= \frac{r}{p}
+		&\sigma^2&=\frac{r(1-p)}{p^2}
 		\end{align*}
 		
-		A negative binomial random variable $X$ can be expressed as $X \sim \textrm{NB}(k, p)$.
+		A negative binomial random variable $X$ can be expressed as $X \sim \textrm{NB}(r, p)$.
 		
 		}
 \end{termBox}
 
 \marginpar[\raggedright\vspace{-5mm}
 
-$\textrm{NB}(k, p)$\vspace{1mm}\\\footnotesize Neg. Bin. dist.\\with $k$ successes\\\& $p$ prob. of success]{\raggedright\vspace{-5mm}
+$\textrm{NB}(r, p)$\vspace{1mm}\\\footnotesize Neg. Bin. dist.\\with $k$ successes\\\& $p$ prob. of success]{\raggedright\vspace{-5mm}
 	
-	$\textrm{NB}(k, p)$\vspace{1mm}\\\footnotesize Neg. Bin. dist.\\with $k$ successes\\\& $p$ prob. of success} 
+	$\textrm{NB}(r, p)$\vspace{1mm}\\\footnotesize Neg. Bin. dist.\\with $k$ successes\\\& $p$ prob. of success} 
 
 \begin{tipBox}{\tipBoxTitle{Is it negative binomial? Four conditions to check.}
 		(1) The trials are independent. \\
@@ -1077,9 +1077,9 @@ $\textrm{NB}(k, p)$\vspace{1mm}\\\footnotesize Neg. Bin. dist.\\with $k$ success
 
 
 \begin{example}{Calculate the probability of a fourth successful extraction on the fifth attempt.}
-The probability of a single success is $p=0.8$, the number of successes is $k=4$, and the number of necessary attempts under this scenario is $n=5$.
+The probability of a single success is $p=0.8$, the number of successes is $r=4$, and the number of necessary attempts under this scenario is $k=5$.
 \begin{align*}
-{n-1 \choose k-1}p^k(1-p)^{n-k}\ 
+{k-1 \choose r-1}p^r(1-p)^{k-r}\ 
 	=\ \frac{4!}{3!1!} (0.8)^4 (0.2)\ 
 	=\ 4 \times 0.08192\ 
 	=\ 0.328
@@ -1087,9 +1087,9 @@ The probability of a single success is $p=0.8$, the number of successes is $k=4$
 \end{example}
 
 \begin{exercise}
-Assume that each extraction attempt is independent. What is the probability that the fourth success occurs within 5 attempts?\footnote{If the fourth success ($k=4$) is within five attempts, it either took four or five tries ($n=4$ or $n=5$):
+Assume that each extraction attempt is independent. What is the probability that the fourth success occurs within 5 attempts?\footnote{If the fourth success ($r=4$) is within five attempts, it either took four or five tries ($k=4$ or $k=5$):
 \begin{align*}
-& P(n=4\text{ OR }n=5) = P(n=4) + P(n=5) \\
+& P(k=4\text{ OR }k=5) = P(k=4) + P(k=5) \\
 &\quad = {4-1 \choose 4-1} 0.8^4 + {5-1 \choose 4-1} (0.8)^4(1-0.8) = 1\times 0.41 + 4\times 0.082 = 0.41 + 0.33 = 0.74
 \end{align*}}
 \end{exercise}
@@ -1099,10 +1099,10 @@ The binomial distribution is used when considering the number of successes for a
 \end{tipBox}
 
 \begin{exercise}
-On 70\% of days, a hospital admits at least one heart attack patient. On 30\% of the days, no heart attack patients are admitted. Identify each case below as a binomial or negative binomial case, and compute the probability. (a) What is the probability the hospital will admit a heart attack patient on exactly three days this week? (b) What is the probability the second day with a heart attack patient will be the fourth day of the week? (c) What is the probability the fifth day of next month will be the first day with a heart attack patient?\footnote{In each part, $p=0.7$. (a) The number of days is fixed, so this is binomial. The parameters are $k=3$ and $n=7$: 0.097. (b) The last "success" (admitting a patient) is fixed to the last day, so apply the negative binomial distribution. The parameters are $k=2$, $n=4$: 0.132. (c) This problem is negative binomial with $k=1$ and $n=5$: 0.006. Note that the negative binomial case when $k=1$ is the same as using the geometric distribution.}
+On 70\% of days, a hospital admits at least one heart attack patient. On 30\% of the days, no heart attack patients are admitted. Identify each case below as a binomial or negative binomial case, and compute the probability. (a) What is the probability the hospital will admit a heart attack patient on exactly three days this week? (b) What is the probability the second day with a heart attack patient will be the fourth day of the week? (c) What is the probability the fifth day of next month will be the first day with a heart attack patient?\footnote{In each part, $p=0.7$. (a) The number of days is fixed, so this is binomial. The parameters are $k=3$ and $n=7$: 0.097. (b) The last "success" (admitting a patient) is fixed to the last day, so apply the negative binomial distribution. The parameters are $r=2$, $k=4$: 0.132. (c) This problem is negative binomial with $r=1$ and $k=5$: 0.006. Note that the negative binomial case when $r=1$ is the same as using the geometric distribution.}
 \end{exercise}
 
-In \textsf{R}, the negative binomial distribution is defined as the number of failures that occur before a target number of successes is reached; i.e., $n - k$. In this text, the distribution is defined in terms of the total number of trials required to observe $k$ successes, where the last trial is necessarily a success. 
+In \textsf{R}, the negative binomial distribution is defined as the number of failures that occur before a target number of successes is reached; i.e., $k - r$. In this text, the distribution is defined in terms of the total number of trials required to observe $k$ successes, where the last trial is necessarily a success. 
 
 \index{distribution!negative binomial|)}
 
@@ -1136,7 +1136,7 @@ Suppose that out of 9 deer, 4 are marked. What is the probability of observing 1
 \begin{termBox}{\tBoxTitle{Hypergeometric distribution}
 		The hypergeometric distribution describes the probability of observing $k$ successes in a sample of size $n$, from a population of size $N$, where there are $m$ successes, and individuals are sampled without replacement:
 		\begin{align*}
-		P(k \textrm{ successes}) = \dfrac{{m \choose k} {N - m \choose n-k}}{{N \choose n}}
+		P(X = k) = \dfrac{{m \choose k} {N - m \choose n-k}}{{N \choose n}}
 		\label{hypergeometricEquation}
 		\end{align*}
 		
