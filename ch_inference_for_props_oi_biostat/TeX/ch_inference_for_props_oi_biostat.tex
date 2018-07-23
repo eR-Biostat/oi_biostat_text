@@ -1,4 +1,4 @@
-%!TEX root=../../main.tex
+%TEX root=../../main.tex
 
 \chapter{Inference for categorical data}
 \label{inferenceForCategoricalData}
@@ -24,7 +24,6 @@ The data are from this study are binomial data, with success defined as a good r
 Inference about $p$ is based on the sample proportion $\hat{p}$, where $\hat{p} = X/n$. In this case, $\hat{p} = 21/52 = 0.404$. If the sample proportion is nearly normal distributed, the normal approximation to the binomial distribution can be used to conduct inference; this method is commonly used since normal probability is accurate and tables of the normal distribution are  available in either paper or electronic form.  When $X$ does not have an approximately normal distribution, exact inference can  based on the binomial distribution for $X$.  Both the normal approximation and exact methods are covered in this chapter.
 
 \subsection{Inference using the normal approximation}
-
 
 A sample proportion can be described as a sample mean. If each success in the melanoma data  is represented as a \texttt{1} and each failure as a \texttt{0}, then the sample proportion is the mean of the 52 numerical outcomes:
 \begin{eqnarray*}
@@ -189,27 +188,6 @@ When the confidence coefficient is 95\%, 1.96 can replaced by 2 and the formula 
 \end{align*}
 This remarkably simple formula is often used by practitioners for a quick estimate of sample size.
 
-% I  like this example but it does not match our content.  Perhaps we can make it a bio lab
-\begin{comment}
-\begin{example}{A manager is about to oversee the mass production of a new tire model in her factory, and she would like to estimate what proportion of these tires will be rejected through quality control. The quality control team has monitored the last three tire models produced by the factory, failing 1.7\% of tires in the first model, 6.2\% of the second model, and 1.3\% of the third model. The manager would like to examine enough tires to estimate the failure rate of the new tire model to within about 2\% with a 90\% confidence level.
-\begin{enumerate}
-\setlength{\itemsep}{0mm}
-\item[(a)] There are three different failure rates to choose from. Perform the sample size computation for each separately, and identify three sample sizes to consider.
-\item[(b)] The sample sizes vary widely. Which of the three would you suggest using? What would influence your choice?
-\end{enumerate}}
-(a)~For a 90\% confidence interval, $z^{\star} = 1.65$, and since an estimate of the proportion 0.017 is available, we'll use it in the margin of error formula: %use theFor the 1.7\% estimate of $p$, we estimate the appropriate sample size as follows:
-\begin{align*}
-1.65\times \sqrt{\frac{0.017(1-0.017)}{n}} &\ < \ 0.02 \\
-113.7 &\ < \ n
-\end{align*}
-For sample size calculations, we always round up, so the first tire model suggests 114 tires would be sufficient.
-
-A similar computation can be accomplished using 0.062 and 0.013 for $p$, and you should verify that using these proportions results in minimum sample sizes of 396 and~88 tires, respectively.
-
-(b) We could examine which of the old models is most like the new model, then choose the corresponding sample size. Or if two of the previous estimates are based on small samples while the other is based on a larger sample, we should consider the value corresponding to the larger sample. There are also other reasonable approaches.
-\end{example}
-
-\end{comment}
 
 \index{data!Congress approval rating|(}
 
@@ -260,6 +238,7 @@ where $p_1$ and $p_2$ are the population proportions, and $n_1$ and $n_2$ are th
 
 
 \subsection{Confidence intervals for $p_1 - p_2$}
+\label{confidenceIntervalsDifferenceProportions}
 
 When calculating confidence intervals for a difference of two proportions using the normal approximation to the binomial, the two sample proportions are used to verify the success-failure condition and to compute the standard error.
 
@@ -364,13 +343,6 @@ Calculate the test statistic $z$:
 	
 The two-sided $p$-value is $P|Z| \ge 0.17 = 0.8650$,  which is greater than 0.05. There is insufficient evidence to reject the null hypothesis; the observed difference in breast cancer death rates is reasonably explained by chance. 	
 
-% removed figure because it does not add much.
-
-\begin{comment}
-\begin{center}
-	\includegraphics[width=0.6\textwidth]{ch_inference_for_props_oi_biostat/figures/mammograms/mammogramPValue}
-\end{center}	
-\end{comment}
 
 Evaluating medical treatments typically requires accounting for additional evidence that cannot be evaluated from a statistical test. For example, if mammograms are much more expensive than a standard screening and do not offer clear benefits, there is reason to recommend standard screenings over mammograms. This study also found that a higher proportion of diagnosed breast cancer cases in the mammogram screening arm (3250 in the mammogram group vs 3133 in the physical exam group), despite the nearly equal number of breast cancer deaths.  The investigators inferred that mammogram may cause over-diagnosis of breast cancer, a phenomenon where a breast cancer diagnosed with mammogram and subsequent biopsy may never become symptomatic. The possibility of over-diagnosis is one of the reasons mammogram screening remains controversial.
 
@@ -401,77 +373,6 @@ With 95\% confidence the difference in the probability of death is between -0.15
 \index{data!breast cancer|)}
 \index{data!mammography|)}
 
-%JV: Commenting out these sections because I want to get to the contigency table method.
-
-\begin{comment}
-
-\subsection{More on 2-proportion hypothesis tests (special topic)}
-
-When we conduct a 2-proportion hypothesis test, usually $H_0$ is $p_1 - p_2 = 0$. However, there are rare situations where we want to check for some difference in $p_1$ and $p_2$ that is some value other than 0. For example, maybe we care about checking a null hypothesis where $p_1 - p_2 = 0.1$.\footnote{We can also encounter a similar situation with a difference of two means, though no such example was given in Chapter~\ref{inferenceForNumericalData} since the methods remain exactly the same in the context of sample means. On the other hand, the success-failure condition and the calculation of the standard error vary slightly in different proportion contexts.} In contexts like these, we generally use $\hat{p}_1$ and $\hat{p}_2$ to check the success-failure condition and construct the standard error.
-
-\begin{exercise}\label{carWheelBladeManufacturer}
-A quadcopter company is considering a new manufacturer for rotor blades. The new manufacturer would be more expensive but their higher-quality blades are more reliable, resulting in happier customers and fewer warranty claims. However, management must be convinced that the more expensive blades are worth the conversion before they approve the switch. If there is strong evidence of a more than 3\% improvement in the percent of blades that pass inspection, management says they will switch suppliers, otherwise they will maintain the current supplier. Set up appropriate hypotheses for the test.\footnote{$H_0$: The higher-quality blades will pass inspection just 3\% more frequently than the standard-quality blades. $p_{highQ} - p_{standard} = 0.03$. $H_A$: The higher-quality blades will pass inspection $>$3\% more often than the standard-quality blades. $p_{highQ} - p_{standard} > 0.03$.}
-\end{exercise}
-
-\setlength{\captionwidth}{85mm}
-
-\begin{figure}
-\centering
-\includegraphics[width=0.6\textwidth]{ch_inference_for_props_oi_biostat/figures/quadcopter/quadcopter_david_j}
-\caption{A Phantom quadcopter.\vspace{-1mm} \\
-   -----------------------------\vspace{-2mm}\\
-   {\footnotesize Photo by David J (\oiRedirect{textbook-quadcopter_david_j}{http://flic.kr/p/oiWLNu}). \oiRedirect{textbook-CC_BY_2}{CC-BY 2.0 license.} This photo has been cropped and a border has been added.}}
-\label{quadcopter_david_j}
-\end{figure}
-
-\setlength{\captionwidth}{\mycaptionwidth}
-
-%\Add{In Guided Practice~\ref{qualityCtrlEngHypothesisEval}, the null difference is 0.03. However, in the vast majority of applications for differences in means or proportions, the null difference is~0. While the details for a difference of means does not change if the null difference is zero or non-zero, that is not the case for a difference in proportions. As we'll see in Section~\ref{}, a hypothesis test for a difference in proportions where the null value is 0 requires additional~care.}
-
-\begin{example}{The quality control engineer from Guided Practice~\ref{carWheelBladeManufacturer} collects a sample of blades, examining 1000 blades from each company and finds that 899 blades pass inspection from the current supplier and 958 pass inspection from the prospective supplier. Using these data, evaluate the hypothesis setup of Guided Practice~\ref{carWheelBladeManufacturer} with a significance level of 5\%.}\label{qualityCtrlEngHypothesisEval}
-First, we check the conditions. The sample is not necessarily random, so to proceed we must assume the blades are all independent; for this sample we will suppose this assumption is reasonable, but the engineer would be more knowledgeable as to whether this assumption is appropriate. The success-failure condition also holds for each sample. Thus, the difference in sample proportions, $0.958 - 0.899 = 0.059$, can be said to come from a nearly normal distribution.
-
-The standard error is computed using the two sample proportions since we do not use a pooled proportion for this context:
-\begin{align*}
-SE = \sqrt{\frac{0.958(1-0.958)}{1000} + \frac{0.899(1-0.899)}{1000}} = 0.0114
-\end{align*}
-In this hypothesis test, because the null is that $p_1 - p_2 = 0.03$, the sample proportions were used for the standard error calculation rather than a pooled proportion.
-
-Next, we compute the test statistic and use it to find the p-value, which is depicted in Figure~\ref{bladesTwoSampleHTPValueQC}.
-$$Z = \frac{\text{point estimate} - \text{null value}}{SE} = \frac{0.059 - 0.03}{0.0114} = 2.54$$
-Using the normal model for this test statistic, we identify the right tail area as 0.006. Since this is a one-sided test, this single tail area is also the p-value, and we reject the null hypothesis because 0.006 is less than 0.05. That is, we have statistically significant evidence that the higher-quality blades actually do pass inspection more than 3\% as often as the currently used blades. Based on these results, management will approve the switch to the new supplier.
-\end{example}
-
-\begin{figure}
-\centering
-\includegraphics[width=0.5\textwidth]{ch_inference_for_props_oi_biostat/figures/bladesTwoSampleHTPValueQC/bladesTwoSampleHTPValueQC}
-\caption{Distribution of the test statistic if the null hypothesis was true. The p-value is represented by the shaded area.}
-\label{bladesTwoSampleHTPValueQC}
-\end{figure}
-
-
-
-%%__________________
-%\section{Determining a sample size for an experiment}
-%\label{SampleSizeFor2Proportions}
-%
-%So far we've been focused on controlling the Type~1 Error rate for hypothesis tests. However, when planning an experiment, we often are interested in determining if there is an effect.\footnote{Similar planning is also appropriate for a} There are often two competing considerations:
-%\begin{itemize}
-%\setlength{\itemsep}{0mm}
-%\item We want to collect enough data that we can detect important effects.
-%\item In many contexts, collecting data is expensive, so we don't want to collect more than what we need to detect effects we care about.
-%\end{itemize}
-%The first point is relatively simple: the more data we collect, the more precise our estimates will be, and so we'll be able to detect smaller effects. The second point is more subtle, since we need to determine the size of effects that we care about.
-%
-%%\begin{example}{Alzheimer's disease is a neurological disease. It affects patients mildly at the beginning and eventually leads to dementia. If an Alzheimer's patient lives long enough, the disease will begin affecting bodily functions and ultimately lead to death. It's an extremely serious condition that millions of people, has no cure, and is very expensive to research, partially due to its slow progression. A group of researchers is }
-%\begin{example}{}
-%
-%\end{example}
-%
-%
-%, even large ones, are difficult to detect with small samples, so we should want to collect a larger sample to detect such effects. If we take a very large sample, we might find a statistically significant difference but the magnitude might be so small that it is of no practical value. In this section we describe techniques for selecting an appropriate sample size based on these considerations.
-
-\end{comment}
 
 %__________________
 \section{Inference for two or more groups}
@@ -504,6 +405,7 @@ Hypothesis testing in a two-way table assesses whether the two variables of inte
 \end{exercise}
 
 \subsection{Expected counts}
+\label{twoWayTablesExpectedCounts}
 
 If type of breast cancer screening had no effect on outcome in the mammogram data, what would the expected results be? 
 
@@ -830,7 +732,7 @@ For nevirapine, more infants than expected experienced virologic failure (60 > 4
 
 \subsection{Fisher's exact test}
 
-If sample sizes are too small, the $\chi^2$ distribution does not yield accurate $p$-values for  assessing  independence of the row and column variables in a table.  When expected counts in a table are less than 5, \term{Fisher's exact test} is often  used to calculate exact levels of significance. This test is usually applied to $2 \times 2$ tables. It can be applied to larger tables, but the logic behind the test is complex and the calculations involved are computationally intensive,  so this section covers only $2 \times 2$ tables. 
+If sample sizes are too small, the $\chi^2$ distribution does not yield accurate $p$-values for  assessing  independence of the row and column variables in a table.  When expected counts in a table are less than 10, \term{Fisher's exact test} is often  used to calculate exact levels of significance. This test is usually applied to $2 \times 2$ tables. It can be applied to larger tables, but the logic behind the test is complex and the calculations involved are computationally intensive,  so this section covers only $2 \times 2$ tables. 
 
 
 \textit{Clostridium difficile} is a bacterium that causes inflammation of the colon. Antibiotic treatment is typically not effective, particularly for patients who experience multiple recurrences of infection. Infusion of feces from healthy donors has been reported as an effective treatment for recurrent infection. A randomized trial was conducted to compare the efficacy of donor-feces infusion versus vancomycin, the antibiotic typically prescribed to treat \textit{C. difficile }infection. The results of the trial are shown in Table~\ref{fecalStudyResultsTest}.\footnote{These results correspond to the number of patients cured after the first infusion of donor feces and the number of patients cured in the vancomycin-alone group.} A brief calculation shows that all of the expected cell counts are less than 10, so the $\chi^2$ test should not be used as a test for association. 
@@ -1096,256 +998,148 @@ The Mendelian proportions are 25\%, 50\%, and 25\%. Thus, the expected counts in
 There are 2 degrees of freedom, since $k = 3$. The $p$-value is between 0.005 and 0.001, which is greater than $\alpha = 0.0001$. There is insufficient evidence to reject the null hypothesis that the offspring ratios correspond to expected Mendelian frequencies.
 \end{example}
 
-\begin{comment}
+\section{Outcome-based sampling: Case-control studies\\(special topic)}
+\label{caseControStudies}
 
-%__________________
-\section[Small sample hypothesis testing for a proportion (special topic)]{Small sample hypothesis testing for a proportion\\(special topic)}
-\label{smallSampleHTForProportion}
+\index{case-control studies|(}
 
-In this section we develop inferential methods for a single proportion that are appropriate when the sample size is too small to apply the normal model to $\hat{p}$. Just like the methods related to the $t$-distribution, these methods can also be applied to large samples.
+\subsection{Introduction}
 
-\subsection{When the success-failure condition is not met}
+The techniques so far in this chapter have often relied on the assumption that the data were collected using random sampling from a population.  When cases come from a random sample, the sample proportion of observations in with a particular outcome should accurately estimate the population proportion in large enough samples.  When studying rare outcomes, however, moderate sized samples may contain few or none of the outcomes.  Persistent pulmonary hypertension of the newborn (PPHN) is a dangerous condition occurring in which the blood vessels in the lungs of a newborn do not relax immediately after birth, leading to inadequate oxygenation.   The condition is rare, occurring in about 1.9 per 1,000 live births, so it is difficult to study using random sampling of live births.  In the early 2000s, anecdotal evidence began to accumulate that the risk of the condition might be increased if the mother of the newborn had been taking a particular medication for depression, a selective serotonin reuptake inhibitor (SSRI) during the third trimester of pregnancy or even as early as during week 20 of the pregnancy.  
 
-\index{data!medical consultant|(}
-People providing an organ for donation sometimes seek the help of a special ``medical consultant''. These consultants assist the patient in all aspects of the surgery, with the goal of reducing the possibility of complications during the medical procedure and recovery. Patients might choose a consultant based in part on the historical complication rate of the consultant's clients. One consultant tried to attract patients by noting the average complication rate for liver donor surgeries in the US is about 10\%, but her clients have only had 3 complications in the 62 liver donor surgeries she has facilitated. She claims this is strong evidence that her work meaningfully contributes to reducing complications (and therefore she should be hired!).
+One design for studying the issue would enroll two cohorts of women, one in which women were taking SSRIs for depression and one in which they were not.  But even in a control cohort of 1,000 women, the chance of observing no cases of persistent pulmonary hypertension would be about 0.15 under if the chance of the condition was 1.9/1,000.  If the probability of the condition in a newborn was increased to 3.0/1,000 among women taking SSRIs, the chance of observing no cases in a cohort of 1,000 women taking the medication would be approximately 0.05.  Precise measures of the probability of a bad outcome in a newborn would require very large cohorts.
 
-\begin{exercise}
-We will let $p$ represent the true complication rate for liver donors working with this consultant. Estimate $p$ using the data, and label this value~$\hat{p}$.\footnote{The sample proportion: $\hat{p} = 3/62 = 0.048$}
-\end{exercise}
-
-\begin{example}{Is it possible to assess the consultant's claim with the data provided?}
-No. The claim is that there is a causal connection, but the data are observational. Patients who hire this medical consultant may have lower complication rates for other reasons.
-
-While it is not possible to assess this causal claim, it is still possible to test for an association using these data. For this question we ask, could the low complication rate of $\hat{p} = 0.048$ be due to chance?
-\end{example}
-
-\begin{exercise} \label{hypForAssessingConsultantWorkInLiverTransplants}
-Write out hypotheses in both plain and statistical language to test for the association between the consultant's work and the true complication rate, $p$, for this consultant's clients.\footnote{$H_0$: There is no association between the consultant's contributions and the clients' complication rate. In statistical language, $p=0.10$. $H_A$: Patients who work with the consultant tend to have a complication rate lower than 10\%, i.e. $p<0.10$.}
-\end{exercise}
-
-\begin{example}{In the examples based on large sample theory, we modeled $\hat{p}$ using the normal distribution. Why is this not appropriate here?}
-The independence assumption may be reasonable if each of the surgeries is from a different surgical team. However, the success-failure condition is not satisfied. Under the null hypothesis, we would anticipate seeing $62\times 0.10=6.2$ complications, not the 10 required for the normal approximation.
-\end{example}
-
-The uncertainty associated with the sample proportion should not be modeled using the normal distribution. However, we would still like to assess the hypotheses from Guided Practice~\ref{hypForAssessingConsultantWorkInLiverTransplants} in absence of the normal framework. To do so, we need to evaluate the possibility of a sample value ($\hat{p}$) this far below the null value, $p_0=0.10$. This possibility is usually measured with a p-value.
-
-The p-value is computed based on the null distribution, which is the distribution of the test statistic if the null hypothesis is true. Supposing the null hypothesis is true, we can compute the p-value by identifying the chance of observing a test statistic that favors the alternative hypothesis at least as strongly as the observed test statistic. This can be done using simulation.
+An alternative design for studies like this reverses the sampling scheme so that two cohorts of individuals, one with and one without a condition, are sampled and the exposure to a possible cause is collected.  In this example, a registry of live births could be used and the births sorted by presence or absence of persistent pulmonary hypertension. The number in each group in which the mother had been taking SSRIs would then be recorded. Such a design would have the advantage of sufficient numbers of cases with and without PPHN, but it has other limitations later in this section. Traditionally, these studies have been called \term{case-control} studies because of the original sampling of individuals with and without a condition.  More generally, it is an example of \term{outcome-dependent sampling}.
 
 
-\subsection{Generating the null distribution and p-value by simulation}
-\label{generatingTheNullDistributionAndPValueBySimulationForOneProportion}
+\subsection{$\chi^2$ tests of association in case-control studies}
+\label{caseControlTests}
 
-We want to identify the sampling distribution of the test statistic ($\hat{p}$) if the null hypothesis was true. In other words, we want to see how the sample proportion changes due to chance alone. Then we plan to use this information to decide whether there is enough evidence to reject the null hypothesis.
-
-Under the null hypothesis, 10\% of liver donors have complications during or after surgery. Suppose this rate was really no different for the consultant's clients. If this was the case, we could \emph{simulate} 62 clients to get a sample proportion for the complication rate from the null distribution.
-
-Each client can be simulated using a deck of cards. Take one red card, nine black cards, and mix them up. Then drawing a card is one way of simulating the chance a patient has a complication \emph{if the true complication rate is 10\%} for the data. If we do this 62 times and compute the proportion of patients with complications in the simulation, $\hat{p}_{sim}$, then this sample proportion is exactly a sample from the null distribution.
-
-An undergraduate student was paid \$2 to complete this simulation. There were 5 simulated cases with a complication and 57 simulated cases without a complication, i.e. $\hat{p}_{sim} = 5/62 = 0.081$.
-
-\begin{example}{Is this one simulation enough to determine whether or not we should reject the null hypothesis from Guided Practice~\ref{hypForAssessingConsultantWorkInLiverTransplants}? Explain.}
-No. To assess the hypotheses, we need to see a distribution of many $\hat{p}_{sim}$, not just a \emph{single} draw from this sampling distribution.
-\end{example}
-
-One simulation isn't enough to get a sense of the null distribution; many simulation studies are needed. Roughly 10,000 seems sufficient. However, paying someone to simulate 10,000 studies by hand is a waste of time and money. Instead, simulations are typically programmed into a computer, which is much more efficient.
-
-Figure~\ref{nullDistForPHatIfLiverTransplantConsultantIsNotHelpful} shows the results of 10,000 simulated studies. The proportions that are equal to or less than $\hat{p}=0.048$ are shaded. The shaded areas represent sample proportions under the null distribution that provide at least as much evidence as $\hat{p}$ favoring the alternative hypothesis. There were 1222 simulated sample proportions with $\hat{p}_{sim} \leq 0.048$. We use these to construct the null distribution's left-tail area and find the p-value:
-\begin{align}
-\text{left tail }\label{estOfPValueBasedOnSimulatedNullForSingleProportion}
-	&= \frac{\text{Number of observed simulations with }\hat{p}_{sim}\leq\text{ 0.048}}{10000}
-\end{align}
-Of the 10,000 simulated $\hat{p}_{sim}$, 1222 were equal to or smaller than $\hat{p}$. Since the hypothesis test is one-sided, the estimated p-value is equal to this tail area: 0.1222.
-\begin{figure}
-\centering
-\includegraphics[width=0.9\textwidth]{ch_inference_for_props_oi_biostat/figures/nullDistForPHatIfLiverTransplantConsultantIsNotHelpful/nullDistForPHatIfLiverTransplantConsultantIsNotHelpful}
-\caption{The null distribution for $\hat{p}$, created from 10,000 simulated studies. The left tail, representing the p-value for the hypothesis test, contains 12.22\% of the simulations.}
-\label{nullDistForPHatIfLiverTransplantConsultantIsNotHelpful}
-\end{figure}
-
-\begin{exercise} \label{plainLanguageExplanationOfHTConclusionForLiverDonorSurgicalConsultant}
-Because the estimated p-value is 0.1222, which is larger than the significance level 0.05, we do not reject the null hypothesis. Explain what this means in plain language in the context of the problem.\footnote{There isn't sufficiently strong evidence to support an association between the consultant's work and fewer surgery complications.}
-\index{data!medical consultant|)}
-\end{exercise}
-
-\begin{exercise}
-Does the conclusion in Guided Practice~\ref{plainLanguageExplanationOfHTConclusionForLiverDonorSurgicalConsultant} imply there is no real association between the surgical consultant's work and the risk of complications? Explain.\footnote{No. It might be that the consultant's work is associated with a reduction but that there isn't enough data to convincingly show this connection.}
-\end{exercise}
-
-\begin{termBox}{\tBoxTitle{One-sided hypothesis test for $p$ with a small sample}
-The p-value is always derived by analyzing the null distribution of the test statistic. The normal model poorly approximates the null distribution for $\hat{p}$ when the success-failure condition is not satisfied. As a substitute, we can generate the null distribution using simulated sample proportions ($\hat{p}_{sim}$) and use this distribution to compute the tail area, i.e. the p-value.}
-\end{termBox}
-
-We continue to use the same rule as before when computing the p-value for a two-sided test: double the single tail area, which remains a reasonable approach even when the sampling distribution is asymmetric. However, this can result in p-values larger than 1 when the point estimate is very near the mean in the null distribution; in such cases, we write that the p-value is 1. Also, very large p-values computed in this way (e.g. 0.85), may also be slightly inflated.
-
-Guided Practice~\ref{plainLanguageExplanationOfHTConclusionForLiverDonorSurgicalConsultant} said the p-value is \emph{estimated}. It is not exact because the simulated null distribution itself is not exact, only a close approximation. However, we can generate an exact null distribution and p-value using the binomial model from Section~\ref{binomialModel}.
-
-\subsection{Generating the exact null distribution and p-value}
-\label{exactNullDistributionUsingBinomialModel}
-
-The number of successes in $n$ independent cases can be described using the binomial model, which was introduced in Section~\ref{binomialModel}. Recall that the probability of observing exactly $k$ successes is given by
-\begin{align} \label{binomialEquationShownForFindingNullDistributionInSmallSamplePropTest}
-P(k\text{ successes}) = {n\choose k} p^{k}(1-p)^{n-k} = \frac{n!}{k!(n-k)!} p^{k}(1-p)^{n-k}
-\end{align}
-where $p$ is the true probability of success. The expression ${n\choose k}$ is read as \emph{$n$ choose $k$}, and the exclamation points represent factorials. For instance, $3!$ is equal to $3\times 2\times 1=6$, $4!$ is equal to $4\times 3\times 2\times 1 = 24$, and so on (see Section~\ref{binomialModel}).
-
-The tail area of the null distribution is computed by adding up the probability in Equation~\eqref{binomialEquationShownForFindingNullDistributionInSmallSamplePropTest} for each $k$ that provides at least as strong of evidence favoring the alternative hypothesis as the data. If the hypothesis test is one-sided, then the p-value is represented by a single tail area. If the test is two-sided, compute the single tail area and double it to get the p-value, just as we have done in the past.
-
-\begin{example}{Compute the exact p-value to check the consultant's claim that her clients' complication rate is below 10\%.}
-Exactly $k=3$ complications were observed in the $n=62$ cases cited by the consultant. Since we are testing against the 10\% national average, our null hypothesis is $p=0.10$. We can compute the p-value by adding up the cases where there are 3 or fewer complications:
-\begin{align*}
-\text{p-value}
-	&= \sum_{j=0}^{3} {n\choose j} p^{j}(1-p)^{n-j} \\
-	&= \sum_{j=0}^{3} {62\choose j} 0.1^{j}(1-0.1)^{62-j} \\
-	&= {62\choose 0} 0.1^{0}(1-0.1)^{62-0} +
-		{62\choose 1} 0.1^{1}(1-0.1)^{62-1} \\
-	& \qquad + {62\choose 2} 0.1^{2}(1-0.1)^{62-2} +
-		{62\choose 3} 0.1^{3}(1-0.1)^{62-3} \\
-	&= 0.0015 + 0.0100 + 0.0340 + 0.0755 \\
-	&= 0.1210
-\end{align*}
-This exact p-value is very close to the p-value based on the simulations (0.1222), and we come to the same conclusion. We do not reject the null hypothesis, and there is not statistically significant evidence to support the association.
-
-If it were plotted, the exact null distribution would look almost identical to the simulated null distribution shown in Figure~\ref{nullDistForPHatIfLiverTransplantConsultantIsNotHelpful} on page~\pageref{nullDistForPHatIfLiverTransplantConsultantIsNotHelpful}.
-\end{example}
-
-\subsection{Using simulation for goodness of fit tests}
-
-Simulation methods may also be used to test goodness of fit. In short, we simulate a new sample based on the purported bin probabilities, then compute a chi-square test statistic $X_{sim}^2$. We do this many times (e.g. 10,000 times), and then examine the distribution of these simulated chi-square test statistics. This distribution will be a very precise null distribution for the test statistic $\chi^2$ if the probabilities are accurate, and we can find the upper tail of this null distribution, using a cutoff of the observed test statistic, to calculate the p-value.
-
-\begin{example}{\index{data!racial make-up of jury|(}Section~\ref{oneWayChiSquare} introduced an example where we considered whether jurors were racially representative of the population. Would our findings differ if we used a simulation technique?}
-Since the minimum bin count condition was satisfied, the chi-square distribution is an excellent approximation of the null distribution, meaning the results should be very similar. Figure~\ref{jurorChiSquareSimulated} shows the simulated null distribution using 100,000 simulated $X_{sim}^2$ values with an overlaid curve of the chi-square distribution. The distributions are almost identical, and the p-values are essentially indistinguishable: 0.115 for the simulated null distribution and 0.117 for the theoretical null distribution.
-\index{data!racial make-up of jury|)}
-\end{example}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.9\textwidth]{ch_inference_for_props_oi_biostat/figures/jurorChiSquareSimulated/jurorChiSquareSimulated}
-\caption{The precise null distribution for the juror example from Section~\ref{oneWayChiSquare} is shown as a histogram of simulated $X_{sim}^2$ statistics, and the theoretical chi-square distribution is also shown.}
-\label{jurorChiSquareSimulated}
-\end{figure}
+\index{Test for association!case-control studies}
 
 
-%__________________
-\section{Randomization test (special topic)}
-\label{smallSampleHTForTwoOrMoreProportion}
+\index{data!persistent pulmonary hypertension in newborns (PPHN)|(}
 
-\index{data!CPR and blood thinner|(}
+In 2006, Chambers, et. al reported a case-control study examining the association of SSRI use and persistent pulmonary hypertension in newborns\footnote{N Engl J Med 2006;354:579-87.}.  The study team enrolled 337 women whose infants suffered from PPHN and 836 women with similar characteristics but whose infants did not have PPHN.  Among the women whose infants had PPHN, 14 had taken an SSRI after week 20 of the pregnancy.  In the cohort of women whose infants did not have PPHN, 6 had been taking the medication after week 20. In the subset of women who had been taking an SSRI, the infants are labeled as `exposed' to the medication.
 
-This section discusses the randomization test, a method for conducting inference in a small-sample setting that is based on simulation. The companion to this text covers the details of how to conduct randomization tests in \textsf{R}.
+The data from the study are summarized in Table~\ref{ssriPPHNObserved}.
 
-Cardiopulmonary resuscitation (CPR) is a procedure commonly used on individuals suffering a heart attack when other emergency resources are not available. This procedure is helpful for maintaining some blood circulation, but the chest compressions involved can cause internal injuries. Internal bleeding and other injuries complicate additional treatment efforts following arrival at a hospital. For example, blood thinners are commonly administered to release a clot responsible for triggering a heart attack. However, blood thinners would exacerbate any internal bleeding. The results of the study are shown in Table~\ref{resultsForCPRStudyInSmallSampleSection}.
-
-\begin{table}[ht]
+\begin{table}[h]
 	\centering
-	\begin{tabular}{lccccc}
+	\begin{tabular}{ll rrr r}
 		\hline
-		&& Survived 	& Died 	&& Total \\
+		PPHN present	 & \hspace{2mm} & Yes & No & \hspace{2mm} & Total \\
 		\hline
-		Control		&& 11		& 39		&& 50 \\
-		Treatment		&& 14		& 26		&& 40 \\
-		\hline
-		Total			&& 25		& 65		&& 90 \\
+		SSRI exposed &	& 14 & 6 &  & 20  \\
+		SSRI unexposed & & 323 & 830 &  & 1153  \\
+        Total & & 337 & 836 & & 1173 \\
 		\hline
 	\end{tabular}
-	\caption{Results for the CPR study. Patients in the treatment group were given a blood thinner, and patients in the control group were not.}
-	\label{resultsForCPRStudyInSmallSampleSection}
-\end{table}
+	\caption{SSRI exposure vs observed number of PPHN cases in newborns.}
+    \label{ssriPPHNObserved}
+\end{table}	
 
-\begin{exercise} What is an appropriate set of hypotheses for this study? \footnote{The null hypothesis is that the survival rate in the control group ($p_c$) is equal to the survival rate in the treatment group ($p_t$), i.e. $H_0: p_c = p_t$. The null is tested against the alternative, that blood thinners have an overall survival effect, $H_A: p_c \neq p_t$. Alternatively, the hypothesis can be stated in terms of a $\chi^2$ framework. The null hypothesis that treatment is independent of outcome is tested against an alternative that treatment and outcome are associated.}
-\end{exercise}
+The sample of women participating in the study are clearly not a random sample drawn from women who had recently given birth; they were identified according to the disease status of their infants.  In this sample, the proportion of newborns with PPHN (337/1173 = 28.7\%) is much higher than the disease prevalence in the general population.  But if SSRI use had no effect on the occurrence of PPHN, the proportions of women taking SSRI's among the PPHN and non-PPHN infants should be about the same.  In other words, the null hypothesis of equal SSRI use among mothers with/without PPHN affected infants is the hypothesis of no association between SSRI use and PPHN, or, in statistical terms, that the rows and columns of Table~\ref{ssriPPHNObserved} are independent.  The observed and expected values, as well as the $\chi^2$ statistic are calculated in earlier examples in this chapter.
 
-\subsection{Large sample framework for a difference in two proportions}
+The expected counts shown in Table~\ref{ssriPPHNExpected} suggest that the $p$-value for a $\chi^2$ may not be accurate; under the null hypothesis, the expected number of PPHN cases in the SSRI exposed group is less than 10.
 
-When sample sizes are large, it is reasonable to use an inference approach that relies on approximation. The point estimate of the difference in survival proportions of the two groups, $\hat{p}_t - \hat{p}_c$, can be adequately modeled using a normal approximation. The expected umber of successes (13.9, 11.1) and failures (36.1, 28.9) are above 10, which satisfies the success-failure condition. Additionally, it can be assumed that patients are independent.
-
-\begin{example}{Assess the significance of the data in Table~\ref{resultsForCPRStudyInSmallSampleSection} against a two-sided alternative. Use $\alpha = 0.05$. }
-
-Calculate the pooled proportion, $\hat{p}$: 
-\[\hat{p} = \dfrac{11 + 14}{50 + 40} = 0.278\]
-	
-Calculate the test statistic, $z$:
-
-\[z = \dfrac{0.35 - 0.22 }{0.278(1-0.278)\sqrt{\frac{1}{40} + \frac{1}{50}}} =  1.37\]
-	
-This $z$-score has area 0.0853 in the right tail. The $p$-value is 0.176, twice the single-tail area. There is insufficient evidence to reject the null hypothesis that there is a difference in survival rates between the treatment and control groups.\footnote{It is also valid to use a $\chi^2$ test to assess significance. The $\chi^2$ statistic of 1.87 and degrees of freedom 1 corresponds to a $p$-value between 0.1 and 0.2. From software, the exact $p$-value is 0.17.}
-
-%chi-square p-value without continuity correction	
-
-\begin{figure}[ht]
+ \begin{table}[h]
 	\centering
-	\includegraphics[width=0.67\textwidth]{ch_inference_for_props_oi_biostat/figures/pValueCPRStudyLargeSampleAnalysisInSmallSampleSection/pValueCPRStudyLargeSampleAnalysisInSmallSampleSection}
-	\caption{The null distribution of the point estimate $\hat{p}_t - \hat{p}_c$ under the large sample framework is a normal distribution with mean $0$ and standard deviation equal to the standard error.}
-	\label{pValueCPRStudyLargeSampleAnalysisInSmallSampleSection}
-\end{figure}
+	\begin{tabular}{ll rrr r}
+		\hline
+		PPHN present  & \hspace{2mm} & Yes & No & \hspace{2mm} & Total \\
+		\hline
+		SSRI exposed &	& 5.80 & 14.20 &  & 20  \\
+		SSRI unexposed & & 331.20 & 811.80 &  & 1153  \\
+        Total & & 337 & 836 & & 1173 \\
+		\hline
+	\end{tabular}
+    \caption{SSRI exposure vs expected number of PPHN cases in newborn.}
+    \label{ssriPPHNExpected}
+\end{table}	
 
-\end{example}
+The $p$-value from Fisher's exact test is $< 0.001$ ($0.00014$, to be exact), so the evidence is strong that SSRI exposure and PPHN are associated. Fisher's exact test is often used in studies of rare conditions or exposures since one or more expected cell counts are typically less than 10.
 
+\index{data!persistent pulmonary hypertension in newborns (PPHN)|)}
 
-The $p$-value 0.176 relies on the normal approximation. When sample sizes are relatively small, and expected values are fairly close to 10, the approximation may only be adequate. The following section describes a simulation technique that produces more accurate $p$-values.
+\subsection{Estimates of association in case-control studies}
 
-\subsection{Small sample framework for a difference in two proportions}
+\label{caseControlStudiesEstimates}
 
-Under the null hypothesis, a patient is equally likely to survive whether they are in the control group or the treatment group. A simulation can be run to produce a set of results that might occur if the null hypothesis is true, where the expected difference between $p_c$ and $p_t$ is zero.
+\index{odds ratios!case-control studies}
 
-Assume that the numbers of patients who survived and died remain constant. However, randomly assign 40 \resp{control\_sim} and \resp{treatment\_sim} labels to the patients; these label counts correspond to the number of patients assigned to each group in the actual study. The simulation results of one such simulation are shown in Table~\ref{resultsForCPRStudyInSmallSampleSectionFake1}.
+For data in a $2 \times 2$ table, correct point estimates of association depend on the mechanism used to gather the data.  In the example of clinical trial of nevirapine vs lopinarvir discussed in Section~\ref{twoWayTablesExpectedCounts}, the population proportion of children who would experience virologic failure after treatment with one of drugs can be estimated by the observed proportion virologic failures  on that drug. For nevirapine, the proportion of children with virologic failure was 60/147 = 0.41, while for lopinarvir the proportion is 27/140 = 0.19.  The difference in outcome between the two groups can be summarized by the difference in these proportions. The proportion experiencing virologic failure when treated with nevirapine was 0.12 larger in nevirapine (0.41 - 0.29), so if the two drugs were to be used in a large population, approximately 12\% more children treated with nevirapine would experience virologic failure compared to lopinarvir. Since these are estimates from a relatively small study, the confidence intervals discussed in Section~\ref{confidenceIntervalsDifferenceProportions} can be used to express the uncertainty in this estimate.
 
-\begin{table}[ht]
-\centering
-\begin{tabular}{lccccc}
-\hline
-			&& Survived 	& Died 	&& Total \\
-\hline
-\resp{control\_sim}		&& 15		& 35		&& 50 \\
-\resp{treatment\_sim}	&& 10		& 30		&& 40 \\
-\hline
-Total			&& 25		& 65		&& 90 \\
-\hline
-\end{tabular}
-\caption{Simulated results for the CPR study under the null hypothesis. The labels were randomly assigned and are independent of the outcome of the patient.}
-\label{resultsForCPRStudyInSmallSampleSectionFake1}
-\end{table}
+Since the proportion of virologic failures can be estimated from the trial data, the relative risk of virologic failure can also be used to estimate the association between treatment and virologic failure. Relative risk is the ratio of two proportions, and was introduced in Section~\ref{TwoWayTablesRelativeRisk}.  The relative risk of virologic failure with nevirapine vs lopinarvir, is $0.41/0.19 = 2.16$.  Children treated with nevirapine are estimated to be than twice as likely to experience virologic failure.  
 
-\begin{exercise} \label{exerciseComputingDifferenceForCPRStudyInSmallSampleSectionFake1}
-What is the difference in survival rates between the two groups in Table~\ref{resultsForCPRStudyInSmallSampleSectionFake1}? How does this compare to the observed 13\% in the real groups?\footnote{The difference is $\hat{p}_{t, sim} - \hat{p}_{c, sim} = \frac{10}{40} - \frac{15}{50} = -0.05$, which is closer to the null value $p_0=0$ than what was observed.}
-\end{exercise}
+Statistically, the population parameter for the relative risk in the study of HIV$^+$ is a ratio of conditional probabilities:
 
-The difference computed in Guided Practice~\ref{exerciseComputingDifferenceForCPRStudyInSmallSampleSectionFake1} represents a draw from the null distribution of the sample differences. To build the complete null distribution of the sample differences, it is necessary to generate many more simulated experiments.
+\begin{align*}
+  \frac{P(\text{virologic failure}| \text{treatment with nevirapine})}
+  {P(\text{virologic failure}|\text{treatment with lopinarvir})}.
+\end{align*}
 
-The null distribution constructed from 10,000 simulations is shown in Figure~\ref{pValueCPRStudySmallSampleAnalysisInSmallSampleSection}. The shaded tail region representing draws with differences $\hat{p}_t - \hat{p}_c$ more extreme than 0.13 has area 0.13; the $p$-value equals 0.26. The normal approximation produced a $p$-value of 0.176, which is relatively far from the value obtained with the randomization approach, although the conclusions of the test are the same in both cases. 
+In a study like the PPHN case-control study, the natural population parameter of interest would be the relative risk of PPHN for infants exposed to an SSRI during after week 20 of gestation compared to those who were not exposed. But in the design of this study, participating mothers were sampled according to whether their infants  did or did not suffer from PPHN and the exposure to an SSRI during gestation was recorded.  The data from the study can only be used to estimate $P(\text{SSRI exposure} | \text{PPHN})$ and  $P(\text{SSRI exposure} | \text{no PPHN})$; relative risk of PPHN from the exposure to SSRI cannot be estimated from the data.  In case-control studies, association is estimated using \term{odds} and \term{odds ratios}.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=\textwidth]{ch_inference_for_props_oi_biostat/figures/pValueCPRStudySmallSampleAnalysisInSmallSampleSection/pValueCPRStudySmallSampleAnalysisInSmallSampleSection}
-\caption{An approximation of the null distribution of the point estimate, $\hat{p}_t - \hat{p}_c$. The p-value is twice the right tail area.}
-\label{pValueCPRStudySmallSampleAnalysisInSmallSampleSection}
-\end{figure}
+Given exposure to SSRI, the \term{odds} of an infant suffering from PPHN are given by the fraction
+\begin{align*}
+  \frac{P(\text{PPHN present} | \text{exposure to SSRI})}
+  {P(\text{PPHN not present} | \text{exposure to SSRI})}.
+\end{align*}
+For an unexposed infant, the odds of PPHN are given by the ratio
+\begin{align*}
+  \frac{P(\text{PPHN present} | \text{no exposure to SSRI})}
+  {P(\text{PPHN not present} | \text{no exposure to SSRI})}.
+\end{align*}
+The ratio of these two expressions for odds is called (not surprisingly) the \term{odds ratio}.  It is the proportional change in the odds comparing exposure to no exposure.  A population odds ratio of 1.5 implies that the odds of PPHN given exposure to an SSRI is 50\% larger than the odds for unexposed infants.  Epidemiologists describe this odds ratio as the odds of PPHN, given exposure to SSRI, compared to the odds of PPHN, given no exposure to SSRI.
 
-In general, small sample methods produce more accurate results since they rely on fewer assumptions. However, they often require doing additional computation or resorting to simulation methods. For this reason, small sample methods are typically used only when conditions for large sample methods are not satisfied.
+In a case-control study, the odds ratio (OR) that can be estimated reverses  the conditional probabilities:
+\begin{align*}
+  \text{OR(exposure, given PPHN)} &=\frac{P(\text{SSRI present} | \text{PPHN})}
+  {P(\text{SSRI not present} | \text{PPHN})} \bigg/
+ \frac{P(\text{SSRI present} | \text{no PPHN})}
+  {P(\text{SSRI not present} | \text{no PPHN})}.
+\end{align*}
+It has the interpretation as the proportional increase in odds of exposure to SSRI comparing infants with PPHN vs. without the condition.
 
-\subsection{Randomization for two-way tables}
+Somewhat surprisingly, Bayes' rule can be used to show that 
+\begin{align*}
+  \text{OR(exposure, given PPHN)} =  \text{OR(PPHN, given exposure)}.  
+\end{align*}
+Despite the apparently restrictive nature of the case-control sampling design, this identity implies that the odds ratio of interest can be estimated from the data.
 
-Randomization methods may also be used for contingency tables. This involves creating randomized contingency tables and computing $\chi^2$ statistics, then examining the null distribution. This randomization approach is valid for any sized sample, and it will be more accurate for cases where one or more expected bin counts do not meet the minimum threshold of~5. When the minimum threshold is met, the simulated null distribution will very closely resemble the $\chi^2$ distribution. 
+Epidemiologists rely on one additional result, called the rare disease assumption. When a disease is rare the odds ratio for the disease given exposure is approximately equal to the relative risk of the disease, given exposure.  These identities are the reason case-control studies are widely used in settings in which a disease is rare: a study design can be based on sampling cases and controls, measuring exposure, then the data can be used to estimate what scientists care about - the relative risk of disease, given exposure.
 
-\end{comment}
+Fortunately, the formula used to calculate an odds ratio is simpler than the argument justifying its use. In the general $2 \times 2$ table in Table~\ref{generalTwoByTwoTable} the odds ratio for disease given exposure status is the simple ratio $ad/bc$.
+ \begin{table}[h]
+	\centering
+	\begin{tabular}{ll rrr r}
+		\hline
+		Disease present  & \hspace{2mm} & Yes & No & \hspace{2mm} & Total \\
+		\hline
+		Exposed &	& $a$ & $b$ &  & $a + b$  \\
+		Unexposed & & $c$ & $d$ &  & $c + d $  \\
+        Total & & $a + c$ & $b + d$ & & $n$ \\
+		\hline
+	\end{tabular}
+    \caption{Exposure vs Disease Status}
+    \label{generalTwoByTwoTable}
+\end{table}	
+
+In the SSRI/PPHN example, the odds ratio for PPHN given SSRI exposure status is $(14)(830)/(6)(323) = 1.59$.  Because PPHN is a rare condition, the risk of PPHN among infants exposed to an SSRI is estimated to be approximately 1.6 times that of an infant not exposed.  Infants exposed to an SSRI are 60\% more likely to suffer from PPHN.  
+
+It can be shown that the $p$-value used in a test of no exposure/disease association is also the $p$-value for a test of the null hypothesis that the odds ratio is 1.
+
+\index{case-control studies|)}
 
 \section{Notes}
 
-\begin{comment}
+Two-way tables are often used to summarize data from medical research studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods.  Despite the simplicity of some of these methods, there are some points worth noting.
 
-Discussion of FE and conditioning.
+Until recently, Fisher's exact test could only be calculated for $2 \times 2$ with  small cell counts. Research has produced faster algorithms for enumerating tables and calculating $p$-values, and the computational power of recent desktop and laptop computers now makes it possible to calculate the Fisher test on nearly any $2 \times 2$ table.  There are also versions of the test that can be calculated on tables with more than 2 rows and/or columns.  The practical result for data analysts is that the sample size condition for the validity of the $\chi^2$ test can be made more restrictive.  This chapter recommends not using the $\chi^2$ test when cell counts in a $2 \times 2$ are less than 10.  Some approaches recommend even larger cell counts.
 
-What to do about the simulation methods
+For many years, introductory text books recommended using a modified version of the $\chi^2$, called the Fisher-Yates test, which adjusted the value of the statistic in small sample sizes to increase the accuracy of the $\chi^2$ sampling distribution in calculating $p$-values.  The Fisher-Yates version of the test is not used as often now because of the widespread availability of the Fisher test.
 
+The Fisher test is not without controversy, at least in the theoretical literature.  Conditioning on the row and column totals allows the calculation of a $p$-value from the hypergeometric distribution, but in principle restricts inference to the set of tables with the same row and column values.  In practice, this is less serious than it may seem. For tables of moderate size, the $p$-values from the $chi^2$ and Fisher tests are nearly identical and for tables with small counts, the Fisher test guarantees that the type I error will be no larger than the specified value of $\alpha$.   In small sample sizes, some statisticians argue that the Fisher-Yates correction is preferable to the Fisher test because of the discrete nature of the hypergeometric distribution.  In small tables, for example, an observed $p$-value of 0.04 may be the largest value that is less than 0.05, so that the type I error of the test in that situation is 0.04, not 0.05.
 
-editing here to see what is  happening.
-
-Can we add material here as if editing and save later
-
-
-do we see diff
-
-
-\end{comment}
-
-
-    
+Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio from that can be estimated from a  case-control  is the same as that from a cohort study. Despite being long and algebraically more complex than other derivations shown in the text, it is a direct application of Bayes' rule, but applied to each term in the fraction that defines population odds ratio.
