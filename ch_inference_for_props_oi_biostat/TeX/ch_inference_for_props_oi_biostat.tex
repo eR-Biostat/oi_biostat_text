@@ -1071,9 +1071,9 @@ The $p$-value from Fisher's exact test is $< 0.001$ ($0.00014$, to be precise), 
 
 \index{odds ratios!case-control studies}
 
-For data in a $2 \times 2$ table, correct point estimates of association depend on the mechanism used to gather the data.  In the example of a clinical trial of nevirapine vs lopinarvir discussed in Section~\ref{twoWayTablesExpectedCounts}, the population proportion of children who would experience virologic failure after treatment with one of drugs can be estimated by the observed proportion of virologic failures on that drug. For nevirapine, the proportion of children with virologic failure is 60/147 = 0.41, while for lopinarvir the proportion is 27/140 = 0.19.  The difference in outcome between the two groups can be summarized by the difference in these proportions. The proportion experiencing virologic failure when treated with nevirapine was 0.12 larger in nevirapine (0.41 - 0.29), so if the two drugs were to be used in a large population, approximately 12\% more children treated with nevirapine would experience virologic failure as compared to lopinarvir. Since these are estimates from a relatively small study, the confidence intervals discussed in Section~\ref{confidenceIntervalsDifferenceProportions} can be used to express the uncertainty in this estimate.
+For data in a $2 \times 2$ table, correct point estimates of association depend on the mechanism used to gather the data.  In the example of a clinical trial of nevirapine versus lopinarvir discussed in Section~\ref{twoWayTablesExpectedCounts}, the population proportion of children who would experience virologic failure after treatment with one of the drugs can be estimated by the observed proportion of virologic failures while on that drug. For nevirapine, the proportion of children with virologic failure is 60/147 = 0.41, while for lopinarvir the proportion is 27/140 = 0.19.  The difference in outcome between the two groups can be summarized by the difference in these proportions. The proportion experiencing virologic failure when treated with nevirapine was 0.12 larger in nevirapine (0.41 - 0.29), so if the two drugs were to be used in a large population, approximately 12\% more children treated with nevirapine would experience virologic failure as compared to lopinarvir. The confidence intervals discussed in Section~\ref{confidenceIntervalsDifferenceProportions} can be used to express the uncertainty in this estimate.
 
-Since the proportion of virologic failures can be estimated from the trial data, the relative risk of virologic failure can also be used to estimate the association between treatment and virologic failure. Relative risk is the ratio of two proportions, and was introduced in Section~\ref{TwoWayTablesRelativeRisk}.  The relative risk of virologic failure with nevirapine vs lopinarvir, is $0.41/0.19 = 2.16$.  Children treated with nevirapine are estimated to be than twice as likely to experience virologic failure.  
+Since the proportion of virologic failures can be estimated from the trial data, the relative risk of virologic failure can also be used to estimate the association between treatment and virologic failure. Relative risk is the ratio of two proportions, and was introduced in Section~\ref{TwoWayTablesRelativeRisk}.  The relative risk of virologic failure with nevirapine versus lopinarvir is $0.41/0.19 = 2.16$.  Children treated with nevirapine are estimated to be more than twice as likely to experience virologic failure.  
 
 Statistically, the population parameter for the relative risk in the study of HIV$^+$ is a ratio of conditional probabilities:
 
@@ -1082,43 +1082,40 @@ Statistically, the population parameter for the relative risk in the study of HI
   {P(\text{virologic failure}|\text{treatment with lopinarvir})}.
 \end{align*}
 
-In a study like the PPHN case-control study, the natural population parameter of interest would be the relative risk of PPHN for infants exposed to an SSRI during after week 20 of gestation compared to those who were not exposed. But in the design of this study, participating mothers were sampled according to whether their infants  did or did not suffer from PPHN and the exposure to an SSRI during gestation was recorded.  The data from the study can only be used to estimate $P(\text{SSRI exposure} | \text{PPHN})$ and  $P(\text{SSRI exposure} | \text{no PPHN})$; relative risk of PPHN from the exposure to SSRI cannot be estimated from the data.  In case-control studies, association is estimated using \term{odds} and \term{odds ratios}.
+In a study like the PPHN case-control study, the natural population parameter of interest would be the relative risk of PPHN for infants exposed to an SSRI during after week 20 of gestation compared to those who were not exposed. However, in the design of this study, participating mothers were sampled and grouped according to whether their infants did or did not suffer from PPHN, rather than assigned to either SSRI exposure or non-exposure. Relative risk of PPHN from exposure to SSRI cannot be estimated from the data because it is not possible to estimate $P(\text{PPHN} | \text{SSRI exposure})$ and $P(\text{PPHN} | \text{no SSRI exposure})$. In case-control studies, association is estimated using \term{odds} and \term{odds ratios} rather than relative risk.
 
-Given exposure to SSRI, the \term{odds} of an infant suffering from PPHN are given by the fraction
-\begin{align*}
-  \frac{P(\text{PPHN present} | \text{exposure to SSRI})}
-  {P(\text{PPHN not present} | \text{exposure to SSRI})}.
-\end{align*}
-For an unexposed infant, the odds of PPHN are given by the ratio
-\begin{align*}
-  \frac{P(\text{PPHN present} | \text{no exposure to SSRI})}
-  {P(\text{PPHN not present} | \text{no exposure to SSRI})}.
-\end{align*}
-The ratio of these two expressions for odds is called (not surprisingly) the \term{odds ratio}.  It is the proportional change in the odds comparing exposure to no exposure.  A population odds ratio of 1.5 implies that the odds of PPHN given exposure to an SSRI is 50\% larger than the odds for unexposed infants.  Epidemiologists describe this odds ratio as the odds of PPHN, given exposure to SSRI, compared to the odds of PPHN, given no exposure to SSRI.
+The \term{odds} of SSRI exposure among the cases are given by the fraction
+\[
+  \text{odds$_\text{cases}$} = \frac{P(\text{SSRI exposure} | \text{PPHN})}
+  {P(\text{no SSRI exposure} | \text{PPHN})} = \frac{14/337}{323/337} = \frac{14}{323}.
+\]
 
-In a case-control study, the odds ratio (OR) that can be estimated reverses  the conditional probabilities:
-\begin{align*}
-  \text{OR(exposure, given PPHN)} &=\frac{P(\text{SSRI present} | \text{PPHN})}
-  {P(\text{SSRI not present} | \text{PPHN})} \bigg/
- \frac{P(\text{SSRI present} | \text{no PPHN})}
-  {P(\text{SSRI not present} | \text{no PPHN})}.
-\end{align*}
-It has the interpretation as the proportional increase in odds of exposure to SSRI comparing infants with PPHN vs. without the condition.
+The odds of SSRI exposure among the controls are given by the fraction
+\[
+  \text{odds$_\text{controls}$} = \frac{P(\text{SSRI exposure} | \text{no PPHN})}
+  {P(\text{no SSRI exposure} | \text{no PPHN})} = \frac{6/836}{830/836} = \frac{6}{830}.
+\]
 
-Somewhat surprisingly, Bayes' rule can be used to show that 
-\begin{align*}
-  \text{OR(exposure, given PPHN)} =  \text{OR(PPHN, given exposure)}.  
-\end{align*}
-Despite the apparently restrictive nature of the case-control sampling design, this identity implies that the odds ratio of interest can be estimated from the data.
+The ratio of the odds, the \term{odds ratio}, compares the odds of exposure among the cases to the odds of exposure among the controls. 
 
-Epidemiologists rely on one additional result, called the rare disease assumption. When a disease is rare the odds ratio for the disease given exposure is approximately equal to the relative risk of the disease, given exposure.  These identities are the reason case-control studies are widely used in settings in which a disease is rare: a study design can be based on sampling cases and controls, measuring exposure, then the data can be used to estimate what scientists care about - the relative risk of disease, given exposure.
+\[OR_{\text{exposure, cases vs. controls}} = \frac{\text{odds$_\text{cases}$}}{\text{odds$_\text{controls}$}} = \frac{14/323}{6/830} = \frac{(14)(830)}{(323)(6)} =  6.00 \]
 
-Fortunately, the formula used to calculate an odds ratio is simpler than the argument justifying its use. In the general $2 \times 2$ table in Table~\ref{generalTwoByTwoTable} the odds ratio for disease given exposure status is the simple ratio $ad/bc$.
+A population odds ratio of, for example, 1.5, implies that the odds of exposure in cases are 50\% larger than the odds of exposure in controls. For this study, the odds ratio of 6.00 implies that the odds of SSRI exposure in infants with PPHN are 6 times as large as the odds of exposure in infants without PPHN. Epidemiologists describe this odds ratio as the odds of exposure given presence of PPHN compared to the odds of exposure given absence of PPHN. An OR greater than 1 suggests that the exposure may be a risk factor for the disease or condition under study.
+
+Surprisingly, the odds ratio of exposure comparing cases to controls is equivalent to the odds ratio of disease comparing exposed to unexposed.\footnote{This result can be shown through Bayes' rule.} With a specific example, it is easy to see how the fraction for the odds ratios are numerically equivalent:
+
+\[OR_{\text{disease, exposed versus unexposed}} = \frac{\text{odds$_\text{exposed}$}}{\text{odds$_\text{unexposed}$}} = \frac{14/6}{323/830} = \frac{(14)(830)}{(6)(323)} = 6.00 \]
+
+Despite the apparently restrictive nature of the case-control sampling design, the odds ratio of interest, the odds ratio for disease given exposure, can be estimated from case-control data.
+
+Epidemiologists rely on one additional result, called the rare disease assumption. When a disease is rare, the odds ratio for the disease given exposure is approximately equal to the relative risk of the disease given exposure.  These identities are the reason case-control studies are widely used in settings in which a disease is rare: it allows for the relative risk of disease given exposure to be estimated, even if the study design is based on sampling cases and controls then measuring exposure.
+
+In a general $2 \times 2$ table of exposure versus disease status (Table~\ref{generalTwoByTwoTable}) the odds ratio for disease given exposure status is the $ad/bc$.
  \begin{table}[h]
 	\centering
 	\begin{tabular}{ll rrr r}
 		\hline
-		Disease present  & \hspace{2mm} & Yes & No & \hspace{2mm} & Total \\
+		Disease Status  & \hspace{2mm} & Present & Absent & \hspace{2mm} & Total \\
 		\hline
 		Exposed &	& $a$ & $b$ &  & $a + b$  \\
 		Unexposed & & $c$ & $d$ &  & $c + d $  \\
@@ -1129,20 +1126,20 @@ Fortunately, the formula used to calculate an odds ratio is simpler than the arg
     \label{generalTwoByTwoTable}
 \end{table}	
 
-In the SSRI/PPHN example, the odds ratio for PPHN given SSRI exposure status is $(14)(830)/(6)(323) = 1.59$.  Because PPHN is a rare condition, the risk of PPHN among infants exposed to an SSRI is estimated to be approximately 1.6 times that of an infant not exposed.  Infants exposed to an SSRI are 60\% more likely to suffer from PPHN.  
+In the PPHN case-control data, the odds ratio for PPHN given SSRI exposure status is $(14)(830)/(6)(323) = 6.00$.  Because PPHN is a rare condition, the risk of PPHN among infants exposed to an SSRI is estimated to be approximately 6 times that of the risk among unexposed infants.  Infants exposed to an SSRI are 600\% more likely to suffer from PPHN.  
 
-It can be shown that the $p$-value used in a test of no exposure/disease association is also the $p$-value for a test of the null hypothesis that the odds ratio is 1.
+It can be shown that the $p$-value used in a test of no association (between exposure and disease) is also the $p$-value for a test of the null hypothesis that the odds ratio is 1.
 
 \index{case-control studies|)}
 
 \section{Notes}
 
-Two-way tables are often used to summarize data from medical research studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods.  Despite the simplicity of some of these methods, there are some points worth noting.
+Two-way tables are often used to summarize data from medical research studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods. 
 
-Until recently, Fisher's exact test could only be calculated for $2 \times 2$ with  small cell counts. Research has produced faster algorithms for enumerating tables and calculating $p$-values, and the computational power of recent desktop and laptop computers now makes it possible to calculate the Fisher test on nearly any $2 \times 2$ table.  There are also versions of the test that can be calculated on tables with more than 2 rows and/or columns.  The practical result for data analysts is that the sample size condition for the validity of the $\chi^2$ test can be made more restrictive.  This chapter recommends not using the $\chi^2$ test when cell counts in a $2 \times 2$ are less than 10.  Some approaches recommend even larger cell counts.
+Until recently, Fisher's exact test could only be calculated for $2 \times 2$ tables with small cell counts. Research has produced faster algorithms for enumerating tables and calculating $p$-values, and the computational power of recent desktop and laptop computers now makes it possible to calculate the Fisher test on nearly any $2 \times 2$ table.  There are also versions of the test that can be calculated on tables with more than 2 rows and/or columns.  The practical result for data analysts is that the sample size condition for the validity of the $\chi^2$ test can be made more restrictive.  This chapter recommends using the $\chi^2$ test only when cell counts in a $2 \times 2$ table are greater than 10; some approaches recommend cell counts larger than 10.
 
-For many years, introductory text books recommended using a modified version of the $\chi^2$, called the Fisher-Yates test, which adjusted the value of the statistic in small sample sizes to increase the accuracy of the $\chi^2$ sampling distribution in calculating $p$-values.  The Fisher-Yates version of the test is not used as often now because of the widespread availability of the Fisher test.
+For many years, introductory textbooks recommended using a modified version of the $\chi^2$ test, called the Fisher-Yates test, which adjusted the value of the statistic in small sample sizes to increase the accuracy of the $\chi^2$ sampling distribution in calculating $p$-values.  The Fisher-Yates version of the test is no longer used as often because of the widespread availability of the Fisher test.
 
-The Fisher test is not without controversy, at least in the theoretical literature.  Conditioning on the row and column totals allows the calculation of a $p$-value from the hypergeometric distribution, but in principle restricts inference to the set of tables with the same row and column values.  In practice, this is less serious than it may seem. For tables of moderate size, the $p$-values from the $chi^2$ and Fisher tests are nearly identical and for tables with small counts, the Fisher test guarantees that the type I error will be no larger than the specified value of $\alpha$.   In small sample sizes, some statisticians argue that the Fisher-Yates correction is preferable to the Fisher test because of the discrete nature of the hypergeometric distribution.  In small tables, for example, an observed $p$-value of 0.04 may be the largest value that is less than 0.05, so that the type I error of the test in that situation is 0.04, not 0.05.
+The Fisher test is not without controversy, at least in the theoretical literature.  Conditioning on the row and column totals allows the calculation of a $p$-value from the hypergeometric distribution, but in principle restricts inference to the set of tables with the same row and column values.  In practice, this is less serious than it may seem. For tables of moderate size, the $p$-values from the $\chi^2$ and Fisher tests are nearly identical and for tables with small counts, the Fisher test guarantees that the Type I error will be no larger than the specified value of $\alpha$.   In small sample sizes, some statisticians argue that the Fisher-Yates correction is preferable to the Fisher test because of the discrete nature of the hypergeometric distribution.  In small tables, for example, an observed $p$-value of 0.04 may be the largest value that is less than 0.05, such that the Type I error of the test in that situation is 0.04, not 0.05.
 
-Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio from that can be estimated from a  case-control  is the same as that from a cohort study. Despite being long and algebraically more complex than other derivations shown in the text, it is a direct application of Bayes' rule, but applied to each term in the fraction that defines population odds ratio.
+Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio estimated from a case-control is the same as that from a cohort study. It is long and algebraically more complex than other derivations shown in the text, but it is a direct application of Bayes' rule, applied to each term in the fraction that defines population odds ratio.
