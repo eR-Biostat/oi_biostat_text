@@ -15,8 +15,8 @@ Chapter~\ref{foundationsForInference} introduced some primary tools of statistic
 \label{oneSampleMeansWithTDistribution}
 
 The tools studied in Chapter~\ref{foundationsForInference} all made use of the $t$-statistic from a sample mean,
-\[t = \frac{\overline{x} - \mu}{s},\]
-where the parameter $\mu$ is a population mean, and $\overline{x}$ and $s$ are the sample mean and standard deviation. Tests and confidence intervals were restricted to samples of at least 30 independent observations from a population where there was no evidence of strong skewness. This allowed for the Central Limit Theorem to be applied, justifying use of the normal distribution to calculate probabilities associated with the $t$-statistic. 
+\[t = \frac{\overline{x} - \mu}{s/\sqrt{n}},\]
+where the parameter $\mu$ is a population mean, $\overline{x}$ and $s$ are the sample mean and standard deviation, and $n$ is the sample size. Tests and confidence intervals were restricted to samples of at least 30 independent observations from a population where there was no evidence of strong skewness. This allowed for the Central Limit Theorem to be applied, justifying use of the normal distribution to calculate probabilities associated with the $t$-statistic. 
 
 In sample sizes smaller than 30, if the data are approximately symmetric and there are no large outliers, the $t$-statistic has what is called a $t$-distribution. When the normal distribution is used as the sampling distribution of the $t$-statistic, $s$ is essentially being treated as a good replacement for the unknown population standard deviation $\sigma$. However, the sample standard deviation $s$, as an estimate of $\sigma$, has its own inherent variability like $\overline{x}$. The $t$ density function adjusts for the variability in $s$ by having more probability in the left and right tails than the normal distribution.
 
@@ -150,7 +150,7 @@ The observations are a simple random sample consisting of less than 10\% of the 
 
 Use the $t$-distribution to calculate the confidence interval:
 \begin{align*}
-\overline{x} \pm  t^{\star}_{\text{df}} \times \text{SE} &= \overline{x}  \pm  t^{\star}_{18}  \times \sqrt{s}/n \\
+\overline{x} \pm  t^{\star}_{\text{df}} \times \text{SE} &= \overline{x}  \pm  t^{\star}_{18}  \times s/\sqrt{n} \\
 &= 4.4 \pm  2.10 \times 2.3/\sqrt{19} \\
 &= (3.29, 5.51)\,\, \mu\text{g/wet g}.
 \end{align*}
