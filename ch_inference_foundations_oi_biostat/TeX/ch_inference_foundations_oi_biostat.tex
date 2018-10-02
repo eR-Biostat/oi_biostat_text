@@ -33,7 +33,7 @@ This chapter introduces the important ideas in drawing estimates from samples by
 
 % remember to add closing index indicator
 
-The BRFSS was established in 1984 in 15 states to collect data using telephone interviews about health-related risk behaviors, chronic health conditions. and the use of preventive services.  It now collects data in all 50 states and the District of Columbia from more than 400,000 interviews conducted each year.  The data set \data{cdc} contains a small number of variables from a random sample of 20,000 responses from the 264,684 interviews from the BRFSS conducted in the year 2000.  Part of this dataset is shown in Table~\ref{cdcDF}, with the variables described in Table~\ref{cdcVariables}.\footnote{With small modifications (character strings re-coded as factors), the data appears in this text as it does in an \textit{OpenIntro} lab. \url{http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-base-R/blob/master/intro\_to\_data/intro\_to\_data.html} }
+The BRFSS was established in 1984 in 15 states to collect data using telephone interviews about health-related risk behaviors, chronic health conditions, and the use of preventive services.  It now collects data in all 50 states and the District of Columbia from more than 400,000 interviews conducted each year.  The data set \data{cdc} contains a small number of variables from a random sample of 20,000 responses from the 264,684 interviews from the BRFSS conducted in the year 2000.  Part of this dataset is shown in Table~\ref{cdcDF}, with the variables described in Table~\ref{cdcVariables}.\footnote{With small modifications (character strings re-coded as factors), the data appears in this text as it does in an \textit{OpenIntro} lab. \url{http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-base-R/blob/master/intro\_to\_data/intro\_to\_data.html} }
 
 
 
@@ -70,7 +70,7 @@ The BRFSS was established in 1984 in 15 states to collect data using telephone i
 \var{genhlth} & A factor variable describing general health status, with levels \texttt{excellent}, \texttt{very good}, \texttt{good}, \texttt{fair}, \texttt{poor}. \\
 \hline
 \end{tabular}
-\caption{Some variables and their descriptions for the \data{cdc} data set.}
+\caption{Some variables and their descriptions for the \data{cdc} dataset.}
 \label{cdcVariables}
 \end{table}
 
@@ -125,7 +125,7 @@ Point estimates become more accurate with increasing sample size. Figure~\ref{cd
 	\label{cdcWeightRunningMean}
 \end{figure}
 
-Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides more reliable estimate of the population mean.
+Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.
 
 %JV: with the edits, this figure no longer shows a 'running mean'.
 
@@ -173,12 +173,12 @@ The \term{standard error (SE)}\index{SE}\marginpar[\raggedright\vspace{-4mm}
 
 $SE$\\\footnotesize standard\\error]{\raggedright\vspace{-4mm}
 
-$SE$\\\footnotesize standard\\error} of the sample mean measures the sample-to-sample variability of $\overline{X}$, the extent to which values of the repeated sample means oscillate around the population mean. The theoretical standard error of the sample mean is calculated by dividing the population standard deviation ($\sigma_{x}$) by the square root of the sample size $n$. Since the population standard deviation $\sigma$ is typically unknown, the sample standard deviation $s$ is often used in the definition of a standard error; $s$ is a reasonably good estimate of $\sigma$. If $\overline{x}$ is the sample mean weight, its standard error (denoted by SE) is
-\[\text{SE}_{\overline{x}} = \dfrac{s_{x}}{\sqrt{n}} = \dfrac{49.04}{\sqrt{60}} = 6.33. \]
+$SE$\\\footnotesize standard\\error} of the sample mean measures the sample-to-sample variability of $\overline{X}$, the extent to which values of the repeated sample means oscillate around the population mean. The theoretical standard error of the sample mean is calculated by dividing the population standard deviation ($\sigma_{x}$) by the square root of the sample size $n$. Since the population standard deviation $\sigma$ is typically unknown, the sample standard deviation $s$ is often used in the definition of a standard error; $s$ is a reasonably good estimate of $\sigma$. If $\overline{X}$ represents the sample mean weight, its standard error (denoted by SE) is
+\[\text{SE}_{\overline{X}} = \dfrac{s_{x}}{\sqrt{n}} = \dfrac{49.04}{\sqrt{60}} = 6.33. \]
 
 This estimate tends to be sufficiently good when the sample size is at least 30 and the population distribution is not strongly skewed. In the case of skewed distributions, a larger sample size is necessary.
 
-The probability tools of Section~\ref{randomVariablesSection} can be used to derive the formula $\sigma_{\overline{X}} = \sigma_x/\sqrt{n}$, but the derivation is not shown here. Larger sample sizes produce sampling distributions that have lower variability. Increasing the sample size causes $\overline{X}$ to be clustered more tightly around the population mean $\mu$, allowing for more accurate estimates of $\mu$ from a single sample, as shown in Figure~\ref{cdcSamplingVariabilityComparison}. When sample size is large, it is more likely that any particular sample will have a mean close to the population mean. 
+The probability tools of Section~\ref{randomVariablesSection} can be used to derive the formula $\sigma_{\overline{X}} = \sigma_x/\sqrt{n}$, but the derivation is not shown here. Larger sample sizes produce sampling distributions that have lower variability. Increasing the sample size causes the distribution of $\overline{X}$ to be clustered more tightly around the population mean $\mu$, allowing for more accurate estimates of $\mu$ from a single sample, as shown in Figure~\ref{cdcSamplingVariabilityComparison}. When sample size is large, it is more likely that any particular sample will have a mean close to the population mean. 
 
 \begin{figure}[h!]
 	\centering
@@ -198,7 +198,7 @@ The probability tools of Section~\ref{randomVariablesSection} can be used to der
 \begin{termBox}{\tBoxTitle{The standard error (SE) of the sample mean}
 		Given $n$ independent observations from a population with standard deviation $\sigma$, the standard error of the sample mean is equal to \vspace{-1mm}
 		\begin{align*}
-          \text{SE}_{\overline{x}} = \frac{s_x}{\sqrt{n}}.
+          \text{SE}_{\overline{X}} = \frac{s_x}{\sqrt{n}}.
 		\label{seOfXBar}
 		\end{align*}\vspace{-3mm}%
 		
@@ -216,7 +216,7 @@ The probability tools of Section~\ref{randomVariablesSection} can be used to der
 	
 	\item The mean of the random variable $\overline{X}$ equals the population mean $\mu$.  In the notation of Chapter~\ref{modeling}, $\mu_{\overline{X}} = E(\overline{X}) = \mu$.
 	
-	\item  The standard deviation of $\overline{X}$ ($\sigma_{\overline{X}})$ is called the standard error (SE) of the sample mean $\overline{x}$. 
+	\item  The standard deviation of $\overline{X}$ ($\sigma_{\overline{X}})$ is called the standard error (SE) of the sample mean. 
 	
 	\item The theoretical standard error of the sample mean, as calculated from a single sample of size $n$, is equal to $\frac{\sigma}{\sqrt{n}}$. The standard error is abbreviated by SE and is usually estimated by using $s$, the sample standard deviation, such that $SE = \frac{s}{\sqrt{n}}$.
 	
@@ -234,14 +234,14 @@ While a point estimate consists of a single value, an interval estimate provides
 \[(\overline{x} -m, \ \overline{x} + m) = \overline{x} \pm m, \]
 where $m$ is the \term{margin of error}. Intervals that have this form are called \term{two-sided confidence intervals} because they provide both lower and upper bounds, $\overline{x} - m$ and $\overline{x} + m$, respectively. One-sided sided intervals are discussed in Section~\ref{onesidedCIs}.
 
-The standard error of the sample mean is the standard deviation of its distribution; additionally, the distribution of sample means is nearly normal and centered at $\mu$. Thus, under the normal model, the sample mean $\overline{x}$ will be within 1.96 standard errors (i.e., standard deviations) of the population mean $\mu$ approximately 95\% of the time.\footnote{In other words, the $Z$-score of 1.96 is associated with 2.5\% area to the right (and $Z$ = -1.96 has 2.5\% area to the left); this can be found on normal probability tables or from using statistical software.} Thus, if an interval is constructed that spans 1.96 standard errors from the point estimate in either direction, a data analyst can be 95\% \term{confident} that the interval
+The standard error of the sample mean is the standard deviation of its distribution; additionally, the distribution of sample means is nearly normal and centered at $\mu$. Under the normal model, the sample mean $\overline{x}$ will be within 1.96 standard errors (i.e., standard deviations) of the population mean $\mu$ approximately 95\% of the time.\footnote{In other words, the $Z$-score of 1.96 is associated with 2.5\% area to the right (and $Z$ = -1.96 has 2.5\% area to the left); this can be found on normal probability tables or from using statistical software.} Thus, if an interval is constructed that spans 1.96 standard errors from the point estimate in either direction, a data analyst can be 95\% \term{confident} that the interval
 
 \begin{align}
   \overline{x}\ \pm\ 1.96\times \text{SE} 
 \label{95PercentCIWhenUsingNormalModel}
 \end{align}
 
-contains the population mean. The value 95\% is an approximation, accurate when the sampling distribution for the sample mean is close to that of a normal distribution. This assumption holds when the sample size is sufficiently large (guidelines for `sufficiently large' are given in Section~\ref{ch4Summary}).
+contains the population mean. The value 95\% is an approximation, accurate when the sampling distribution for the sample mean is close to a normal distribution. This assumption holds when the sample size is sufficiently large (guidelines for `sufficiently large' are given in Section~\ref{ch4Summary}).
 
 \begin{figure}[h!]
 	\centering
@@ -274,7 +274,7 @@ Just as with the sampling distribution of the sample mean, the interpretation of
   \end{example}
 
   \begin{exercise} \label{95CIExerciseForWeightUSFemales}
-    The are 31 females in the sample of 60 US adults, and the average and standard deviation of weight for these individuals are 162.3~lbs and 57.74~lbs, respectively.  A histogram of \var{weight} for the 31 females is shown in Figure~\ref{cdcFemaleWeightHist}.  Calculate an approximate 95\% confidence interval for the average weight of US females.  Is the interval likely to be accurate?\footnote{Applying Equation~\ref{95PercentCIWhenUsingNormalModel}: $162.3  \pm (1.96)(57.73/\sqrt{31}) \rightarrow (149.85, 174.67)$.  The usual interpretation would be that a data analyst can be about 95\% confident the average weight of US females is between approximately 150 and 175~lbs.  However, the histogram of female weights shows substantial right skewing, and several females with recorded weights larger than 200~lbs. The confidence interval is probably not accurate; a larger sample should be collected in order for the sampling distribution of the mean to be approximately normal.  Chapter~\ref{inferenceForNumericalData} will introduce the $t$-distribution, which is more reliable with small sample sizes than the $z$-distribution.}
+    There are 31 females in the sample of 60 US adults, and the average and standard deviation of weight for these individuals are 162.3~lbs and 57.74~lbs, respectively.  A histogram of \var{weight} for the 31 females is shown in Figure~\ref{cdcFemaleWeightHist}.  Calculate an approximate 95\% confidence interval for the average weight of US females.  Is the interval likely to be accurate?\footnote{Applying Equation~\ref{95PercentCIWhenUsingNormalModel}: $162.3  \pm (1.96)(57.73/\sqrt{31}) \rightarrow (149.85, 174.67)$.  The usual interpretation would be that a data analyst can be about 95\% confident the average weight of US females is between approximately 150 and 175~lbs.  However, the histogram of female weights shows substantial right skewing, and several females with recorded weights larger than 200~lbs. The confidence interval is probably not accurate; a larger sample should be collected in order for the sampling distribution of the mean to be approximately normal.  Chapter~\ref{inferenceForNumericalData} will introduce the $t$-distribution, which is more reliable with small sample sizes than the $z$-distribution.}
 \end{exercise}
 
 \begin{figure}[hht]
@@ -333,14 +333,14 @@ Apply the 99\% confidence interval formula: $\overline{x}_{active}\ \pm\ 2.58 \t
 
 \begin{example} {
     Create a 99\% confidence interval for the average adult weight in the US population using the data in \data{cdc.samp}. The point estimate is $\overline{x}_{weight} = 173.3$ and the standard error is $SE_{\overline{x}} = 6.33$.}
-Apply the 99\% confidence interval formula: $\overline{x}_{weight}\ \pm\ 2.58 \times  SE_{\overline{x}} \rightarrow (156.97, 189.63)$. A data analyst can be 99\% confident that the average adult weight is between 156.97 and 189.63~lbs.
+Apply the 99\% confidence interval formula: $\overline{x}_{weight}\ \pm\ 2.58 \times  SE_{\overline{X}} \rightarrow (156.97, 189.63)$. A data analyst can be 99\% confident that the average adult weight is between 156.97 and 189.63~lbs.
 \end{example}
 
 The 95\% confidence interval for the average adult weight is (160.89, 185.71)~lbs. Increasing the confidence level to 99\% results in the interval (156.97, 189.63) lbs; this wider interval is more likely to contain the population mean $\mu$. However, increasing the confidence level comes at a cost: a wider interval is less informative in providing a precise estimate of the population mean. Consider the extreme: to be "100\% confident" that an interval contains $\mu$, the interval must span all possible values of $\mu$. For example, with 100\% confidence the average weight is between 0 and 1000 lbs; while this interval necessarily contains $\mu$, it has no interpretive value and is completely uninformative.\footnote{Strictly speaking, to be 100\% confident requires an interval spanning all positive numbers; 1000 lbs has been arbitrarily chosen as an upper limit for human weight.} 
 
-Decreasing the confidence level results in a narrower interval and a more precise estimate, but the interval has less chance of containing $\mu$. For example, consider a 50\% confidence interval for average adult weight using \data{cdc.samp}: the $z^{\star}$ value is 0.67, and the confidence interval is (169.06, 177.54)~lbs. This interval provides more precise estimate of the population average weight $\mu$ than the 99\% or 95\% confidence intervals, but there is only a 50\% chance that it contains $\mu$.
+Decreasing the confidence level produces a narrower interval; the estimate is more precise, but also more prone to inaccuracy. For example, consider a 50\% confidence interval for average adult weight using \data{cdc.samp}: the $z^{\star}$ value is 0.67, and the confidence interval is (169.06, 177.54)~lbs. This interval provides a more precise estimate of the population average weight $\mu$ than the 99\% or 95\% confidence intervals, but the increased precision comes with less confidence about whether the interval contains $\mu$. In a theoretical setting of repeated sampling, if 100 50\% confidence intervals were computed, only half could be expected to contain $\mu$.
 
-The choice of confidence level is a trade-off between obtaining a precise estimate and calculating an interval that likely contains the population parameter. In published literature, the most used confidence intervals are the 90\%, 95\%, and 99\%. 
+The choice of confidence level is a trade-off between obtaining a precise estimate and calculating an interval that can be reasonably expected to contain the population parameter. In published literature, the most used confidence intervals are the 90\%, 95\%, and 99\%. 
 
 \subsection{One-sided confidence intervals}
 \label{onesidedCIs}
