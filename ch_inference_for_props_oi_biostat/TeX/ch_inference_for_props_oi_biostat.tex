@@ -51,7 +51,7 @@ $\hat{p}$\vspace{0mm}\\\footnotesize sample\\proportion\vspace{3mm}\\\normalsize
 
 $\hat{p}$\vspace{0mm}\\\footnotesize sample\\proportion\vspace{3mm}\\\normalsize$p$\vspace{0mm}\\\footnotesize population\\proportion}
 
-When conducting inference, the population proportion $p$ is unknown, and the sample proportion $\hat{p}$ can be substituted for $p$ to check the success-failure condition and compute the standard error.
+When conducting inference, the population proportion $p$ is unknown. Thus, to construct a confidence interval, the sample proportion $\hat{p}$ can be substituted for $p$ to check the success-failure condition and compute the standard error. In a hypothesis test, $p_0$ is substituted for $p$.
 
 \subsubsection{Confidence intervals for a proportion}
 \label{confIntForPropSection}
@@ -104,24 +104,24 @@ The test statistic $z$ for the null hypothesis $H_0: p = p_0$ based on a sample 
     &= \dfrac{\hat{p} - p_0}{\sqrt{\frac{(p_0)(1-p_0)}{n}}}. 
 \end{align*}
 
-\begin{example}{Suppose that out of a cohort of 120 patients with stage 1 lung cancer at the Dana-Farber Cancer Institute (DFCI), 80 of the patients survive at least 5 years, and suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population with this disease has a different 5-year survival probability than the national population?}
+\begin{example}{Suppose that out of a cohort of 120 patients with stage 1 lung cancer at the Dana-Farber Cancer Institute (DFCI), 80 of the patients survive at least 5 years, and suppose that National Cancer Institute statistics indicate that the 5-year survival probability for stage 1 lung cancer patients nationally is 0.60. Do the data collected from 120 patients support the claim that the DFCI population with this disease has a different 5-year survival probability than the national population? Let $\alpha = 0.10$, since this is an early study of the therapy.}
 
-Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A:  p \neq 0.60$, using $\alpha = 0.05$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.60) = 40 > 5.$ The test statistic is the $z$-score of the point estimate: 
+Test the hypothesis $H_0: p = 0.60$ versus the alternative, $H_A:  p \neq 0.60$, using $\alpha = 0.10$. If we assume that the outcome of one patient at DFCI does not influence the outcome of other patients, the independence condition is met, and the success-failure condition is satisfied since $(120)(0.60) = 80 > 5$ and $(120)(1-0.60) = 40 > 5.$ The test statistic is the $z$-score of the point estimate: 
 
 \[z = \dfrac{\text{point estimate - null value}}{SE} = \dfrac{0.67 - 0.60}{\sqrt{\frac{(0.60)(1-0.60)}{120}}} = 1.57. \]
 
-The $p$-value is the probability that a standard normal variable is larger than 1.57 or smaller than -.157, and is 0.12; since the $p$-value is greater than 0.05, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national rate.
+The $p$-value is the probability that a standard normal variable is larger than 1.57 or smaller than -1.57, $P(|Z| > 1.57) = 0.12$ ; since the $p$-value is greater than 0.05, there is insufficient evidence to reject $H_0$ in favor of $H_A$. There is not convincing evidence that the survival probability at DFCI differs from the national rate.
 
 \end{example}
 
-\begin{example} {Using the data from the study in advanced melanoma, use the normal approximation to the sampling distribution of $\hat{p}$ to test the null hypothesis that the response probability to the novel combined therapy is 30\% against a one-sided alternative that the response proportion is greater than 30\%.}
+\begin{example} {Using the data from the study in advanced melanoma, use the normal approximation to the sampling distribution of $\hat{p}$ to test the null hypothesis that the response probability to the novel combined therapy is 30\% against a one-sided alternative that the response proportion is greater than 30\%. Let $\alpha = 0.10$.}
 
 The test statistic has value 
 \[
 z = (0.404 - 0.30)/\sqrt{(0.30)(0.70)/52} = 1.64. 
 \] 
 
-The one-sided p-value is $P(Z \geq 1.64) = 0.05$ and the null hypothesis is rejected in favor of a one-sided alternative.  This is an example where a one-sided test and a two-sided confidence interval (equivalent to a two-sided test) yield slightly different conclusions. With either approach, the data would support further study of these drugs in melanoma.  
+The one-sided $p$-value is $P(Z \geq 1.64) = 0.05$; there is sufficient evidence to reject the null hypothesis at $\alpha = 0.10$. This is an example of where a two-sided test and a one-sided test yield different conclusions. 
 
 \end{example}
 

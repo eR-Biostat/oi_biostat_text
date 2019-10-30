@@ -191,7 +191,7 @@ Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = 
 
 \index{least squares regression |)}
 
-\section{Interpreting a least squares regression line}
+\section{Interpreting a linear model}
 \label{interpretingLeastSquaresLine}
 
 A least squares regression line functions as a statistical model that can be used to estimate the relationship between an explanatory and response variable. While the calculations for constructing a regression line are relatively simple, interpreting the linear model is not always straightforward. In addition to discussing the mathematical interpretation of model parameters, this section also addresses methods for assessing whether a linear model is an appropriate choice, interpreting categorical predictors, and identifying outliers.
@@ -500,7 +500,7 @@ Tests for one-sided alternatives and one-sided confidence intervals make the usu
 
 Statistical software is typically used to obtain $t$-statistics and $p$-values for inference with regression, since using the formulas for calculating standard error can be cumbersome.
 
-The standard errors of $\beta_0$ and $\beta_1$ used in confidence intervals and hypothesis tests replace $\sigma$ with $s$, the standard deviation of the residuals from a fitted line. Formally, 
+The standard errors of $b_0$ and $b_1$ used in confidence intervals and hypothesis tests replace $\sigma$ with $s$, the standard deviation of the residuals from a fitted line. Formally, 
 \[s = \sqrt{\frac{\sum e^{2}_{i}}{n-2}} =  \sqrt{\frac{\sum (y_{i}-\hat{y}_{i})^{2}}{n-2}} \]
 
 \begin{comment}
