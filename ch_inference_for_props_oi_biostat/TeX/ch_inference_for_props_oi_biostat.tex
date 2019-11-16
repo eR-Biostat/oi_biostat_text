@@ -142,7 +142,7 @@ $H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$.
 
 %This is one of those situations where $p$ is doing double duty and (be careful!) the null hypothesis value for the parameter and the significance level $\alpha$ have the same numerical value. 
 
-The independence condition is satisfied, but the success-failure condition is not, since $np_0 = (85)(0.05) = 4.25 < 10$, so this is a setting where exact binomial probabilities should be used to calculate a $p$-value.
+The independence condition is satisfied, but the success-failure condition is not, since $np_0 = (85)(0.05) = 4.25 < 5$, so this is a setting where exact binomial probabilities should be used to calculate a $p$-value.
 
 The sample proportion $\hat{p}$ equals $x/n = 24/85 = 0.28$. Since $\hat{p} > p_0$, calculate the two-sided $p$-value from $2 \times P(X \geq 24)$, where $X \sim \text{Binom}(85, 0.05)$.
 
@@ -167,7 +167,7 @@ Whenever possible, a sample size for a study should be estimated before data col
 Algebra can be used to show that the above equation implies
 
 \begin{align*}
-n = \frac{(z^{\star})^2}{m^2(p)(1 - p)}.
+n = \frac{(z^{\star})^2(p)(1 - p)}{m^2}.
 \end{align*}
 In some settings a preliminary estimate for $p$ can be used to calculate $n$.  When no estimate is available, calculus can be used to show that $p(1 - p)$ has its largest value when $p = 0.50$, and that conservative value for $p$ is often used to ensure that $n$ is sufficiently large regardless of the value of the unknown population proportion $p$.  In  that case, $n$ satisfies
 \begin{align*}
