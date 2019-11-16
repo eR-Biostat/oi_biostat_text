@@ -869,7 +869,7 @@ The results are significant at the $\alpha = 0.05$ significance level. There is 
 
 \subsubsection{Calculating a two-sided $p$-value}
 
-There are various methods for calculating a two-sided $p$-value in the Fisher's exact test setting. When the test is calculated by hand, the most common way to calculate a two-sided $p$-value is to double the one-sided $p$-value. One other common method used by various statistical computing packages such as \textsf{R} is to classify "more extreme" tables as all tables with probabilities less than that of the observed table, in both directions. The two-sided $p$-value is the sum of probabilities for the qualifying tables.  That approach is illustrated in the next example.
+There are various methods for calculating a two-sided $p$-value in the Fisher's exact test setting. When the test is calculated by hand, the most common way to calculate a two-sided $p$-value is to double the smaller of the one-sided $p$-values. One other common method used by various statistical computing packages such as \textsf{R} is to classify "more extreme" tables as all tables with probabilities less than that of the observed table, in both directions. The two-sided $p$-value is the sum of probabilities for the qualifying tables.  That approach is illustrated in the next example.
 
 \begin{example}{Evaluate the statistical significance of the observed data in Table~\ref{fecalStudyResultsTest} using the two-sided alternative $H_A: p_1 \neq p_2$.}
 	
