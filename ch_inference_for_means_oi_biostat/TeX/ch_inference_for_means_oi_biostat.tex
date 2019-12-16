@@ -26,7 +26,7 @@ In sample sizes smaller than 30, if the data are approximately symmetric and the
 \index{t-distribution|(}
 \index{distribution!$t$|(}
 
-Figure~\ref{tDistCompareToNormalDist} shows a $t$ distribution and normal distribution. Like the standard normal distribution, the $t$-distribution is unimodal and symmetric about zero.  However, the tails of a $t$-distribution are thicker than for the normal, so observations are more likely to fall beyond two standard deviations from the mean than under the normal distribution.\footnote{The standard deviation of the $t$-distribution is actually a little more than 1. However, it is useful to always think of the $t$-distribution as having a standard deviation of 1 in all of our applications.} While the estimate of the standard error will be less accurate with smaller sample sizes, the thick tails of the $t$-distribution correct for the variability in $s$.
+Figure~\ref{tDistCompareToNormalDist} shows a $t$ distribution and normal distribution. Like the standard normal distribution, the $t$-distribution is unimodal and symmetric about zero.  However, the tails of a $t$-distribution are thicker than for the normal, so observations are more likely to fall beyond two standard deviations from the mean than under the normal distribution.\footnote{The standard deviation of the $t$-distribution is actually a little more than 1. However, it is useful to think of the $t$-distribution as having a standard deviation of 1 in the context of using it to conduct inference.} While the estimate of the standard error will be less accurate with smaller sample sizes, the thick tails of the $t$-distribution correct for the variability in $s$.
 
 \begin{figure}
 \centering
@@ -48,7 +48,7 @@ The $t$-distribution can be described as a family of symmetric distributions wit
 The degrees of freedom characterize the shape of the $t$-distribution. The larger the degrees of freedom, the more closely the distribution approximates the normal model.}
 \end{termBox}
 
-Probabilities for the $t$-distribution can be calculated either by using distribution tables or using statistical software. The use of software has become the preferred method because it is more accurate, allows for complete flexibility in the choice of $t$-values on the horizontal axis, and is not limited to a small range of degrees of freedom. The remainder of this section illustrates the use of a \term{t-table}, partially shown in Table~\ref{tTableSample}, in place of the normal probability table. A larger $t$-table is in Appendix~\ref{tDistributionTable} on page~\pageref{tDistributionTable}.  The \textsl{R Companion} illustrates the use of the \textsf{R} functions \texttt{pt} and \texttt{qt} to calculate probabilities for the $t$-distribution.  Readers intending to use software can skip to the next section.
+Probabilities for the $t$-distribution can be calculated either by using distribution tables or using statistical software. The use of software has become the preferred method because it is more accurate, allows for complete flexibility in the choice of $t$-values on the horizontal axis, and is not limited to a small range of degrees of freedom. The remainder of this section illustrates the use of a \term{t-table}, partially shown in Table~\ref{tTableSample}, in place of the normal probability table. A larger $t$-table is in Appendix~\ref{tDistributionTable} on page~\pageref{tDistributionTable}.  The \textsf{R} labs illustrate the use of software to calculate probabilities for the $t$-distribution.  Readers intending to use software can skip to the next section.
 
 
 \begin{table}[hht]
@@ -128,6 +128,7 @@ A one-sided interval with the same confidence coefficient will have the form
 \end{align*}
 except that in this case $t_{\text{df}}^{\star}$ is the point on a $t$-distribution with $n-1$ degrees of freedom and  area $(1 - \alpha)$ to its left.
 
+With the ability to conveniently calculate $t^\star$ for any sample size or associated $\alpha$ via computing software, the $t$-distribution can be used by default over the normal distribution. The rule of thumb that $n > 30$ qualifies as a large enough sample size to use the normal distribution dates back to when it was necessary to rely on distribution tables.
 
 \index{data!dolphins and mercury|(}
 \begin{example}{Dolphins are at the top of the oceanic food chain; as a consequence, dangerous substances such as mercury tend to be present in their organs and muscles at high concentrations. In areas where dolphins are regularly consumed, it is important to monitor dolphin mercury levels. This example uses data from a random sample of 19 Risso's dolphins from the Taiji area in Japan.\footnote{Taiji is a significant source of dolphin and whale meat in Japan. Thousands of dolphins pass through the Taiji area annually; assume that these 19 dolphins represent a simple random sample. Data reference: Endo T and Haraguchi K. 2009. High mercury levels in hair samples from residents of Taiji, a Japanese whaling town. Marine Pollution Bulletin 60(5):743-747.} Calculate the 95\% confidence interval for average mercury content in Risso's dolphins from the Taiji area.
@@ -242,7 +243,7 @@ In the 2000 Olympics, was the use of a new wetsuit design responsible for an obs
 %       label="swimSuitTimes"
 %		digits = c(0, 0, 2, 2, 2))
 	
-The swimsuit velocity data is an example of \term{paired data}, in which two sets of observations  are uniquely paired so that an observation in one set matches an observation in the other; in this case, each swimmer has two measured velocities, one with a wetsuit and one with a swimsuit. A natural measure of the effect of the wetsuit on swim velocity is the difference between the measured maximum velocities (\texttt{velocity.diff = wet.suit.velocity - swim.suit.velocity}). Even though there are two measurements per swimmer, using the difference in velocities as the variable of interest allows for the problem to be approached like those in Section~\ref{oneSampleMeansWithTDistribution}.  Although it was not explicitly noted, the data used in Section~\ref{formalHypothesisTesting} were paired; each respondent had both an actual and desired weight.
+The swimsuit velocity data are an example of \term{paired data}, in which two sets of observations  are uniquely paired so that an observation in one set matches an observation in the other; in this case, each swimmer has two measured velocities, one with a wetsuit and one with a swimsuit. A natural measure of the effect of the wetsuit on swim velocity is the difference between the measured maximum velocities (\texttt{velocity.diff = wet.suit.velocity - swim.suit.velocity}). Even though there are two measurements per swimmer, using the difference in velocities as the variable of interest allows for the problem to be approached like those in Section~\ref{oneSampleMeansWithTDistribution}.  Although it was not explicitly noted, the data used in Section~\ref{formalHypothesisTesting} were paired; each respondent had both an actual and desired weight.
 
 Suppose the parameter $\delta$ is the population average of the difference in maximum velocities during a 1500m swim if all competitive swimmers recorded swim velocities with each suit type. A hypothesis test can then be conducted with the null hypothesis that the mean population difference in swim velocities between suit types equals 0 (i.e., there is no difference in population average swim velocities), $H_0: \delta = 0$, against the alternative that the difference is non-zero, $H_A: \delta \neq 0$.
 
@@ -264,7 +265,6 @@ Some important assumptions are being made. First, it is assumed that the data ar
 	\label{swimDotPlot}
 \end{figure}
 
-\newpage
 
 Let $\overline{x}_{\text{diff}}$ denote the sample average of the differences in maximum velocity, $s_{\text{diff}}$ the sample standard deviation of the differences, and $n$ the number of pairs in the dataset. The $t$-statistic used to test $H_0$ vs. $H_A$ is: 
 
@@ -915,7 +915,7 @@ The \data{famuss} dataset was introduced in Chapter~\ref{introductionToData}, Se
 	Write the null and corresponding alternative hypotheses in plain language.\footnote{$H_0$: The average percent change in non-dominant arm strength is equal across the three genotypes. $H_A$: The average percent change in non-dominant arm strength varies across some (or all) groups.}
 \end{exercise}
 
-Table~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. It seems reasonable to assume normality; while there are some outliers in each group, this is not a concern since the sample sizes are relatively large.
+Table~\ref{famussSummaryTable} provides summary statistics for each group. A side-by-side boxplot for the change in non-dominant arm strength is shown in Figure~\ref{famussBoxPlot}; Figure~\ref{famussNormal} shows the Q-Q plots by each genotype. Notice that the variability appears to be approximately constant across groups; nearly constant variance across groups is an important assumption that must be satisfied for using ANOVA. Based on the Q-Q plots, there is evidence of moderate right skew; the data does not follow a normal distribution very closely, but could be considered to 'loosely' follow a normal distribution.\footnote{In a more advanced course, it can be shown that the ANOVA procedure still holds with deviations from normality when sample sizes are moderately large. Additionally, a more advanced course would discuss appropriate transformations to induce normality.} It is reasonable to assume that the observations are independent within and across groups; it is unlikely that participants in the study were related, or that data collection was carried out in a way that one participant's change in arm strength could influence another's. 
 
 \begin{table}[ht]
 	\centering\small
@@ -935,10 +935,18 @@ Table~\ref{famussSummaryTable} provides summary statistics for each group. A sid
 
 \begin{figure}[h!]
 	\centering
-	\includegraphics[width=0.7\textwidth]{ch_inference_for_means_oi_biostat/figures/famussBoxPlot/famussBoxPlot}
+	\includegraphics[width=0.5\textwidth]{ch_inference_for_means_oi_biostat/figures/famussBoxPlot/famussBoxPlot}
 	\caption{Side-by-side box plot of the change in non-dominant arm strength for 595 participants across three groups.}
 	\label{famussBoxPlot}
 \end{figure}
+
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.7\textwidth]{ch_inference_for_means_oi_biostat/figures/famussNormal/famussNormal}
+	\caption{Q-Q plots of the change in non-dominant arm strength for 595 participants across three groups.}
+	\label{famussNormal}
+\end{figure}
+
 
 \begin{example}{The largest difference between the sample means is between the \texttt{CC} and \texttt{TT} groups. Consider again the original hypotheses:
 		\begin{itemize}

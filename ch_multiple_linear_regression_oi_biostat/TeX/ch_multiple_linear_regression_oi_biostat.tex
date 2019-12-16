@@ -169,7 +169,7 @@ To assess the linearity assumption, examine plots of residuals against each of t
 	\centering
 	\includegraphics[width=0.8\textwidth]
 	{ch_multiple_linear_regression_oi_biostat/figures/prevendStatinAgeResidPlot/prevendStatinAgeResidPlot.pdf}
-	\caption{Age vs residuals in the model for RFFT vs statins and age in the PREVEND data.  The horizontal line is the least squares line for age vs the residuals.}
+	\caption{Residuals versus age in the model for RFFT vs statins and age in the PREVEND data.}
 	\label{prevendStatinAgeResidPlot}
 \end{figure}
 
@@ -239,8 +239,6 @@ R_{adj}^{2} = 1-\frac{\text{Var}(e_i) / (n-p-1)}{\text{Var}(y_i) / (n-1)}
 where $n$ is the number of cases used to fit the model and $p$ is the number of predictor variables in the model.}
 \end{termBox}
 
-Since $p = 1$ in simple linear regression, the $R^2$ and adjusted $R^2$ have the same value when there is only a single predictor. 
-
 Essentially, the adjusted $R^2$ imposes a penalty for including additional predictors that do not contribute much towards explaining the observed variation in the response variable. The value of the adjusted $R^2$ in the model with both \var{Statin} and \var{Age} is 0.2823, which is essentially the same as the $R^2$ value of 0.2852. The additional predictor \var{Age} considerably increases the strength of the model, resulting in only a small penalty to the $R^2$ value.
 
 While the adjusted $R^2$ is useful as a statistic for comparing models, it does not have an inherent interpretation like $R^2$. Students often confuse the interpretation of $R^2$ and adjusted $R^2$; while the two are similar, adjusted $R^2$ is \emph{not} the proportion of variation in the response variable explained by the model. The use of adjusted $R^2$ for model selection will be discussed in Section~\ref{modelSelection}.
@@ -295,7 +293,7 @@ Just as in Chapter~\ref{probability}, upper case letters are used when thinking 
 
 For any given set of estimates $b_1, b_2,\ldots,b_p$ and predictors $x_{i1},x_{i2},\ldots,x_{ip}$, predicted values of the response can be calculated using
 \[
-   \hat{y}_i = b_0 + b_1 x_{i1} + b_2 x_{i2} +\cdots b_p x_{ip},
+   \hat{y}_i = b_0 + b_1 x_{i1} + b_2 x_{i2} +\cdots + b_p x_{ip},
 \]
 where $b_0, b_1, \dots, b_p$ are estimates of the coefficients $\beta_0, \beta_1, \dots, \beta_p$ obtained using the principle of least squares estimation. 
 
@@ -313,7 +311,7 @@ When the assumptions of multiple regression hold, at least approximately, this r
 \begin{termBox}{\tBoxTitle{Sampling distributions of estimated coefficients}
 Suppose 
 \[
-\hat{y} = b_0 + b_1 x_{i} + b_2 x_{i} +\cdots b_p x_{i}
+\hat{y} = b_0 + b_1 x_{i} + b_2 x_{i} +\cdots + b_p x_{i}
 \]
 is an estimated multiple regression model from a dataset with $n$ observations on the response and predictor variables, and let $b_k$ be one of the estimated coefficients.  Under the hypothesis $H_0: \beta_k = 0$, the standardized statistic
 \[
@@ -375,7 +373,7 @@ The formula is not used for calculation, since the numerical value of the $F$-st
 The $F$-statistic in regression is used to test the null hypothesis 
 
 \[
-  H_0:\, \beta_1 = \beta_2 = \cdots \beta_p = 0
+  H_0:\, \beta_1 = \beta_2 = \cdots = \beta_p = 0
 \]
 against the alternative that at least one of the coefficients is not 0.
 
@@ -579,7 +577,7 @@ The coefficient for statin use shows the importance of adjusting for confounders
 \label{prevendRFFTStatinAgeEducationCVD}
 \end{table}
 
-The $R^2$ for the model is 0.4355; a substantial increase from the model with only statin use and age as predictors, which had an $R^2$ of 0.02852. The adjusted $R^2$ for the model is 0.4286, close to the $R^2$ value, which suggests that the additional predictors increase the strength of the model enough to justify the additional complexity.
+The $R^2$ for the model is 0.4355; a substantial increase from the model with only statin use and age as predictors, which had an $R^2$ of 0.2852. The adjusted $R^2$ for the model is 0.4286, close to the $R^2$ value, which suggests that the additional predictors increase the strength of the model enough to justify the additional complexity.
 
 Figure~\ref{prevendRFFTStatinAgeEducCVDResidNormPlot} shows a plot of residuals vs predicted RFFT scores from the model in Table~\ref{prevendRFFTStatinAgeEducationCVD} and a normal probability plot of the residuals. These plots show that the model fits the data reasonably well. The residuals show a slight increase in variability for larger predicted values, and the normal probability plot shows the residuals depart slightly from normality in the extreme tails.  Model assumptions never hold exactly, and the possible violations shown in this figure are not sufficient reasons to discard the model.
 
@@ -858,7 +856,7 @@ There are six potential predictors in the model; the variable \texttt{year.of.is
 
 A \term{scatterplot matrix} can be useful for visualizing the relationships between the predictor and response variables, as well as the relationships between predictors. Each subplot in the matrix is a simple scatterplot; all possible plots are shown, except for the plots of a variable versus itself. The variable names are listed along the diagonal of the matrix, and the diagonal divides the matrix into symmetric plots. For instance, the first plot in the first row shows \var{abundance} on the vertical axis and \var{log.area} on the horizontal axis; the first plot in the first column shows \var{abundance} on the horizontal axis and \var{log.area} on the vertical axis. Note that for readability, \var{grazing.intensity} appears with values 1 - 5, with 1 denoting "light" and 5 denoting "heavy" grazing intensity.
    
-The plots in the first row of Figure~\ref{forestbirdsScatterPlotMatrix} show the relationships between \var{abundance} and the predictors.\footnote{Traditionally, the response variable (i.e., the dependent variable) is plotted on the vertical axis; as a result, it seems more natural to look at the first row where \var{abundance} is on the $y$-axis. It is equally valid, however, to assess the association of \var{abundance} with the predictors from the plots in the first column.} There is a strong positive association between \var{abundance} with \var{log.area}, and a strong negative association between \var{abundance} and \var{log.yrs.isolation}. The variables \var{log.dist.near.patch} and \var{log.dist.larger} seem weakly positively associated with \var{altitude}. There is high variance of \var{abundance} and somewhat similar centers for the first four categories, but \var{abundance} does clearly tend to be lower in the "high grazing" category versus the others.
+The plots in the first row of Figure~\ref{forestbirdsScatterPlotMatrix} show the relationships between \var{abundance} and the predictors.\footnote{Traditionally, the response variable (i.e., the dependent variable) is plotted on the vertical axis; as a result, it seems more natural to look at the first row where \var{abundance} is on the $y$-axis. It is equally valid, however, to assess the association of \var{abundance} with the predictors from the plots in the first column.} There is a strong positive association between \var{abundance} with \var{log.area}, and a strong negative association between \var{abundance} and \var{log.yrs.isolation}. The variables \var{log.dist.near.patch} and \var{log.dist.larger} seem weakly positively associated with \var{abundance}. There is high variance of \var{abundance} and somewhat similar centers for the first four categories, but \var{abundance} does clearly tend to be lower in the "high grazing" category versus the others.
 
 The variables \var{log.dist.nearest} and \var{log.dist.larger} appear strongly associated; a model may only need one of the two, as they may be essentially "redundant" in explaining the variability in the response variable.\footnote{Typically, the predictor that is less strongly correlated with the response variable is the one that is "redundant" and will be statistically insignificant when included in a model with the more strongly correlated predictor. This is not always the case, and depends on the other variables in the model.} In this case, however, since both are only weakly associated with \var{abundance}, both may be unnecessary in a model.
 
