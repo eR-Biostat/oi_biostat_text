@@ -3,12 +3,6 @@
 \chapter{Simple linear regression}
 \label{linRegrForTwoVar}
 
-\begin{comment}
-  
-  - indexing not done yet
-  - exercise file not done yet
-\end{comment}
-
 
 \index{linear regression|textbf}
 
@@ -19,6 +13,8 @@ This chapter explores simple linear regression, a technique for estimating a str
 For example, scatterplots in Chapter~\ref{introductionToData} illustrated the linear relationship between height and weight in the NHANES data, with height as a predictor of weight. Adding a best-fitting line to these data using regression techniques would allow for prediction of an individual's weight based on their height. The linear model could also be used to investigate questions about the population-level relationship between height and weight, since the data are a random sample from the population of adults in the United States. 
 
 The next chapter covers multiple regression, a statistical model used to estimate the relationship between a single numerical response variable and several predictor variables.
+
+% \newpage
 
 \section{Examining scatterplots}
 \label{examiningScatterPlots}
@@ -67,6 +63,8 @@ Figure~\ref{frogClutchVolBodySizeRegress} shows the relationship between \var{cl
 
 
 \end{exercise}
+
+\newpage
 
 \index{scatter plots|)}
 \section{Estimating a regression line using least squares}
@@ -188,6 +186,8 @@ Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = 
 \end{exercise}
 
 %\newpage
+
+\newpage
 
 \index{least squares regression |)}
 
@@ -462,6 +462,8 @@ It is important to be especially careful about outliers when predictors are cate
 
 \end{comment}
 
+\newpage
+
 \section{Statistical inference with regression}
 \label{inferenceRegression}
 
@@ -623,6 +625,9 @@ The sign of the $t$-statistic differs because for the two-group test, the differ
 Example~\ref{wdiAssumptionsEx} showed that the constant variability assumption does not hold for these data. As a result, it might be advisable for a researcher interested in comparing the infant mortality rates between these two groups to conduct a two-group hypothesis test without using the pooled standard deviation assumption. Since this test uses a different formula for calculating the standard error of the difference in means, the $t$-statistic is different; additionally, the degrees of freedom are not equivalent. In this particular example, there is not a noticeable effect on the $p$-value.
 
 
+
+\newpage
+
 \section{Notes}
 
 This chapter provides only a brief introduction to simple linear regression; The next chapter, Chapter~\ref{multipleLinearRegression}, expands on the principles of simple regression to models with more than one predictor variable. 
@@ -636,3 +641,6 @@ The $R^2$ statistic is widely used in the social sciences where the unexplained 
 Linear regression models are often estimated after an investigator has noticed a linear relationship in data, and experienced investigators can often guess correctly that regression coefficients will be significant before calculating a $p$-value. Unlike with two-sample hypothesis tests, regression models are rarely specified in advance at the design stage. In practice, it is best to be skeptical about a small $p$-value in a regression setting, and wait to see whether the observed statistically significant relationship can be confirmed in an independent dataset. The issue of model validation and assessing whether results of a regression analysis will generalize to other datasets is often discussed at length in advanced courses.
 
 In more advanced texts, substantial attention is devoted to the subtleties of fitting straight line models. For instance, there are strategies for adjusting an analysis when one or more of the assumptions for regression do not hold. Additionally, there are methods to numerically assess the leverage or influence that each observation has on a fitted model, rather than the conceptual approach outlined earlier.
+
+Lab 1 explores the relationship between body mass index (BMI) and age in adults by fitting and interpreting a straight line to these variables in the NHANES dataset.  Lab 2 discusses the statistical model for least squares regression and discusses residual plots used to assess the assumptions for linear regression.  The lab is a useful reminder that least squares regression is much more than the mechanics of finding a line that best fits a dataset.  The Lab 3 exercises examine a method of estimating how well a line fit to data predicts values of a response variable by exploring the quantity $R^2$.  Categorical predictor variables are common in medicine and the life sciences.  Lab 4 explores the use of binary categorical predictor variables in regression and shows how two-sample $t$-tests can be calculated using linear regression.
+

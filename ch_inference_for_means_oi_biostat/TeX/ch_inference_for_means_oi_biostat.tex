@@ -4,9 +4,6 @@
 \label{inferenceForNumericalData}
 
 
-
-
-
 Chapter~\ref{foundationsForInference} introduced some primary tools of statistical inference\textemdash point estimates, interval estimates, and hypothesis tests. This chapter discusses settings where these tools are often used, including the analysis of paired observations and the comparison of two or more independent groups. The chapter also covers the important topic of estimating an appropriate sample size when a study is being designed.  The chapter starts with introducing a new distribution, the $t$-distribution, which can be used for small sample sizes. 
 
 
@@ -187,6 +184,8 @@ The probability that the absolute value of a $t$-statistic with 14 df is smaller
 
 \index{t-test!one-sample|)}
 
+\newpage
+
 \section{Two-sample test for paired data}
 \label{pairedData}
 
@@ -306,6 +305,8 @@ Using the data in Table~\ref{swimSuitTimes}, calculate a 95\% confidence interva
 
 The general approach when analyzing paired data is to first calculate the differences between the values in each pair, then use those differences in methods for confidence intervals and tests for a single sample.  Any conclusion from an analysis should be stated in terms of the original paired measurements.
 
+
+\newpage
 
 %__________________
 \section{Two sample test for independent data}
@@ -655,6 +656,8 @@ where $t^{\star}$ is the point on a $t$-distribution with $n_1 + n_2 -2$ degrees
 
 The benefits of pooling the standard deviation are realized through obtaining a better estimate of the standard deviation for each group and using a larger degrees of freedom parameter for the $t$-distribution. Both of these changes may permit a more accurate model of the sampling distribution of $\overline{x}_1 - \overline{x}_2$, if the standard deviations of the two groups are indeed equal.  In most applications, however, it is difficult to verify the assumption of equal population standard deviations, and thus safer to use the methods discussed in Sections~\ref{confidenceIntervalDifferenceMeans} and \ref{testingDifferenceMeans}.
 
+\newpage
+
 %__________________
 \section[Power calculations for a difference of means (special topic)]{Power calculations for a difference of means\\ (special topic)}
 \label{PowerForDifferenceOfTwoMeans}
@@ -850,6 +853,8 @@ The formula for power can be used to verify the sample size of 251:
 The calculated power is slightly larger than 80\% because of the rounding to 251.
 
 The sample size calculations done before any data are collected are one of the most critical aspects of conducting a study. If an analysis is done incorrectly, it can be redone once the error is discovered. However, if data were collected for a sample size that is either too large or too small, it can be impossible to correct the error, especially in studies with human subjects. As a result, sample size calculations are nearly always done using software. For two-sample $t$-tests, the \textsf{R} function \texttt{power.t.test} is both freely available and easy to use.
+
+\newpage
 
 \section[Comparing means with ANOVA (special topic)]{Comparing means with ANOVA (special topic)}
 \label{anovaAndRegrWithCategoricalVariables}
@@ -1106,6 +1111,8 @@ In summary, the mean percent strength change in the non-dominant arm for genotyp
 
 \index{analysis of variance (ANOVA)|)}
 
+\newpage
+
 \section{Notes}
 \label{inferenceForNumericalDataNotes}
 
@@ -1123,4 +1130,6 @@ Finally, the formula used to approximate degrees of freedom $\nu$ for the indepe
 \[\nu = \dfrac{\left[(s_1^2/n_1) + (s_2^2/n_2)\right]^2}{\left[(s_1^2/n_1)^2/(n_1 - 1) + (s_2^2/n_2)^2/(n_2 - 1)\right]}\],
 where $n_1, s_1$ are the sample size and standard deviation for the first sample, and $n_2, s_2$ are the corresponding values for the second sample.
 Since $\nu$ is routinely provided in the output from statistical software, there is rarely any need to calculate it by hand.  The approximate formula $\text{df} = \min(n_1 - 1, n_2 - 1)$ always produces a smaller value for degrees of freedom and hence a larger $p$-value.
+
+The labs for this chapter are structured around particularly important problems in practice: comparing two groups, such as a treatment and control group (Lab 1);  assessing before starting a study whether a sample size is large enough to make it likely that important differences will be detected (Lab 2); comparing more than two groups using analysis of variance (Lab 3); controlling error rates when looking at many comparisons in a dataset (Lab 4); and thinking about hypothesis testing in the large context of reproducibility (Lab 5). The first four labs provide guidance on how to conduct and interpret specific types of analyses.  Students may find the last lab particularly useful in gaining an understanding of the role of testing an inference in programs of research in specific areas of medicine.
 

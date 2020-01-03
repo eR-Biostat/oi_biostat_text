@@ -95,6 +95,7 @@ For the LEAP study, the 11.8\% difference is indeed larger than that expected by
 
 \index{data!LEAP|)}
 
+\newpage
 
 \section{Data basics}
 \label{dataBasics}
@@ -261,7 +262,7 @@ Female body size (\var{body.size}) is neither an explanatory nor response variab
 Refer to the variables from the \data{famuss} dataset described in Table~\ref{famussVariables} to formulate a question about the relationships between these variables, and identify the response and explanatory variables in the context of the question.\footnote{Two sample questions: (1)  Does change in participant arm strength after training seem associated with race? The response variable is \var{ndrm.ch} and the explanatory variable is \var{race}. (2)  Do male participants appear to respond differently to strength training than females? The response variable is \var{ndrm.ch} and the explanatory variable is \var{sex}.}
 \end{exercise}
 
-
+\newpage
 
 \section{Data collection principles}
 \label{dataCollectionPrinciples}
@@ -457,6 +458,7 @@ Observational studies may reveal interesting patterns or associations that can b
 
 Observational studies can be either prospective or retrospective. A \term{prospective study} identifies participants and collects information at scheduled times or as events unfold. For example, in the Nurses' Health Study, researchers recruited registered nurses beginning in 1976 and collected data through administering biennial surveys; data from the study have been used to investigate risk factors for major chronic diseases in women.\footnote{\texttt{\oiRedirect{textbook-channing_nurse_study}{www.channing.harvard.edu/nhs}}} \termsub{Retrospective studies}{retrospective study} collect data after events have taken place, such as from medical records. Some datasets may contain both retrospectively- and prospectively-collected variables. The Cancer Care Outcomes Research and Surveillance Consortium (CanCORS) enrolled participants with lung or colorectal cancer, collected information about diagnosis, treatment, and previous health behavior, but also maintained contact with participants to gather data about long-term outcomes.\footnote{Ayanian, John Z., et al. "Understanding cancer treatment and outcomes: the cancer care outcomes research and surveillance consortium." Journal of Clinical Oncology 22.15 (2004): 2992-2996}  
 
+\newpage
 
 \section[Numerical data]{Numerical data}
 \label{numericalData}
@@ -699,6 +701,7 @@ Undo the log transformation. The middle 70\% of the data are within the range ($
 
 Functions other than the natural log can also be used to transform data, such as the square root and inverse.  
 
+\newpage
 
 \section[Categorical data]{Categorical data}
 \label{categoricalData}
@@ -752,6 +755,8 @@ A bar plot is a common way to display a single categorical variable. The left pa
 	\caption{Two bar plots of \var{actn3.r577x}. The left panel shows the counts, and the right panel shows the proportions for each genotype.}
 	\label{famussBarPlot}
 \end{figure}
+
+\newpage
 
 \section{Relationships between two variables}
 
@@ -1232,6 +1237,8 @@ Recall the question introduced in Section~\ref{variableRelations}: is ACTN3 geno
 \end{exercise}
 
 \index{data!frog|)}
+
+\newpage
 
 \section[Exploratory data analysis]{Exploratory data analysis}
 \label{exploratoryDataAnalysis}
@@ -2040,6 +2047,8 @@ While presentation-style graphics may use relatively sophisticated approaches to
 
 \begin{comment}
 
+  \newpage
+
 \section[Genomic data]{Genomic data}
 
 In 1990, an international team of scientists led by the National Institutes of Health founded the Human Genome Project (HGP) with the goal of determining the complete nucleotide sequence of the human genome -- an estimated three billion base pairs of DNA.\footnote{Venter, et al. The sequence of the human genome. \textit{Science} 2001; \textbf{291}: 1304-1351 DOI: 10.1126/science.1058040} The project was declared complete in April 2003, with the first working draft made available to the public in 2001: "The scientific work will have profound long-term consequences for medicine, leading to the elucidation of the underlying molecular mechanisms of disease and thereby facilitating the design in many cases of rational diagnostics and therapeutics targeted at those mechanisms."\footnote{International Human Genome Sequencing Consortium. Initial sequencing and analysis of the human genome. \textit{Nature} 2001; \textbf{409}: 880-921.} The tools and techniques developed through the HGP have since been used to characterize the entire genomes of other organisms used extensively in biological research, such as mice and fruit flies. The free availability of genomic sequence data revolutionized biology as a discipline, creating new fields of study centered on taking a genome-wide approach to understanding fundamental biological questions. With the advent of high-throughput sequencing technologies, datasets in biology began to become larger and more complex, necessitating the development of advanced computational methods to analyze and interpret biological data. 
@@ -2253,21 +2262,10 @@ Introductory treatments of statistics often emphasize the value of formal method
 
 The tools of descriptive statistics form the basis of exploratory data analysis; having the intuition for exploring and interpreting data in the context of a research question is an essential statistical skill. With computing software, it is a relatively simple matter to produce numerical and graphical summaries even with large datasets. The challenge lies instead in understanding how to effectively wade through a dataset, disentangle complex relationships between variables, and piece together the underlying story. 
 
-\begin{comment}
+It is important to note that the graphical methods illustrated in the text are relatively simple, static graphs that, for instance, do not show changes dynamically over time. They will be surprisingly useful in the later chapters. But there has been considerable progress in the visual display of data in the last decade, and many wonderful displays exist that show complex, time dependent data.  We especially recommend the bubble charts available at the Gapminder web site (https://www.gapminder.org) that show international trends in public health outcomes and the graphical display of data in the Upshot section of the New York Times (https://www.nytimes.com/section/upshot).
 
-%JV: Some of this material should go in the preface to the text. Also, we should probably have a specific section in the back for technical notes about specific datasets.
+There are 4 labs associated with Chapter 1.  The first lab introduces basic commands for working with data in \textsl{R}, and shows how to produce the graphical and numerical summaries discussed in this chapter.  The exercises in Lab 1 rely heavily on the introduction to \textsl{R} and R Studio in Lab 00 (Getting Started).  The remaining three labs explore the data presented in the case studies in Section 7. They outline analyses driven by questions similar to what one might encounter in practice.  Does the state of California discriminate in its distribution of funds for developmental disability support (DDS) (Lab 2)?  Are particular genes associated with a subtype of pediatric leukemia (Lab 3)?  Is there a genetic basis to the cold weather response in the plant \textit{Arabidopsis arenosa.} (Lab 4)?
 
-Introductory treatments of statistics often emphasize the value of formal methods of probability and inference, the material covered in the remaining chapters in this text.  But numerical and graphical summaries are useful for understanding the features of a dataset before the process of inference begins.  A thorough understanding of the distribution of a dataset uncovers aspects that may provide insight into the data collection process and the reliability of the data.  Are there outliers?  If so, are they the result of errors in data recording?  Are some measurements out of range, even if they are not outliers, such as ages greater than 21 in a study of  where of children? Perhaps skewing suggests further questions. The right-skewing in the income data shown in Figure~\label{incomeHistReg} suggests that it may be important to identify the small number of countries with high income and investigate the ways in which the differ from countries with low or moderate income. Finally,  most of the methods of inference explored later in this text should begin with a careful understanding of the strengths and weaknesses of a dataset.
+Labs 3 and 4 demonstrate how computing is essential for data analysis; even though the two datasets are relatively small by modern standards, they are already too large to feasibly analyze without statistical computing software. All three labs illustrate how important questions can be examined even with relatively simple statistical concepts.
 
-As the introduction to this chapter notes, in practice numerical and graphical summaries are always produced using software that ranges from programs commonly available, such as Excel, to more specialized software, such as \textsf{R}.  We have chosen to emphasize concept and interpretation in the text, while putting the details of using \textsf{R} in a companion volume.  For readers who are more likely to read and interpret statistics than calculate summaries or who will use software other than \textsf{R}, the text is not cluttered with \textsf{R} code that might interrupt the flow of ideas.  But we do not wish to imply that computing is not valuable; it is, and for readers who are preparing to work in research, it is essential.  Doing analyses in well-tested software is not only easier, it is more likely to be correct, since it will not be subject to calculation or transposition errors.  For readers likely to use \textsf{R} in research, fluency in \textsf{R} is an integral part of learning about the role of statistics in research.
-
-In our teaching, we push the use of \textsf{R} beyond the traditional role of statistical computation.  The \textsf{R} Markdown package in \textit{R Studio} provides a way to integrate the code and the narrative conclusions of an analysis in a single, reproducible document.  There are other systems that provide the same functionality, and we encourage their use.
-
-We believe that introductory texts in statistics should use data from published studies, whenever possible.  Datasets such as \data{famuss} or the \data{frog} dataset help students understand that statistics is more than a course to satisfy a requirement.  But research datasets often use a somewhat complex background in a scientific area that cannot easily be covered in a text such as this.  The \data{famuss} dataset is a subset of data from a study of more than 1,300 participants, where many phenotype and genotype measurements were made, using detailed protocols designed to standardize the measurement process. References to the protocols are contained in the Clarkson and other papers cited earlier in the chapter. For instance, the variable \texttt{ndrm.ch} measures the percent change in the maximum weight that a participant could curl in one repetition with the his or her non-dominant arm after 12 weeks of resistance training.  The subset of 595 participants in the dataset used in the text consists of all participants who did not have any missing measurements in the variables contained in the data.  Dropping cases with missing values may lead to bias, but data without missing observations is easier to get started with.  The summary statistics for the data agree with the 602 cases presented in the Clarkson paper cited in the text.
-
-The Golub data discussed in this chapter can be found from several sources.  In addition to the version used here from the \textsl{DAAG} \textsf{R} package by Maindonald and Braun, it is contained in the BioConductor package \textsl{golubEsets} and can be found in its original form at the link in given in Section~\ref{DNAMicroarrays}.
-
-Finally, the graphical methods illustrated in the text are relatively simple, static graphs that, for instance, do not show changes dynamically over time. They will be surprisingly useful in the later chapters. But there has been considerable progress in the visual display of data in the last decade, and many wonderful displays exist that show complex, time dependent data.  We especially recommend the bubble charts available at the Gapminder web site (https://www.gapminder.org) that show international trends in public health outcomes.
-
-\end{comment}
 

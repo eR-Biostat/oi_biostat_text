@@ -31,6 +31,8 @@ The investigators behind the Joosten study anticipated an issue in the analysis\
 
 Figure~\ref{prevendAgeRFFTConfounderPlot} visually demonstrates why age is a potential confounder for the association between statin use and cognitive function, where cognitive function is measured via the Ruff Figural Fluency Test (RFFT). Scores range from 0 (worst) to 175 (best). The blue points indicate individuals not using statins, while red points indicate statin users. First, it is clear that age and statin use are associated, with statin use becoming more common as age increases; the red points are more prevalent on the right side of the plot. Second, it is also clear that age is associated with lower RFFT scores; ignoring the colors, the point cloud drifts down and to the right. However, a close inspection of the plot suggests that for ages in relatively small ranges (e.g., ages 50-60), statin use may not be strongly associated with RFFT score\textemdash there are approximately as many red dots with low RFFT scores as with high RFFT scores in a given age range. In other words, for subsets of participants with approximately similar ages, statin use may not be associated with RFFT. Multiple regression provides a way to estimate the association of statin use with RFFT while adjusting for age; i.e., accounting for the underlying relationship between age and statin use.
 
+\newpage
+
 \section{Simple versus multiple regression}
 \label{simpleVsMultipleRegression}
 
@@ -155,6 +157,8 @@ The results shown in Table~\ref{prevendRFFTStatinAgeRegression} do not provide i
 
 There is an important aspect of these data that should not be overlooked. The data do not come from a study in which participants were followed as they aged; i.e., a longitudinal study. Instead, this study was a cross-sectional study, in which patient age, statin use, and RFFT score were recorded for all participants during a short time interval. While the results of the study support the conclusion that older patients tend to have lower RFFT scores, they cannot be used to conclude that scores decline with age in individuals; there were no repeated measurements of RFFT taken as individual participants aged. Older patients come from an earlier birth cohort, and it is possible, for instance, that younger participants have more post-secondary school education or better health practices generally; such a cohort effect may have some explanatory effect on the observed association. The details of how a study is designed and how data are collected should always be taken into account when interpreting study results. 
 
+\newpage
+
 \section{Evaluating the fit of a multiple regression model}
 
 \subsection{Using residuals to check model assumptions}
@@ -243,7 +247,9 @@ Essentially, the adjusted $R^2$ imposes a penalty for including additional predi
 
 While the adjusted $R^2$ is useful as a statistic for comparing models, it does not have an inherent interpretation like $R^2$. Students often confuse the interpretation of $R^2$ and adjusted $R^2$; while the two are similar, adjusted $R^2$ is \emph{not} the proportion of variation in the response variable explained by the model. The use of adjusted $R^2$ for model selection will be discussed in Section~\ref{modelSelection}.
 
- 
+
+\newpage
+
 \section{The general multiple linear regression model}
 \label{generalMultipleRegression}
  
@@ -383,6 +389,8 @@ Under the null hypothesis, the sampling distribution of the $F$-statistic is an 
 The $F$-test is inherently one-sided\textemdash deviations from the null hypothesis of any form will push the statistic to the right tail of the $F$-distribution.  The $p$-value from the right tail of the $F$-distribution should never be doubled.  Students also sometimes make the mistake of assuming that if the null hypothesis of the $F$-test is rejected, all coefficients must be non-zero, instead of at least one. A significant $p$-value for the $F$-statistic suggests that the predictor variables in the model, when considered as a group, are associated with the response variable.
 
 In practice, it is rare for the $F$-test not to reject the null hypothesis, since most regression models are used in settings where a scientist has prior evidence that at least some of the predictors are useful.
+
+\newpage
 
 \section{Categorical predictors with more than two levels}
 \label{categoricalMoreThanTwoLevels}
@@ -544,6 +552,8 @@ Other, equivalent approaches can be used to fit regression models with categoric
 
 \end{comment}
 
+
+\newpage
 
 \section{Reanalyzing the PREVEND data}
 \label{reanalyzingStatinDataSet}
@@ -754,6 +764,8 @@ It is also important to note that the model explains very little of the observed
 There are some important general points that should not be overlooked when interpreting this model. The data cannot be used to infer causality; the data simply show associations between total cholesterol, age, and diabetes status. Each of the NHANES surveys are cross-sectional; they are administered to a sample of US residents with various ages and other demographic features during a relatively short period of time.  No single individual has had his or her cholesterol levels measured over a period of many years, so the model slope for diabetes is not indicative of an individual's cholesterol level declining (or increasing) with age.
 
 Finally, the interpretation of a model often requires additional contextual information that is relevant to the study population but not captured in the dataset. What might explain increased age being associated with lower cholesterol for diabetics, but higher cholesterol for non-diabetics? The guidelines for the use of cholesterol-lowering statins suggest that these drugs should be prescribed more often in older individuals, and even more so in diabetic individuals. It is a reasonable speculation that the interaction between age and diabetes status seen in the NHANES data is a result of more frequent statin use in diabetic individuals.
+
+\newpage
 
 \section{Model selection for explanatory models}
 \label{modelSelection}
@@ -1115,6 +1127,8 @@ A general rule of thumb is to avoid fitting a model where there are fewer than 1
 
 As mentioned earlier, other analyses of \data{forest.birds} have treated \var{grazing.intensity} as a numerical variable with five values. One advantage to doing so is to produce a more stable model; only one slope parameter needs to be estimated, rather than four. However, treating \var{grazing.intensity} as a numerical variable requires assuming that any one unit change is associated with the same change in population mean \var{abundance}; under this assumption, a change between "light" and "less than average" (codes \resp{1} to \resp{2}) is associated with the same change in population mean \var{abundance} as between "moderately heavy" to "heavy" (codes \resp{4} to \resp{5}) grazing. Previous model fitting has shown that this assumption is not supported by the data, and that changes in mean \var{abundance} between adjacent levels in grazing intensity are not constant. In this text, it is our recommendation that categorical variables should not be treated as numerical variables.  
 
+\newpage
+
 \section{The connection between ANOVA and regression}
 \label{ANOVAandRegression}
 
@@ -1155,6 +1169,7 @@ At the introductory level, ANOVA is useful in that it provides more direct acces
 
 %DH: My defense of not using Bonferroni in regression is weak, and may simply be wrong.  A substantial fix would be to go back to all the regression section and at least point out that Bonferroni should be used more often.  I don't like that idea either, though.  I have a contradiction in the notes section.
 
+\newpage
 
 \section{Notes}
 
@@ -1187,6 +1202,16 @@ This chapter and the previous chapter cover only the basic principles behind lin
 	
 \end{description}
 
+Because there are so many tools available in multiple regression, this chapter has a larger collection of labs than most other chapters. Lab 1 introduces the multiple regression, illustrating one its most common uses --- estimating an association between a response variable and predictor of interest while adjusting for possible confounding.
+
+Graphical methods for examining the assumptions behind multiple regression are important when there are too many variables to allow effective visualization of associations among more than two variables; Lab 2 discusses the residual plots used to check assumptions for multiple regression and introduces adjusted $R^2$ using the dataset from the California Department of Developmental Support introduced earlier.
+
+Lab 3 explores how the association between a response variable and categorical predictors with more than two levels can be be estimated using multiple regression. This topic extends the earlier material in Lab 4 in the chapter on simple linear regression.
+
+Lab 4 introduces the concept of a statistical interaction using the NHANES dataset, examining whether the association between BMI and age is different for women than for men. 
+
+Multiple regression is often used to examine associations between response variables and a small set of pre-specified predictors, it can also be used to explore and select models between a response variable and a set of candidate predictors. Lab 5 discusses explanatory modeling, in which the goal is to construct a model that explains the observed variation in the response variable. 
+ 
 
 \begin{comment}
 

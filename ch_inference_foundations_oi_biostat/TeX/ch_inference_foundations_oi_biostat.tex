@@ -1,4 +1,4 @@
-%!TEX root=../../main.tex
+%TEX root=../../main.tex
 
 %\begin{doublespace}
 %\begin{spacing}{1.5}
@@ -14,12 +14,7 @@ Have not included using p-values as a measure of the strength of evidence
 
 Not surprisingly, many studies are now demonstrating the adverse effect of obesity on health outcomes. A 2017 study conducted by the consortium studying the global burden of disease estimates that high body mass index (a measure of body fat that adjusts for height and weight) may account for as many as 4.0 million deaths globally.\footnote{DOI: 10.1056/NEJMoa1614362}  In addition to the physiologic effects of being overweight, other studies have shown that perceived weight status (feeling that one is overweight or underweight) may have a significant effect on self-esteem.\footnote{J Ment Health Policy Econ. 2010 Jun;13(2):53-63}\textsuperscript{,}\footnote{DOI: 10.1186/1471-2458-7-80}  
 
-As stated in its mission statement, the United States Centers for Disease Control and Prevention (US CDC) "serves as
-the national focus for developing and applying disease prevention and control, environmental health, and health
-promotion and health education activities designed to improve the health of the people of the United
-States".\footnote{\url{https://www.cdc.gov/maso/pdf/cdcmiss.pdf}} Since it is not feasible to measure the health
-status and outcome of every single US resident, the CDC estimates features of health from samples taken from the population, via large surveys that are repeated periodically. These surveys include the National Health Interview Survey
-(NHIS), the National Health and Nutrition Examination Survey (NHANES), the Youth Risk Behavior Surveillance System (YRBSS) and the Behavior Risk Factor Surveillance System (BRFSS).  In the language of statistics, the average weight of all US adults is a \term{population parameter}; the mean weight in a sample or survey is an \term{estimate} of population average weight.  The principles of statistical inference provide not only estimates of population parameters, but also measures of uncertainty that account for the fact that different random samples will produce different estimates because of the variability of random sampling; i.e., two different random samples will not include exactly the same people.
+As stated in its mission statement, the United States Centers for Disease Control and Prevention (US CDC) "serves as the national focus for developing and applying disease prevention and control, environmental health, and health promotion and health education activities designed to improve the health of the people of the United States".\footnote{\url{https://www.cdc.gov/maso/pdf/cdcmiss.pdf}} Since it is not feasible to measure the health status and outcome of every single US resident, the CDC estimates features of health from samples taken from the population, via large surveys that are repeated periodically. These surveys include the National Health Interview Survey (NHIS), the National Health and Nutrition Examination Survey (NHANES), the Youth Risk Behavior Surveillance System (YRBSS) and the Behavior Risk Factor Surveillance System (BRFSS).  In the language of statistics, the average weight of all US adults is a \term{population parameter}; the mean weight in a sample or survey is an \term{estimate} of population average weight.  The principles of statistical inference provide not only estimates of population parameters, but also measures of uncertainty that account for the fact that different random samples will produce different estimates because of the variability of random sampling; i.e., two different random samples will not include exactly the same people.
 
 \begin{comment}
 
@@ -89,6 +84,8 @@ Histograms showing the distributions of height, age, weight, and desired weight 
 \end{figure}
 
 \end{comment}
+
+\newpage
 
 %__________________
 \section[Variability in estimates]{Variability in estimates} %\sectionvideohref{youtube-DNIauUrRIEM&list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4}}
@@ -225,6 +222,9 @@ The probability tools of Section~\ref{randomVariablesSection} can be used to der
 \end{termBox}
 
 \index{point estimate|)}
+
+\newpage
+
 
 \section[Confidence intervals]{Confidence intervals}
 \label{confidenceIntervals}
@@ -429,6 +429,9 @@ The confidence interval (27.7, 29.9) $\text{kg}/\text{m}{^2}$ certainly suggests
 
 % check to see if other closing index commands are needed.
 % I have eliminated the ref to testing in the BMI example.  What about re-inserting it using weight - wtdesire?  Have a look at that analysis
+
+
+\newpage
 
 \section[Hypothesis testing]{Hypothesis testing} %\sectionvideohref{youtube-NVbPE1_Cbx8&list=PLkIselvEzpM7Pjo94m1e7J5jkIZkbQAl4}}
 \label{hypothesisTesting}
@@ -798,6 +801,7 @@ Sir Ronald Fisher was the first to propose using $p$-values as one of the statis
 
 The formal use of p-values is emphasized here because of its prominence in the scientific literature, and because the steps outlined are fundamental to the scientific method for empirical research: specify hypotheses, state in advance how strong the evidence should be to constitute sufficient evidence against the null, specify the method of analysis and compute the test statistic, draw a conclusion. These steps are designed to avoid the pitfall of choosing a hypothesis or method of analysis that is biased by the data and hence reaches a conclusion that may not be reproducible.
 
+\newpage
 
 \section{Notes}
 \label{ch4Summary}
@@ -823,3 +827,6 @@ These nuanced issues cannot be adequately covered in any introduction to statist
 \end{itemize}
 
 The next chapters will discuss methods of inference in specific settings, such as comparing two groups. These settings expand on the concepts discussed in this chapter and offer additional opportunities to practice calculating tests and intervals, reading problems for context, and checking underlying assumptions behind methods of inference.
+
+The labs for the chapter reinforce conceptual understanding of confidence intervals and hypothesis tests, and their link to sampling variability using the data from the YRBSS and NHANES. Both datasets are large enough to be viewed in an instructional setting as populations from which repeated samples can be drawn.  They are useful platforms for illustrating the conceptual role of hypothetical repeated sampling in the properties of tests and intervals, a topic which many students find difficult. Students may find the last lab for this chapter (Lab 4) particularly helpful for understanding Type I errors in testing and their probabilities under the null hypothesis, typically labeled $\alpha$.
+

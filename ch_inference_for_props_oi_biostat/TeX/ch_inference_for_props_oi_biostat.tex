@@ -12,6 +12,9 @@ As  with all methods of inference, it is important to understand how the data we
 
 Be careful about the notation in this chapter---since $p$ is the standard notation for a population proportion and for a probability, $p$ does double duty in this chapter as a population parameter and significance level. 
 
+\newpage
+
+
 %__________________
 \section{Inference for a single proportion}
 \label{singleProportion}
@@ -181,7 +184,7 @@ A confidence interval no wider than 20\% has a margin of error of 10\%, or 0.10.
 
 Sample sizes are always rounded up, so the study should have 97 patients.  
 
-Since the  study will likely yield a value $\hat{p}$ different from 0.50, the final margin of error will be smaller than $\pm 0.10$.
+Since the study will likely yield a value $\hat{p}$ different from 0.50, the final margin of error will be smaller than $\pm 0.10$.
 
 \end{example}
 
@@ -206,6 +209,8 @@ A sample size of 370 or more would be reasonable.}
 \index{margin of error|)}
 
 \end{exercise}
+
+\newpage
 
 %__________________
 
@@ -373,6 +378,8 @@ With 95\% confidence, the difference in the probability of death is between -0.1
 
 \index{data!breast cancer|)}
 \index{data!mammography|)}
+
+\newpage
 
 
 %__________________
@@ -837,7 +844,6 @@ Suppose that researchers were interested in testing the null hypothesis against 
 	\label{fecalStudyGeneral}
 \end{table}
 
-
 The probability of observing a table with cells $a, b, c, d$ given fixed marginal totals $a+b$, $c+d$, $a + c$, and $b +d$ follows the hypergeometric distribution.  The hypergeometric distribution was introduced in Section~\ref{hypergeometric}.
 
 \[P(a,b,c,d) = \text{HGeom}(a+b, c+d, a+c) = \dfrac{ {a+b \choose a} {c+d \choose c}}{{n \choose a+c}} = \dfrac{(a+b)! \text{ } (c+d)! \text{ } (a+c)! \text{ } (b+d)!}{a! \text{ } b! \text{ } c! \text{ } d! \text{ } n!}\]
@@ -930,8 +936,8 @@ As calculated in the previous example, the one-sided $p$-value is $0.0084$. Thus
 
 \end{example}
 
-\textit{JV: Did not look for a good example for a guided practice yet, as the table needs to be relatively small for the hand calculation method to be reasonable.}
 
+\newpage
 
 %__________________
 \section[Chi-square tests for the fit of a distribution. (special topic)]{Chi-square tests for the fit of a distribution \\(special topic)}
@@ -1132,6 +1138,8 @@ It can be shown that the $p$-value used in a test of no association (between exp
 
 \index{case-control studies|)}
 
+\newpage
+
 \section{Notes}
 
 Two-way tables are often used to summarize data from medical research studies, and entire texts have been written about methods of analysis for these tables.  This chapter covers only the most basic of those methods. 
@@ -1143,3 +1151,6 @@ For many years, introductory textbooks recommended using a modified version of t
 The Fisher test is not without controversy, at least in the theoretical literature.  Conditioning on the row and column totals allows the calculation of a $p$-value from the hypergeometric distribution, but in principle restricts inference to the set of tables with the same row and column values.  In practice, this is less serious than it may seem. For tables of moderate size, the $p$-values from the $\chi^2$ and Fisher tests are nearly identical and for tables with small counts, the Fisher test guarantees that the Type I error will be no larger than the specified value of $\alpha$.   In small sample sizes, some statisticians argue that the Fisher-Yates correction is preferable to the Fisher test because of the discrete nature of the hypergeometric distribution.  In small tables, for example, an observed $p$-value of 0.04 may be the largest value that is less than 0.05, such that the Type I error of the test in that situation is 0.04, not 0.05.
 
 Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio estimated from a case-control is the same as that from a cohort study. It is long and algebraically more complex than other derivations shown in the text, but it is a direct application of Bayes' rule, applied to each term in the fraction that defines population odds ratio.
+
+The two labs for this chapter examine methods of inference for the success probability in binomial data then generalizes inference for binomial proportions to two-way contingency tables.  Lab 2 also discusses measures of association in two-by-two tables.  The datasets in the labs are similar to datasets that arise frequently in medical statistics.  Lab 1 assesses the the evidence for a treatment effect in a single uncontrolled trial of a new drug for melanoma and whether outcomes in stage 1 lung cancer are different among patients treated at Dana-Farber Cancer Institute compared to population based statistics. In Lab 2, students analyze a dataset from a published clinical trial examining the benefit of using a more expensive but potentially more effective drug to treat HIV-positive infants,
+
