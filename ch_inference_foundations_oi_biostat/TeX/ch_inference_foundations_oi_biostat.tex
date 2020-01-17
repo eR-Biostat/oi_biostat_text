@@ -522,7 +522,7 @@ The observed sample mean is 4.22 standard deviations to the right of $\mu_0 = 0$
 
 The \term{$p$-value} is the probability of observing a sample mean as or more extreme than the observed value, under the assumption that the null hypothesis is true. In samples of size 40 or more, the $t$-statistic will have a standard normal distribution unless the data are strongly skewed or extreme outliers are present. Recall that a standard normal distribution has mean 0 and standard deviation 1.
 
-For two-sided tests, with $H_A: \mu \neq \mu_0$, the $p$-value is the sum of the area of the two tails defined by the $t$-statistic: $P(Z \leq -t) + P(Z \geq t) = P(Z \geq |t| )$ (Figure~\ref{pValueTwoSided}).
+For two-sided tests, with $H_A: \mu \neq \mu_0$, the $p$-value is the sum of the area of the two tails defined by the $t$-statistic: $2 P(Z \geq |t|) = P(Z \leq -|t|) + P(Z \geq |t|)$ (Figure~\ref{pValueTwoSided}).
 
 \begin{figure}[h]
 	\centering
@@ -578,7 +578,7 @@ t &= \frac{\overline{x}-\mu_0}{s/\sqrt{n}} = \frac{0.53 - 0.50} {0.16/\sqrt{23}}
 
 For this two-sided alternative $H_A: \mu \neq 0.50$, the $p$-value is 
 
-\[P(Z \leq -t) + P(Z \geq t)= 2 \times P(Z \geq 0.859) = 0.390.\]
+\[P(Z \leq -|t|) + P(Z \geq |t|) = 2 \times P(Z \geq 0.859) = 0.390.\]
 
 \begin{figure}[h]
 	\centering
@@ -756,7 +756,7 @@ A government agency responsible for approving drugs to be marketed to the genera
 
 In some cases, the choice of a one-sided or two-sided test can influence whether the null hypothesis is rejected. For example, consider a sample for which the $t$-statistic is 1.80. If a two-sided test is conducted at $\alpha = 0.05$, the $p$-value is
 
-\[P(Z \leq -t) + P(Z \geq t)= 2P(Z \geq 1.80) = 0.072.\]
+\[P(Z \leq -|t|) + P(Z \geq |t|)= 2P(Z \geq 1.80) = 0.072.\]
 
 There is insufficient evidence to reject $H_0$, since $p > \alpha$. However, what if a one-sided test is conducted at $\alpha = 0.05$, with $H_A: \mu > \mu_0$? In this case, the $p$-value is
 
