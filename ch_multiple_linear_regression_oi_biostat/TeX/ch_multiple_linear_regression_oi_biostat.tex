@@ -1185,7 +1185,7 @@ This chapter and the previous chapter cover only the basic principles behind lin
 	
 	\item \emph{Remember the context of the problem.} Context is important at each stage of a regression analysis. The best approach for constructing a model from a small number of potential predictors is based on considering the context of the problem and including predictors that have either been shown in the past to be associated with the response or for which there is a plausible working hypothesis about association with the response. When interpreting coefficients, consider whether the model results cohere with the underlying biological or medical context.
 	
-	\item \emph{Critically examine residual plots.} All models are approximations, so it is not necessary to be concerned about relatively minor violations of assumptions; residual plots are seldom as well behaved as those for the PREVEND data. In some cases, like with the California data, residual plots show obvious major violations. With intermediate cases such as in the \data{forest.birds} plots, examine the plots closely and provide a detailed assessment of where the model seems less reliable.
+	\item \emph{Critically examine residual plots.} All models are approximations, so it is not necessary to be concerned about relatively minor violations of assumptions; residual plots are seldom as well behaved as those for the PREVEND data. In some cases, like with the California DDS data, residual plots show obvious major violations. With intermediate cases such as in the \data{forest.birds} plots, examine the plots closely and provide a detailed assessment of where the model seems less reliable.
 
 \end{description}
 
@@ -1202,15 +1202,11 @@ This chapter and the previous chapter cover only the basic principles behind lin
 	
 \end{description}
 
-Because there are so many tools available in multiple regression, this chapter has a larger collection of labs than most other chapters. Lab 1 introduces the multiple regression, illustrating one its most common uses --- estimating an association between a response variable and predictor of interest while adjusting for possible confounding.
+Because there are so many tools available in multiple regression, this chapter has a larger collection of labs than most other chapters. Lab 1 introduces the multiple regression model, illustrating one its most common uses---estimating an association between a response variable and predictor of interest while adjusting for possible confounding. Lab 2 discusses the residual plots used to check assumptions for multiple regression and introduces adjusted $R^2$ using the California DDS dataset initially introduced in Chapter~\ref{introductionToData}. 
 
-Graphical methods for examining the assumptions behind multiple regression are important when there are too many variables to allow effective visualization of associations among more than two variables; Lab 2 discusses the residual plots used to check assumptions for multiple regression and introduces adjusted $R^2$ using the dataset from the California Department of Developmental Support introduced earlier.
+Lab 3 explores how the association between a response variable and categorical predictors with more than two levels can be be estimated using multiple regression. This topic extends the earlier material in Chapter 6, Lab 4. Lab 4 introduces the concept of a statistical interaction using the NHANES dataset, examining whether the association between BMI and age among women is different than that among men. 
 
-Lab 3 explores how the association between a response variable and categorical predictors with more than two levels can be be estimated using multiple regression. This topic extends the earlier material in Lab 4 in the chapter on simple linear regression.
-
-Lab 4 introduces the concept of a statistical interaction using the NHANES dataset, examining whether the association between BMI and age is different for women than for men. 
-
-Multiple regression is often used to examine associations between response variables and a small set of pre-specified predictors, it can also be used to explore and select models between a response variable and a set of candidate predictors. Lab 5 discusses explanatory modeling, in which the goal is to construct a model that explains the observed variation in the response variable. 
+Multiple regression is often used to examine associations between response variables and a small set of pre-specified predictors. It can also be used to explore and select models between a response variable and a set of candidate predictors. Lab 5 discusses explanatory modeling, in which the goal is to construct a model that effectively explains the observed variation in the response variable. 
  
 
 \begin{comment}
