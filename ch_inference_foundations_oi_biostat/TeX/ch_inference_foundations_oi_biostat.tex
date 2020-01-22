@@ -6,30 +6,15 @@
 \chapter{Foundations for inference}
 \label{foundationsForInference}
 
-\begin{comment}
-
-Have not included using p-values as a measure of the strength of evidence
-
-\end{comment}
-
 Not surprisingly, many studies are now demonstrating the adverse effect of obesity on health outcomes. A 2017 study conducted by the consortium studying the global burden of disease estimates that high body mass index (a measure of body fat that adjusts for height and weight) may account for as many as 4.0 million deaths globally.\footnote{DOI: 10.1056/NEJMoa1614362}  In addition to the physiologic effects of being overweight, other studies have shown that perceived weight status (feeling that one is overweight or underweight) may have a significant effect on self-esteem.\footnote{J Ment Health Policy Econ. 2010 Jun;13(2):53-63}\textsuperscript{,}\footnote{DOI: 10.1186/1471-2458-7-80}  
 
 As stated in its mission statement, the United States Centers for Disease Control and Prevention (US CDC) "serves as the national focus for developing and applying disease prevention and control, environmental health, and health promotion and health education activities designed to improve the health of the people of the United States".\footnote{\url{https://www.cdc.gov/maso/pdf/cdcmiss.pdf}} Since it is not feasible to measure the health status and outcome of every single US resident, the CDC estimates features of health from samples taken from the population, via large surveys that are repeated periodically. These surveys include the National Health Interview Survey (NHIS), the National Health and Nutrition Examination Survey (NHANES), the Youth Risk Behavior Surveillance System (YRBSS) and the Behavior Risk Factor Surveillance System (BRFSS).  In the language of statistics, the average weight of all US adults is a \term{population parameter}; the mean weight in a sample or survey is an \term{estimate} of population average weight.  The principles of statistical inference provide not only estimates of population parameters, but also measures of uncertainty that account for the fact that different random samples will produce different estimates because of the variability of random sampling; i.e., two different random samples will not include exactly the same people.
-
-\begin{comment}
-
-There are many parameters of a population that might be of interest in addition to the mean of a variable, such as a median, and might include measures of variability such as a standard deviation or interquartile range.  Population parameters may also include features of categorical variables, such the proportion of a population that feels its current health is only fair or poor.  
-
-\end{comment}
 
 This chapter introduces the important ideas in drawing estimates from samples by discussing methods of inference for a population mean, $\mu$, including three widely used tools: point estimates for a population mean, interval estimates that include both a point estimate and a margin of error, and a method for testing scientific hypotheses about $\mu$. The concepts used in this chapter will appear throughout the rest of the book, which discusses inference for other settings. While particular equations or formulas may change to reflect the details of a problem at hand, the fundamental ideas will not. 
 
 \index{data!cdc|(}
 
-% remember to add closing index indicator
-
 The BRFSS was established in 1984 in 15 states to collect data using telephone interviews about health-related risk behaviors, chronic health conditions, and the use of preventive services.  It now collects data in all 50 states and the District of Columbia from more than 400,000 interviews conducted each year.  The data set \data{cdc} contains a small number of variables from a random sample of 20,000 responses from the 264,684 interviews from the BRFSS conducted in the year 2000.  Part of this dataset is shown in Table~\ref{cdcDF}, with the variables described in Table~\ref{cdcVariables}.\footnote{With small modifications (character strings re-coded as factors), the data appears in this text as it does in an \textit{OpenIntro} lab. \url{http://htmlpreview.github.io/?https://github.com/andrewpbray/oiLabs-base-R/blob/master/intro\_to\_data/intro\_to\_data.html} }
-
 
 
 % latex table generated in R 3.3.2 by xtable 1.8-2 package
@@ -71,20 +56,6 @@ The BRFSS was established in 1984 in 15 states to collect data using telephone i
 
 Few studies are as large as the original BRFSS dataset (more than 250,000 cases); in fact, few are as large as the 20,000 cases in the dataset \data{cdc}. The dataset \data{cdc} is large enough that estimates calculated from \data{cdc} can be thought of as essentially equivalent to the population characteristics of the entire US adult population. This chapter uses a random sample of 60 cases from \data{cdc}, stored as \data{cdc.samp}, to illustrate the effect of sampling variability and the ideas behind inference. In other words, suppose that \data{cdc} represents the population, and that \data{cdc.samp} is a sample from the population; the goal is to estimate characteristics of the population of 20,000 using only the data from the 60 individuals in the sample.
 
-\begin{comment}
-
-Histograms showing the distributions of height, age, weight, and desired weight in \data{cdc.samp} are shown in Figure~\ref{cdcSampHistograms}
-
-\begin{figure}[h]
-\centering
-\includegraphics[width=0.8\textwidth]
-{ch_inference_foundations_oi_biostat/figures/cdcSampHistograms/cdcSampHistograms} 
-\caption{Histograms of \var{height}, \var{age}, \var{weight}, and \var{wtdesire} for the sample data (\data{cdc.samp}).}
-\label{cdcSampHistograms}
-\end{figure}
-
-\end{comment}
-
 \newpage
 
 %__________________
@@ -94,20 +65,6 @@ Histograms showing the distributions of height, age, weight, and desired weight 
 \index{point estimate|(}
 
 A natural way to estimate features of the population, such as the population mean weight, is to use the corresponding summary statistic calculated from the sample.\footnote{Other population parameters, such as population median or population standard deviation, can also estimated using sample versions.} The mean weight in the sample of 60 adults in \data{cdc.samp} is $\overline{x}_{\text{weight}} = 173.3$ lbs; this sample mean is a \term{point estimate} of the population mean, $\mu_{\text{weight}}$. If a different random sample of 60 individuals were taken from \data{cdc}, the new sample mean would likely be different as a result of \term{sampling variation}. While estimates generally vary from one sample to another, the population mean is a fixed value.  
-
-\begin{comment}
-
-Other population parameters, such as population median or population standard deviation, can also estimated using sample versions. The median weight in the sample of 60 adults is 165lbs, reflecting the right-skewed distribution for weight visible in Figure~\ref{cdcSampHistograms}.  The boxplot of weight in the sample (Figure~\ref{cdcSampWeightBoxPlot}) shows more clearly the reason for the difference between the mean and the median.  There are outliers above the third quartile, recorded weights of 290, 300 and 400 lbs. These are indeed large weights, but with the increase prevalence of obesity in the United States, they are not impossibly large and will not be eliminated from the sample.
-
-\begin{figure}
-\centering
-\includegraphics[width=0.8\textwidth]
-{ch_inference_foundations_oi_biostat/figures/cdcSampWeightBoxPlot/cdcSampWeightBoxPlot.pdf} 
-\caption{Histograms of \var{height}, \var{age}, \var{weight}, and \var{wtdesire} for the sample data (\data{cdc.samp}).}
-\label{cdcSampHistograms}
-\end{figure}
-
-\end{comment}
 
 \begin{exercise} \label{peOfDiffWeightBetweenGender}
 	How would one estimate the difference in average weight between men and women? Given that $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, what is a good point estimate for the population difference?\footnote{Given that $\overline{x}_{\text{men}} = 185.1$ lbs and $\overline{x}_{\text{women}} = 162.3$ lbs, the difference of the two sample means, $185.1 - 162.3 = 22.8$lbs, is a point estimate of the difference. The data in the random sample suggests that adult males are, on average, about 23~lbs heavier than adult females.}
@@ -123,8 +80,6 @@ Point estimates become more accurate with increasing sample size. Figure~\ref{cd
 \end{figure}
 
 Note how a sample size around 50 may produce a sample mean that is as much as 10 lbs higher or lower than the population mean. As sample size increases, the fluctuations around the population mean decrease; in other words, as sample size increases, the sample mean becomes less variable and provides a more reliable estimate of the population mean.
-
-%JV: with the edits, this figure no longer shows a 'running mean'.
 
 
 \subsection{The sampling distribution for the mean}
@@ -320,17 +275,6 @@ A 99\% confidence interval will have the form
  and will consequently be wider than a 95\% interval for $\mu$ calculated from the same data, since the margin of error $m$ is larger.
 
 
-\begin{comment}
-% WARNING !!!!
-% EOCE 4.9 (as of 2nd Edition) references the results of this exercise
-\begin{example} {
-	Create a 99\% confidence interval for the average days active per week of all YRBSS students using \data{yrbss.samp}. The point estimate is $\overline{x}_{active} = 3.93$ and the standard error is $SE_{\overline{x}} = 0.25$.}
-Apply the 99\% confidence interval formula: $\overline{x}_{active}\ \pm\ 2.58 \times  SE_{\overline{x}} \rightarrow (3.28, 4.58)$. We are 99\% confident that the average days active per week of all YRBSS students is between 3.28 and 4.58~days.
-\end{example}
-%library(openintro); data(yrbss.samp); d <- yrbss.samp; mean(d$age); sd(d$age)/sqrt(100)
-
-\end{comment}
-
 \begin{example} {
     Create a 99\% confidence interval for the average adult weight in the US population using the data in \data{cdc.samp}. The point estimate is $\overline{x}_{weight} = 173.3$ and the standard error is $SE_{\overline{x}} = 6.33$.}
 Apply the 99\% confidence interval formula: $\overline{x}_{weight}\ \pm\ 2.58 \times  SE_{\overline{X}} \rightarrow (156.97, 189.63)$. A data analyst can be 99\% confident that the average adult weight is between 156.97 and 189.63~lbs.
@@ -427,9 +371,6 @@ The confidence interval (27.7, 29.9) $\text{kg}/\text{m}{^2}$ certainly suggests
 \index{confidence interval!interpretation|)}
 \index{confidence interval|)}
 
-% check to see if other closing index commands are needed.
-% I have eliminated the ref to testing in the BMI example.  What about re-inserting it using weight - wtdesire?  Have a look at that analysis
-
 
 \newpage
 
@@ -442,14 +383,6 @@ Important decisions in science, such as whether a new treatment for a disease sh
 
 Hypothesis testing is a method for calculating the probability of making a specific observation under a working hypothesis, called the null hypothesis. By assuming that the data come from a distribution specified by the null hypothesis, it is possible to calculate the likelihood of observing a value as extreme as the one represented by the sample. If the chances of such an extreme observation are small, there is enough evidence to reject the null hypothesis in favor of an alternative hypothesis. 
 
-\begin{comment}
-
-Important decisions in science, such as whether a new treatment improves outcomes for patients with a disease, are typically based on a wide range of information. Is there a biological basis for a treatment effect? Are other, similar drugs effective in the disease?  Does an important clinical study of the drug provide robust evidence of a beneficial effect?  A drug is thought to have beneficial effect on a population of patients with a disease if the population average effect is clinically important. Confidence intervals provide a plausible range of values for a population parameter, such as a mean, along with a confidence coefficient. Hypothesis tests are one measure of the strength of the evidence that drug is effective, and are often used as part of a decision about whether the drug should be used.
-
-In medical research, that decision might be faced by staff at the US FDA on whether to approve a drug for marketing in the United States after reviewing data on the safety and efficacy of the drug.  Hypothesis testing is a method for calculating the probability of making a specific observation under a working hypothesis, called the null hypothesis. When testing a statistical hypothesis, one assumes that the data come from a distribution specified by the null hypothesis in order to calculate the likelihood of observing a value as extreme as the one represented by the sample. If the chances of such an extreme observation are small, there is enough evidence to reject the null hypothesis in favor of an alternative hypothesis.  In the setting of drug approval, the null hypothesis might be a drug under consideration is has the same effect as a placebo, and if the measured effect of a drug in a clinical study is extreme enough to be very unlikely under the null hypothesis, the drug is typically assumed to be effective.  Other settings for hypothesis testing might be deciding whether certain contaminants in the environment might have reached sufficiently high levels to be dangerous, or whether children born in a neighborhood are at higher risk for birth defects.
-
-\end{comment}
-
 \begin{termBox}{\tBoxTitle{Null and alternative hypotheses}
   {The \term{null hypothesis ($H_0$)} often represents either a skeptical perspective or a claim to be tested. The \term{alternative hypothesis ($H_A$)} is an alternative claim and is often represented by a range of possible parameter values.}}
 \end{termBox}
@@ -458,16 +391,6 @@ Generally, an investigator suspects that the null hypothesis is not true and per
 
 The next section presents the steps in formal hypothesis testing, which is applied when data are analyzed to support a decision or make a scientific claim.
 
-
-\begin{comment}
-	
-	-- Emphasize that testing is used for decisions making
-	
-	-- Decisions are based on the weight of the evidence, and result of a test is one piece of the evidence.
-	
-	-- What is the value of the formal approach: reproducibility, and its adherence to the scientific process. That is the value of prespecification. Try to do this concisely.
-	
-\end{comment}
 
 \subsection{The Formal Approach to Hypothesis Testing}
 \label{formalHypothesisTesting}
@@ -790,7 +713,6 @@ The decision as to whether to use a one-sided or two-sided test must be made bef
 
 %cite published_research_false
 
-% edits to here 24 jul 2017
 
 \subsection{The informal use of $p$-values}
 \label{informalUseOfp-values}

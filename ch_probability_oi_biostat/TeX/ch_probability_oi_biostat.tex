@@ -8,12 +8,6 @@
 
 What are the chances that a woman with an abnormal mammogram has breast cancer? What is the probability that a woman with an abnormal mammogram has breast cancer, given that she is in her 40's? What is the likelihood that out of 100 women who undergo a mammogram and test positive for breast cancer, at least one of the women has received a false positive result?
 
-\begin{comment}
-
-What are the chances that a woman with an abnormal mammogram has breast cancer?  What is the likelihood that an overweight male teenager with high blood pressure will develop cardiovascular disease by the age of 50?  What is the probability that two parents who are unaffected carriers of cystic fibrosis will have a child with the disease? 
-
-\end{comment}
-
 These questions use the language of probability to express statements about outcomes that may or may not occur. More specifically, probability is used to quantify the level of uncertainty about each outcome.  Like all mathematical tools, probability becomes easier to understand and work with once important concepts and terminology have been formalized. 
 
 This chapter introduces that formalization, using two types of examples. One set of examples uses settings familiar to most people -- rolling dice or picking cards from a deck. The other set of examples draws from medicine, biology, and public health, reflecting the contexts and language specific to those fields. The approaches to solving these two types of problems are surprisingly similar, and in both cases, seemingly difficult problems can be solved in a series of reliable steps.
@@ -28,18 +22,6 @@ The rules of probability can easily be modeled with classic scenarios, such as f
 \begin{example}{What is the chance of getting \resp{1} when rolling a die?}\label{probOf1}
 If the die is fair, then there must be an equal chance of rolling a \resp{1} as any other possible number. Since there are six outcomes, the chance must be 1-in-6 or, equivalently, $1/6$.
 \end{example}
-
-\begin{comment}
-
-\begin{example}{What is the chance of getting a \resp{1} or \resp{2} in the next roll?}\label{probOf1Or2}
-\resp{1} and \resp{2} constitute two of the six equally likely possible outcomes, so the chance of getting one of these two outcomes must be $2/6 = 1/3$.
-\end{example}
-
-\begin{example}{What is the chance of getting either \resp{1}, \resp{2}, \resp{3}, \resp{4}, \resp{5}, or \resp{6} on the next roll?}\label{probOf123456}
-100\%. The outcome must be one of these numbers.
-\end{example}
-
-\end{comment}
 
 \begin{example}{What is the chance of not rolling a \resp{2}?}\label{probNot2}
 Not rolling a \resp{2} is the same as getting a \resp{1}, \resp{3}, \resp{4}, \resp{5}, or \resp{6}, which makes up five of the six equally likely outcomes and has probability $5/6$.
@@ -233,12 +215,6 @@ where $P(A$ and $B)$ is the probability that both events occur.}
 
 Note that in the language of statistics, "or" is inclusive such that $A$ or $B$ occurs means $A$, $B$, or both $A$ and $B$ occur.
 
-\begin{comment}
-\begin{tipBox}{\tipBoxTitle{``or'' is inclusive}
-Note that in the language of statistics, "or" is inclusive such that $A$ or $B$ occurs means $A$, $B$, or both $A$ and $B$ occur.}
-\end{tipBox}
-\end{comment}
-
 \begin{exercise}
 (a) If $A$ and $B$ are disjoint, describe why this implies $P(A$ and $B) = 0$. (b) Using part (a), verify that the General Addition Rule simplifies to the Addition Rule for disjoint events if $A$ and $B$ are disjoint.\footnote{(a) If $A$ and $B$ are disjoint, $A$ and $B$ can never occur simultaneously. (b) If $A$ and $B$ are disjoint, then the last term of Equation~(\ref{generalAdditionRule}) is 0 (see part (a)) and we are left with the Addition Rule for disjoint events.}
 \end{exercise}
@@ -425,62 +401,6 @@ Let $A$ represent the event in which two dice are rolled and their total is less
 \end{exercise}
 
 
-%JV: commenting out this example since neither of us seem fully satisfied with it... 03Dec17
-
-\begin{comment}
-
-\begin{figure}
-\begin{center}
-\includegraphics[width=\textwidth]{ch_probability_oi_biostat/figures/gestageMarginalDist/gestageMarginalDist.pdf}
-\caption{Distribution of gestational age for live births in the US in 2010, measured in weeks}
-\label{fig:gestageMarginalDist}
-\end{center}
-\end{figure}
-
-%DH: R script for creating figure stored with the figure; needs to be improved
-
-In some cases, approximate probabilities can be calculated using the complement of an event and information from a graph. Figure \ref{fig:gestageMarginalDist} shows the distribution of gestational ages for the 3,999,386 infants born in the US in 2010. Gestational age of a newborn is the time between conception and birth, typically recorded in weeks. The term "full term" is used to refer to babies of gestational age between 39 and 40 weeks. Approximately how many births are not considered full term?
-
-Small probabilities are difficult to read accurately from the graph of a distribution. Instead of adding the heights of the bars for gestational ages outside the full term range, use the complement. The graph shows that approximately 30\% of births occur at 39 weeks, and slightly less than 20\% occur at 40 weeks, so approximately 50\% of babies are considered full term. By using the complement of the event of a full term birth, it is clear that approximately 50\% of births are not considered full term. This approximation ignores the small proportions of births for which gestational age is not known or reported.
-
-When examining the important features of a distribution, approximate values are often sufficient. In some instances, the graph is all that will be available. 
-
-%JV: I think it is enough here to discuss the graph.
-
-The distribution of gestational age is shown in tabular form in Table \ref{gestageMarginalDistTable}.  The table shows the exact value of the proportion of babies born at 39 or 40 weeks (0.47), but when examining the important features of a distribution, approximate values are often sufficient.  In some instances, the graph is all that will be available.  Since small probabilities are difficult to read accurately from the graph of a distribution, they are best read from the table.  Pre-term babies are those born at less than 37 weeks gestational age.  Table \ref{gestageMarginalDistTable} shows that the probability of this event is $0.01 + 0.01 + 0.02 + 0.08 = 0.12$.  Of course, even the table shows approximate values, since the small proportion of very premature babies born at less than 20 weeks is rounded to zero.
-
-% latex table generated in R 3.2.4 by xtable 1.8-2 package
-% Wed Jun 22 11:23:13 2016
-\begin{table}[ht]
-\centering
-\begin{tabular}{rr}
-	\hline
-		Gest. Age (Wks.) & Proportion \\ 
-		\hline
-		> 20 & 0.00 \\ 
-		20 - 27 & 0.01 \\ 
-	    28 - 31 & 0.01 \\ 
-		32 - 33 & 0.02 \\ 
-		34 - 36 & 0.08 \\ 
-		37 - 38 & 0.27 \\ 
-		39 & 0.28 \\ 
-		40 & 0.19 \\ 
-		41 & 0.08 \\ 
-		$\geq$ 42 & 0.05 \\ 
-		Not Stated & 0.00 \\ 
-		\hline
-	\end{tabular}
-\label{gestageMarginalDistTable}
-\end{table}
-
-%\textit{DH: value labels should be modified}
-
-%\textit{DH: not satisfied with the way this example worked out; it should be improved or changed}
-
-% edits to here, 27 May 2016
-
-\end{comment}
-
 \subsection{Independence}
 \label{probabilityIndependence}
 
@@ -541,8 +461,6 @@ First, note that the complement of at least 1 person testing positive is that no
            &= 1 - (0.988)^{150} = 1 - 0.16 = 0.84.
     \end{align*}
  
-  %DH: \textit{DH: should we be more formal here in defining events? Also, this is the example that we also solved in R, two different ways.  Those solutions are candidates for the R supplement JV: No, I think it may actually be more intuitive to see events written this way.}
-
 Even when using a test with a small probability of a false positive, the company is more than 80\% likely to incorrectly claim at least one employee is an illegal drug user!
 
 \end{example}
@@ -623,7 +541,6 @@ Conditional probability is used to  characterize how the probability of an outco
 \index{marginal probability|(}
 \index{joint probability|(}
 
-%  DH: OI has a nice venn diagram for joint distributions, but the diabetes/age example is probably too complicated for the diagram.
 
 Tables~\ref{DiabetesAgeContTable} and \ref{DiabetesAgeProbTable} provide additional information about the relationship between diabetes prevalence and age.\footnote{Because the CDC provides only approximate numbers for diabetes prevalence, the numbers in the table are approximations of actual population counts.} Table~\ref{DiabetesAgeContTable} is a contingency table for the entire US population in 2012; the values in the table are in thousands (to make the table more readable).  
 
@@ -807,73 +724,7 @@ This is a specific instance of the more general result that if two events $A$ an
 In the US population, about 45\% of people are blood group O. Suppose that 40\% of Asian people living in the US are blood group O, and that the Asian population in the United States is approximately 4\%. Do these data suggest that blood group is independent of ethnicity?\footnote{Let $A$ represent blood group O, and $B$ represent Asian ethnicity. Since $P(A|B) = 0.40$ does not equal $P(A) = 0.45$, the two events are not independent. Blood group does not seem to be independent of ethnicity.}
 \end{exercise}
 
-%JV: Tree diagrams are already introduced in the next section.
 
-\begin{comment}
-
-\subsection{Tree diagrams}
-
-\index{tree diagram|(}
-
-\termsub{Tree diagrams}{tree diagram} are a tool to organize outcomes and probabilities around the structure of the data. They are most useful when two or more processes occur in a sequence and each process is conditioned on its predecessors.
-
-\begin{comment}
-
-The \data{smallpox} data fit this description. The population is split by \var{inoculation}: \resp{yes} and \resp{no}. Following this split, survival rates were observed for each group. This structure is reflected in the \term{tree diagram} shown in Figure~\ref{smallpoxTreeDiagram}. The first branch for \var{inoculation} is said to be the \term{primary} branch while the other branches are \term{secondary}.
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.93\textwidth]{ch_probability_oi_biostat/figures/smallpoxTreeDiagram/smallpoxTreeDiagram}
-\caption{A tree diagram of the \data{smallpox} data set.}
-\label{smallpoxTreeDiagram}
-\end{figure}
-
-Tree diagrams are annotated with marginal and conditional probabilities, as shown in Figure~\ref{smallpoxTreeDiagram}. This tree diagram splits the smallpox data by \var{inoculation} into the \resp{yes} and \resp{no} groups with respective marginal probabilities 0.0392 and 0.9608. The secondary branches are conditioned on the first, so we assign conditional probabilities to these branches. For example, the top branch in Figure~\ref{smallpoxTreeDiagram} is the probability that \var{result} = \resp{lived} conditioned on the information that \var{inoculated} = \resp{yes}. Joint probabilities can be constructed at the end of each branch in the tree by multiplying the numbers from left to right. These joint probabilities are computed using the General Multiplication Rule:
-\begin{eqnarray*}
-&& P(\text{\var{inoculated} = \resp{yes} and \var{result} = \resp{lived}}) \\
-	&&\quad = P(\text{\var{inoculated} = \resp{yes}}) P(\text{\var{result} = \resp{lived}}|\text{\var{inoculated} = \resp{yes}}) \\
-	&&\quad = (0.0392) (0.9754) =0.0382
-\end{eqnarray*}
-
-
-
-
-\begin{example}  
-
-In the general population, about 1 in 28 individuals (approximately 3.6\%) is an unaffected carrier of a mutation in the cystic fibrosis gene, \textit{CFTR}, discussed in example~\ref{CFInheritanceExample}.  Most unaffected carriers are unaware that they harbor the mutation.  Suppose that people with cystic fibrosis do not live long enough to reproduce with a partner.  In the absence of any genetic testing information, what is the probability that a child of two parents will be a carrier of CF?
-	
-	\textit{DH: solution not given for now, since I did not want to take the time to draw the tree.  This will be a good example to also solve algebraically, to show that the tree diagram is a representation of the theorem of total prob. Useful, since it will come up with Bayes Thm. Borrow some of the wording from the solution to the grade problem in OI that I removed here.  Below has a start of the solution}
-	
-	
-\textit{solution}
-The probabilities calculated in example~\ref{CFInheritanceExample} were conditional probabilities given the carrier status of the parents, though that term was not used in the example.  This exercise asks for an unconditional probability of the disease status of the child, with no additional information about the parents.  The solution uses methods already discussed, but combined is a series of steps.  
-
-The main steps are to first enumerate all the possibilities for carrier status of the parents, calculate the probabilities for each status, then calculate the conditional probability of an affected child, given each of the possible outcomes of the parents, and finally use a tree to calculate the probability of a child being affected. A tree diagram helps in keeping track of the steps.
-
-\textit{small pox tree left as a placeholder. Replace with relevant (and more complicated) tree.}
-
-Tree diagrams are annotated with marginal and conditional probabilities, as shown in Figure~\ref{smallpoxTreeDiagram}. The tree diagram begins with branches corresponding to genotype status of the parents-- each branch is labeled with the marginal probability of each genotype (computed below). Each of those branches then splits into branches corresponding possible genotypes for the offspring, and the branches are labeled with the conditional probability of the offspring genotype, given the genotypes of the parents.   Joint probabilities can be constructed at the end of each branch in the tree by multiplying the numbers from left to right. These joint probabilities are computed using the General Multiplication Rule.
-
-Since the problem assumes that affected parents do not reproduce, the pair of parents must satisfy one of the events $A$ = (neither parent is a carrier), $B$ (the mother is a carrier, the father is not), $C$ = (the father is a carrier, the mother is not), $D$ = (both parents are carriers). 
-Since the carrier status of the mother is independent of that of the father, the probabilities of these events are:
-
-\begin{itemize}
-	\item $P(A) = (1 - 0.036)(1 - 0.036) = 0.929$
-	
-	\item $P(B) = P(C) = (1 - 0.036)(0.036) = 0.035$
-	
-	\item $P(D) = (0.036)(0.036) = 0.001$
-\end{itemize}
-	
-These probabilities do not sum to one because the events do not the event in which one or both parents are have CF, that is, are homozygous for the mutation.
-
-The conditional probabilities for the second set of branches are calculated using the method illustrated in example~\ref{CFInheritanceExample}.  Given that neither parent is a carrier, the conditional probability that an offspring is affected is 0.  Given each of the two events that only one of the parents is a carrier, the probability that a 
-
-\end{example}
-
-In addition to being a graphical representation of how to compute a probability, tree diagrams are a useful way to organize the information in a probability problem and can often reduce a seemingly difficult problem to a series of simple steps
-
-\end{comment}
 
 \subsection{Bayes' Theorem}
 \label{bayesTheoremSubsection}
@@ -935,12 +786,6 @@ Calculating probabilities for diagnostic tests is done so often in medicine that
 \begin{exercise}
 	Identify the prevalence, sensitivity, specificity, and PPV from the scenario in Example~\ref{probabilityOfBreastCancerGivenPositiveTestExample}.\footnote{The prevalence of breast cancer is 0.0035. The sensitivity is the probability of a positive test result when disease is present, which is the complement of a false negative: $1 - 0.11 = 0.89$. The specificity is the probability of a negative test result when disease is absent, which is the complement of a false positive: $1 - 0.07 = 0.93$. The PPV is 0.04, the probability of breast cancer given a positive mammogram.}
 \end{exercise}
-
-\begin{comment}
-
-The probability of a positive mammogram when breast cancer is present is called the \term{sensitivity} of mammogram.  The probability of a negative mammogram when breast cancer is not present is called the \term{specificity} of mammogram.  The probability that breast cancer is present when a mammogram is positive is called the \term{positive predictive value}, or PPV, of mammogram. \term{Negative predictive value} is the probability that breast cancer is not present when a mammogram is negative.  The probability of a woman having breast cancer is called the prevalence of breast cancer.  These terms are used for nearly all diagnostic tests used to screen for diseases.
-
-\end{comment}
 
 
 \subsubsection{Solution 2. Bayes' Rule.}
