@@ -11,11 +11,10 @@ There are several applications of multiple regression. One of the most common ap
 The other sections in the chapter outline general principles of multiple regression, including the statistical model, methods for assessing quality of model fit, categorical predictors with more than two levels, interaction, and the connection between ANOVA and regression.
 
 
-
 \section{Introduction to multiple linear regression}
 \label{introductionMultipleLinearRegression}
 
-Statins are a class of drugs widely used to lower cholesterol. There are two main types of cholesterol: low density lipoprotein (LDL) and high density lipoprotein (HDL).\footnote{Total cholesterol level is the sum of LDL and HDL levels.} Research suggests that adults with elevated LDL may be at risk for adverse cardiovascular events such as a heart attack or stroke. In 2013, a panel of experts commissioned by the American College of Cardiology and the American Heart Association recommended that statin therapy be considered in individuals who either have any form of atherosclerotic cardiovascular disease\footnote{i.e., arteries thickening and hardening with plaque} or have LDL cholesterol levels $\geq 190$ mg/dL, individuals with Type II diabetes ages 40 to 75 with LDL between 70 to 189 mg/dL, and non-diabetic individuals ages of 40 to 75 with a predicted probability of future clogged arteries of at least 0.075.\footnote{Circulation. 2014;129:S1-S45. DOI: 10.1161/01.cir.0000437738.63853.7a}
+Statins are a class of drugs widely used to lower cholesterol. There are two main types of cholesterol: low density lipoprotein (LDL) and high density lipoprotein (HDL).\footnote{Total cholesterol level is the sum of LDL and HDL levels.} Research suggests that adults with elevated LDL may be at risk for adverse cardiovascular events such as a heart attack or stroke. In 2013, a panel of experts commissioned by the American College of Cardiology and the American Heart Association recommended that statin therapy be considered in individuals who either have any form of atherosclerotic cardiovascular disease\footnote{i.e., arteries thickening and hardening with plaque} or have LDL cholesterol levels $\geq 190$ mg/dL, individuals with Type II diabetes ages 40 to 75 with LDL between 70 to 189 mg/dL, and non-diabetic individuals ages of 40 to 75 with a predicted probability of future clogged arteries of at least 0.075.\footnote{Stone NJ, et al. 2013 ACC/AHA Guideline on the Treatment of Blood Cholesterol to Reduce Atherosclerotic Cardiovascular Risk in Adults Circulation. 2014;129:S1-S45. DOI: 10.1161/01.cir.0000437738.63853.7a}
 
 Health policy analysts have estimated that if the new guidelines were to be followed, almost half of Americans ages 40 to 75 and nearly all men over 60 would be prescribed a statin. However, some physicians have raised the question of whether treatment with a statin might be associated with an increased risk of cognitive decline.\footnote{Muldoon, Matthew F., et al. Randomized trial of the effects of simvastatin on cognitive functioning in hypercholesterolemic adults. The American journal of medicine 117.11 (2004): 823-829.}\textsuperscript{,}\footnote{King, Deborah S., et al. Cognitive impairment associated with atorvastatin and simvastatin. Pharmacotherapy: The Journal of Human Pharmacology and Drug Therapy 23.12 (2003): 1663-1667.} Older adults are at increased risk for cardiovascular disease, but also for cognitive decline. A study by Joosten, et al. examined the association of statin use and other variables with cognitive ability in an observational cohort of 4,095 participants from the Netherlands who were part of the larger PREVEND study introduced in Section~\ref{examiningScatterPlots}.\footnote{Joosten H, Visser ST, van Eersel ME, Gansevoort RT, Bilo HJG, et al. (2014) Statin Use and Cognitive Function: Population-Based Observational Study with Long-Term Follow- Up. PLoS ONE 9(12): e115755. doi:10.1371/ journal.pone.0115755} The analyses presented in this chapter are based on a random sample of 500 participants from the cohort.\footnote{The random sample are accessible as \data{prevend.samp} in the \data{oibiostat} \textsf{R} package.}
 
@@ -203,13 +202,12 @@ are shown in Figure~\ref{ddsAgeEthnicityResidNormPlot}. From these plots, assess
 	\label{ddsAgeEthnicityResidNormPlot}
 \end{figure}		
 		
-%JV: 12Jan2018, cannot figure out how to adjust margins so that x-labels show without y-labels running into y tick-labels...
-		
+	
 }
 
 The model assumptions are clearly violated. The residual versus fitted plot	shows obvious patterns; the residuals do not scatter randomly about the $y = 0$ line. Additionally, the variance of the residuals is not constant around the $y = 0$ line. As shown in the normal probability plot, the residuals show marked departures from normality, particularly in the upper tail; although this skewing may be partially resolved with a log transformation, the patterns in the residual versus fitted plot are more problematic.
 
-Recall that a residual is the difference between an observed value and expected value; for an observation $i$, the residual equals $y_i - \hat{y}_i$. Positive residuals occur when a model's predictions are larger than the observed value, and vice versa for negative residuals. In the residual versus fitted plot, it can be seen that in the middle range of predicted values, the model consistently underpredicts expenditures; on the upper and lower ends, the model over-predicts. This is a particularly serious issue with the model fit. 
+Recall that a residual is the difference between an observed value and expected value; for an observation $i$, the residual equals $y_i - \hat{y}_i$. Positive residuals occur when a model's predictions are larger than the observed value, and vice versa for negative residuals. In the residual versus fitted plot, it can be seen that in the middle range of predicted values, the model consistently under-predicts expenditures; on the upper and lower ends, the model over-predicts. This is a particularly serious issue with the model fit. 
 
 A linear regression model is not appropriate for these data.	
 	
@@ -494,64 +492,6 @@ It is unreasonable to assume that the change in mean RFFT score when comparing t
 Categorical variables can be included in multiple regression models with other predictors, as is shown in the next section. Section~\ref{ANOVAandRegression} discusses the connection between ANOVA and regression models with only one categorical predictor.
 
 
-\begin{comment}
-
-In the model~\ref{RFFTStatinModel}, the variable \var{Statin} is a categorial predictor with two values, coded 0 if the participant was not taking a statin, and 1 if he or she was using the medication.  Without adjusting for age, the estimated coefficient (-10.05) suggests that taking a statin may be associated with a 10 point drop in RFFT score.  In a model such as this, the category \var{Statin = 0} is called the reference category, and the estimated coefficient is the change in the average response between the category \var{Statin = 1} and the reference category.
-
-Software such as \textsf{R} includes the option of declaring categorical variables as factors, with values (called levels) that serve as labels for categories instead of as numerical values.  Here is the output from \textsf{R} of a regression of RFFT score with the predictor \var{Statin} declared as a factor:
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Fri Jan  5 11:27:38 2018
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 70.7143 & 1.3808 & 51.21 & 0.0000 \\ 
-  as.factor(Statin)1 & -10.0534 & 2.8792 & -3.49 & 0.0005 \\ 
-   \hline
-\end{tabular}
-\caption{Parameter estimates for 
-       the least squares regression of RFFT vs. 
-       statin use,  with \var{Statin} converted to a 
-       factor variable.  PREVEND Data.} 
-\end{table}
-
-The predictor is now labeled \texttt{as.factor(Statin)1}, denoting that the value 0 is the reference category, since the estimate -10.05 is the change in mean RFFT when the category for \var{Statin} changes from 0 to 1.  The regression estimate is the same as in the model where \var{Statin} was treated as a numerical value, because in that instance a 1 unit change in \var{Statin} was a change in mean RFFT between not taking a statin to taking one.  
-
-The same idea is used when estimating the association of a response with a categorical variable that has more than two categories.  One of the categories is set as the reference category, and coefficients are estimated for each of the other categories, each one providing an estimate of the change in response between the reference category and the category of interest.  In the dataset \data{prevend.samp}, the educational level of the participant is coded 0, 1, 2 or 3, where 0 denotes only a primary school education, 1 a lower secondary school education in the Dutch system, 2 a higher secondary education, and 3 a University education.   In statistical terms, the variable \var{Education} is a categorical variable with 4 levels.  It would not be correct to estimate the association between RFFT and educational level using the numerical codes for \var{Education}; such a model would assume that the change in mean RFFT when changing educational level from primary to lower secondary school would be the same as the change when educational level changes from upper secondary school to a university education, since in the codes assigned, the predictor would change by 1 in both cases.  The codes assigned to categorical variables are simply short-hand names for the levels, not meaningful values.  
-
-Table~\ref{prevendRFFTEducationRegression} provides the output from \textsf{R} from a regression model for RFFT with predictor \var{Education}.  
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Fri Jan  5 11:32:59 2018
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 40.9412 & 3.2027 & 12.78 & 0.0000 \\ 
-  as.factor(Education)1 & 14.7786 & 3.6864 & 4.01 & 0.0001 \\ 
-  as.factor(Education)2 & 32.1335 & 3.7631 & 8.54 & 0.0000 \\ 
-  as.factor(Education)3 & 44.9639 & 3.6835 & 12.21 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\caption{{Parameter estimates for the least squares 
-       model for RFFT vs education, with 
-       \var{Education} converted to a factor variable. 
-       PREVEND data.} 
-\label{prevendRFFTEducationRegression}}
-\end{table}
-\textsf{R} has set \var{Education = 0} as the baseline category. The coefficients other than the intercept provide the estimated change in mean RFFT score when \var{Education} changes from the baseline category to the level 1, 2 or 3. Since these are estimated changes or differences, the mean RFFT scores in each category are the mean in the reference category (the intercept) plus the coefficient for that category. Mean RFFT scores are approximately 14.8 points higher in participants with a lower secondary school education compared to those with only a primary school education.  The estimated mean for those with a lower secondary education is $40.94 + 14.78 = 55.72$.  Participants with a higher secondary education scored approximately 32.1 points higher than those with only a primary school education, and have estimated mean RFFT score $40.94 + 32.13 = 73.07$.  Unlike many other settings, the intercept in this model does have a meaningful interpretation -- it is the mean response (mean RFFT) in the reference category (primary school education), or 40.94.
-
-The estimated model can be used to calculate changes in mean score between any two levels using simple subtraction.  For instance, the change in mean score between lower and higher secondary education is approximately $(40.28 +32.13) - (40.28 +14.78) = 32.13 - 14.8 = 17.3$ points.
-
-The $p$-values in the last column indicate that the change in mean score between participants with just a primary education and any of the other categories is statistically significant.
-
-Other, equivalent approaches can be used to fit regression models with categorical predictors. When a model has only one predictor that is categorical, the analysis of variance (ANOVA) described in Section~\ref{ANOVASection} can be used, and the initial model examining the association of statin use with RFFT used a variable (Statin) coded 0 or 1. The binary variable for Statin use is called a `dummy variable' in regression, and some approaches extend the use `dummy variables' to variables with multiple categories.  The data analyst creates binary variables for each of the levels of the categorical variable, but that method can lead to errors if not done carefully, and is not described here.
-
-\end{comment}
-
 
 \newpage
 
@@ -757,8 +697,6 @@ Residual plots can be used to assess the quality of the model fit. Figure~\ref{n
    	\label{nhanesAgeDiabetesCholResidNormPlot}
 \end{figure}
 
-%JV: removing mention of use of the model for 'predictions', also not generally necessary to make predictions about cholesterol from a practical perspective
-
 It is also important to note that the model explains very little of the observed variability in total cholesterol---the multiple $R^2$ of the model is 0.032. While the model falls well short of perfection, it may be reasonably adequate in applied settings. In the setting of a large study, such as one to examine factors affecting cholesterol levels in adults, a model like the one discussed here is typically a starting point for building a more refined model. Given these results, a research team might proceed by collecting more data. Regression models are commonly used as tools to work towards understanding a phenomenon, and rarely represent a 'final answer'.
 
 There are some important general points that should not be overlooked when interpreting this model. The data cannot be used to infer causality; the data simply show associations between total cholesterol, age, and diabetes status. Each of the NHANES surveys are cross-sectional; they are administered to a sample of US residents with various ages and other demographic features during a relatively short period of time.  No single individual has had his or her cholesterol levels measured over a period of many years, so the model slope for diabetes is not indicative of an individual's cholesterol level declining (or increasing) with age.
@@ -773,8 +711,6 @@ Finally, the interpretation of a model often requires additional contextual info
 %insert indexing as necessary
 
 Previously, multiple regression modeling was shown in the context of estimating an association while adjusting for possible confounders. Another application of multiple regression is explanatory modeling, in which the goal is to construct a model that explains the observed variation in the response variable. In this context, there is no pre-specified primary predictor of interest; explanatory modeling is concerned with identifying predictors associated with the response. It is typically desirable to have a small model that avoids including variables which do not contribute much towards the $R^2$.
-
-%If the goal is to make predictions, then a larger model might be preferable even if it includes variables with slope coefficients that are not statistically significant. 
 
 The intended use of a regression model influences the way in which a model is selected. Approaches to model selection vary from those based on careful study of a relatively small set of predictors to purely algorithmic methods that screen a large set of predictors and choose a final model by optimizing a numerical criterion. Algorithmic selection methods have gained popularity as researchers have been able to collect larger datasets, but the choice of an algorithm and the optimization criterion require more advanced material and are not covered here. This section illustrates model selection in the context of a small set of potential predictors using only the tools and ideas that have been discussed earlier in this chapter and in Chapter~\ref{linRegrForTwoVar}. 
 
@@ -800,8 +736,6 @@ Generally, model selection for explanatory modeling follows these steps:
 \end{enumerate}
 
 The process behind model selection will be illustrated with a case study in which a regression model is built to examine the association between the abundance of forest birds in a habitat patch and features of a patch. 
-
-%The model will also be assessed with respect to its reliability for making predictions about bird abundance based on features of a patch.
 
 \subsubsection{Abundance of forest birds: introduction}
 
@@ -905,62 +839,6 @@ A numerical approach confirms some of the features observable from the scatterpl
 \label{forestbirdsCorrelation}
 \end{table}
 
-%JV: Commenting out significance testing as a 'confirmation' of the descriptive approach
-
-\begin{comment}
-
-Simple linear regression models of \var{abundance} vs. \var{log.area}, \var{altitude}, \var{log.yrs.isolation} and \var{grazing.level} shown in Tables~\ref{forestbirdsAbunLogAreaRegress} - \ref{forestbirdsAbunGrazingIntensityRegress} show that these variables are, individually, strongly associated with \var{abundance}.  Neither of the two log transformations of the two distance variables are significantly associated with \var{abundance} in simple regression models.
-
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Fri Jan 26 13:34:16 2018
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 10.4014 & 1.4894 & 6.98 & 0.0000 \\ 
-  log.area & 4.2467 & 0.5252 & 8.09 & 0.0000 \\ 
-   \hline
-\end{tabular}
-\caption{Regression of \var{abundance} on \var{log.area}, dataset \data{forest.birds}}
-\label{forestbirdsAbunLogAreaRegress}
-\end{table}
-
-
-% latex table generated in R 3.3.2 by xtable 1.8-2 package
-% Fri Jan 26 13:35:52 2018
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 5.5983 & 4.7209 & 1.19 & 0.2409 \\ 
-  altitude & 0.0952 & 0.0310 & 3.07 & 0.0033 \\ 
-   \hline
-\end{tabular}
-\caption{Regression of \var{abundance} on \var{altitude}, dataset \data{forest.birds}}
-\label{forestbirdsAbunAltitudeRegress}
-\end{table}
-
-% latex table generated in R 3.4.3 by xtable 1.8-2 package
-% Fri Feb 23 12:16:07 2018
-\begin{table}[ht]
-\centering
-\begin{tabular}{rrrrr}
-  \hline
- & Estimate & Std. Error & t value & Pr($>$$|$t$|$) \\ 
-  \hline
-(Intercept) & 42.9319 & 5.9667 & 7.20 & 0.0000 \\ 
-  log.yrs.isolation & -7.2217 & 1.7979 & -4.02 & 0.0002 \\ 
-   \hline
-\end{tabular}
-\caption{Regression of \var{abundance} on \var{log.yrs.isolation}, dataset \data{forest.birds}}
-\label{orestbirdsAbunIsolationRegress}
-\end{table}
-
-\end{comment}
 
 \subsubsection{Initial model fitting}
 
@@ -1016,12 +894,6 @@ First, fit models excluding the predictors that were not statistically significa
 
 It is prudent to check whether the two distance-related variables that were initially excluded might increase the adjusted $R^2$, even though this seems unlikely. When either or both of these variables are added, the adjusted $R^2$ decreases from 0.70 to 0.69. Thus, these variables are not added to the working model. 
 
-%JV: removing the following to make the discussion more streamlined. If we want to discuss the issue of significance changing as variables are added/dropped, should be done more thoroughly, not as side note here.
-
-\begin{comment}
-This model shows two features that sometimes arise in multiple regression.  The statistical significance of a variable or category may change when other variables are added to a model. That happened initially with \var{altitude}, which was significant as a single predictor, and has happened in this working model with the grazing intensity categories "less than average", "average", and "moderately heavy." 
-\end{comment}
-
 In this working model, only one of the coefficients associated with grazing intensity is statistically significant; when compared to the baseline grazing category (light grazing), heavy grazing is associated with a reduced predicted mean abundance of 11.9 birds (assuming that \var{log.area} is held constant). Individual categories of a categorical variable cannot be dropped, so a data analyst has the choice of leaving the variable as is, or collapsing the variable into fewer categories. For this model, it might be useful to collapse grazing intensity into a two-level variable, with one category corresponding to the original classification of heavy, and another category corresponding to the other four categories; i.e., creating a version of grazing intensity that only has the levels "heavy" and "not heavy". This is supported by the data exploration; a plot of \var{abundance} versus \var{grazing.intensity} shows that the centers of the distributions of \var{abundance} in the lowest four grazing intensity categories are roughly similar, relative to the center in the heavy grazing category. The model with the binary version of grazing intensity, \var{grazing.binary}, is shown in Table~\ref{forestbirdsAbunLogAreaGrazingLevelRegress}. The model with \var{grazing.binary} has adjusted $R^2 = 0.71$, which is slightly larger than 0.70 in the more complex model with \var{grazing.intensity}; the model explains 72\% of the variability in \var{abundance} ($R^2 = 0.724$). 
 
 Incorporating an interaction term did not improve the model; adding a parameter for the interaction between \var{log.area} and \var{grazing.binary} decreased the adjusted $R^2$ to 0.709. Thus, the model shown in Table~\ref{forestbirdsAbunLogAreaGrazingLevelRegress} is the final model.
@@ -1072,17 +944,9 @@ In the left plot, the large positive and large negative residuals visible from F
 
 The relatively large $R^2$ for the final model (0.72) suggests that patch area and extent of grazing (either heavy or not) explain a large amount of the observed variability in bird abundance. Of the features measured in the study, these two are the most highly associated with bird abundance. Larger area is associated with an increase in abundance; when grazing intensity does not change, the model predicts an increase in average abundance by 3.18 birds for every one unit increase in log area (or equivalently, for every $\exp(1) 2.7$ hectares increase in area). A patch with heavy grazing is estimated to have a mean abundance of about 11.58 birds lower than a patch that has not been heavily grazed. 
 
-The residual plots imply that the final model may not be particularly accurate. For most observations, the predictions are accurate between $\pm 5$ birds, but there are several instances of overpredictions as high as around 10 and underpredictions of about 15. Additionally, the accurate and inaccurate predictions occur at similar ranges of of \var{log.area}; if the model only tended to be inaccurate at a specific range, such as for patches with low area, it would be possible to provide clearer advice about when the model is unreliable. The residuals plots do suggest that the model is more reliable for patches with heavy grazing, although there is a slight tendency towards overprediction.
+The residual plots imply that the final model may not be particularly accurate. For most observations, the predictions are accurate between $\pm 5$ birds, but there are several instances of over-predictions as high as around 10 and under-predictions of about 15. Additionally, the accurate and inaccurate predictions occur at similar ranges of of \var{log.area}; if the model only tended to be inaccurate at a specific range, such as for patches with low area, it would be possible to provide clearer advice about when the model is unreliable. The residuals plots do suggest that the model is more reliable for patches with heavy grazing, although there is a slight tendency towards over-prediction.
 
 Based on these results, the ecologists might decide to proceed by collecting more data. Currently, the model seems to adequately explain the variability in bird abundance for patches that have been heavily grazed, but perhaps there are additional variables that are associated with bird abundance, especially in patches that are not heavily grazed. Adding these variables might improve model residuals, in addition to raising $R^2$. 
-
-%JV: Discussion about a prediction model from these data should be in Notes, along with mentioning importance of validation, etc.
-
-\begin{comment}
-
-A decision about whether the model is "good enough" for prediction requires additional context-specific information and cannot be made simply from analyzing the data. In this case, a statistician consulted to create the prediction model might ask the ecologists about how precise predictions need to be in order to be practically useful as a field tool. The ecologists might decide that using a prediction model with this level of inaccuracy could be worth the resources saved from having to directly measure bird abundance. Alternatively, they might decide that the model is too inaccurate for their purposes; if they continue surveying patches where mean bird abundance is about 20 birds, perhaps a typical error of $\pm 5$ birds would be considered too large.
-
-\end{comment}
 
 \subsubsection{Final considerations}
 
@@ -1167,8 +1031,6 @@ Section~\ref{anovaAndRegrWithCategoricalVariables} discussed the use of Bonferro
 At the introductory level, ANOVA is useful in that it provides more direct access to Type I error control and pairwise comparisons with $t$-tests. In practice, with the use of techniques not covered in this text, any analysis done via the ANOVA approach can also be approached with regression modeling. 
 
 
-%DH: My defense of not using Bonferroni in regression is weak, and may simply be wrong.  A substantial fix would be to go back to all the regression section and at least point out that Bonferroni should be used more often.  I don't like that idea either, though.  I have a contradiction in the notes section.
-
 \newpage
 
 \section{Notes}
@@ -1208,42 +1070,5 @@ Lab 3 explores how the association between a response variable and categorical p
 
 Multiple regression is often used to examine associations between response variables and a small set of pre-specified predictors. It can also be used to explore and select models between a response variable and a set of candidate predictors. Lab 5 discusses explanatory modeling, in which the goal is to construct a model that effectively explains the observed variation in the response variable. 
  
-
-\begin{comment}
-
-\begin{itemize}
-	
-	\item Regression models are more reliable when the response variable has an approximate normal distribution, or at least a symmetric distribution.  Always begin by examining a histogram and normal probability plot of the response variable.  Right-skewed response variables are common, and a log transform will often produce approximate normality. The predictors need not be normally distributed; some may be categorical variables.  If a transformation is used for the response variable, the final interpretation of the any model should be stated in terms of the original scale of measurement for the response.
-	
-	\item When fitting a simple linear regression, make a scatterplot with a least squares line, even when the predictor is a categorical variable with two levels.  Nonlinear trends or outliers are often obvious in scatterplots.  If outliers are evident, the source of the data should be reviewed when possible, since outliers result may from errors in data collection.  If there has not been an error or the data collection process is not accessible, consider whether the outlier does not belong to the target population of inference, such as the District of Columbia in the data on infant mortality shown in Figure~\ref{infMortUS}.
-	
-	\item Keep a clear view of the purpose of the regression.  Will it be used to understand the relationship between a particular predictor and the response after adjusting for confounders, to construct a model for prediction, or to simply understand the joint association between a response and set of predictors.
-	
-	\item Building a model for prediction from a large set of potential predictors can be useful, but the best way to construct a multiple regression model when there is a small number of predictors is to think about the context of the problem and include predictors that have either been shown in the past to be associated with the response or for which there is a plausible working hypothesis about some association.
-	
-	\item When building a model where there may not be a clear specification of which predictors to include, it is useful to examine the association between the response and each of the individual predictors.  Remember that the lack of statistical significance of the association between a response and a predictor is not evidence of no association, so predictors are often included in an initial model even when the evidence against no association is weaker than the traditional $p=0.05$.  In practice, investigators sometimes include predictors for which the individual associations are significant at $p < 0.10$ or $p < 0.20$.
-	
-	\item  With either simple or multiple regression, examine diagnostic plots of the residuals before drawing conclusions.  All models are approximations, and residual plots are seldom as well-behaved as in \data{statin.samp}, so don't fuss too much about relatively minor violations of the assumptions.  When the residual plots show some striking anomalies, as in the analysis of the \data{forest.birds} dataset, try to explore the anomalies for an explanation.  Even when they can't be `disappeared', it is useful to understand the source of the anomalies.
-	
-	\item  The summary statistics from a regression output, e.g., $t$-statistics, adjusted $R^2$ and $F$-statistics all provide different information and should be used appropriately.
-
-	\item Efficient and relatively inexpensive technologies are for measuring biological phenomenon at the molecular level are becoming widely available, and the datasets containing these measurements often contain large numbers of potential predictors for a response for many cases.  The approach to model selection discussed in this chapter should not be used in those settings.  Apparent associations can be due to chance, and can lead to models that are not reproducible.   The more structured methods for model selection that are discussed in advanced courses should be used in these settings.  This topic is discussed in more detail below. 
-	
-\end{itemize}
-
-
-To keep the treatment of regression both brief and accessible, however, many important topics have been left out.  Here are some of the most important
-
-\begin{itemize}
-	
-	\item Predicted values from a regression have an inherent uncertainty because model parameters are only estimates.  There are two types of interval estimates used with prediction: confidence intervals for a predicted mean response from a set of values for the predictors; and prediction intervals that show the variability in predicted response for a set of predictors for a case not in the dataset.  Because prediction intervals are subject to both the variability in a predicted mean response and the variability of an individual observation about is mean, prediction intervals are wider than confidence intervals for a predicted mean.  Most statistical software provide both kinds of estimates.
-	
-	\item Model selection is a more advanced and more difficult topic that is often recognized by practitioners, and about which there is continuing research.  Many introductory texts recommend using `stepwise' regression.  Forward stepwise regression adds predictors one by one according to a set criterion (usually smallest $p$-value).  Backward stepwise regression eliminates variables from a larger model one by one until a criterion is met. Both approaches can be useful and usually automated in statistical software.  But there are weaknesses to both methods -- final models are data dependent and chance alone can lead to spurious variables being included.  Since the models are data-driven, traditional formulas for estimating prediction error underestimate the variability in predictions. In very large datasets, stepwise regression can lead to substantially incorrect models. Newer methods for model building based on cross-validation or other advanced techniques are more reliable.
-	
-	\item  Examining the significance levels of several regression coefficients involves (at least implicitly) testing several hypotheses simultaneously and can lead to increased type I error rate, of the sort discussed in Section~\ref{multipleComparisonsAndControllingTheType1ErrorRate}.  A less error-prone approach begins with the $F$statistic, and if it significant, adjusts $p$-value for multiplicity. For a small number of coefficients, a Bonferroni adjustment is useful, but more advanced methods of error control are used in datasets with more than a handful of parameters.  \textit{we are not following our own advice on this.}
-	
-\end{itemize}
-
-\end{comment}
 
 

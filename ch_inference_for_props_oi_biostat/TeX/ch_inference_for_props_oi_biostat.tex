@@ -85,7 +85,7 @@ The approximate 95\% confidence interval for $p$, the population response probab
 
 Did the participants in the melanoma trial constitute a random sample?  Patients who participate in clinical trials are unlikely to be a random sample of patients with the disease under study since the patients or their physicians must be aware of the trial, and patients must be well enough to travel to a major medical center and be willing to receive an experimental therapy that may have serious side effects.  
 
-Investigators in the melanoma trial were aware that the the observed proportion of patients responding in a clinical trial may be different than the hypothetical response probability in the population of patients with advanced melanoma. Study teams try to minimize these systematic differences by following strict specifications for deciding whether patients are eligible for a study. However, there is no guarantee that the results observed in a sample will be replicated in the general population.
+Investigators in the melanoma trial were aware that the observed proportion of patients responding in a clinical trial may be different than the hypothetical response probability in the population of patients with advanced melanoma. Study teams try to minimize these systematic differences by following strict specifications for deciding whether patients are eligible for a study. However, there is no guarantee that the results observed in a sample will be replicated in the general population.
 
 Small, initial studies in which there is no control group, like the one described here, are early steps in exploring the value of a new therapy and are used to justify further study of a treatment when the results are substantially different than expected.  The largest observed response rate in previous trials of 30\% was close to the lower bound of the confidence interval from the study (27\%, 54\%), so the results were considered adequate justification for continued research on this treatment.
 
@@ -143,7 +143,6 @@ The $p$-value for a hypothesis test corresponds to the sum of the probabilities 
 
 $H_0: p = 0.05$; $H_A: p \neq 0.05$. Let $\alpha = 0.05$. 
 
-%This is one of those situations where $p$ is doing double duty and (be careful!) the null hypothesis value for the parameter and the significance level $\alpha$ have the same numerical value. 
 
 The independence condition is satisfied, but the success-failure condition is not, since $np_0 = (85)(0.05) = 4.25 < 5$, so this is a setting where exact binomial probabilities should be used to calculate a $p$-value.
 
@@ -198,7 +197,7 @@ This remarkably simple formula is often used by practitioners for a quick estima
 \index{data!Congress approval rating|(}
 
 \begin{exercise}
-A recent estimate of Congress' approval rating was 19\%.\footnote{\oiRedirect{textbook-congress_at_19_in_May2015}{www.gallup.com/poll/183128/five-months-gop-congress-approval-remains-low.aspx}} What sample size does this estimate suggest should be used for a margin of error of 0.04 with 95\% confidence?\footnote{Apply the formula \\
+A 2015 estimate of Congress' approval rating was 19\%.\footnote{\oiRedirect{textbook-congress_at_19_in_May2015}{www.gallup.com/poll/183128/five-months-gop-congress-approval-remains-low.aspx}} What sample size does this estimate suggest should be used for a margin of error of 0.04 with 95\% confidence?\footnote{Apply the formula \\
 \begin{align*}
 1.96\times \sqrt{\frac{p(1-p)}{n}} \approx
 1.96\times \sqrt{\frac{0.19(1-0.19)}{n}} &\leq 0.04 \qquad\to\qquad n \geq 369.5
@@ -452,7 +451,7 @@ Note that the quantities 44,925 and 1,005 are the row and column totals correspo
 	
 \end{example}
 
-\begin{example} {If a newborn is HIV$^+$, should he or she be treated with nevirapine (NVP) or a more expensive drug, lopinarvir (LPV)? In this setting, success means preventing virologic failure; i.e., growth of the virus. A randomized study was conducted to assess whether there is an association between treatment and outcome.\footnote{N Engl J Med 2012; 366:2380-2389
+\begin{example} {If a newborn is HIV$^+$, should he or she be treated with nevirapine (NVP) or a more expensive drug, lopinarvir (LPV)? In this setting, success means preventing virologic failure; i.e., growth of the virus. A randomized study was conducted to assess whether there is an association between treatment and outcome.\footnote{Violari A, et al. N Engl J Med 2012; 366:2380-2389
 DOI: 10.1056/NEJMoa1113249} Of the 147 children administered NVP, about 41\% experienced virologic failure; of the 140 children administered LPV, about 19\% experienced virologic failure. Construct a table of observed counts and a table of expected counts.}
 	
 Convert the proportions to count data: 41\% of 147 is approximately 60, and 19\% of 140 is approximately 27. 
@@ -1152,5 +1151,5 @@ The Fisher test is not without controversy, at least in the theoretical literatu
 
 Section~\ref{caseControlStudiesEstimates} does not show the derivation that the odds ratio estimated from a case-control is the same as that from a cohort study. It is long and algebraically more complex than other derivations shown in the text, but it is a direct application of Bayes' rule, applied to each term in the fraction that defines population odds ratio.
 
-The two labs for this chapter examine methods of inference for the success probability in binomial data then generalizes inference for binomial proportions to two-way contingency tables.  Lab 2 also discusses measures of association in two-by-two tables.  The datasets in the labs are similar to datasets that arise frequently in medical statistics.  Lab 1 assesses the the evidence for a treatment effect in a single uncontrolled trial of a new drug for melanoma and whether outcomes in stage 1 lung cancer are different among patients treated at Dana-Farber Cancer Institute compared to population based statistics. In Lab 2, students analyze a dataset from a published clinical trial examining the benefit of using a more expensive but potentially more effective drug to treat HIV-positive infants.
+The two labs for this chapter examine methods of inference for the success probability in binomial data then generalizes inference for binomial proportions to two-way contingency tables.  Lab 2 also discusses measures of association in two-by-two tables.  The datasets in the labs are similar to datasets that arise frequently in medical statistics.  Lab 1 assesses the evidence for a treatment effect in a single uncontrolled trial of a new drug for melanoma and whether outcomes in stage 1 lung cancer are different among patients treated at Dana-Farber Cancer Institute compared to population based statistics. In Lab 2, students analyze a dataset from a published clinical trial examining the benefit of using a more expensive but potentially more effective drug to treat HIV-positive infants.
 
