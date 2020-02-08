@@ -47,7 +47,7 @@ The following conditions should be true in a scatterplot for a line to be consid
 \item[1 Linearity.] The data shows a linear trend. If there is a nonlinear trend, an advanced regression method should be applied; such methods are not covered in this text.  Occasionally, a transformation of the data will uncover a linear relationship in the transformed scale.
 \item[2 Constant variability.] The variability of the response variable about the line remains roughly constant as the predictor variable changes.
 \item[3 Independent observations.]  The $(x,y)$ pairs are independent; i.e., the value of one pair provides no information about other pairs. Be cautious about applying regression to sequential observations in time (\term{time series} data), such as height measurements taken over the course of several years. Time series data may have a complex underlying structure, and the relationship between the observations should be accounted for in a model. 
-\item[4 Residuals that are approximately normally distributed.] This condition can be checked only after a line has been fit to the data and will be explained in Section~\ref{checkingResiduals}. In large datasets, it is sufficient for the residuals to be approximately symmetric with only a few outliers. This condition becomes particularly important when inferences are made about the line, as discussed in Section~\ref{inferenceRegression}.  
+\item[4 Residuals that are approximately normally distributed.] This condition can be checked only after a line has been fit to the data and will be explained in Section~\ref{checkingResiduals}, where the term residual is defined. In large datasets, it is sufficient for the residuals to be approximately symmetric with only a few outliers. This condition becomes particularly important when inferences are made about the line, as discussed in Section~\ref{inferenceRegression}.  
 \end{description}
 
 \begin{exercise} \label{nonConstantVariance}
@@ -185,7 +185,6 @@ Figure~\ref{nhanesHeightWeightRegress} shows the relationship between \var{heigh
 Predict the weight in pounds for an adult who is 5 feet, 11 inches tall. 1 cm = .3937 in; 1 lb = 0.454 kg.\footnote{5 feet, 11 inches equals $71/.3937 = 180.34$ centimeters. From the regression equation, the predicted weight is $-57.738 + 0.839(180.34) = 93.567$ kilograms. In pounds, this weight is $93.567/0.454 = 206.280$.}
 \end{exercise}
 
-%\newpage
 
 \newpage
 
@@ -260,8 +259,6 @@ The residuals above the line are more variable, taking on more extreme values th
 \subsubsection{Checking normality of the residuals}
 
 \index{normal probability plot}
-
-% check that this is indexed in chap 1 after pulling from repo
 
 The normal probability plot, introduced in Section~\ref{assessingNormal}, is best suited for checking normality of the residuals, since normality can be difficult to assess using histograms alone. Figure~\ref{prevendResidNormPlot} shows both the histogram and normal probability plot of the residuals after fitting a least squares regression to the age versus RFFT data.  
  
@@ -349,10 +346,8 @@ Figure~\ref{wdiPlot} shows a scatterplot of log(\texttt{inf.mortality}) against 
 	\centering
 	\includegraphics[width=0.6\textwidth]{ch_simple_linear_regression_oi_biostat/figures/wdiPlot/wdiPlotB}
 	\caption{Country-level infant mortality rates, divided into low access ($x=0$) and high access ($x=1$) to sanitation. The least squares regression line is also shown.}
-	\label{wdiPlot}
+	\label{wdiPlotA}
 \end{figure}
-
-%JV: Change the name of the plot to wdiPlotA to see a version of the plot that is closer to base R. OI code uses dotplot instead of plot to suppress the tick mark labeling on the x-axis and more easily add labels.
 
 
 The least squares regression line has the form
@@ -454,14 +449,6 @@ Generally speaking, if an influential point arises from random sampling from a l
 \label{exampleInfantMortalityAssumptions}
 \end{exercise}
 
-%JV: perhaps better to leave this out, unless we want to go into more detail about what exactly to be careful for / how to address the issue.
-
-\begin{comment}
-
-It is important to be especially careful about outliers when predictors are categorical variables.  Figure~\ref{wdiPlot} shows the regression line passing through the mean response variable for each of the two categories \var{sanit.access} = 1 and \var{sanit.access} = 0. It is generally true that when a categorical predictor variable has two levels, the regression line passes through the mean of each group. If one group is particularly small and has a very different set of values for the response variable, that category will have large influence on the estimated slope.
-
-\end{comment}
-
 \newpage
 
 \section{Statistical inference with regression}
@@ -504,15 +491,6 @@ Statistical software is typically used to obtain $t$-statistics and $p$-values f
 
 The standard errors of $b_0$ and $b_1$ used in confidence intervals and hypothesis tests replace $\sigma$ with $s$, the standard deviation of the residuals from a fitted line. Formally, 
 \[s = \sqrt{\frac{\sum e^{2}_{i}}{n-2}} =  \sqrt{\frac{\sum (y_{i}-\hat{y}_{i})^{2}}{n-2}} \]
-
-\begin{comment}
-\begin{align*}
-e_{i} &= \textrm{observed response - predicted response}\\
-&= y_{i}-\hat{y}_{i}\\
-&= y_{i}-b_{0}-b_{1}x_{i}, \text{   and} \\
-s &= \sqrt{\frac{\Sigma e^{2}_{i}}{n-2}} =  \sqrt{\frac{\Sigma (y_{i}-\hat{y}_{i})^{2}}{n-2}}.
-\end{align*}
-\end{comment}
 
 The two standard errors are
 \[\text{s.e.}(b_1) = \frac{s}{\sqrt{\sum(x_i -\overline{x})^2}}  \qquad \qquad \text{s.e.}(b_0) = s \sqrt{\frac{1}{n} + \frac{\overline{x}^2}

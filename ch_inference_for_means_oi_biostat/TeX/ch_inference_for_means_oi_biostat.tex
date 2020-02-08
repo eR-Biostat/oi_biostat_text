@@ -312,9 +312,7 @@ The general approach when analyzing paired data is to first calculate the differ
 \section{Two sample test for independent data}
 \label{differenceOfTwoMeans}
 
-Does treatment using embryonic stem cells (ESCs) help improve heart function following a heart attack? New and potentially risky treatments are sometimes tested in animals before studies in humans are conducted.  In a 2005 paper in \textit{Lancet}, Menard, et al. describe an experiment in which 18 sheep with induced heart attacks were randomly assigned to receive cell transplants containing either ESCs or inert material.\footnote{Lancet 2005; 366:1005-12}  Various measures of cardiac function were measured 1 month after the transplant.
-
-% need full citation for article
+Does treatment using embryonic stem cells (ESCs) help improve heart function following a heart attack? New and potentially risky treatments are sometimes tested in animals before studies in humans are conducted.  In a 2005 paper in \textit{Lancet}, Menard, et al. describe an experiment in which 18 sheep with induced heart attacks were randomly assigned to receive cell transplants containing either ESCs or inert material.\footnote{Menard C, et al., Transplantation of cardiac-committed mouse embryonic stem cells to infarcted sheep myocardium: a preclinical 2005; 366:1005-12, doi \url{https://doi.org/10.1016/S0140-6736(05)67380-1}}  Various measures of cardiac function were measured 1 month after the transplant.
 
 This design is typical of an intervention study. The analysis of such an experiment is an example of drawing inference about the difference in two population means, $\mu_1 - \mu_2$, when the data are independent, i.e., not paired. The point estimate of the difference, $\overline{x}_1 - \overline{x}_2$, is used to calculate a $t$-statistic that is the basis of confidence intervals and tests.
 
@@ -496,11 +494,9 @@ This $p$-value is larger than the significance value, 0.05, so the null hypothes
 
 In the two-sample setting, students often find it difficult to determine whether a paired test or an independent group test should be used.  The paired test applies only in situations where there is a natural pairing of observations between groups, such as in the \data{swim} data. Pairing can be obvious, such as the two measurements for each swimmer, or more subtle, such as measurements of respiratory function in twins, where one member of the twin pair is treated with an experimental treatment and the other with a control. In the case of two independent groups, there is no natural way to pair observations.
 
-%JV: removed the reference to comparing sample size because it seems to distract from fundamental distinction between the tests
-
 A common error is to overlook pairing in data and assume that two groups are independent. The swimsuit data can be used to illustrate the possible harm in conducting an independent group test rather than a paired test. In Section~\ref{pairedData}, the paired $t$-test showed a significant difference in the swim velocities between swimmers wearing wetsuits versus regular swimsuits. Suppose the analysis had been conducted without accounting for the fact that the measurements were paired.
 
-%JV: resolve discrepancy with swim suit data
+%JV: resolve discrepancy with swim suit data.  Text is correct, data package is not
 
 The mean and standard deviation for the 12 wet suit velocities are 1.51 and 0.14 (m/sec), respectively, and 1.43 and 0.14 (m/sec) for the 12 swim suit velocities. A two-group test statistic is:
 \[t = \frac{1.52 - 1.43}{\sqrt{0.14^2/12 + 0.14^2/12}} = 1.37 \]
@@ -892,29 +888,6 @@ There are three conditions on the data that must be checked before performing AN
 
 The \data{famuss} dataset was introduced in Chapter~\ref{introductionToData}, Section~\ref{variableTypes}. In the FAMuSS study, researchers examined the relationship between muscle strength and genotype at a location on the ACTN3 gene. The measure for muscle strength is percent change in strength in the non-dominant arm (\var{ndrm.ch}). Is there a difference in muscle strength across the three genotype categories (\texttt{CC}, \texttt{CT}, \texttt{TT})?
 
-\begin{comment}
-
-\begin{table}[h]
-	\centering\small
-	\begin{tabular}{lp{10.5cm}}
-		\hline
-		{\bf variable} & {\bf description} \\
-		\hline
-		\var{sex} & Sex of the participant \\
-		\var{age} & Age in years   \\
-		\var{race} & Recorded as \resp{African Am} (African American), \resp{Caucasian}, \resp{Asian}, \resp{Hispanic} or \resp{Other} \\
-		\var{height} & Height in inches    \\
-		\var{weight} & Weight in pounds \\
-		\var{actn3.r577x} & Genotype at the location r577x in the ACTN3 gene. \\
-		\var{ndrm.ch} & Percent change in strength in the non-dominant arm, comparing strength after to before training \\
-		\hline
-	\end{tabular}
-	\caption{Variables and their descriptions for the \data{famuss} dataset.\vspaceB{-3.5mm}}
-	\label{famussVariablesANOVA}
-\end{table}
-
-\end{comment}
-
 \begin{exercise} \label{nullHypForFamuss}
 	The null hypothesis under consideration is the following: $\mu_{\resp{CC}} = \mu_{\resp{CT}} = \mu_{\resp{TT}}$.
 	Write the null and corresponding alternative hypotheses in plain language.\footnote{$H_0$: The average percent change in non-dominant arm strength is equal across the three genotypes. $H_A$: The average percent change in non-dominant arm strength varies across some (or all) groups.}
@@ -971,7 +944,7 @@ Analysis of variance focuses on answering one question: is the variability in th
 
 where $SSG$ is the \term{sum of squares between groups}, $\sum_{i=1}^{k} n_{i}\left(\overline{x}_{i} - \overline{x}\right)^{2}$, and $\textrm{df}_{G}=k-1$ is the degrees of freedom associated with the $MSG$ when there are $k$ groups.
 
-Under the null hypothesis, any observed variation in group means is due to chance and there is no real difference between the groups. In other words, the null hypothesis assumes that the groupings are non-informative, such that all observations can be thought of as belonging to a single group. If this scenario is true, then it is reasonable to expect that the variability between the group means should be equal to the variability observed within a single group. The \term{mean square error ($MSE$)} is a pooled variance estimate with associated degrees of freedom $\textrm{df}_E=n-k$ that provides a measure of variability within the groups. tThe mean square error is computed as:
+Under the null hypothesis, any observed variation in group means is due to chance and there is no real difference between the groups. In other words, the null hypothesis assumes that the groupings are non-informative, such that all observations can be thought of as belonging to a single group. If this scenario is true, then it is reasonable to expect that the variability between the group means should be equal to the variability observed within a single group. The \term{mean square error ($MSE$)} is a pooled variance estimate with associated degrees of freedom $\textrm{df}_E=n-k$ that provides a measure of variability within the groups. The mean square error is computed as:
 
 \[MSE = \frac{1}{n-k}\sum_{i=1}^{k} (n_i-1)s_i^{2} = \frac{1}{\textrm{df}_{E}}SSE, \]
 
@@ -1093,19 +1066,6 @@ This results in a $p$-value of 0.145 on $df =592$. This $p$-value is larger than
 In summary, the mean percent strength change in the non-dominant arm for genotype \resp{CT} individuals is not statistically distinguishable from those of genotype \resp{CC} and \resp{TT} individuals. However, there is evidence that mean percent strength change in the non-dominant arm differs between individuals of genotype \resp{CC} and \resp{TT} are different. 
 	
 \end{example}
-
-%JV: I think it is better to not mention the following unless we want to discuss in more detail and provide a concrete example. 
-
-\begin{comment}
-
-\textit{JV: add an example of situation in which ANOVA rejects, but no significant pairwise difference found}
-
-\begin{caution}
-	{Sometimes an ANOVA will reject the null but no groups will have statistically significant differences}
-	{It is possible to reject the null hypothesis using ANOVA and then to not subsequently identify differences in the pairwise comparisons. However, \emph{this does not invalidate the ANOVA conclusion}. It only means we have not been able to successfully identify which groups differ in their means.}
-\end{caution}
-
-\end{comment}
 
 \index{significance level!multiple comparisons|)}
 
