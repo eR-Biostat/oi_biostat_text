@@ -4,12 +4,12 @@ data(COL)
 myPDF('pValueTuna.pdf', 6, 2.4,
       mar = c(2, 0, 0.5, 0),
       mgp = c(3, 0.65, 0))
-normTail(L = -0.859,
-         U = 0.859,
+normTail(L = -0.599,
+         U = 0.599,
          col = COL[1],
          axes = FALSE)
-labels <- expression('t = 0.859')
-axis(1, at = 0.859, labels = labels, cex.axis = 0.87)
+labels <- expression('t = 0.599')
+axis(1, at = 0.599, labels = labels, cex.axis = 0.87)
 
 par(mgp = c(3, 0.77, 0))
 at <- c(-15, 0, 5)
