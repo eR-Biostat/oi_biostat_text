@@ -8,7 +8,7 @@ In most practical settings, more than one explanatory variable is likely to be a
 
 There are several applications of multiple regression. One of the most common applications in a clinical setting is estimating an association between a response variable and primary predictor of interest while adjusting for possible confounding variables. Sections~\ref{introductionMultipleLinearRegression} and \ref{simpleVsMultipleRegression} introduce the multiple regression model by examining the possible association between cognitive function and the use of statins after adjusting for potential confounders. Section~\ref{modelSelection} discusses another application of multiple regression\textemdash constructing a model that effectively explains the observed variation in the response variable. 
 
-The other sections in the chapter outline general principles of multiple regression, including the statistical model, methods for assessing quality of model fit, categorical predictors with more than two levels, interaction, and the connection between ANOVA and regression.
+The other sections in the chapter outline general principles of multiple regression, including the statistical model, methods for assessing quality of model fit, categorical predictors with more than two levels, interaction, and the connection between ANOVA and regression.  The methods used to conduct hypothesis tests and construct confidence intervals for regression coefficients extend naturally from simple to multiple linear regression, so the section on the statistical model for multiple regression can be treated as optional.  
 
 
 \section{Introduction to multiple linear regression}
@@ -152,7 +152,7 @@ In a clinical setting, the interpretive focus lies on reporting the nature of th
 	Although the use of statins appeared to be associated with lower RFFT scores when no adjustment was made for possible confounders, statin use is not significantly associated with RFFT score in a regression model that adjusts for age. 
 \end{quotation}
 
-The results shown in Table~\ref{prevendRFFTStatinAgeRegression} do not provide information about either the quality of the model fit. The next section describes the residual plots that can be used to check model assumptions and the use of $R^2$ to estimate how much of the variability in the response variable is explained by the model.
+The results shown in Table~\ref{prevendRFFTStatinAgeRegression} do not provide information about either the quality of the model fit or its value as a prediction model. The next section describes the residual plots that can be used to check model assumptions and the use of $R^2$ to estimate how much of the variability in the response variable is explained by the model.
 
 There is an important aspect of these data that should not be overlooked. The data do not come from a study in which participants were followed as they aged; i.e., a longitudinal study. Instead, this study was a cross-sectional study, in which patient age, statin use, and RFFT score were recorded for all participants during a short time interval. While the results of the study support the conclusion that older patients tend to have lower RFFT scores, they cannot be used to conclude that scores decline with age in individuals; there were no repeated measurements of RFFT taken as individual participants aged. Older patients come from an earlier birth cohort, and it is possible, for instance, that younger participants have more post-secondary school education or better health practices generally; such a cohort effect may have some explanatory effect on the observed association. The details of how a study is designed and how data are collected should always be taken into account when interpreting study results. 
 
@@ -227,7 +227,7 @@ $i^{\text{th}}$ case.
 
 The first definition cannot be used in multiple regression, since there is a correlation coefficient between each predictor and the response variable. However, since there is a single set of residuals, the second definition remains applicable. 
 
-Although $R^2$ can be calculated directly from the equation, it is rarely calculated by hand since computing software includes $R^2$ as a standard part of the summary output for a regression model.\footnote{In \textsf{R} and other software, $R^2$ is typically labeled 'multiple R-squared'.} In the model with response \var{RFFT} and predictors \var{Statin} and \var{Age}, $R^2 = 0.2852$.  The model explains almost 29\% of the variability in RFFT scores, a considerable improvement over the model with \var{Statin} alone ($R^2 = 0.0239$).
+Although $R^2$ can be calculated directly from the equation, it is rarely calculated by hand since statistical software includes $R^2$ as a standard part of the summary output for a regression model.\footnote{In \textsf{R} and other software, $R^2$ is typically labeled 'multiple R-squared'.} In the model with response \var{RFFT} and predictors \var{Statin} and \var{Age}, $R^2 = 0.2852$.  The model explains almost 29\% of the variability in RFFT scores, a considerable improvement over the model with \var{Statin} alone ($R^2 = 0.0239$).
 
 Adding a variable to a regression model always increases the value of $R^2$. Sometimes that increase is large and clearly important, such as when age is added to the model for RFFT scores. In other cases, the increase is small, and may not be worth the added complexity of including another variable. The \term{adjusted R-squared} is often used to balance predictive ability with complexity in a multiple regression model. Like $R^2$, the adjusted $R^2$ is routinely provided in software output. 
 
@@ -1069,6 +1069,3 @@ Because there are so many tools available in multiple regression, this chapter h
 Lab 3 explores how the association between a response variable and categorical predictors with more than two levels can be be estimated using multiple regression. This topic extends the earlier material in Chapter 6, Lab 4. Lab 4 introduces the concept of a statistical interaction using the NHANES dataset, examining whether the association between BMI and age among women is different than that among men. 
 
 Multiple regression is often used to examine associations between response variables and a small set of pre-specified predictors. It can also be used to explore and select models between a response variable and a set of candidate predictors. Lab 5 discusses explanatory modeling, in which the goal is to construct a model that effectively explains the observed variation in the response variable. 
- 
-
-

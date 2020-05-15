@@ -12,6 +12,8 @@ This chapter explores simple linear regression, a technique for estimating a str
 
 For example, scatterplots in Chapter~\ref{introductionToData} illustrated the linear relationship between height and weight in the NHANES data, with height as a predictor of weight. Adding a best-fitting line to these data using regression techniques would allow for prediction of an individual's weight based on their height. The linear model could also be used to investigate questions about the population-level relationship between height and weight, since the data are a random sample from the population of adults in the United States. 
 
+Not all relationships in data are linear.  For example, the scatterplot in Figure~\ref{incomeLifeExpectancy} of Chapter~\ref{introductionToData} shows a highly non-linear relationship between between annual per capita income and life expectancy for 165 countries in 2011.  Relationships are called \term{strong relationships} if the pattern of the dependence between the predictor and response variables is clear, even if it is nonlinear as in Figure~\ref{incomeLifeExpectancy}.  A \term{weak relationship} is one in which the points in the scatterplot are so diffuse as to make it difficult to discern any relationship.  Figure~\ref{posNegCorPlots} in Chapter~\ref{introductionToData} showed relationships progressing from weak to strong moving from left to right in the top and bottom panels.  Each of the relationships shown in the second panels from the left are \term{moderate relationships}.  Finally, changing the scale of measurement of one or both variables, such as changing age from age in years to age in months, simply stretches or compresses one or both axes and does not change the nature of the relationship.  If a relationship is linear it will remain so, and with a simple change of scale, a nonlinear relationship will remain nonlinear.
+
 The next chapter covers multiple regression, a statistical model used to estimate the relationship between a single numerical response variable and several predictor variables.
 
 % \newpage
@@ -20,7 +22,7 @@ The next chapter covers multiple regression, a statistical model used to estimat
 \label{examiningScatterPlots}
 
 \index{scatterplots|(}
-Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{prevend} dataset, available in the \textsf{R} \texttt{oibiostat} package. 
+Various demographic and cardiovascular risk factors were collected as a part of the Prevention of REnal and Vascular END-stage Disease (PREVEND) study, which took place in the Netherlands. The initial study population began as 8,592 participants aged 28-75 years who took a first survey in 1997-1998.\footnote{Participants were selected from the city of Groningen on the basis of their urinary albumin excretion; urinary albumin excretion is known to be associated with abnormalities in renal function.} Participants were followed over time; 6,894 participants took a second survey in 2001-2003, and 5,862 completed the third survey in 2003-2006. In the third survey, measurement of cognitive function was added to the study protocol. Data from 4,095 individuals who completed cognitive testing are in the \data{prevend} dataset, available in the \textsf{R} package  \texttt{oibiostat}. 
 
 As adults age, cognitive function changes over time, largely due to various cerebrovascular and neurodegenerative changes. It is thought that cognitive decline is a long-term process that may start as early as 45 years of age.\footnote{Joosten H, et al. Cardiovascular risk profile and cognitive function in young, middle-aged, and elderly subjects. Stroke. 2013;44:1543-1549, \url{https://doi.org/10.1161/STROKEAHA.111.000496} } The Ruff Figural Fluency Test (RFFT) is one measure of cognitive function that provides information about cognitive abilities such as planning and the ability to switch between different tasks. The test consists of drawing as many unique designs as possible from a pattern of dots, under timed conditions; scores range from 0 to 175 points (worst and best score, respectively).
 
@@ -34,7 +36,7 @@ RFFT scores for a random sample of 500 individuals are shown in Figure~\ref{prev
 	\label{prevendAgeRFFT}
 \end{figure}
 
-It is important to avoid adding straight lines to non-linear data. For example, the scatterplot in Figure~\ref{incomeLifeExpectancy} of Chapter~\ref{introductionToData} shows a highly non-linear relationship between between annual per capita income and life expectancy for 165 countries in 2011.
+It is important to avoid adding straight lines to non-linear data, such as in  Figure~\ref{incomeLifeExpectancy}.
 
 The following conditions should be true in a scatterplot for a line to be considered a reasonable approximation to the relationship in the plot and for the application of the methods of inference discussed later in the chapter:
 
@@ -340,7 +342,7 @@ Figure~\ref{wdiHistReg} shows that infant mortality rates are highly right-skewe
 	\label{wdiHistTransform}
 \end{figure}
 
-Figure~\ref{wdiPlot} shows a scatterplot of log(\texttt{inf.mortality}) against the categorical variable for sanitation access, coded \texttt{1} if at least 50\% of the population has access to adequate sanitation, and \texttt{0} otherwise. Since there are only two values of the predictor, the values of infant mortality are stacked above the two predictor values 0 and 1.\footnote{Typically, side-by-side boxplots are used to display the relationship between a numerical variable and a categorical variable. In a regression context, it can be useful to use a scatterplot instead, in order to see the variability around the regression line.} 
+Figure~\ref{wdiPlotA} shows a scatterplot of log(\texttt{inf.mortality}) against the categorical variable for sanitation access, coded \texttt{1} if at least 50\% of the population has access to adequate sanitation, and \texttt{0} otherwise. Since there are only two values of the predictor, the values of infant mortality are stacked above the two predictor values 0 and 1.\footnote{Typically, side-by-side boxplots are used to display the relationship between a numerical variable and a categorical variable. In a regression context, it can be useful to use a scatterplot instead, in order to see the variability around the regression line.} 
 
 \begin{figure}[h!]
 	\centering
@@ -475,7 +477,7 @@ In both of these expressions, $\sigma$ is the standard deviation of $\varepsilon
 Hypothesis tests and confidence intervals for regression parameters have the same basic form as tests and intervals about population means. The test statistic for a null hypothesis $H_0: \beta_1 = \beta^0_1$ about a slope parameter is
 \[t = \frac{b_1 - \beta^0_1}{\text{s.e.}(b_1)},\]
 where the formula for $\text{s.e.}(b_1)$ is given below.
-In this setting, $t$ has a $t$-distribution with $n - 2$ degrees of freedom, where $n$ is the number of ordered pairs used to calculated the least squares line.  
+In this setting, $t$ has a $t$-distribution with $n - 2$ degrees of freedom, where $n$ is the number of ordered pairs used to estimate the least squares line.  
 
 Typically, hypothesis testing in regression involves tests of whether the $x$ and $y$ variables are associated; in other words, whether the slope is significantly different from 0. In these settings, the null hypothesis is that there is no association between the explanatory and response variables, or $H_0: \beta_1 = 0 = \beta^0_1$, in which case
 \[t = \frac{b_1}{\text{s.e.}(b_1)}.\]
@@ -490,11 +492,11 @@ Tests for one-sided alternatives and one-sided confidence intervals make the usu
 Statistical software is typically used to obtain $t$-statistics and $p$-values for inference with regression, since using the formulas for calculating standard error can be cumbersome.
 
 The standard errors of $b_0$ and $b_1$ used in confidence intervals and hypothesis tests replace $\sigma$ with $s$, the standard deviation of the residuals from a fitted line. Formally, 
-\[s = \sqrt{\frac{\sum e^{2}_{i}}{n-2}} =  \sqrt{\frac{\sum (y_{i}-\hat{y}_{i})^{2}}{n-2}} \]
+\[s = \sqrt{\frac{\sum e^{2}_{i}}{n-2}} =  \sqrt{\frac{\sum (y_{i}-\hat{y}_{i})^{2}}{n-2}}. \]
 
 The two standard errors are
-\[\text{s.e.}(b_1) = \frac{s}{\sqrt{\sum(x_i -\overline{x})^2}}  \qquad \qquad \text{s.e.}(b_0) = s \sqrt{\frac{1}{n} + \frac{\overline{x}^2}
-	{\sum(x_i - \overline{x})^2}} \]
+\[\text{s.e.}(b_1) = \frac{s}{\sqrt{\sum(x_i -\overline{x})^2}}  \qquad \text{and} \qquad \text{s.e.}(b_0) = s \sqrt{\frac{1}{n} + \frac{\overline{x}^2}
+	{\sum(x_i - \overline{x})^2}}. \]
 
 
 \begin{example}{Is there evidence of a significant association between number of doctors per 100,000 members of the population in a state with infant mortality rate? 
